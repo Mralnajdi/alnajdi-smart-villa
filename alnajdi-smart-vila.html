@@ -289,6 +289,129 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .modal-create{padding:7px 15px;border-radius:9px;background:#8B5CF6;border:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:white;cursor:pointer;}
 
 .brand-logo{display:flex;align-items:center;opacity:.75;}
+
+/* Back button */
+.back-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;margin:10px 0 0;border-radius:12px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--t2);transition:all .18s;width:fit-content;}
+.back-btn:hover{transform:translateX(-2px);color:var(--t1);border-color:var(--border2);}
+.back-btn svg{opacity:.6;transition:opacity .2s;}
+.back-btn:hover svg{opacity:1;}
+
+/* Camera modal */
+.cam-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.cam-modal-bg.show{display:flex;}
+.cam-modal{background:var(--s1);border:1px solid rgba(227,30,36,.28);border-radius:20px;padding:0;width:100%;max-width:560px;animation:popup-in .25s cubic-bezier(.34,1.3,.64,1) both;overflow:hidden;}
+.cam-modal-head{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border);}
+.cam-modal-title{font-size:15px;font-weight:800;color:var(--t1);display:flex;align-items:center;gap:8px;}
+.cam-modal-live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:#E31E24;}
+.cam-modal-live::before{content:'';width:7px;height:7px;border-radius:50%;background:#E31E24;animation:blink 1.5s ease infinite;}
+.cam-modal-close{width:32px;height:32px;border-radius:50%;background:var(--s2);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.cam-modal-close:hover{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);}
+.cam-modal-view{position:relative;width:100%;aspect-ratio:16/9;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.cam-modal-view img,.cam-modal-view iframe{width:100%;height:100%;object-fit:contain;border:none;}
+.cam-modal-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--t3);}
+.cam-modal-placeholder svg{opacity:.4;}
+.cam-modal-placeholder span{font-size:12px;font-weight:600;}
+.cam-modal-info{padding:14px 18px;display:flex;flex-wrap:wrap;gap:14px;border-top:.5px solid var(--border);}
+.cam-modal-stat{display:flex;flex-direction:column;gap:2px;}
+.cam-modal-stat-label{font-size:8px;font-weight:700;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;}
+.cam-modal-stat-value{font-size:12px;font-weight:700;color:var(--t1);}
+.cam-modal-actions{padding:0 18px 16px;display:flex;gap:8px;flex-wrap:wrap;}
+.cam-action-btn{padding:7px 14px;border-radius:10px;border:.5px solid var(--border);background:var(--s2);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.cam-action-btn:hover{border-color:var(--border2);color:var(--t1);}
+.cam-action-btn.rec{border-color:rgba(227,30,36,.3);color:#E31E24;background:rgba(227,30,36,.06);}
+
+/* Apple Glass Theme */
+html.glass{
+  --bg:rgba(240,240,250,0.65);--s1:rgba(255,255,255,0.45);--s2:rgba(255,255,255,0.3);
+  --s3:rgba(255,255,255,0.2);--border:rgba(255,255,255,.45);--border2:rgba(255,255,255,.6);
+  --t1:#1D1D1F;--t2:#6E6E73;--t3:#AEAEB2;--t4:#D1D1D6;
+  --glass-blur:saturate(180%) blur(20px);--glass-bg:rgba(255,255,255,0.55);
+}
+html.glass body{background:linear-gradient(135deg,#E8ECFB 0%,#F5E6F0 25%,#E6F0F8 50%,#EDE8FB 75%,#F0EBF4 100%);background-attachment:fixed;}
+html.glass .app{background:transparent;}
+html.glass .tb{background:rgba(255,255,255,0.5);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:.5px solid rgba(255,255,255,.6);}
+html.glass .tabs-wrap{background:transparent;}
+html.glass .tabs{background:rgba(255,255,255,0.4);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-color:rgba(255,255,255,.5);}
+html.glass .tab.on{background:rgba(255,255,255,0.7);box-shadow:0 2px 10px rgba(0,0,0,.06);}
+html.glass .pane{background:transparent;}
+html.glass .fsumm,html.glass .fctrl,html.glass .fn-btn,html.glass .qa-btn,html.glass .sc-chip,html.glass .sch,html.glass .back-btn{
+  background:rgba(255,255,255,0.45);backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);border-color:rgba(255,255,255,.5);
+}
+html.glass .room-bar{backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);}
+html.glass .room-summ,html.glass .room-grid-wrap{background:rgba(255,255,255,0.35);backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);}
+html.glass .dc{background:rgba(255,255,255,0.4);backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);border-color:rgba(255,255,255,.5);box-shadow:0 2px 12px rgba(0,0,0,.04);}
+html.glass .dc.active{background:rgba(255,255,255,0.55);box-shadow:0 4px 20px rgba(0,0,0,.06);}
+html.glass .dc-shm{display:none;}
+html.glass .pop{background:rgba(255,255,255,0.75);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-color:rgba(255,255,255,.6);}
+html.glass .pop-arr{border-top-color:rgba(255,255,255,0.75);}
+html.glass .gc{background:rgba(255,255,255,0.4);backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);border-color:rgba(139,92,246,.2);}
+html.glass .modal,.html.glass .cam-modal{background:rgba(255,255,255,0.7);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);}
+html.glass .modal-bg,.html.glass .cam-modal-bg{background:rgba(0,0,0,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+html.glass .ctrl-pill,html.glass .lang-pill{background:rgba(255,255,255,0.4);border-color:rgba(255,255,255,.5);}
+html.glass .cp-btn.on{background:rgba(255,255,255,0.6);}
+html.glass .sel-bar{background:rgba(139,92,246,.08);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);}
+html.glass .rnav-btn{background:rgba(255,255,255,0.4);backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);border-color:rgba(255,255,255,.5);}
+html.glass #hero-widget{background:rgba(255,255,255,0.45)!important;backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-color:rgba(200,168,75,.2)!important;}
+html.glass .gd{background:rgba(139,92,246,.04);border-color:rgba(139,92,246,.12);}
+html.glass .cam-modal{background:rgba(255,255,255,0.7);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);}
+
+/* Responsive */
+@media(max-width:768px){
+  .tb{padding:0 10px;gap:6px;height:48px;}
+  .tb-name{font-size:9px;letter-spacing:.2em;}
+  .tb-clk{font-size:10px;}
+  .pane{padding:0 10px 60px;}
+  .tabs-wrap{padding:8px 10px 0;}
+  .tab{font-size:10px;padding:6px 3px;}
+  .dev-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;}
+  .dc{padding:10px;}
+  .ico-btn{width:44px;height:44px;border-radius:13px;}
+  .dc-name{font-size:12px;}
+  .dc-val{font-size:17px;}
+  .qa-grid{grid-template-columns:1fr 1fr;gap:5px;}
+  .qa-btn{padding:9px 10px;}
+  .fn-btn{padding:10px 11px;}
+  .cam-modal{max-width:95vw;border-radius:16px;}
+  .cam-modal-info{gap:10px;padding:12px 14px;}
+  .cam-modal-actions{padding:0 14px 14px;}
+  .status-bar{gap:4px;}
+  .sch{padding:5px 8px 5px 5px;}
+  .hero-title{letter-spacing:.18em;}
+  #hero-widget{padding:14px 14px 10px!important;}
+  .pop{padding:9px;}
+}
+@media(max-width:480px){
+  .tb-name{font-size:8px;letter-spacing:.15em;}
+  .ha-status span{display:none;}
+  .dev-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:5px;}
+  .dc{padding:8px;}
+  .ico-btn{width:38px;height:38px;border-radius:11px;}
+  .dc-name{font-size:11px;}
+  .dc-val{font-size:15px;}
+  .dc-det{gap:3px;}
+  .det-k{font-size:6.5px;}
+  .det-v{font-size:8px;}
+  .qa-grid{grid-template-columns:1fr;gap:5px;}
+  .fn-btn{gap:8px;}
+  .fn-ico{width:34px;height:34px;border-radius:11px;}
+  .fn-name{font-size:12px;}
+  .fn-sub{font-size:9px;}
+  .cam-modal-view{aspect-ratio:4/3;}
+  .tabs{gap:2px;padding:2px;}
+  .tab{padding:5px 2px;font-size:9px;}
+  .t-bdg{min-width:13px;height:13px;font-size:7px;}
+  .scenes{gap:4px;}
+  .sc-chip{padding:5px 9px;font-size:10px;}
+  #hero-widget{padding:12px 10px 8px!important;}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .dev-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+  .cam-modal{max-width:500px;}
+}
+@media(min-width:1025px){
+  .dev-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));}
+  .pane{max-width:900px;margin:0 auto;}
+}
 </style>
 </head>
 <body>
@@ -298,10 +421,12 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
   <div class="tb-gem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
   <div class="tb-name">A&nbsp;L&nbsp;N&nbsp;A&nbsp;J&nbsp;D&nbsp;I&nbsp;&nbsp;&nbsp;V&nbsp;I&nbsp;L&nbsp;A</div>
   <div class="tb-sp"></div>
+  <div class="tb-clk" id="clk"></div>
   <div style="display:flex;align-items:center;gap:5px;">
     <div class="ctrl-pill">
       <button class="cp-btn on" id="btn-dk" onclick="setTheme('dark')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="#8B9CF4" stroke-width="1.7"/></svg></button>
       <button class="cp-btn" id="btn-lt" onclick="setTheme('light')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#FBB024" stroke-width="1.7"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#FBB024" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+      <button class="cp-btn" id="btn-gl" onclick="setTheme('glass')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#A78BFA" stroke-width="1.7" opacity=".7"/><rect x="6" y="6" width="12" height="12" rx="3" stroke="#A78BFA" stroke-width="1.4" opacity=".5"/></svg></button>
     </div>
     <div class="lang-pill">
       <button class="lp on" id="btn-en" onclick="setLang('en')">EN</button>
@@ -465,6 +590,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 </div>
 
 <div class="pane" id="pane-g">
+  <div class="back-btn" onclick="showPane('home',document.getElementById('tab-home'))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l6-6M5 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="en">Home</span><span class="ar" style="display:none">الرئيسية</span></div>
   <div id="fsumm-g"></div>
   <div class="rnav"><div class="rnav-row" id="rnav-g"></div></div>
   <div class="fctrl">
@@ -491,6 +617,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 </div>
 
 <div class="pane" id="pane-1">
+  <div class="back-btn" onclick="showPane('home',document.getElementById('tab-home'))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l6-6M5 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="en">Home</span><span class="ar" style="display:none">الرئيسية</span></div>
   <div id="fsumm-1"></div>
   <div class="rnav"><div class="rnav-row" id="rnav-1"></div></div>
   <div class="fctrl">
@@ -517,10 +644,45 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 </div>
 
 <div class="pane" id="pane-r">
+  <div class="back-btn" onclick="showPane('home',document.getElementById('tab-home'))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l6-6M5 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="en">Home</span><span class="ar" style="display:none">الرئيسية</span></div>
   <div id="fsumm-r"></div>
+  <div class="rnav"><div class="rnav-row" id="rnav-r"></div></div>
   <div id="rooms-r"></div>
   <div class="sec" id="grp-lbl-r" style="display:none"><span class="en">Groups</span><span class="ar" style="display:none">المجموعات</span></div>
   <div id="grp-con-r"></div>
+</div>
+
+<div class="cam-modal-bg" id="cam-modal" onclick="closeCamModal(event)">
+  <div class="cam-modal" onclick="event.stopPropagation()">
+    <div class="cam-modal-head">
+      <div class="cam-modal-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#E31E24" stroke-width="1.6" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#E31E24" stroke-width="1.6"/></svg>
+        <span id="cam-modal-name">Camera</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="cam-modal-live">● LIVE</div>
+        <div class="cam-modal-close" onclick="closeCamModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+    </div>
+    <div class="cam-modal-view" id="cam-modal-view">
+      <div class="cam-modal-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+        <span id="cam-placeholder-text">Connecting to camera feed...</span>
+      </div>
+    </div>
+    <div class="cam-modal-info">
+      <div class="cam-modal-stat"><div class="cam-modal-stat-label">Model</div><div class="cam-modal-stat-value" id="cam-modal-model">—</div></div>
+      <div class="cam-modal-stat"><div class="cam-modal-stat-label">Resolution</div><div class="cam-modal-stat-value" id="cam-modal-res">—</div></div>
+      <div class="cam-modal-stat"><div class="cam-modal-stat-label">Protocol</div><div class="cam-modal-stat-value" id="cam-modal-proto">—</div></div>
+      <div class="cam-modal-stat"><div class="cam-modal-stat-label">Brand</div><div class="cam-modal-stat-value" id="cam-modal-brand">—</div></div>
+      <div class="cam-modal-stat"><div class="cam-modal-stat-label">Status</div><div class="cam-modal-stat-value" id="cam-modal-status" style="color:#34D399">● Online</div></div>
+    </div>
+    <div class="cam-modal-actions">
+      <button class="cam-action-btn rec"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg> Recording</button>
+      <button class="cam-action-btn" onclick="toggleCamFullscreen()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M16 21h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Fullscreen</button>
+      <button class="cam-action-btn" id="cam-snapshot-btn" onclick="camSnapshot()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5"/></svg> Snapshot</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal-bg" id="modal">
@@ -1200,11 +1362,22 @@ function toggleSelMode(floor, roomId) {
 }
 
 function handleCardClick(el, entityId, floor) {
-  if (!SEL_MODE[floor]) return;
-  if (!SEL[floor]) SEL[floor] = new Set();
-  if (SEL[floor].has(entityId)) { SEL[floor].delete(entityId); el.classList.remove('sel'); }
-  else { SEL[floor].add(entityId); el.classList.add('sel'); }
-  updateSelCnt(floor);
+  if (SEL_MODE[floor]) {
+    if (!SEL[floor]) SEL[floor] = new Set();
+    if (SEL[floor].has(entityId)) { SEL[floor].delete(entityId); el.classList.remove('sel'); }
+    else { SEL[floor].add(entityId); el.classList.add('sel'); }
+    updateSelCnt(floor);
+    return;
+  }
+  // If camera, open live view modal
+  let dev = null;
+  for (const fd of Object.values(ROOMS)) {
+    for (const r of fd.rooms) { const d = r.devices.find(x => x.id === entityId); if (d) { dev = d; break; } }
+    if (dev) break;
+  }
+  if (dev && dev.type === 'camera') {
+    openCamModal(dev);
+  }
 }
 
 function updateSelCnt(floor) {
@@ -1322,20 +1495,27 @@ function runScene(el, sceneId) {
 }
 
 function setTheme(t) {
-  const dark = t==='dark';
-  document.getElementById('btn-dk').classList.toggle('on', dark);
-  document.getElementById('btn-lt').classList.toggle('on', !dark);
+  document.getElementById('btn-dk').classList.toggle('on', t==='dark');
+  document.getElementById('btn-lt').classList.toggle('on', t==='light');
+  document.getElementById('btn-gl').classList.toggle('on', t==='glass');
+  document.documentElement.classList.remove('glass');
   const r = document.documentElement.style;
-  if (dark) {
+  if (t==='dark') {
     r.setProperty('--bg','#0A0B10'); r.setProperty('--s1','#13141B'); r.setProperty('--s2','#1A1C25');
     r.setProperty('--s3','#22242F'); r.setProperty('--t1','#F0EDE6'); r.setProperty('--t2','#78756F');
     r.setProperty('--t3','#3A3835'); r.setProperty('--t4','#1C1A16');
     r.setProperty('--border','rgba(255,255,255,.08)'); r.setProperty('--border2','rgba(255,255,255,.16)');
-  } else {
+  } else if (t==='light') {
     r.setProperty('--bg','#EDEEF4'); r.setProperty('--s1','#FFFFFF'); r.setProperty('--s2','#F4F5FA');
     r.setProperty('--s3','#EAEBF2'); r.setProperty('--t1','#0F1018'); r.setProperty('--t2','#6A6865');
     r.setProperty('--t3','#C2BFB9'); r.setProperty('--t4','#E2DFD9');
     r.setProperty('--border','rgba(0,0,0,.07)'); r.setProperty('--border2','rgba(0,0,0,.14)');
+  } else if (t==='glass') {
+    document.documentElement.classList.add('glass');
+    r.setProperty('--bg','rgba(240,240,250,0.65)'); r.setProperty('--s1','rgba(255,255,255,0.45)'); r.setProperty('--s2','rgba(255,255,255,0.3)');
+    r.setProperty('--s3','rgba(255,255,255,0.2)'); r.setProperty('--t1','#1D1D1F'); r.setProperty('--t2','#6E6E73');
+    r.setProperty('--t3','#AEAEB2'); r.setProperty('--t4','#D1D1D6');
+    r.setProperty('--border','rgba(255,255,255,.45)'); r.setProperty('--border2','rgba(255,255,255,.6)');
   }
 }
 
@@ -1353,13 +1533,21 @@ function setLang(l) {
   renderAll();
 }
 
+function formatTime12(d) {
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2,'0');
+  const s = String(d.getSeconds()).padStart(2,'0');
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return { time: `${h}:${m}:${s}`, ampm, short: `${h}:${m} ${ampm}` };
+}
 function tick() {
   const n = new Date();
-  const timeText = [n.getHours(), n.getMinutes()].map(v => String(v).padStart(2,'0')).join(':');
+  const t = formatTime12(n);
   const clk = document.getElementById('clk');
   const heroClk = document.getElementById('hw-clk');
-  if (clk) clk.textContent = timeText;
-  if (heroClk) heroClk.textContent = timeText;
+  if (clk) clk.textContent = t.short;
+  if (heroClk) heroClk.innerHTML = `${t.time}<span style="font-size:clamp(14px,2.5vw,20px);opacity:.6;margin-left:6px;font-weight:600;">${t.ampm}</span>`;
 }
 function setDate() {
   const n=new Date();
@@ -1467,8 +1655,9 @@ if ('WebSocket' in window) connect(); else { const txt = document.getElementById
 
 function updateHeroClock() {
   const n = new Date();
+  const t = formatTime12(n);
   const hw = document.getElementById('hw-clk');
-  if (hw) hw.textContent = [n.getHours(),n.getMinutes()].map(v=>String(v).padStart(2,'0')).join(':');
+  if (hw) hw.innerHTML = `${t.time}<span style="font-size:clamp(14px,2.5vw,20px);opacity:.6;margin-left:6px;font-weight:600;">${t.ampm}</span>`;
   const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
   const arD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -1520,6 +1709,60 @@ updateHeroClock();
 setInterval(updateHeroClock, 1000);
 fetchWeather();
 setInterval(fetchWeather, 600000);
+
+// Camera modal
+let currentCamDev = null;
+function openCamModal(dev) {
+  currentCamDev = dev;
+  const modal = document.getElementById('cam-modal');
+  const nameEl = document.getElementById('cam-modal-name');
+  const viewEl = document.getElementById('cam-modal-view');
+  const modelEl = document.getElementById('cam-modal-model');
+  const resEl = document.getElementById('cam-modal-res');
+  const protoEl = document.getElementById('cam-modal-proto');
+  const brandEl = document.getElementById('cam-modal-brand');
+  const statusEl = document.getElementById('cam-modal-status');
+  const placeholderText = document.getElementById('cam-placeholder-text');
+  if (!modal) return;
+  nameEl.textContent = AR ? (dev.nameAr || dev.name) : dev.name;
+  modelEl.textContent = dev.model || '—';
+  resEl.textContent = dev.resolution || '—';
+  protoEl.textContent = dev.protocol || '—';
+  brandEl.textContent = dev.brand || '—';
+  const st = STATE[dev.id];
+  const online = st && st.state !== 'unavailable' && st.state !== '';
+  statusEl.innerHTML = online ? '<span style="color:#34D399">● Online</span>' : '<span style="color:#EF4444">● Offline</span>';
+  // Try to load camera stream from Home Assistant
+  const streamUrl = `/api/camera_proxy_stream/${dev.id}?token=${getToken() || ''}`;
+  const snapshotUrl = `/api/camera_proxy/${dev.id}?token=${getToken() || ''}`;
+  if (online && getToken()) {
+    viewEl.innerHTML = `<img src="${snapshotUrl}" alt="${dev.name}" onerror="this.parentElement.innerHTML='<div class=\\'cam-modal-placeholder\\'><svg width=\\'48\\' height=\\'48\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M23 7l-7 5 7 5V7z\\' stroke=\\'currentColor\\' stroke-width=\\'1.2\\' stroke-linejoin=\\'round\\'/><rect x=\\'1\\' y=\\'5\\' width=\\'15\\' height=\\'14\\' rx=\\'2\\' stroke=\\'currentColor\\' stroke-width=\\'1.2\\'/></svg><span>Camera feed unavailable — check HA connection</span></div>'">`;
+  } else {
+    viewEl.innerHTML = `<div class="cam-modal-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/></svg><span>${online ? 'Connecting to camera feed...' : 'Camera offline'}</span></div>`;
+  }
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeCamModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  const modal = document.getElementById('cam-modal');
+  if (modal) modal.classList.remove('show');
+  document.body.style.overflow = '';
+  currentCamDev = null;
+}
+function toggleCamFullscreen() {
+  const view = document.getElementById('cam-modal-view');
+  if (!view) return;
+  if (document.fullscreenElement) { document.exitFullscreen(); }
+  else { view.requestFullscreen().catch(()=>{}); }
+}
+function camSnapshot() {
+  if (!currentCamDev) return;
+  const btn = document.getElementById('cam-snapshot-btn');
+  if (btn) { btn.textContent = '✓ Saved'; setTimeout(() => { btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5"/></svg> Snapshot'; }, 1500); }
+}
+// Close cam modal on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCamModal(); closeModal(); } });
 
 </script>
 </body>
