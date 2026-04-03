@@ -37,6 +37,82 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 @keyframes slide-down{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes select-pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 
+/* ═══ ANIMATED CARD SYSTEM ═══ */
+@keyframes ring-breathe{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.45), 0 0 12px rgba(var(--ac),0.2)}
+  50%{box-shadow:0 0 0 8px rgba(var(--ac),0), 0 0 20px rgba(var(--ac),0.35)}
+  100%{box-shadow:0 0 0 0 rgba(var(--ac),0.45), 0 0 12px rgba(var(--ac),0.2)}
+}
+@keyframes warm-glow{
+  0%,100%{filter:drop-shadow(0 0 4px rgba(var(--ac),0.4)) brightness(1)}
+  50%{filter:drop-shadow(0 0 12px rgba(var(--ac),0.7)) brightness(1.15)}
+}
+@keyframes cool-breeze{
+  0%{transform:translateX(0) scaleY(1)}
+  25%{transform:translateX(2px) scaleY(0.97)}
+  50%{transform:translateX(0) scaleY(1.03)}
+  75%{transform:translateX(-2px) scaleY(0.97)}
+  100%{transform:translateX(0) scaleY(1)}
+}
+@keyframes curtain-slide{
+  0%,100%{transform:translateY(0)}
+  30%{transform:translateY(-3px)}
+  60%{transform:translateY(2px)}
+}
+@keyframes rec-pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.6;transform:scale(1.12)}
+}
+@keyframes radar-sweep{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes sonar-ring{
+  0%{transform:scale(0.5);opacity:0.7;border-width:2px}
+  100%{transform:scale(2.2);opacity:0;border-width:0.5px}
+}
+@keyframes hub-network{
+  0%,100%{transform:scale(1);opacity:0.6}
+  50%{transform:scale(1.08);opacity:1}
+}
+@keyframes media-wave{
+  0%{transform:scaleY(0.4)}
+  50%{transform:scaleY(1)}
+  100%{transform:scaleY(0.4)}
+}
+@keyframes liquid-fill{
+  0%{transform:translateX(-100%) rotate(0deg)}
+  100%{transform:translateX(100%) rotate(360deg)}
+}
+@keyframes card-glow-in{
+  0%{opacity:0;transform:translateY(12px) scale(0.96)}
+  60%{transform:translateY(-2px) scale(1.01)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes status-breathe{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--ac),0.4)}
+  50%{transform:scale(1.05);box-shadow:0 0 0 4px rgba(var(--ac),0)}
+}
+@keyframes wave-border{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes glitch-flicker{
+  0%,92%,100%{opacity:1;transform:translate(0)}
+  93%{opacity:0.8;transform:translate(-1px,1px)}
+  95%{opacity:0.9;transform:translate(1px,-1px)}
+  97%{opacity:0.7;transform:translate(-1px,0)}
+}
+@keyframes room-card-hover{
+  0%{transform:translateY(0) scale(1)}
+  100%{transform:translateY(-4px) scale(1.01)}
+}
+@keyframes anim-progress{
+  0%{background-position:0 0}
+  100%{background-position:30px 0}
+}
+
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
 
 .tb{height:52px;background:var(--s1);border-bottom:.5px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:9px;flex-shrink:0;z-index:100;}
@@ -111,33 +187,85 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:7px;}
 
 .dc{
-  border-radius:13px;padding:12px;
+  border-radius:16px;padding:12px;
   cursor:pointer;position:relative;overflow:visible;
-  transition:transform .15s,border-color .2s;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .3s,background .3s,box-shadow .3s;
   border:.5px solid var(--border);
   background:var(--s2);
+  animation:card-glow-in .4s ease both;
 }
-.dc:hover{transform:translateY(-2px);}
-.dc.active{border-color:rgba(var(--bc),.28);background:rgba(var(--bc),.05);}
-.dc::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;border-radius:0 0 3px 3px;background:radial-gradient(ellipse,rgb(var(--bc)),transparent 70%);opacity:.7;}
-.dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.025),transparent);background-size:300% 100%;pointer-events:none;border-radius:13px;animation:shimmer 4s ease infinite;}
+.dc:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 8px 25px rgba(0,0,0,.3);}
+.dc.active{
+  border-color:rgba(var(--bc),.35);
+  background:rgba(var(--bc),.06);
+  box-shadow:0 0 0 1px rgba(var(--bc),.12), 0 4px 20px rgba(var(--bc),.15);
+}
+.dc.active:hover{box-shadow:0 0 0 1px rgba(var(--bc),.2), 0 8px 30px rgba(var(--bc),.25);}
+.dc::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1.5px;border-radius:0 0 3px 3px;background:radial-gradient(ellipse,rgb(var(--bc)),transparent 70%);opacity:.7;transition:opacity .3s;}
+.dc.active::before{opacity:1;height:2px;animation:glow 2s ease infinite;}
+.dc::after{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .4s;pointer-events:none;background:radial-gradient(circle at 50% 0%,rgba(var(--bc),.08),transparent 70%);}
+.dc.active::after{opacity:1;}
+.dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.025),transparent);background-size:300% 100%;pointer-events:none;border-radius:16px;animation:shimmer 4s ease infinite;}
+.dc.active .dc-shm{background:linear-gradient(90deg,transparent,rgba(var(--bc),.04),transparent);background-size:300% 100%;}
+
+/* ═══ TYPE-SPECIFIC ANIMATED CARD ACCENTS ═══ */
+.dc.active.type-light{--ac:var(--bc);}
+.dc.active.type-light::after{background:radial-gradient(ellipse at 50% -20%,rgba(var(--bc),.14),transparent 65%);}
+.dc.active.type-climate{--ac:var(--bc);}
+.dc.active.type-climate::after{background:linear-gradient(180deg,rgba(var(--bc),.08) 0%,transparent 60%);}
+.dc.active.type-cover{--ac:var(--bc);}
+.dc.active.type-camera{--ac:var(--bc);}
+.dc.active.type-camera::after{background:radial-gradient(circle at 30% 30%,rgba(var(--bc),.1),transparent 60%);}
+.dc.active.type-sensor{--ac:var(--bc);}
+.dc.active.type-hub{--ac:var(--bc);}
+.dc.active.type-media{--ac:var(--bc);}
+
+/* ═══ ANIMATED PROGRESS BAR ═══ */
+.dc.active .dc-fill{
+  background-image:linear-gradient(45deg,rgba(255,255,255,.12) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.12) 75%,transparent 75%);
+  background-size:15px 15px;
+  animation:anim-progress 1s linear infinite;
+}
 
 .dc-r1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;}
 .ico-btn{
-  position:relative;width:52px;height:52px;border-radius:16px;
+  position:relative;width:56px;height:56px;border-radius:17px;
   display:flex;align-items:center;justify-content:center;
-  border:none;cursor:pointer;transition:transform .15s;flex-shrink:0;
+  border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;
 }
-.ico-btn:hover{transform:scale(1.07);}
+.ico-btn:hover{transform:scale(1.1);}
 .ico-btn::before{content:'';position:absolute;inset:-7px;border-radius:23px;opacity:.9;animation:glow 2.5s ease infinite;}
 .ico-btn::after{content:'';position:absolute;inset:-7px;border-radius:23px;border:1.5px solid;animation:pulse-ring 2s ease-out infinite;}
+.dc.active .ico-btn{animation:ring-breathe 1.8s ease-in-out infinite;}
 .dc.active .ico-btn svg{filter:drop-shadow(0 0 7px rgb(var(--bc)));}
 
-.dc.active.type-light .ico-btn svg{animation:flicker 3s ease-in-out infinite;}
+/* Light: warm flickering glow */
+.dc.active.type-light .ico-btn svg{animation:warm-glow 2.5s ease-in-out infinite;}
+.dc.active.type-light .ico-btn{animation:ring-breathe 2s ease-in-out infinite;}
 
-.dc.active.type-climate .ico-btn svg{animation:spin 5s linear infinite;}
+/* Climate: spinning + cool breeze */
+.dc.active.type-climate .ico-btn svg{animation:spin 4s linear infinite, warm-glow 3s ease infinite;}
+.dc.active.type-climate .ico-btn{animation:ring-breathe 1.5s ease-in-out infinite;}
 
-.dc.active.type-cover .ico-btn svg{animation:bounce 2.2s ease-in-out infinite;}
+/* Cover: curtain slide motion */
+.dc.active.type-cover .ico-btn svg{animation:curtain-slide 2.8s ease-in-out infinite;}
+.dc.active.type-cover .ico-btn{animation:ring-breathe 2.2s ease-in-out infinite;}
+
+/* Camera: recording pulse */
+.dc.active.type-camera .ico-btn svg{animation:rec-pulse 1.5s ease-in-out infinite;}
+.dc.active.type-camera .ico-btn{animation:ring-breathe 1.2s ease-in-out infinite;}
+
+/* Sensor: sonar/radar effect */
+.dc.active.type-sensor .ico-btn svg{animation:warm-glow 2s ease-in-out infinite;}
+.dc.active.type-sensor .ico-btn{animation:status-breathe 2s ease-in-out infinite;}
+
+/* Hub: network pulse */
+.dc.active.type-hub .ico-btn svg{animation:hub-network 2.5s ease-in-out infinite;}
+.dc.active.type-hub .ico-btn{animation:ring-breathe 3s ease-in-out infinite;}
+
+/* Media: playback animation */
+.dc.active.type-media .ico-btn svg{animation:warm-glow 1.8s ease-in-out infinite;}
+.dc.active.type-media .ico-btn{animation:ring-breathe 1.6s ease-in-out infinite;}
 
 .chg-dot{
   position:absolute;bottom:-1px;right:-1px;
@@ -289,6 +417,172 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .modal-create{padding:7px 15px;border-radius:9px;background:#8B5CF6;border:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:white;cursor:pointer;}
 
 .brand-logo{display:flex;align-items:center;opacity:.75;}
+
+/* ═══════ ANIMATED ROOM PREVIEW CARDS ═══════ */
+.room-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;}
+.room-card{
+  position:relative;
+  border-radius:16px;
+  padding:14px;
+  background:var(--s1);
+  border:.5px solid var(--border);
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s;
+  animation:card-glow-in .45s ease both;
+}
+.room-card:hover{
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  border-color:rgba(var(--rc),.4);
+}
+.room-card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:2px;
+  background:radial-gradient(ellipse,rgb(var(--rc)),transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.room-card:hover::before{opacity:1;}
+.room-card::after{
+  content:'';position:absolute;inset:0;border-radius:16px;pointer-events:none;
+  background:radial-gradient(circle at 50% 0%,rgba(var(--rc),.06),transparent 65%);
+  opacity:0;transition:opacity .4s;
+}
+.room-card:hover::after{opacity:1;}
+.room-card-glow{
+  position:absolute;inset:0;border-radius:16px;pointer-events:none;
+  background:radial-gradient(circle at 30% 80%,rgba(var(--rc),.05),transparent 55%);
+}
+.room-card-icon{
+  width:44px;height:44px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;margin-bottom:10px;
+  transition:transform .3s;
+}
+.room-card:hover .room-card-icon{transform:scale(1.08);}
+.room-card-icon::after{
+  content:'';position:absolute;inset:-5px;border-radius:19px;
+  border:1.5px solid rgba(var(--rc),.3);
+  animation:pulse-ring 2.5s ease-out infinite;
+  opacity:0;
+}
+.room-card:hover .room-card-icon::after{opacity:1;}
+.room-card-name{font-size:12px;font-weight:800;margin-bottom:2px;}
+.room-card-floor{font-size:9px;color:var(--t3);margin-bottom:8px;font-weight:600;letter-spacing:.05em;}
+.room-card-stats{display:flex;flex-wrap:wrap;gap:4px;}
+.room-card-stat{
+  display:flex;align-items:center;gap:3px;
+  padding:3px 7px;border-radius:12px;
+  font-size:8px;font-weight:700;
+  background:rgba(var(--rc),.06);
+  border:.5px solid rgba(var(--rc),.15);
+  color:rgb(var(--rc));
+}
+.room-card-stat svg{flex-shrink:0;}
+.room-card-badge{
+  position:absolute;top:10px;right:10px;
+  min-width:20px;height:20px;border-radius:10px;
+  padding:0 5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:900;
+  color:white;
+  animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+.room-card-active-ring{
+  position:absolute;top:8px;right:8px;
+  width:8px;height:8px;border-radius:50%;
+}
+.room-card-active-ring.on{animation:blink 2s ease infinite;}
+
+/* ═══ ANIMATED SCENE CARDS ═══ */
+.sc-chip{
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,border-color .2s;
+}
+.sc-chip:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.sc-chip.on{box-shadow:0 0 0 1px rgba(var(--sc),.2),0 4px 15px rgba(var(--sc),.2);}
+
+/* ═══ ANIMATED QA BUTTONS ═══ */
+.qa-btn{transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;}
+.qa-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,.25);}
+.qa-btn:active{transform:translateY(0) scale(0.98);}
+
+/* ═══ ANIMATED FLOOR NAVIGATION CARDS ═══ */
+.fn-btn{transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .3s;}
+.fn-btn:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 8px 24px rgba(0,0,0,.25);}
+
+/* ═══ ANIMATED STATUS BAR ═══ */
+.sch{transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;}
+.sch:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+
+/* ═══ ANIMATED TOGGLE ═══ */
+.tog{transition:background .22s,box-shadow .22s;}
+.tog.on{box-shadow:0 0 8px rgba(var(--bc),.4);}
+
+/* ═══ WAVE ANIMATION BARS (for media cards) ═══ */
+.media-waves{display:flex;align-items:flex-end;gap:2px;height:16px;}
+.media-wave-bar{width:3px;border-radius:2px;animation:media-wave 1.2s ease-in-out infinite;}
+.media-wave-bar:nth-child(1){height:40%;animation-delay:0s;}
+.media-wave-bar:nth-child(2){height:70%;animation-delay:.15s;}
+.media-wave-bar:nth-child(3){height:50%;animation-delay:.3s;}
+.media-wave-bar:nth-child(4){height:90%;animation-delay:.45s;}
+.media-wave-bar:nth-child(5){height:60%;animation-delay:.6s;}
+
+/* ═══ RADAR ANIMATION (for sensors) ═══ */
+.sensor-radar{
+  position:absolute;top:50%;left:50%;width:30px;height:30px;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.sensor-radar::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid rgba(var(--bc),.4);
+  animation:sonar-ring 2s ease-out infinite;
+}
+.sensor-radar::after{
+  content:'';position:absolute;inset:4px;border-radius:50%;
+  border:1px solid rgba(var(--bc),.25);
+  animation:sonar-ring 2s ease-out .6s infinite;
+}
+
+/* ═══ RECORDING DOT (for cameras) ═══ */
+.rec-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#EF4444;animation:rec-pulse 1.2s ease-in-out infinite;
+  margin-left:4px;
+}
+
+/* ═══ DEVICE CARD STAGGER ═══ */
+.dev-grid .dc:nth-child(1){animation-delay:.05s}
+.dev-grid .dc:nth-child(2){animation-delay:.1s}
+.dev-grid .dc:nth-child(3){animation-delay:.15s}
+.dev-grid .dc:nth-child(4){animation-delay:.2s}
+.dev-grid .dc:nth-child(5){animation-delay:.25s}
+.dev-grid .dc:nth-child(6){animation-delay:.3s}
+.dev-grid .dc:nth-child(7){animation-delay:.35s}
+.dev-grid .dc:nth-child(8){animation-delay:.4s}
+.dev-grid .dc:nth-child(9){animation-delay:.45s}
+.dev-grid .dc:nth-child(10){animation-delay:.5s}
+
+/* ═══ ROOM CARD STAGGER ═══ */
+.room-cards-grid .room-card:nth-child(1){animation-delay:.05s}
+.room-cards-grid .room-card:nth-child(2){animation-delay:.1s}
+.room-cards-grid .room-card:nth-child(3){animation-delay:.15s}
+.room-cards-grid .room-card:nth-child(4){animation-delay:.2s}
+.room-cards-grid .room-card:nth-child(5){animation-delay:.25s}
+.room-cards-grid .room-card:nth-child(6){animation-delay:.3s}
+.room-cards-grid .room-card:nth-child(7){animation-delay:.35s}
+.room-cards-grid .room-card:nth-child(8){animation-delay:.4s}
+.room-cards-grid .room-card:nth-child(9){animation-delay:.45s}
+.room-cards-grid .room-card:nth-child(10){animation-delay:.5s}
+.room-cards-grid .room-card:nth-child(11){animation-delay:.55s}
+.room-cards-grid .room-card:nth-child(12){animation-delay:.6s}
+.room-cards-grid .room-card:nth-child(13){animation-delay:.65s}
+.room-cards-grid .room-card:nth-child(14){animation-delay:.7s}
+.room-cards-grid .room-card:nth-child(15){animation-delay:.75s}
+.room-cards-grid .room-card:nth-child(16){animation-delay:.8s}
+
+/* ═══ ERROR DEVICE ANIMATION ═══ */
+.dc.error{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.04);}
+.dc.error .ico-btn{animation:glitch-flicker 3s ease-in-out infinite !important;}
+.dc.error::before{background:radial-gradient(ellipse,#EF4444,transparent 70%);}
 </style>
 </head>
 <body>
@@ -438,6 +732,9 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
       <div class="qa-name" style="color:#6366F1"><span class="en">Good Night</span><span class="ar" style="display:none">وضع النوم</span></div>
     </div>
   </div>
+  <div class="sec"><span class="en">Rooms</span><span class="ar" style="display:none">الغرف</span></div>
+  <div class="room-cards-grid" id="home-room-cards"></div>
+
   <div class="sec"><span class="en">Floors</span><span class="ar" style="display:none">الطوابق</span></div>
   <div class="fn-btn" style="border-color:rgba(200,168,75,.28);background:rgba(200,168,75,.05);border-top:2px solid #C8A84B;" onclick="showPane('g',document.getElementById('tab-g'))">
     <div class="fn-ico" style="background:rgba(200,168,75,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
@@ -853,9 +1150,21 @@ function buildDeviceCard(dev, floor) {
     }
   }
 
+  // Animated type-specific accents
+  let animAccent = '';
+  if (active) {
+    if (dev.type === 'media') {
+      const playing = st && st.state === 'playing';
+      if (playing) animAccent = `<div class="media-waves" style="margin-top:2px">${[1,2,3,4,5].map(()=>`<div class="media-wave-bar" style="background:${c}"></div>`).join('')}</div>`;
+    }
+    if (dev.type === 'camera') {
+      animAccent = `<span class="rec-dot"></span>`;
+    }
+  }
+
   let togHtml = '';
   if (!dev.isError && ['light','cover','climate','media'].includes(dev.type)) {
-    togHtml = `<button class="tog ${active?'on':'off'}" id="tog_${pid}" style="${active?'background:'+c:''}" onclick="event.stopPropagation();doToggle('${dev.id}','${dev.type}')"></button>`;
+    togHtml = `<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><button class="tog ${active?'on':'off'}" id="tog_${pid}" style="--bc:${cr};${active?'background:'+c:''}" onclick="event.stopPropagation();doToggle('${dev.id}','${dev.type}')"></button>${animAccent}</div>`;
   }
 
   const icoSet = ICO_SETS[dev.isError ? 'sensor' : dev.type];
@@ -901,8 +1210,9 @@ function buildDeviceCard(dev, floor) {
           <div style="position:absolute;inset:-7px;border-radius:23px;background:radial-gradient(circle,rgba(${cr},.14),transparent 70%);animation:glow 2.5s ease infinite;"></div>
           <div style="position:absolute;inset:-7px;border-radius:23px;border:1.5px solid rgba(${cr},.5);animation:pulse-ring 2s ease-out infinite;"></div>
           <div id="icosvg_${pid}">${icoHtml}</div>
+          ${(active && dev.type==='sensor')?'<div class="sensor-radar" style="--bc:'+cr+'"></div>':''}
           <div class="chg-dot" style="--bc:${cr}"></div>
-          <div class="nbdg" id="nbdg_${pid}" style="background:${c};color:${c==='#F5C400'?'#08080E':'white'};box-shadow:0 2px 8px rgba(${cr},.5);">${active?(dev.type==='camera'?'●':'ON'):'OFF'}</div>
+          <div class="nbdg" id="nbdg_${pid}" style="background:${active?c:'var(--s3)'};color:${active?(c==='#F5C400'?'#08080E':'white'):'var(--t3)'};box-shadow:${active?'0 2px 8px rgba('+cr+',.5)':'none'};${active?'animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both, status-breathe 2s ease infinite;--ac:'+cr:'animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both'}">${active?(dev.type==='camera'?'REC':'ON'):'OFF'}</div>
         </button>
         
         <div class="pop-wrap" id="${pid}" style="display:none">
@@ -994,6 +1304,93 @@ function buildRoomNav(floor) {
   }).join('');
 }
 
+/* ═══ ANIMATED ROOM CARDS BUILDER ═══ */
+function getRoomIcon(room) {
+  const id = room.id.toLowerCase();
+  const hasCamera = room.devices.some(d => d.type === 'camera');
+  const hasClimate = room.devices.some(d => d.type === 'climate');
+  const hasCover = room.devices.some(d => d.type === 'cover');
+  const hasMedia = room.devices.some(d => d.type === 'media');
+  const hasHub = room.devices.some(d => d.type === 'hub');
+  const c = room.color;
+
+  if (hasCamera) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22 7.5l-8 5 8 5V7.5z" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/><rect x="1" y="5.5" width="14" height="13" rx="2.5" stroke="${c}" stroke-width="1.6"/><circle cx="8" cy="12" r="2.5" stroke="${c}" stroke-width="1.4"/></svg>`;
+  if (id.includes('bed') || id.includes('ali') || id.includes('second')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 10V7a2 2 0 012-2h14a2 2 0 012 2v3M3 10v7h18v-7M3 10h18" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10V8h4v2M13 10V8h4v2" stroke="${c}" stroke-width="1.4" stroke-linecap="round"/><path d="M3 17v2M21 17v2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+  if (id.includes('living') || id.includes('sitting')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3M4 9a2 2 0 00-2 2v4h20v-4a2 2 0 00-2-2M2 15v3a1 1 0 001 1h18a1 1 0 001-1v-3" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  if (id.includes('kitchen')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 2v6a4 4 0 008 0V2M12 8v14M19 2v6c0 1.66 1.34 3 3 3M19 2v20" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  if (id.includes('bath')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16a1 1 0 011 1v2a4 4 0 01-4 4H7a4 4 0 01-4-4v-2a1 1 0 011-1zM6 12V5a2 2 0 012-2h1a2 2 0 012 2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><path d="M6 19v2M18 19v2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+  if (id.includes('closet')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="${c}" stroke-width="1.6"/><path d="M12 3v18M3 12h18" stroke="${c}" stroke-width="1.6"/><circle cx="10" cy="8" r="1" fill="${c}"/><circle cx="14" cy="15" r="1" fill="${c}"/></svg>`;
+  if (id.includes('office')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="${c}" stroke-width="1.6"/><path d="M8 21h8M12 17v4" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+  if (id.includes('back') || id.includes('door')) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="${c}" stroke-width="1.6"/><path d="M9 2v20" stroke="${c}" stroke-width="1.6"/><circle cx="15" cy="12" r="1.5" fill="${c}"/></svg>`;
+  if (hasHub) return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.5" stroke="${c}" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+  return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="${c}" stroke-width="1.6"/></svg>`;
+}
+
+function buildRoomCards() {
+  let html = '';
+  for (const [floor, fd] of Object.entries(ROOMS)) {
+    for (const room of fd.rooms) {
+      const rc = room.colorRgb;
+      const c = room.color;
+      const title = AR ? room.titleAr : room.title;
+      const floorLabel = AR ? fd.titleAr : fd.title;
+      const devices = room.devices;
+      const lights = devices.filter(d=>d.type==='light');
+      const covers = devices.filter(d=>d.type==='cover');
+      const climates = devices.filter(d=>d.type==='climate');
+      const cameras = devices.filter(d=>d.type==='camera');
+      const sensors = devices.filter(d=>d.type==='sensor');
+      const media = devices.filter(d=>d.type==='media');
+
+      // Count active devices
+      let activeCount = 0;
+      devices.forEach(d => { if (isActive(d, STATE[d.id])) activeCount++; });
+
+      let stats = '';
+      if (lights.length) {
+        let onCount = 0;
+        lights.forEach(d => { if (isActive(d, STATE[d.id])) onCount++; });
+        stats += `<div class="room-card-stat" style="color:${onCount>0?'#0A84FF':'var(--t3)'};background:${onCount>0?'rgba(10,132,255,.1)':'rgba(var(--rc),.04)'};border-color:${onCount>0?'rgba(10,132,255,.25)':'rgba(var(--rc),.1)'}"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2"/></svg>${onCount}/${lights.length}</div>`;
+      }
+      if (covers.length) {
+        let openCount = 0;
+        covers.forEach(d => { if (isActive(d, STATE[d.id])) openCount++; });
+        stats += `<div class="room-card-stat" style="color:${openCount>0?'#A78BFA':'var(--t3)'};background:${openCount>0?'rgba(167,139,250,.1)':'rgba(var(--rc),.04)'};border-color:${openCount>0?'rgba(167,139,250,.25)':'rgba(var(--rc),.1)'}"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${openCount}/${covers.length}</div>`;
+      }
+      if (climates.length) {
+        let onCount = 0;
+        climates.forEach(d => { if (isActive(d, STATE[d.id])) onCount++; });
+        stats += `<div class="room-card-stat" style="color:${onCount>0?'#00B87A':'var(--t3)'};background:${onCount>0?'rgba(0,184,122,.1)':'rgba(var(--rc),.04)'};border-color:${onCount>0?'rgba(0,184,122,.25)':'rgba(var(--rc),.1)'}"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="3" stroke="currentColor" stroke-width="2"/></svg>${onCount>0?(AR?'شغال':'ON'):(AR?'طافي':'OFF')}</div>`;
+      }
+      if (cameras.length) {
+        stats += `<div class="room-card-stat" style="color:#8B5CF6;background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.25)"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M22 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="1" y="5" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/></svg>${cameras.length}<span class="rec-dot"></span></div>`;
+      }
+      if (media.length) {
+        stats += `<div class="room-card-stat" style="color:#38BDF8;background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.25)"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/></svg>TV</div>`;
+      }
+
+      const floorTab = floor;
+      html += `
+      <div class="room-card" style="--rc:${rc}" onclick="showPane('${floorTab}',document.getElementById('tab-${floorTab}'));setTimeout(()=>scrollToRoom('${room.id}'),150)">
+        <div class="room-card-glow"></div>
+        <div class="room-card-active-ring ${activeCount>0?'on':''}" style="background:${activeCount>0?c:'var(--t3)'};box-shadow:${activeCount>0?'0 0 6px '+c:'none'}"></div>
+        <div class="room-card-icon" style="background:rgba(${rc},.12);box-shadow:0 4px 14px rgba(${rc},.15);">
+          ${getRoomIcon(room)}
+        </div>
+        <div class="room-card-name" style="color:${c}">${title}</div>
+        <div class="room-card-floor">${floorLabel}</div>
+        <div class="room-card-stats">${stats || `<div class="room-card-stat">${devices.length} ${AR?'جهاز':'devices'}</div>`}</div>
+      </div>`;
+    }
+  }
+  return html;
+}
+
+function renderRoomCards() {
+  const el = document.getElementById('home-room-cards');
+  if (el) el.innerHTML = buildRoomCards();
+}
+
 function renderFloor(floor) {
   const fd = ROOMS[floor];
   document.getElementById('fsumm-'+floor).innerHTML = buildFloorSummary(floor);
@@ -1006,6 +1403,7 @@ function renderAll() {
   renderFloor('g');
   renderFloor('1');
   renderFloor('r');
+  renderRoomCards();
   updateCounts();
 }
 
