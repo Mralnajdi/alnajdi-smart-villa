@@ -37,81 +37,214 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 @keyframes slide-down{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes select-pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 
-/* ═══ ANIMATED CARD SYSTEM ═══ */
+/* ══════════════════════════════════════════════════════
+   HA-ANIMATED CARD SYSTEM — ALNAJDI VILA PREMIUM
+   Inspired by github.com/Anashost/HA-Animated-cards
+   ══════════════════════════════════════════════════════ */
+
+/* ─── Core Animations ─── */
 @keyframes ring-breathe{
-  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.45), 0 0 12px rgba(var(--ac),0.2)}
-  50%{box-shadow:0 0 0 8px rgba(var(--ac),0), 0 0 20px rgba(var(--ac),0.35)}
-  100%{box-shadow:0 0 0 0 rgba(var(--ac),0.45), 0 0 12px rgba(var(--ac),0.2)}
-}
-@keyframes warm-glow{
-  0%,100%{filter:drop-shadow(0 0 4px rgba(var(--ac),0.4)) brightness(1)}
-  50%{filter:drop-shadow(0 0 12px rgba(var(--ac),0.7)) brightness(1.15)}
-}
-@keyframes cool-breeze{
-  0%{transform:translateX(0) scaleY(1)}
-  25%{transform:translateX(2px) scaleY(0.97)}
-  50%{transform:translateX(0) scaleY(1.03)}
-  75%{transform:translateX(-2px) scaleY(0.97)}
-  100%{transform:translateX(0) scaleY(1)}
-}
-@keyframes curtain-slide{
-  0%,100%{transform:translateY(0)}
-  30%{transform:translateY(-3px)}
-  60%{transform:translateY(2px)}
-}
-@keyframes rec-pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.6;transform:scale(1.12)}
-}
-@keyframes radar-sweep{
-  0%{transform:rotate(0deg)}
-  100%{transform:rotate(360deg)}
-}
-@keyframes sonar-ring{
-  0%{transform:scale(0.5);opacity:0.7;border-width:2px}
-  100%{transform:scale(2.2);opacity:0;border-width:0.5px}
-}
-@keyframes hub-network{
-  0%,100%{transform:scale(1);opacity:0.6}
-  50%{transform:scale(1.08);opacity:1}
-}
-@keyframes media-wave{
-  0%{transform:scaleY(0.4)}
-  50%{transform:scaleY(1)}
-  100%{transform:scaleY(0.4)}
-}
-@keyframes liquid-fill{
-  0%{transform:translateX(-100%) rotate(0deg)}
-  100%{transform:translateX(100%) rotate(360deg)}
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.5), 0 0 15px rgba(var(--ac),0.25), inset 0 0 8px rgba(var(--ac),0.1)}
+  50%{box-shadow:0 0 0 10px rgba(var(--ac),0), 0 0 25px rgba(var(--ac),0.4), inset 0 0 12px rgba(var(--ac),0.15)}
+  100%{box-shadow:0 0 0 0 rgba(var(--ac),0.5), 0 0 15px rgba(var(--ac),0.25), inset 0 0 8px rgba(var(--ac),0.1)}
 }
 @keyframes card-glow-in{
-  0%{opacity:0;transform:translateY(12px) scale(0.96)}
-  60%{transform:translateY(-2px) scale(1.01)}
+  0%{opacity:0;transform:translateY(14px) scale(0.94)}
+  50%{transform:translateY(-3px) scale(1.02)}
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
 @keyframes status-breathe{
-  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--ac),0.4)}
-  50%{transform:scale(1.05);box-shadow:0 0 0 4px rgba(var(--ac),0)}
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--ac),0.5)}
+  50%{transform:scale(1.06);box-shadow:0 0 0 5px rgba(var(--ac),0)}
 }
-@keyframes wave-border{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+@keyframes anim-progress{0%{background-position:0 0}100%{background-position:30px 0}}
+
+/* ─── LIGHT ANIMATIONS (Warm Glow + Flicker + Hue Rotate) ─── */
+@keyframes light-warm-glow{
+  0%,100%{filter:drop-shadow(0 0 5px rgba(var(--ac),0.5)) brightness(1)}
+  25%{filter:drop-shadow(0 0 10px rgba(var(--ac),0.7)) brightness(1.1)}
+  50%{filter:drop-shadow(0 0 16px rgba(var(--ac),0.85)) brightness(1.2)}
+  75%{filter:drop-shadow(0 0 10px rgba(var(--ac),0.65)) brightness(1.08)}
 }
+@keyframes light-flicker{
+  0%,100%{opacity:1;filter:brightness(1)}
+  10%{opacity:.92;filter:brightness(1.05)}
+  20%{opacity:1;filter:brightness(1)}
+  30%{opacity:.88;filter:brightness(1.08)}
+  50%{opacity:1;filter:brightness(1.12)}
+  70%{opacity:.95;filter:brightness(1)}
+  85%{opacity:1;filter:brightness(1.06)}
+}
+@keyframes light-card-ambient{
+  0%,100%{box-shadow:0 0 20px rgba(var(--bc),.08), inset 0 -2px 15px rgba(var(--bc),.04)}
+  50%{box-shadow:0 0 35px rgba(var(--bc),.15), inset 0 -2px 20px rgba(var(--bc),.08)}
+}
+@keyframes light-ring-expand{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.4), 0 0 0 0 rgba(var(--ac),0.2)}
+  100%{box-shadow:0 0 0 12px rgba(var(--ac),0), 0 0 0 20px rgba(var(--ac),0)}
+}
+@keyframes rgb-hue-rotate{
+  0%{filter:hue-rotate(0deg) brightness(1.1)}
+  25%{filter:hue-rotate(90deg) brightness(1.2)}
+  50%{filter:hue-rotate(180deg) brightness(1.1)}
+  75%{filter:hue-rotate(270deg) brightness(1.2)}
+  100%{filter:hue-rotate(360deg) brightness(1.1)}
+}
+
+/* ─── CLIMATE/AC ANIMATIONS (Spinning Fan + Cool Breeze + Frost) ─── */
+@keyframes climate-spin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes climate-breeze{
+  0%{transform:translateX(0) scaleX(1)}
+  20%{transform:translateX(3px) scaleX(1.02)}
+  40%{transform:translateX(-2px) scaleX(0.98)}
+  60%{transform:translateX(2px) scaleX(1.01)}
+  80%{transform:translateX(-1px) scaleX(0.99)}
+  100%{transform:translateX(0) scaleX(1)}
+}
+@keyframes climate-frost{
+  0%,100%{box-shadow:0 0 20px rgba(0,184,122,.06), inset 0 0 15px rgba(0,184,122,.03)}
+  50%{box-shadow:0 0 35px rgba(0,184,122,.12), inset 0 0 20px rgba(0,184,122,.06)}
+}
+@keyframes climate-wave{
+  0%{clip-path:polygon(0% 75%,16% 72%,33% 78%,50% 73%,66% 77%,83% 71%,100% 76%,100% 100%,0% 100%)}
+  50%{clip-path:polygon(0% 72%,16% 77%,33% 71%,50% 76%,66% 72%,83% 78%,100% 73%,100% 100%,0% 100%)}
+  100%{clip-path:polygon(0% 75%,16% 72%,33% 78%,50% 73%,66% 77%,83% 71%,100% 76%,100% 100%,0% 100%)}
+}
+
+/* ─── CURTAIN/COVER ANIMATIONS (Slide + Fabric Wave) ─── */
+@keyframes curtain-open{
+  0%,100%{transform:translateY(0) scaleY(1)}
+  15%{transform:translateY(-4px) scaleY(1.02)}
+  30%{transform:translateY(-2px) scaleY(0.99)}
+  50%{transform:translateY(-3px) scaleY(1.01)}
+  75%{transform:translateY(-1px) scaleY(1)}
+}
+@keyframes curtain-fabric{
+  0%{transform:skewX(0deg) scaleX(1)}
+  25%{transform:skewX(1deg) scaleX(1.01)}
+  50%{transform:skewX(0deg) scaleX(1)}
+  75%{transform:skewX(-1deg) scaleX(0.99)}
+  100%{transform:skewX(0deg) scaleX(1)}
+}
+@keyframes curtain-card-sway{
+  0%,100%{box-shadow:0 0 18px rgba(var(--bc),.06), inset 0 2px 12px rgba(var(--bc),.03)}
+  50%{box-shadow:0 0 28px rgba(var(--bc),.12), inset 0 2px 18px rgba(var(--bc),.06)}
+}
+
+/* ─── CAMERA ANIMATIONS (Recording Pulse + Scanning + Red Alert) ─── */
+@keyframes camera-rec-pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  40%{opacity:.5;transform:scale(1.15)}
+  60%{opacity:.8;transform:scale(1.05)}
+}
+@keyframes camera-scan{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+@keyframes camera-card-alert{
+  0%,100%{border-color:rgba(var(--bc),.35);box-shadow:0 0 15px rgba(var(--bc),.08)}
+  50%{border-color:rgba(var(--bc),.55);box-shadow:0 0 25px rgba(var(--bc),.18)}
+}
+@keyframes rec-dot-blink{
+  0%,100%{opacity:1;box-shadow:0 0 4px #EF4444}
+  50%{opacity:.2;box-shadow:0 0 8px #EF4444}
+}
+
+/* ─── SENSOR ANIMATIONS (Radar Sweep + Sonar + Shockwave) ─── */
+@keyframes sensor-radar{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes sensor-sonar{
+  0%{transform:scale(0.3);opacity:0.8;border-width:2.5px}
+  100%{transform:scale(2.8);opacity:0;border-width:0.3px}
+}
+@keyframes sensor-shockwave{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.5)}
+  70%{box-shadow:0 0 0 15px rgba(var(--ac),0)}
+  100%{box-shadow:0 0 0 0 rgba(var(--ac),0)}
+}
+@keyframes sensor-detected{
+  0%,100%{background:rgba(var(--bc),.06)}
+  50%{background:rgba(var(--bc),.12)}
+}
+
+/* ─── MEDIA ANIMATIONS (Equalizer Bars + Vinyl Spin + Play Pulse) ─── */
+@keyframes media-eq-bar{
+  0%{transform:scaleY(0.3)}
+  25%{transform:scaleY(1)}
+  50%{transform:scaleY(0.5)}
+  75%{transform:scaleY(0.8)}
+  100%{transform:scaleY(0.3)}
+}
+@keyframes media-vinyl{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes media-play-pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.08);opacity:.85}
+}
+@keyframes media-card-vibe{
+  0%,100%{box-shadow:0 0 18px rgba(var(--bc),.06)}
+  25%{box-shadow:0 0 22px rgba(var(--bc),.1)}
+  50%{box-shadow:0 0 28px rgba(var(--bc),.14)}
+  75%{box-shadow:0 0 22px rgba(var(--bc),.1)}
+}
+
+/* ─── HUB/NETWORK ANIMATIONS (Signal Rings + Data Flow) ─── */
+@keyframes hub-signal{
+  0%,100%{transform:scale(1);opacity:0.7}
+  50%{transform:scale(1.1);opacity:1}
+}
+@keyframes hub-data-flow{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+@keyframes hub-ring-1{0%{transform:scale(0.8);opacity:0.6}50%{transform:scale(1.4);opacity:0}100%{transform:scale(0.8);opacity:0.6}}
+@keyframes hub-ring-2{0%{transform:scale(0.6);opacity:0.4}50%{transform:scale(1.6);opacity:0}100%{transform:scale(0.6);opacity:0.4}}
+
+/* ─── ERROR/GLITCH ANIMATION ─── */
 @keyframes glitch-flicker{
-  0%,92%,100%{opacity:1;transform:translate(0)}
-  93%{opacity:0.8;transform:translate(-1px,1px)}
-  95%{opacity:0.9;transform:translate(1px,-1px)}
-  97%{opacity:0.7;transform:translate(-1px,0)}
+  0%,88%,100%{opacity:1;transform:translate(0);filter:none}
+  89%{opacity:0.7;transform:translate(-2px,1px);filter:hue-rotate(90deg)}
+  91%{opacity:0.9;transform:translate(2px,-1px);filter:hue-rotate(-90deg)}
+  93%{opacity:0.6;transform:translate(-1px,-1px);filter:brightness(1.5)}
+  95%{opacity:1;transform:translate(1px,0);filter:none}
+  97%{opacity:0.8;transform:translate(-1px,1px);filter:hue-rotate(45deg)}
 }
-@keyframes room-card-hover{
-  0%{transform:translateY(0) scale(1)}
-  100%{transform:translateY(-4px) scale(1.01)}
+
+/* ─── WATER LEAK SENSOR (Liquid Wave) ─── */
+@keyframes water-wave{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
 }
-@keyframes anim-progress{
-  0%{background-position:0 0}
-  100%{background-position:30px 0}
+@keyframes water-drip{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  80%{transform:translateY(12px) scale(0.8);opacity:0.6}
+  100%{transform:translateY(14px) scale(0.5);opacity:0}
 }
+
+/* ─── DOOR SENSOR (Open/Close) ─── */
+@keyframes door-swing{
+  0%,100%{transform:perspective(200px) rotateY(0deg)}
+  50%{transform:perspective(200px) rotateY(-15deg)}
+}
+
+/* ─── FAN ANIMATION ─── */
+@keyframes fan-spin-slow{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes fan-idle-rock{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(8deg)}
+  75%{transform:rotate(-8deg)}
+}
+
+/* ─── ROOM CARD HOVER ─── */
+@keyframes room-card-hover{0%{transform:translateY(0) scale(1)}100%{transform:translateY(-4px) scale(1.01)}}
 
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
 
@@ -208,64 +341,118 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.025),transparent);background-size:300% 100%;pointer-events:none;border-radius:16px;animation:shimmer 4s ease infinite;}
 .dc.active .dc-shm{background:linear-gradient(90deg,transparent,rgba(var(--bc),.04),transparent);background-size:300% 100%;}
 
-/* ═══ TYPE-SPECIFIC ANIMATED CARD ACCENTS ═══ */
-.dc.active.type-light{--ac:var(--bc);}
-.dc.active.type-light::after{background:radial-gradient(ellipse at 50% -20%,rgba(var(--bc),.14),transparent 65%);}
-.dc.active.type-climate{--ac:var(--bc);}
-.dc.active.type-climate::after{background:linear-gradient(180deg,rgba(var(--bc),.08) 0%,transparent 60%);}
-.dc.active.type-cover{--ac:var(--bc);}
-.dc.active.type-camera{--ac:var(--bc);}
-.dc.active.type-camera::after{background:radial-gradient(circle at 30% 30%,rgba(var(--bc),.1),transparent 60%);}
-.dc.active.type-sensor{--ac:var(--bc);}
-.dc.active.type-hub{--ac:var(--bc);}
-.dc.active.type-media{--ac:var(--bc);}
+/* ══════ TYPE-SPECIFIC ANIMATED CARD ACCENTS ══════ */
+.dc.active{--ac:var(--bc);}
 
-/* ═══ ANIMATED PROGRESS BAR ═══ */
+/* ─── LIGHT CARD: Warm ambient glow overlay ─── */
+.dc.active.type-light{animation:card-glow-in .4s ease both, light-card-ambient 3s ease-in-out infinite;}
+.dc.active.type-light::after{background:radial-gradient(ellipse at 50% -20%,rgba(var(--bc),.18),transparent 60%);}
+
+/* ─── CLIMATE CARD: Cool frost overlay ─── */
+.dc.active.type-climate{animation:card-glow-in .4s ease both, climate-frost 4s ease-in-out infinite;}
+.dc.active.type-climate::after{background:linear-gradient(180deg,rgba(var(--bc),.1) 0%,transparent 55%);}
+
+/* ─── COVER CARD: Fabric sway ─── */
+.dc.active.type-cover{animation:card-glow-in .4s ease both, curtain-card-sway 3.5s ease-in-out infinite;}
+.dc.active.type-cover::after{background:linear-gradient(135deg,rgba(var(--bc),.06),transparent 50%,rgba(var(--bc),.04));}
+
+/* ─── CAMERA CARD: Alert border pulse ─── */
+.dc.active.type-camera{animation:card-glow-in .4s ease both, camera-card-alert 2s ease-in-out infinite;}
+.dc.active.type-camera::after{background:radial-gradient(circle at 25% 25%,rgba(var(--bc),.12),transparent 55%);}
+
+/* ─── SENSOR CARD: Shockwave pulse ─── */
+.dc.active.type-sensor{animation:card-glow-in .4s ease both, sensor-detected 2.5s ease-in-out infinite;}
+.dc.active.type-sensor::after{background:radial-gradient(circle at 50% 50%,rgba(var(--bc),.1),transparent 60%);}
+
+/* ─── HUB CARD: Data flow shimmer ─── */
+.dc.active.type-hub::after{background:linear-gradient(90deg,transparent,rgba(var(--bc),.08),transparent);background-size:200% 100%;animation:hub-data-flow 3s linear infinite;}
+
+/* ─── MEDIA CARD: Vibe pulse ─── */
+.dc.active.type-media{animation:card-glow-in .4s ease both, media-card-vibe 2.5s ease-in-out infinite;}
+.dc.active.type-media::after{background:radial-gradient(ellipse at 50% 80%,rgba(var(--bc),.1),transparent 60%);}
+
+/* ══════ ANIMATED PROGRESS BAR ══════ */
 .dc.active .dc-fill{
-  background-image:linear-gradient(45deg,rgba(255,255,255,.12) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.12) 75%,transparent 75%);
+  background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%);
   background-size:15px 15px;
-  animation:anim-progress 1s linear infinite;
+  animation:anim-progress .8s linear infinite;
+}
+
+/* ══════ CLIMATE WAVE OVERLAY ══════ */
+.climate-wave-overlay{
+  position:absolute;bottom:0;left:0;right:0;height:30%;
+  border-radius:0 0 16px 16px;
+  pointer-events:none;overflow:hidden;
+  opacity:0;transition:opacity .4s;
+}
+.dc.active.type-climate .climate-wave-overlay{opacity:1;}
+.climate-wave-inner{
+  position:absolute;bottom:-5px;left:-10%;right:-10%;height:200%;
+  background:rgba(var(--bc),.06);
+  border-radius:45%;
+  animation:climate-wave 4s ease-in-out infinite;
+}
+
+/* ══════ CAMERA SCAN LINE ══════ */
+.camera-scanline{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(var(--bc),.6),transparent);
+  pointer-events:none;opacity:0;
+  animation:none;
+}
+.dc.active.type-camera .camera-scanline{
+  opacity:1;
+  animation:camera-scan-line 3s ease-in-out infinite;
+}
+@keyframes camera-scan-line{
+  0%{top:0;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{top:100%;opacity:0}
 }
 
 .dc-r1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;}
 .ico-btn{
   position:relative;width:56px;height:56px;border-radius:17px;
   display:flex;align-items:center;justify-content:center;
-  border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;
+  border:none;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;flex-shrink:0;
 }
-.ico-btn:hover{transform:scale(1.1);}
+.ico-btn:hover{transform:scale(1.12);}
 .ico-btn::before{content:'';position:absolute;inset:-7px;border-radius:23px;opacity:.9;animation:glow 2.5s ease infinite;}
-.ico-btn::after{content:'';position:absolute;inset:-7px;border-radius:23px;border:1.5px solid;animation:pulse-ring 2s ease-out infinite;}
-.dc.active .ico-btn{animation:ring-breathe 1.8s ease-in-out infinite;}
-.dc.active .ico-btn svg{filter:drop-shadow(0 0 7px rgb(var(--bc)));}
+.ico-btn::after{content:'';position:absolute;inset:-7px;border-radius:23px;border:1.5px solid rgba(var(--bc),.3);opacity:0;transition:opacity .3s;}
+.dc.active .ico-btn::after{opacity:1;animation:pulse-ring 2s ease-out infinite;}
+.dc.active .ico-btn svg{filter:drop-shadow(0 0 8px rgb(var(--bc)));}
 
-/* Light: warm flickering glow */
-.dc.active.type-light .ico-btn svg{animation:warm-glow 2.5s ease-in-out infinite;}
-.dc.active.type-light .ico-btn{animation:ring-breathe 2s ease-in-out infinite;}
+/* ─── LIGHT: Warm pulsing glow + flicker ─── */
+.dc.active.type-light .ico-btn{animation:ring-breathe 1.8s ease-in-out infinite;}
+.dc.active.type-light .ico-btn svg{animation:light-warm-glow 2.5s ease-in-out infinite;}
+.dc.active.type-light .ico-btn::after{animation:light-ring-expand 2s ease-out infinite;}
 
-/* Climate: spinning + cool breeze */
-.dc.active.type-climate .ico-btn svg{animation:spin 4s linear infinite, warm-glow 3s ease infinite;}
-.dc.active.type-climate .ico-btn{animation:ring-breathe 1.5s ease-in-out infinite;}
+/* ─── CLIMATE: Spinning fan + cool breeze ─── */
+.dc.active.type-climate .ico-btn{animation:ring-breathe 2s ease-in-out infinite;}
+.dc.active.type-climate .ico-btn svg{animation:climate-spin 3s linear infinite;}
+.dc.active.type-climate .ico-btn::before{animation:climate-breeze 4s ease-in-out infinite;}
 
-/* Cover: curtain slide motion */
-.dc.active.type-cover .ico-btn svg{animation:curtain-slide 2.8s ease-in-out infinite;}
-.dc.active.type-cover .ico-btn{animation:ring-breathe 2.2s ease-in-out infinite;}
+/* ─── COVER: Curtain opening motion ─── */
+.dc.active.type-cover .ico-btn{animation:ring-breathe 2.5s ease-in-out infinite;}
+.dc.active.type-cover .ico-btn svg{animation:curtain-open 3s ease-in-out infinite;}
 
-/* Camera: recording pulse */
-.dc.active.type-camera .ico-btn svg{animation:rec-pulse 1.5s ease-in-out infinite;}
+/* ─── CAMERA: Recording red pulse ─── */
 .dc.active.type-camera .ico-btn{animation:ring-breathe 1.2s ease-in-out infinite;}
+.dc.active.type-camera .ico-btn svg{animation:camera-rec-pulse 1.5s ease-in-out infinite;}
 
-/* Sensor: sonar/radar effect */
-.dc.active.type-sensor .ico-btn svg{animation:warm-glow 2s ease-in-out infinite;}
-.dc.active.type-sensor .ico-btn{animation:status-breathe 2s ease-in-out infinite;}
+/* ─── SENSOR: Radar sweep / sonar shockwave ─── */
+.dc.active.type-sensor .ico-btn{animation:sensor-shockwave 2s ease-out infinite;}
+.dc.active.type-sensor .ico-btn svg{animation:light-warm-glow 2s ease-in-out infinite;}
 
-/* Hub: network pulse */
-.dc.active.type-hub .ico-btn svg{animation:hub-network 2.5s ease-in-out infinite;}
-.dc.active.type-hub .ico-btn{animation:ring-breathe 3s ease-in-out infinite;}
+/* ─── HUB: Signal emanation ─── */
+.dc.active.type-hub .ico-btn{animation:hub-signal 2.5s ease-in-out infinite;}
+.dc.active.type-hub .ico-btn svg{animation:light-warm-glow 3s ease-in-out infinite;}
+.dc.active.type-hub .ico-btn::after{animation:hub-ring-1 2s ease-out infinite;}
 
-/* Media: playback animation */
-.dc.active.type-media .ico-btn svg{animation:warm-glow 1.8s ease-in-out infinite;}
-.dc.active.type-media .ico-btn{animation:ring-breathe 1.6s ease-in-out infinite;}
+/* ─── MEDIA: Play pulse + vinyl feel ─── */
+.dc.active.type-media .ico-btn{animation:ring-breathe 1.8s ease-in-out infinite;}
+.dc.active.type-media .ico-btn svg{animation:media-play-pulse 2s ease-in-out infinite;}
 
 .chg-dot{
   position:absolute;bottom:-1px;right:-1px;
@@ -517,36 +704,65 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .tog{transition:background .22s,box-shadow .22s;}
 .tog.on{box-shadow:0 0 8px rgba(var(--bc),.4);}
 
-/* ═══ WAVE ANIMATION BARS (for media cards) ═══ */
-.media-waves{display:flex;align-items:flex-end;gap:2px;height:16px;}
-.media-wave-bar{width:3px;border-radius:2px;animation:media-wave 1.2s ease-in-out infinite;}
-.media-wave-bar:nth-child(1){height:40%;animation-delay:0s;}
-.media-wave-bar:nth-child(2){height:70%;animation-delay:.15s;}
-.media-wave-bar:nth-child(3){height:50%;animation-delay:.3s;}
-.media-wave-bar:nth-child(4){height:90%;animation-delay:.45s;}
-.media-wave-bar:nth-child(5){height:60%;animation-delay:.6s;}
+/* ══════ EQUALIZER BARS (for media cards) ══════ */
+.media-waves{display:flex;align-items:flex-end;gap:2px;height:18px;}
+.media-wave-bar{width:3px;border-radius:2px;animation:media-eq-bar 1s ease-in-out infinite;}
+.media-wave-bar:nth-child(1){height:35%;animation-delay:0s;animation-duration:.8s}
+.media-wave-bar:nth-child(2){height:65%;animation-delay:.1s;animation-duration:.6s}
+.media-wave-bar:nth-child(3){height:45%;animation-delay:.2s;animation-duration:.9s}
+.media-wave-bar:nth-child(4){height:80%;animation-delay:.05s;animation-duration:.7s}
+.media-wave-bar:nth-child(5){height:55%;animation-delay:.15s;animation-duration:.85s}
 
-/* ═══ RADAR ANIMATION (for sensors) ═══ */
+/* ══════ SENSOR RADAR (Sonar + Sweep) ══════ */
 .sensor-radar{
-  position:absolute;top:50%;left:50%;width:30px;height:30px;
+  position:absolute;top:50%;left:50%;width:36px;height:36px;
   transform:translate(-50%,-50%);pointer-events:none;
 }
 .sensor-radar::before{
   content:'';position:absolute;inset:0;border-radius:50%;
-  border:1.5px solid rgba(var(--bc),.4);
-  animation:sonar-ring 2s ease-out infinite;
+  border:2px solid rgba(var(--bc),.5);
+  animation:sensor-sonar 2s ease-out infinite;
 }
 .sensor-radar::after{
-  content:'';position:absolute;inset:4px;border-radius:50%;
-  border:1px solid rgba(var(--bc),.25);
-  animation:sonar-ring 2s ease-out .6s infinite;
+  content:'';position:absolute;inset:5px;border-radius:50%;
+  border:1.5px solid rgba(var(--bc),.35);
+  animation:sensor-sonar 2s ease-out .7s infinite;
+}
+/* Third ring for deeper effect */
+.sensor-radar-inner{
+  position:absolute;inset:10px;border-radius:50%;
+  border:1px solid rgba(var(--bc),.2);
+  animation:sensor-sonar 2s ease-out 1.4s infinite;
 }
 
-/* ═══ RECORDING DOT (for cameras) ═══ */
+/* ══════ RECORDING DOT (for cameras) ══════ */
 .rec-dot{
-  display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:#EF4444;animation:rec-pulse 1.2s ease-in-out infinite;
-  margin-left:4px;
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:7px;font-weight:800;color:#EF4444;
+  letter-spacing:.05em;
+}
+.rec-dot::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:#EF4444;
+  animation:rec-dot-blink 1.2s ease-in-out infinite;
+}
+
+/* ══════ WATER LEAK INDICATOR ══════ */
+.water-indicator{
+  position:absolute;bottom:0;left:0;right:0;height:4px;
+  border-radius:0 0 16px 16px;overflow:hidden;
+  pointer-events:none;
+}
+.water-indicator-wave{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);
+  animation:water-wave 2s ease-in-out infinite;
+}
+
+/* ══════ DOOR SENSOR INDICATOR ══════ */
+.dc.active.type-sensor[data-ico="door"] .ico-btn svg{
+  animation:door-swing 3s ease-in-out infinite;
+  transform-origin:left center;
 }
 
 /* ═══ DEVICE CARD STAGGER ═══ */
@@ -1289,6 +1505,9 @@ function buildDeviceCard(dev, floor) {
        onclick="handleCardClick(this,'${dev.id}','${selFloor}')">
     <div class="sel-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="dc-shm"></div>
+    ${dev.type==='camera'?'<div class="camera-scanline"></div>':''}
+    ${dev.type==='climate'?'<div class="climate-wave-overlay"><div class="climate-wave-inner"></div></div>':''}
+    ${dev.icoKey==='water'?'<div class="water-indicator"><div class="water-indicator-wave"></div></div>':''}
     <div class="dc-r1">
       <div style="position:relative">
         <button class="ico-btn" id="icobtn_${pid}"
@@ -1297,7 +1516,7 @@ function buildDeviceCard(dev, floor) {
           <div style="position:absolute;inset:-7px;border-radius:23px;background:radial-gradient(circle,rgba(${cr},.14),transparent 70%);animation:glow 2.5s ease infinite;"></div>
           <div style="position:absolute;inset:-7px;border-radius:23px;border:1.5px solid rgba(${cr},.5);animation:pulse-ring 2s ease-out infinite;"></div>
           <div id="icosvg_${pid}">${icoHtml}</div>
-          ${(active && dev.type==='sensor')?'<div class="sensor-radar" style="--bc:'+cr+'"></div>':''}
+          ${(active && dev.type==='sensor')?'<div class="sensor-radar" style="--bc:'+cr+'"><div class="sensor-radar-inner"></div></div>':''}
           <div class="chg-dot" style="--bc:${cr}"></div>
           <div class="nbdg" id="nbdg_${pid}" style="background:${active?c:'var(--s3)'};color:${active?(c==='#F5C400'?'#08080E':'white'):'var(--t3)'};box-shadow:${active?'0 2px 8px rgba('+cr+',.5)':'none'};${active?'animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both, status-breathe 2s ease infinite;--ac:'+cr:'animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both'}">${active?(dev.type==='camera'?'REC':'ON'):'OFF'}</div>
         </button>
