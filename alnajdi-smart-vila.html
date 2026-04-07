@@ -37,6 +37,213 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 @keyframes slide-down{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes select-pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 
+/* ══════════════════════════════════════════════════════
+   HA-ANIMATED CARD SYSTEM — ALNAJDI VILA PREMIUM
+   Inspired by github.com/Anashost/HA-Animated-cards
+   ══════════════════════════════════════════════════════ */
+
+/* ─── Core Animations ─── */
+@keyframes ring-breathe{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.5), 0 0 15px rgba(var(--ac),0.25), inset 0 0 8px rgba(var(--ac),0.1)}
+  50%{box-shadow:0 0 0 10px rgba(var(--ac),0), 0 0 25px rgba(var(--ac),0.4), inset 0 0 12px rgba(var(--ac),0.15)}
+  100%{box-shadow:0 0 0 0 rgba(var(--ac),0.5), 0 0 15px rgba(var(--ac),0.25), inset 0 0 8px rgba(var(--ac),0.1)}
+}
+@keyframes card-glow-in{
+  0%{opacity:0;transform:translateY(14px) scale(0.94)}
+  50%{transform:translateY(-3px) scale(1.02)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes status-breathe{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--ac),0.5)}
+  50%{transform:scale(1.06);box-shadow:0 0 0 5px rgba(var(--ac),0)}
+}
+@keyframes anim-progress{0%{background-position:0 0}100%{background-position:30px 0}}
+
+/* ─── LIGHT ANIMATIONS (Warm Glow + Flicker + Hue Rotate) ─── */
+@keyframes light-warm-glow{
+  0%,100%{filter:drop-shadow(0 0 5px rgba(var(--ac),0.5)) brightness(1)}
+  25%{filter:drop-shadow(0 0 10px rgba(var(--ac),0.7)) brightness(1.1)}
+  50%{filter:drop-shadow(0 0 16px rgba(var(--ac),0.85)) brightness(1.2)}
+  75%{filter:drop-shadow(0 0 10px rgba(var(--ac),0.65)) brightness(1.08)}
+}
+@keyframes light-flicker{
+  0%,100%{opacity:1;filter:brightness(1)}
+  10%{opacity:.92;filter:brightness(1.05)}
+  20%{opacity:1;filter:brightness(1)}
+  30%{opacity:.88;filter:brightness(1.08)}
+  50%{opacity:1;filter:brightness(1.12)}
+  70%{opacity:.95;filter:brightness(1)}
+  85%{opacity:1;filter:brightness(1.06)}
+}
+@keyframes light-card-ambient{
+  0%,100%{box-shadow:0 0 20px rgba(var(--bc),.08), inset 0 -2px 15px rgba(var(--bc),.04)}
+  50%{box-shadow:0 0 35px rgba(var(--bc),.15), inset 0 -2px 20px rgba(var(--bc),.08)}
+}
+@keyframes light-ring-expand{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.4), 0 0 0 0 rgba(var(--ac),0.2)}
+  100%{box-shadow:0 0 0 12px rgba(var(--ac),0), 0 0 0 20px rgba(var(--ac),0)}
+}
+@keyframes rgb-hue-rotate{
+  0%{filter:hue-rotate(0deg) brightness(1.1)}
+  25%{filter:hue-rotate(90deg) brightness(1.2)}
+  50%{filter:hue-rotate(180deg) brightness(1.1)}
+  75%{filter:hue-rotate(270deg) brightness(1.2)}
+  100%{filter:hue-rotate(360deg) brightness(1.1)}
+}
+
+/* ─── CLIMATE/AC ANIMATIONS (Spinning Fan + Cool Breeze + Frost) ─── */
+@keyframes climate-spin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes climate-breeze{
+  0%{transform:translateX(0) scaleX(1)}
+  20%{transform:translateX(3px) scaleX(1.02)}
+  40%{transform:translateX(-2px) scaleX(0.98)}
+  60%{transform:translateX(2px) scaleX(1.01)}
+  80%{transform:translateX(-1px) scaleX(0.99)}
+  100%{transform:translateX(0) scaleX(1)}
+}
+@keyframes climate-frost{
+  0%,100%{box-shadow:0 0 20px rgba(0,184,122,.06), inset 0 0 15px rgba(0,184,122,.03)}
+  50%{box-shadow:0 0 35px rgba(0,184,122,.12), inset 0 0 20px rgba(0,184,122,.06)}
+}
+@keyframes climate-wave{
+  0%{clip-path:polygon(0% 75%,16% 72%,33% 78%,50% 73%,66% 77%,83% 71%,100% 76%,100% 100%,0% 100%)}
+  50%{clip-path:polygon(0% 72%,16% 77%,33% 71%,50% 76%,66% 72%,83% 78%,100% 73%,100% 100%,0% 100%)}
+  100%{clip-path:polygon(0% 75%,16% 72%,33% 78%,50% 73%,66% 77%,83% 71%,100% 76%,100% 100%,0% 100%)}
+}
+
+/* ─── CURTAIN/COVER ANIMATIONS (Slide + Fabric Wave) ─── */
+@keyframes curtain-open{
+  0%,100%{transform:translateY(0) scaleY(1)}
+  15%{transform:translateY(-4px) scaleY(1.02)}
+  30%{transform:translateY(-2px) scaleY(0.99)}
+  50%{transform:translateY(-3px) scaleY(1.01)}
+  75%{transform:translateY(-1px) scaleY(1)}
+}
+@keyframes curtain-fabric{
+  0%{transform:skewX(0deg) scaleX(1)}
+  25%{transform:skewX(1deg) scaleX(1.01)}
+  50%{transform:skewX(0deg) scaleX(1)}
+  75%{transform:skewX(-1deg) scaleX(0.99)}
+  100%{transform:skewX(0deg) scaleX(1)}
+}
+@keyframes curtain-card-sway{
+  0%,100%{box-shadow:0 0 18px rgba(var(--bc),.06), inset 0 2px 12px rgba(var(--bc),.03)}
+  50%{box-shadow:0 0 28px rgba(var(--bc),.12), inset 0 2px 18px rgba(var(--bc),.06)}
+}
+
+/* ─── CAMERA ANIMATIONS (Recording Pulse + Scanning + Red Alert) ─── */
+@keyframes camera-rec-pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  40%{opacity:.5;transform:scale(1.15)}
+  60%{opacity:.8;transform:scale(1.05)}
+}
+@keyframes camera-scan{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+@keyframes camera-card-alert{
+  0%,100%{border-color:rgba(var(--bc),.35);box-shadow:0 0 15px rgba(var(--bc),.08)}
+  50%{border-color:rgba(var(--bc),.55);box-shadow:0 0 25px rgba(var(--bc),.18)}
+}
+@keyframes rec-dot-blink{
+  0%,100%{opacity:1;box-shadow:0 0 3px #EF4444}
+  50%{opacity:.3;box-shadow:0 0 5px #EF4444}
+}
+
+/* ─── SENSOR ANIMATIONS (Radar Sweep + Sonar + Shockwave) ─── */
+@keyframes sensor-radar{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes sensor-sonar{
+  0%{transform:scale(0.5);opacity:0.5;border-width:2px}
+  100%{transform:scale(2.2);opacity:0;border-width:0.3px}
+}
+@keyframes sensor-shockwave{
+  0%{box-shadow:0 0 0 0 rgba(var(--ac),0.5)}
+  70%{box-shadow:0 0 0 15px rgba(var(--ac),0)}
+  100%{box-shadow:0 0 0 0 rgba(var(--ac),0)}
+}
+@keyframes sensor-detected{
+  0%,100%{background:rgba(var(--bc),.06)}
+  50%{background:rgba(var(--bc),.12)}
+}
+
+/* ─── MEDIA ANIMATIONS (Equalizer Bars + Vinyl Spin + Play Pulse) ─── */
+@keyframes media-eq-bar{
+  0%{transform:scaleY(0.3)}
+  25%{transform:scaleY(1)}
+  50%{transform:scaleY(0.5)}
+  75%{transform:scaleY(0.8)}
+  100%{transform:scaleY(0.3)}
+}
+@keyframes media-vinyl{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes media-play-pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.08);opacity:.85}
+}
+@keyframes media-card-vibe{
+  0%,100%{box-shadow:0 0 18px rgba(var(--bc),.06)}
+  25%{box-shadow:0 0 22px rgba(var(--bc),.1)}
+  50%{box-shadow:0 0 28px rgba(var(--bc),.14)}
+  75%{box-shadow:0 0 22px rgba(var(--bc),.1)}
+}
+
+/* ─── HUB/NETWORK ANIMATIONS (Signal Rings + Data Flow) ─── */
+@keyframes hub-signal{
+  0%,100%{transform:scale(1);opacity:0.7}
+  50%{transform:scale(1.1);opacity:1}
+}
+@keyframes hub-data-flow{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+@keyframes hub-ring-1{0%{transform:scale(0.8);opacity:0.6}50%{transform:scale(1.4);opacity:0}100%{transform:scale(0.8);opacity:0.6}}
+@keyframes hub-ring-2{0%{transform:scale(0.6);opacity:0.4}50%{transform:scale(1.6);opacity:0}100%{transform:scale(0.6);opacity:0.4}}
+
+/* ─── ERROR/GLITCH ANIMATION ─── */
+@keyframes glitch-flicker{
+  0%,88%,100%{opacity:1;transform:translate(0);filter:none}
+  89%{opacity:0.7;transform:translate(-2px,1px);filter:hue-rotate(90deg)}
+  91%{opacity:0.9;transform:translate(2px,-1px);filter:hue-rotate(-90deg)}
+  93%{opacity:0.6;transform:translate(-1px,-1px);filter:brightness(1.5)}
+  95%{opacity:1;transform:translate(1px,0);filter:none}
+  97%{opacity:0.8;transform:translate(-1px,1px);filter:hue-rotate(45deg)}
+}
+
+/* ─── WATER LEAK SENSOR (Liquid Wave) ─── */
+@keyframes water-wave{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
+}
+@keyframes water-drip{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  80%{transform:translateY(12px) scale(0.8);opacity:0.6}
+  100%{transform:translateY(14px) scale(0.5);opacity:0}
+}
+
+/* ─── DOOR SENSOR (Open/Close) ─── */
+@keyframes door-swing{
+  0%,100%{transform:perspective(200px) rotateY(0deg)}
+  50%{transform:perspective(200px) rotateY(-15deg)}
+}
+
+/* ─── FAN ANIMATION ─── */
+@keyframes fan-spin-slow{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes fan-idle-rock{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(8deg)}
+  75%{transform:rotate(-8deg)}
+}
+
+
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
 
 .tb{height:52px;background:var(--s1);border-bottom:.5px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:9px;flex-shrink:0;z-index:100;}
@@ -53,7 +260,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .lp.on{background:rgba(200,168,75,.1);color:var(--gold);}
 .ha-status{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--t2);}
 .ha-dot{width:5px;height:5px;border-radius:50%;background:#94A3B8;transition:background .3s;}
-.ha-dot.ok{background:#34D399;animation:blink 2.5s ease infinite;}
+.ha-dot.ok{background:#34D399;animation:blink 4s ease infinite;}
 .ha-dot.err{background:#EF4444;}
 .tb-clk{font-size:11px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.06em;}
 
@@ -83,7 +290,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .rnav-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:24px;flex-shrink:0;background:var(--s1);border:.5px solid var(--border);font-family:inherit;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .18s;}
 .rnav-btn.on{border-color:rgba(var(--rc),.35);color:rgb(var(--rc));background:rgba(var(--rc),.07);}
 .rn-dot{width:5px;height:5px;border-radius:50%;opacity:0;flex-shrink:0;}
-.rnav-btn.on .rn-dot{opacity:1;animation:blink 1.8s ease infinite;}
+.rnav-btn.on .rn-dot{opacity:1;animation:blink 3.5s ease infinite;}
 
 .fctrl{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;background:var(--s1);border:.5px solid var(--border);border-radius:12px;padding:8px 12px;margin:9px 0 0;}
 .fctrl-lbl{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
@@ -111,33 +318,105 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:7px;}
 
 .dc{
-  border-radius:13px;padding:12px;
-  cursor:pointer;position:relative;overflow:visible;
-  transition:transform .15s,border-color .2s;
+  border-radius:14px;padding:12px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .2s ease,border-color .3s,background .3s,box-shadow .3s;
   border:.5px solid var(--border);
   background:var(--s2);
 }
-.dc:hover{transform:translateY(-2px);}
-.dc.active{border-color:rgba(var(--bc),.28);background:rgba(var(--bc),.05);}
-.dc::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;border-radius:0 0 3px 3px;background:radial-gradient(ellipse,rgb(var(--bc)),transparent 70%);opacity:.7;}
-.dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.025),transparent);background-size:300% 100%;pointer-events:none;border-radius:13px;animation:shimmer 4s ease infinite;}
+.dc:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,.2);}
+.dc.active{
+  border-color:rgba(var(--bc),.3);
+  background:rgba(var(--bc),.05);
+  box-shadow:0 0 15px rgba(var(--bc),.08);
+}
+.dc.active:hover{box-shadow:0 0 20px rgba(var(--bc),.14);}
+.dc::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;border-radius:0 0 3px 3px;background:radial-gradient(ellipse,rgb(var(--bc)),transparent 70%);opacity:0;transition:opacity .3s;}
+.dc.active::before{opacity:.6;}
+.dc::after{content:'';position:absolute;inset:0;border-radius:14px;opacity:0;transition:opacity .4s;pointer-events:none;background:radial-gradient(circle at 50% 0%,rgba(var(--bc),.06),transparent 70%);}
+.dc.active::after{opacity:1;}
+.dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.01),transparent);background-size:300% 100%;pointer-events:none;border-radius:14px;animation:shimmer 10s ease infinite;}
+.dc.active .dc-shm{background:linear-gradient(90deg,transparent,rgba(var(--bc),.02),transparent);background-size:300% 100%;}
+
+/* ══════ TYPE-SPECIFIC CARD ACCENTS (subtle) ══════ */
+.dc.active{--ac:var(--bc);}
+.dc.active.type-light::after{background:radial-gradient(ellipse at 50% -10%,rgba(var(--bc),.1),transparent 60%);}
+.dc.active.type-climate::after{background:linear-gradient(180deg,rgba(var(--bc),.06) 0%,transparent 50%);}
+.dc.active.type-camera::after{background:radial-gradient(circle at 25% 25%,rgba(var(--bc),.06),transparent 55%);}
+.dc.active.type-media::after{background:radial-gradient(ellipse at 50% 80%,rgba(var(--bc),.06),transparent 60%);}
+
+/* ══════ ANIMATED PROGRESS BAR ══════ */
+.dc.active .dc-fill{
+  background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%);
+  background-size:15px 15px;
+  animation:anim-progress .8s linear infinite;
+}
+
+/* ══════ CLIMATE WAVE OVERLAY ══════ */
+.climate-wave-overlay{
+  position:absolute;bottom:0;left:0;right:0;height:30%;
+  border-radius:0 0 16px 16px;
+  pointer-events:none;overflow:hidden;
+  opacity:0;transition:opacity .4s;
+}
+.dc.active.type-climate .climate-wave-overlay{opacity:1;}
+.climate-wave-inner{
+  position:absolute;bottom:-5px;left:-10%;right:-10%;height:200%;
+  background:rgba(var(--bc),.06);
+  border-radius:45%;
+  animation:climate-wave 4s ease-in-out infinite;
+}
+
+/* ══════ CAMERA SCAN LINE ══════ */
+.camera-scanline{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(var(--bc),.6),transparent);
+  pointer-events:none;opacity:0;
+  animation:none;
+}
+.dc.active.type-camera .camera-scanline{
+  opacity:1;
+  animation:camera-scan-line 3s ease-in-out infinite;
+}
+@keyframes camera-scan-line{
+  0%{top:0;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{top:100%;opacity:0}
+}
 
 .dc-r1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;}
 .ico-btn{
-  position:relative;width:52px;height:52px;border-radius:16px;
+  position:relative;width:52px;height:52px;border-radius:15px;
   display:flex;align-items:center;justify-content:center;
-  border:none;cursor:pointer;transition:transform .15s;flex-shrink:0;
+  border:none;cursor:pointer;transition:transform .2s ease;flex-shrink:0;
 }
-.ico-btn:hover{transform:scale(1.07);}
-.ico-btn::before{content:'';position:absolute;inset:-7px;border-radius:23px;opacity:.9;animation:glow 2.5s ease infinite;}
-.ico-btn::after{content:'';position:absolute;inset:-7px;border-radius:23px;border:1.5px solid;animation:pulse-ring 2s ease-out infinite;}
-.dc.active .ico-btn svg{filter:drop-shadow(0 0 7px rgb(var(--bc)));}
+.ico-btn:hover{transform:scale(1.06);}
+.ico-btn::before{content:'';position:absolute;inset:-5px;border-radius:20px;opacity:0;}
+.ico-btn::after{content:'';position:absolute;inset:-5px;border-radius:20px;border:1px solid rgba(var(--bc),.15);opacity:0;transition:opacity .3s;}
+.dc.active .ico-btn::after{opacity:1;}
+.dc.active .ico-btn svg{filter:drop-shadow(0 0 3px rgba(var(--bc),.3));transition:filter .3s;}
 
-.dc.active.type-light .ico-btn svg{animation:flicker 3s ease-in-out infinite;}
+/* LIGHT: gentle warm glow */
+.dc.active.type-light .ico-btn svg{animation:light-warm-glow 5s ease-in-out infinite;}
 
-.dc.active.type-climate .ico-btn svg{animation:spin 5s linear infinite;}
+/* CLIMATE: slow spin */
+.dc.active.type-climate .ico-btn svg{animation:climate-spin 8s linear infinite;}
 
-.dc.active.type-cover .ico-btn svg{animation:bounce 2.2s ease-in-out infinite;}
+/* COVER: subtle slide */
+.dc.active.type-cover .ico-btn svg{animation:curtain-open 6s ease-in-out infinite;}
+
+/* CAMERA: gentle pulse */
+.dc.active.type-camera .ico-btn svg{animation:camera-rec-pulse 3s ease-in-out infinite;}
+
+/* SENSOR: soft glow */
+.dc.active.type-sensor .ico-btn svg{animation:light-warm-glow 5s ease-in-out infinite;}
+
+/* HUB: steady signal */
+.dc.active.type-hub .ico-btn svg{animation:hub-signal 5s ease-in-out infinite;}
+
+/* MEDIA: soft pulse */
+.dc.active.type-media .ico-btn svg{animation:media-play-pulse 4s ease-in-out infinite;}
 
 .chg-dot{
   position:absolute;bottom:-1px;right:-1px;
@@ -201,9 +480,9 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .sch{display:flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;border-radius:34px;background:var(--s1);border:.5px solid var(--border);position:relative;cursor:pointer;transition:all .18s;}
 .sch.on{border-color:rgba(var(--sc),.3);background:rgba(var(--sc),.06);}
 .sch-bub{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(var(--sc),.14);}
-.sch.on .sch-bub svg{animation:bounce 2.2s ease-in-out infinite;}
+.sch.on .sch-bub svg{}
 .sch-bdg{position:absolute;top:-5px;left:-5px;min-width:17px;height:17px;border-radius:9px;padding:0 3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;background:rgb(var(--sc));color:#08080E;border:2px solid var(--bg);box-shadow:0 2px 6px rgba(var(--sc),.5);z-index:2;animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both;}
-.sch-bdg::before{content:'';position:absolute;inset:-3px;border-radius:12px;border:1.5px solid rgba(var(--sc),.4);animation:pulse-ring 2s ease-out infinite;}
+.sch-bdg::before{content:'';position:absolute;inset:-3px;border-radius:12px;border:1px solid rgba(var(--sc),.2);}
 .sch-lbl{font-size:10px;font-weight:600;}
 .sch.on .sch-lbl{color:rgb(var(--sc));}
 .sch-sub{font-size:8px;color:var(--t3);}
@@ -215,7 +494,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .sec{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;margin:13px 0 7px;display:flex;align-items:center;gap:7px;}
 .sec::after{content:'';flex:1;height:.5px;background:var(--border);}
 
-.fn-btn{display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:13px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .18s;margin-bottom:6px;}
+.fn-btn{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:14px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .2s;margin-bottom:6px;position:relative;overflow:hidden;}
 .fn-btn:hover{transform:translateY(-2px);}
 .fn-ico{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .fn-info{flex:1;}
@@ -224,7 +503,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .fn-arr{color:var(--t3);font-size:16px;}
 
 .qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.qa-btn{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .18s;}
+.qa-btn{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:13px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .2s;}
 .qa-btn:hover{transform:translateY(-1px);}
 .qa-ico{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .qa-name{font-size:11px;font-weight:700;}
@@ -233,7 +512,7 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .sc-chip{display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:23px;background:var(--s1);border:.5px solid var(--border);font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .18s;}
 .sc-chip.on{background:rgba(var(--sc),.07);border-color:rgba(var(--sc),.3);color:rgb(var(--sc));}
 .sc-dot{width:5px;height:5px;border-radius:50%;opacity:0;background:rgb(var(--sc));}
-.sc-chip.on .sc-dot{opacity:1;animation:blink 1.5s ease infinite;}
+.sc-chip.on .sc-dot{opacity:1;animation:blink 3s ease infinite;}
 
 .sel-bar{position:sticky;top:0;z-index:80;background:#1A1C2E;border:1px solid rgba(139,92,246,.3);border-radius:13px;padding:8px 12px;display:none;align-items:center;gap:7px;flex-wrap:wrap;animation:fade-up .2s ease;margin-top:8px;}
 .sel-bar.show{display:flex;}
@@ -289,6 +568,83 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 .modal-create{padding:7px 15px;border-radius:9px;background:#8B5CF6;border:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:white;cursor:pointer;}
 
 .brand-logo{display:flex;align-items:center;opacity:.75;}
+
+
+/* ═══ SUBTLE HOVER EFFECTS ═══ */
+.sc-chip:hover{transform:translateY(-1px);}
+.qa-btn:hover{transform:translateY(-1px);}
+.fn-btn:hover{transform:translateY(-1px);border-color:var(--border2);}
+.fn-btn::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:radial-gradient(ellipse,var(--fn-color,var(--gold)),transparent 70%);opacity:.5;}
+.sch:hover{transform:translateY(-1px);}
+.tog{transition:background .22s;}
+.tog.on{box-shadow:0 0 6px rgba(var(--bc),.25);}
+
+/* ══════ EQUALIZER BARS (for media cards) ══════ */
+.media-waves{display:flex;align-items:flex-end;gap:2px;height:18px;}
+.media-wave-bar{width:3px;border-radius:2px;animation:media-eq-bar 1s ease-in-out infinite;}
+.media-wave-bar:nth-child(1){height:35%;animation-delay:0s;animation-duration:.8s}
+.media-wave-bar:nth-child(2){height:65%;animation-delay:.1s;animation-duration:.6s}
+.media-wave-bar:nth-child(3){height:45%;animation-delay:.2s;animation-duration:.9s}
+.media-wave-bar:nth-child(4){height:80%;animation-delay:.05s;animation-duration:.7s}
+.media-wave-bar:nth-child(5){height:55%;animation-delay:.15s;animation-duration:.85s}
+
+/* ══════ SENSOR RADAR (Sonar + Sweep) ══════ */
+.sensor-radar{
+  position:absolute;top:50%;left:50%;width:36px;height:36px;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.sensor-radar::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:2px solid rgba(var(--bc),.5);
+  animation:sensor-sonar 2s ease-out infinite;
+}
+.sensor-radar::after{
+  content:'';position:absolute;inset:5px;border-radius:50%;
+  border:1.5px solid rgba(var(--bc),.35);
+  animation:sensor-sonar 2s ease-out .7s infinite;
+}
+/* Third ring for deeper effect */
+.sensor-radar-inner{
+  position:absolute;inset:10px;border-radius:50%;
+  border:1px solid rgba(var(--bc),.2);
+  animation:sensor-sonar 2s ease-out 1.4s infinite;
+}
+
+/* ══════ RECORDING DOT (for cameras) ══════ */
+.rec-dot{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:7px;font-weight:800;color:#EF4444;
+  letter-spacing:.05em;
+}
+.rec-dot::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:#EF4444;
+  animation:rec-dot-blink 1.2s ease-in-out infinite;
+}
+
+/* ══════ WATER LEAK INDICATOR ══════ */
+.water-indicator{
+  position:absolute;bottom:0;left:0;right:0;height:4px;
+  border-radius:0 0 16px 16px;overflow:hidden;
+  pointer-events:none;
+}
+.water-indicator-wave{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);
+  animation:water-wave 2s ease-in-out infinite;
+}
+
+/* ══════ DOOR SENSOR INDICATOR ══════ */
+.dc.active.type-sensor[data-ico="door"] .ico-btn svg{
+  animation:door-swing 3s ease-in-out infinite;
+  transform-origin:left center;
+}
+
+
+/* ═══ ERROR DEVICE ANIMATION ═══ */
+.dc.error{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.04);}
+.dc.error .ico-btn{animation:glitch-flicker 3s ease-in-out infinite !important;}
+.dc.error::before{background:radial-gradient(ellipse,#EF4444,transparent 70%);}
 </style>
 </head>
 <body>
@@ -321,18 +677,18 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
     </button>
     <button class="tab" id="tab-g" onclick="showPane('g',this)" style="">
       <span class="en">Ground</span><span class="ar" style="display:none">أرضي</span>
-      <span class="t-bdg" id="tb-g" style="background:#C8A84B">30</span>
+      <span class="t-bdg" id="tb-g" style="background:#C8A84B">40</span>
     </button>
     <button class="tab" id="tab-1" onclick="showPane('1',this)">
       <span class="en">First</span><span class="ar" style="display:none">أول</span>
-      <span class="t-bdg" id="tb-1" style="background:#0A84FF;color:white">24</span>
+      <span class="t-bdg" id="tb-1" style="background:#0A84FF;color:white">56</span>
     </button>
     <button class="tab dis">
       <span class="en">2nd</span><span class="ar" style="display:none">ثاني</span>
     </button>
     <button class="tab" id="tab-r" onclick="showPane('r',this)">
       <span class="en">Roof</span><span class="ar" style="display:none">سطح</span>
-      <span class="t-bdg" id="tb-r" style="background:#8B5CF6;color:white">3</span>
+      <span class="t-bdg" id="tb-r" style="background:#8B5CF6;color:white">1</span>
     </button>
   </div>
 </div>
@@ -439,20 +795,20 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
     </div>
   </div>
   <div class="sec"><span class="en">Floors</span><span class="ar" style="display:none">الطوابق</span></div>
-  <div class="fn-btn" style="border-color:rgba(200,168,75,.28);background:rgba(200,168,75,.05);border-top:2px solid #C8A84B;" onclick="showPane('g',document.getElementById('tab-g'))">
-    <div class="fn-ico" style="background:rgba(200,168,75,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#C8A84B"><span class="en">Ground Floor</span><span class="ar" style="display:none">الدور الأرضي</span></div><div class="fn-sub"><span class="en">Ali Room · Back Doorway · Prep Kitchen · Sitting Room</span><span class="ar" style="display:none">غرفة علي · مدخل خلفي · مطبخ · جلوس</span></div></div>
-    <div class="fn-arr">›</div>
+  <div class="fn-btn" style="--fn-color:#C8A84B;border-color:rgba(200,168,75,.18);background:linear-gradient(135deg,rgba(200,168,75,.04),rgba(200,168,75,.01));" onclick="showPane('g',document.getElementById('tab-g'))">
+    <div class="fn-ico" style="background:rgba(200,168,75,.1);border-radius:13px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+    <div class="fn-info"><div class="fn-name" style="color:#C8A84B"><span class="en">Ground Floor</span><span class="ar" style="display:none">الدور الأرضي</span></div><div class="fn-sub"><span class="en">Back Doorway · Sitting Room · Prep Kitchen · Father Room · Cameras</span><span class="ar" style="display:none">مدخل خلفي · جلوس · مطبخ · غرفة الوالد · كاميرات</span></div></div>
+    <div class="fn-arr" style="color:#C8A84B">›</div>
   </div>
-  <div class="fn-btn" style="border-color:rgba(10,132,255,.28);background:rgba(10,132,255,.05);border-top:2px solid #0A84FF;" onclick="showPane('1',document.getElementById('tab-1'))">
-    <div class="fn-ico" style="background:rgba(10,132,255,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#0A84FF" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#0A84FF"><span class="en">First Floor</span><span class="ar" style="display:none">الدور الأول</span></div><div class="fn-sub"><span class="en">Living Room · Master Suite · Master Bedroom · Office</span><span class="ar" style="display:none">معيشة · ماستر سويت · ماستر بيدروم · مكتب</span></div></div>
-    <div class="fn-arr">›</div>
+  <div class="fn-btn" style="--fn-color:#0A84FF;border-color:rgba(10,132,255,.18);background:linear-gradient(135deg,rgba(10,132,255,.04),rgba(10,132,255,.01));" onclick="showPane('1',document.getElementById('tab-1'))">
+    <div class="fn-ico" style="background:rgba(10,132,255,.1);border-radius:13px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#0A84FF" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+    <div class="fn-info"><div class="fn-name" style="color:#0A84FF"><span class="en">First Floor</span><span class="ar" style="display:none">الدور الأول</span></div><div class="fn-sub"><span class="en">Master Bedroom · Bathroom · Office · Closet · Sitting · Living · Second Room</span><span class="ar" style="display:none">ماستر بيدروم · حمام · مكتب · كلوزيت · جلوس · معيشة · غرفة ثانية</span></div></div>
+    <div class="fn-arr" style="color:#0A84FF">›</div>
   </div>
-  <div class="fn-btn" style="border-color:rgba(139,92,246,.28);background:rgba(139,92,246,.05);border-top:2px solid #8B5CF6;" onclick="showPane('r',document.getElementById('tab-r'))">
-    <div class="fn-ico" style="background:rgba(139,92,246,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#8B5CF6" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#8B5CF6"><span class="en">Roof</span><span class="ar" style="display:none">السطح</span></div><div class="fn-sub"><span class="en">Cameras · Aqara G5 Pro · Hikvision NVR</span><span class="ar" style="display:none">كاميرات · أكارا G5 Pro · هيكفيجن</span></div></div>
-    <div class="fn-arr">›</div>
+  <div class="fn-btn" style="--fn-color:#8B5CF6;border-color:rgba(139,92,246,.18);background:linear-gradient(135deg,rgba(139,92,246,.04),rgba(139,92,246,.01));" onclick="showPane('r',document.getElementById('tab-r'))">
+    <div class="fn-ico" style="background:rgba(139,92,246,.1);border-radius:13px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#8B5CF6" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+    <div class="fn-info"><div class="fn-name" style="color:#8B5CF6"><span class="en">Roof</span><span class="ar" style="display:none">السطح</span></div><div class="fn-sub"><span class="en">Roof Camera · Hikvision NVR</span><span class="ar" style="display:none">كاميرا السطح · هيكفيجن</span></div></div>
+    <div class="fn-arr" style="color:#8B5CF6">›</div>
   </div>
   <div class="sec"><span class="en">Scenes</span><span class="ar" style="display:none">المشاهد</span></div>
   <div class="scenes">
@@ -546,12 +902,20 @@ html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;he
 'use strict';
 
 const BRAND_COLORS = {
-  'Aqara':     { hex:'#0A84FF', rgb:'10,132,255' },
-  'Hikvision': { hex:'#E31E24', rgb:'227,30,36'  },
-  'Ecobee':    { hex:'#00B87A', rgb:'0,184,122'  },
-  'Homey':     { hex:'#FF6B35', rgb:'255,107,53' },
-  'Fibaro':    { hex:'#F5C400', rgb:'245,196,0'  },
-  'default':   { hex:'#94A3B8', rgb:'148,163,184' }
+  'Aqara':       { hex:'#0A84FF', rgb:'10,132,255' },
+  'Hikvision':   { hex:'#E31E24', rgb:'227,30,36'  },
+  'Ecobee':      { hex:'#00B87A', rgb:'0,184,122'  },
+  'Homey':       { hex:'#FF6B35', rgb:'255,107,53' },
+  'Fibaro':      { hex:'#F5C400', rgb:'245,196,0'  },
+  'Sony':        { hex:'#000000', rgb:'30,30,30'   },
+  'Apple':       { hex:'#A2AAAD', rgb:'162,170,173' },
+  'Bose':        { hex:'#1A1A1A', rgb:'40,40,40'   },
+  'LG':          { hex:'#A50034', rgb:'165,0,52'   },
+  'Skyworth':    { hex:'#0066CC', rgb:'0,102,204'  },
+  'HP':          { hex:'#0096D6', rgb:'0,150,214'  },
+  'Generic':     { hex:'#6B7280', rgb:'107,114,128' },
+  'Athom':       { hex:'#FF6B35', rgb:'255,107,53' },
+  'default':     { hex:'#94A3B8', rgb:'148,163,184' }
 };
 
 function brandColor(brand) {
@@ -612,7 +976,21 @@ function brandLogo(brand, hex) {
     Homey: `<svg width="44" height="11" viewBox="0 0 130 28" fill="none"><path d="M4 6v16M12 6v16M4 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><circle cx="26" cy="14" r="7" stroke="${hex}" stroke-width="2.2"/><path d="M39 6v16M47 6v16M39 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M57 14a7 7 0 1014 0 7 7 0 00-14 0z" stroke="${hex}" stroke-width="2.2"/><path d="M77 22V6l8 10 8-10v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M101 6v16M109 6v16M101 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/></svg>`,
     Fibaro: `<svg width="44" height="11" viewBox="0 0 130 28" fill="none"><path d="M4 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M4 6h8a6 6 0 010 12H4" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M24 6h6M24 14h5M24 22h6" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M38 6v16M46 6v16M38 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M52 6h6a6 6 0 010 12h-6V6z" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   };
-  return logos[brand] || `<span style="font-size:9px;font-weight:700;color:${hex}">${brand}</span>`;
+  if (!logos[brand]) {
+    // Text-based logos for brands without SVG
+    const textBrands = {
+      Sony: `<span style="font-size:10px;font-weight:900;color:${hex};letter-spacing:0.08em;font-style:italic">SONY</span>`,
+      Apple: `<span style="font-size:10px;font-weight:700;color:${hex}">Apple</span>`,
+      Bose: `<span style="font-size:10px;font-weight:900;color:${hex};letter-spacing:0.05em">BOSE</span>`,
+      LG: `<span style="font-size:10px;font-weight:900;color:${hex}">LG</span>`,
+      Skyworth: `<span style="font-size:9px;font-weight:700;color:${hex}">Skyworth</span>`,
+      HP: `<span style="font-size:10px;font-weight:900;color:${hex}">hp</span>`,
+      Generic: `<span style="font-size:9px;font-weight:600;color:${hex}">Generic</span>`,
+      Athom: `<span style="font-size:9px;font-weight:700;color:${hex}">Athom</span>`,
+    };
+    return textBrands[brand] || `<span style="font-size:9px;font-weight:700;color:${hex}">${brand}</span>`;
+  }
+  return logos[brand];
 }
 
 const COLOR_PALETTE = [
@@ -627,41 +1005,68 @@ const ROOMS = {
     color:'#C8A84B', colorRgb:'200,168,75',
     rooms:[
       {
-        id:'ali', title:'Ali Room', titleAr:'غرفة علي', color:'#F472B6', colorRgb:'244,114,182',
-        devices:[
-          {id:'light.ali_back_cove_light',   name:'Back Cove Light',   nameAr:'كوف خلفي',   brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-          {id:'light.ali_curtain_cove_light', name:'Curtain Cove Light',nameAr:'كوف ستارة',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-          {id:'light.ali_front_cove_light',   name:'Front Cove Light',  nameAr:'كوف أمامي',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-        ]
-      },
-      {
         id:'back', title:'Back Doorway', titleAr:'المدخل الخلفي', color:'#FB923C', colorRgb:'251,146,60',
         devices:[
-          {id:'light.cove_light_backdoor_hall',  name:'Cove Light',   nameAr:'كوف لايت',      brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.main_lights_backdoor_hall', name:'Main Lights',  nameAr:'رئيسية',         brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_backdoor_hall', name:'Mini Lights',  nameAr:'مينيات',         brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.wall_lights_backdoor_hall', name:'Wall Lights',  nameAr:'جداريات',        brand:'Fibaro', type:'light', model:'Dimmer 2',  protocol:'Z-Wave Plus'},
-        ]
-      },
-      {
-        id:'kitchen', title:'Prep Kitchen', titleAr:'المطبخ', color:'#34D399', colorRgb:'52,211,153',
-        devices:[
-          {id:'light.cove_light_1_prep_kitchen', name:'Cove Light 1', nameAr:'كوف 1', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_2_prep_kitchen', name:'Cove Light 2', nameAr:'كوف 2', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_3_prep_kitchen', name:'Cove Light 3', nameAr:'كوف 3', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_4_prep_kitchen', name:'Cove Light 4', nameAr:'كوف 4', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_5_prep_kitchen', name:'Cove Light 5', nameAr:'كوف 5', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_6_prep_kitchen', name:'Cove Light 6', nameAr:'كوف 6', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_7_prep_kitchen', name:'Cove Light 7', nameAr:'كوف 7', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_8_prep_kitchen', name:'Cove Light 8', nameAr:'كوف 8', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
+          {id:'light.cove_light_backdoor_hall',  name:'Cove Light',   nameAr:'كوف لايت',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.main_lights_backdoor_hall', name:'Main Lights',  nameAr:'رئيسية',     brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.mini_lights_backdoor_hall', name:'Mini Lights',  nameAr:'مينيات',     brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.wall_lights_backdoor_hall', name:'Wall Lights',  nameAr:'جداريات',    brand:'Fibaro',type:'light', model:'Dimmer 2',  protocol:'Z-Wave Plus'},
         ]
       },
       {
         id:'sitting-g', title:'Sitting Room', titleAr:'غرفة الجلوس', color:'#60A5FA', colorRgb:'96,165,250',
         devices:[
-          {id:'binary_sensor.aqara_hub_m2_status',    name:'Hub M2',       nameAr:'هاب M2',        brand:'Aqara', type:'hub',    model:'Hub M2',     protocol:'Zigbee GW'},
-          {id:'light.cove_lights_sitting_room_group', name:'Cove Lights (9)',nameAr:'كوف لايتس (9)', brand:'Aqara', type:'light',  model:'T1M-G01',    protocol:'Zigbee 3.0'},
-          {id:'switch.homey_bridge',                  name:'Homey Bridge',  nameAr:'هومي بريدج',    brand:'Homey', type:'hub',    model:'Bridge',     protocol:'Multi'},
+          {id:'light.cove_light_1_sitting_room',  name:'Cove Light 1',  nameAr:'كوف 1',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_2_sitting_room',  name:'Cove Light 2',  nameAr:'كوف 2',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_3_sitting_room',  name:'Cove Light 3',  nameAr:'كوف 3',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_4_sitting_room',  name:'Cove Light 4',  nameAr:'كوف 4',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_5_sitting_room',  name:'Cove Light 5',  nameAr:'كوف 5',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_6_sitting_room',  name:'Cove Light 6',  nameAr:'كوف 6',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_7_sitting_room',  name:'Cove Light 7',  nameAr:'كوف 7',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_8_sitting_room',  name:'Cove Light 8',  nameAr:'كوف 8',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_9_sitting_room',  name:'Cove Light 9',  nameAr:'كوف 9',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_10_sitting_room', name:'Cove Light 10', nameAr:'كوف 10', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_11_sitting_room', name:'Cove Light 11', nameAr:'كوف 11', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+        ]
+      },
+      {
+        id:'kitchen', title:'Prep Kitchen', titleAr:'المطبخ', color:'#34D399', colorRgb:'52,211,153',
+        devices:[
+          {id:'light.cove_light_1_prep_kitchen', name:'Cove Light 1', nameAr:'كوف 1', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_2_prep_kitchen', name:'Cove Light 2', nameAr:'كوف 2', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_3_prep_kitchen', name:'Cove Light 3', nameAr:'كوف 3', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_4_prep_kitchen', name:'Cove Light 4', nameAr:'كوف 4', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_5_prep_kitchen', name:'Cove Light 5', nameAr:'كوف 5', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_6_prep_kitchen', name:'Cove Light 6', nameAr:'كوف 6', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_7_prep_kitchen', name:'Cove Light 7', nameAr:'كوف 7', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_8_prep_kitchen', name:'Cove Light 8', nameAr:'كوف 8', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+        ]
+      },
+      {
+        id:'father', title:'Father Room', titleAr:'غرفة الوالد', color:'#F472B6', colorRgb:'244,114,182',
+        devices:[
+          {id:'light.father_back_cove_light',    name:'Back Cove Light',    nameAr:'كوف خلفي',  brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.father_curtain_cove_light', name:'Curtain Cove Light', nameAr:'كوف ستارة', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.father_front_cove_light',   name:'Front Cove Light',   nameAr:'كوف أمامي', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+        ]
+      },
+      {
+        id:'cameras-g', title:'Cameras', titleAr:'كاميرات أرضي', color:'#E31E24', colorRgb:'227,30,36',
+        devices:[
+          {id:'camera.back_parking_cam_1',   name:'Back Parking Cam 1',   nameAr:'موقف خلفي 1',    brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.back_parking_cam_2',   name:'Back Parking Cam 2',   nameAr:'موقف خلفي 2',    brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.vila_main_gate',       name:'Vila Main Gate',       nameAr:'بوابة الفيلا',   brand:'Hikvision', type:'camera', model:'DS-KV8113-WME1',       protocol:'PoE · NVR'},
+          {id:'camera.dirty_kitchen_2',      name:'Dirty Kitchen 2',      nameAr:'مطبخ خارجي',     brand:'Hikvision', type:'camera', model:'DS-2CD2383G2-IU',      protocol:'PoE · NVR'},
+          {id:'camera.front_parking_cam_1',  name:'Front Parking Cam 1',  nameAr:'موقف أمامي 1',   brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.front_parking_cam_2',  name:'Front Parking Cam 2',  nameAr:'موقف أمامي 2',   brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.garden',               name:'Garden',               nameAr:'الحديقة',         brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.ipcamera_06',          name:'IPCamera 06',          nameAr:'كاميرا 06',       brand:'Hikvision', type:'camera', model:'NVR IP Camera',        protocol:'PoE · NVR'},
+          {id:'camera.ipcamera_07',          name:'IPCamera 07',          nameAr:'كاميرا 07',       brand:'Hikvision', type:'camera', model:'NVR IP Camera',        protocol:'PoE · NVR'},
+          {id:'camera.ipcamera_09',          name:'IPCamera 09',          nameAr:'كاميرا 09',       brand:'Hikvision', type:'camera', model:'NVR IP Camera',        protocol:'PoE · NVR'},
+          {id:'camera.ipcamera_14',          name:'IPCamera 14',          nameAr:'كاميرا 14',       brand:'Hikvision', type:'camera', model:'NVR IP Camera',        protocol:'PoE · NVR'},
+          {id:'camera.porch_back',           name:'Porch Back',           nameAr:'شرفة خلفية',      brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.porch_dewanyah',       name:'Porch Dewanyah',       nameAr:'شرفة ديوانية',    brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
+          {id:'camera.porch_kitchen',        name:'Porch Kitchen',        nameAr:'شرفة مطبخ',       brand:'Hikvision', type:'camera', model:'DS-2CD2686G2-IZSU/SL', protocol:'PoE · NVR'},
         ]
       },
     ]
@@ -671,69 +1076,109 @@ const ROOMS = {
     color:'#0A84FF', colorRgb:'10,132,255',
     rooms:[
       {
-        id:'living', title:'Living Room', titleAr:'غرفة المعيشة', color:'#F472B6', colorRgb:'244,114,182',
-        devices:[
-          {id:'cover.big_curtain_left_living_room',  name:'Big Curtain Left',  nameAr:'ستارة كبيرة يسار', brand:'Aqara', type:'cover',  model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'cover.big_curtain_right_living_room', name:'Big Curtain Right', nameAr:'ستارة كبيرة يمين', brand:'Aqara', type:'cover',  model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'light.cove_lights_living_room',       name:'Cove Lights',       nameAr:'كوف لايتس',        brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.sitting_pendant_living_room',   name:'Sitting Pendant',   nameAr:'بندينت جلوس',      brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.table_pendant_living_room',     name:'Table Pendant',     nameAr:'بندينت طاولة',     brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_living_room',       name:'Mini Lights',       nameAr:'مينيات',           brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.tv_light_living_room',          name:'TV Light',          nameAr:'إضاءة TV',         brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'media_player.living_room_tv',         name:'Living Room TV',    nameAr:'تلفزيون المعيشة',  brand:'Aqara', type:'media',  model:'Smart TV',         protocol:'Wi-Fi'},
-        ]
-      },
-      {
         id:'mbed', title:'Master Bedroom', titleAr:'ماستر بيدروم', color:'#FB923C', colorRgb:'251,146,60',
         devices:[
-          {id:'light.colourful_ceiling_light_master_bedroom', name:'Ceiling Light',     nameAr:'سقف ملون',     brand:'Aqara',    type:'light',   model:'T1M RGB',         protocol:'Zigbee 3.0'},
-          {id:'light.cove_lights_master_bedroom',             name:'Cove Lights (10+)', nameAr:'كوف لايتس',   brand:'Aqara',    type:'light',   model:'T1M-G01',         protocol:'Zigbee 3.0'},
-          {id:'climate.ecobee_master_bedroom',                name:'AC Thermostat',     nameAr:'مكيف ترموستات', brand:'Ecobee', type:'climate', model:'SmartThermostat', protocol:'Wi-Fi'},
-          {id:'cover.big_curtain_master_bedroom',             name:'Big Curtain',       nameAr:'ستارة كبيرة',  brand:'Aqara',    type:'cover',   model:'Curtain Motor E1',protocol:'Zigbee 3.0'},
-          {id:'cover.small_curtain_master_bedroom',           name:'Small Curtain',     nameAr:'ستارة صغيرة',  brand:'Aqara',    type:'cover',   model:'Curtain Motor E1',protocol:'Zigbee 3.0'},
-          {id:'sensor.presence_sensor_fp2_master_bedroom',    name:'FP2 Presence',      nameAr:'FP2 حضور',     brand:'Aqara',    type:'sensor',  model:'FP2 mmWave',      protocol:'Wi-Fi',  icoKey:'motion'},
-          {id:'switch.aqara_hub_m3',                          name:'Hub M3',            nameAr:'هاب M3',       brand:'Aqara',    type:'hub',     model:'Hub M3',          protocol:'Zigbee·Z-Wave·BLE'},
-          {id:'sensor.aqara_cube_t1_pro_status',              name:'Cube T1 Pro ×14',   nameAr:'كيوب T1 Pro',  brand:'Aqara',    type:'sensor',  model:'Cube T1 Pro',     protocol:'Zigbee 3.0', isError:true},
-          {id:'media_player.master_bedroom_tv',               name:'Bedroom TV',        nameAr:'تلفزيون',      brand:'Aqara',    type:'media',   model:'Smart TV',        protocol:'Wi-Fi'},
+          {id:'light.back_bed_cove_light_master_bedroom',     name:'Back Bed Cove Light',     nameAr:'كوف سرير خلفي',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.bed_lights_master_bedroom',              name:'Bed Lights',              nameAr:'إضاءة سرير',      brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.center_bed_cove_light_master_bedroom',   name:'Center Bed Cove Light',   nameAr:'كوف سرير وسط',    brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.center_sitting_cove_light_master_bedroom',name:'Center Sitting Cove',    nameAr:'كوف جلسة وسط',    brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.center_sitting_spot_lights_master_bedroom',name:'Center Sitting Spots',  nameAr:'سبوت جلسة وسط',   brand:'Fibaro',type:'light',   model:'Fibaro',           protocol:'Z-Wave Plus'},
+          {id:'light.colourful_ceiling_light_master_bedroom', name:'Colourful Ceiling Light', nameAr:'سقف ملون',        brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.flow_plus_master_bedroom',               name:'Flow Plus',               nameAr:'فلو بلس',         brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.focus_lights_master_bedroom',            name:'Focus Lights',            nameAr:'إضاءة تركيز',     brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.left_bed_cove_light_master_bedroom',     name:'Left Bed Cove Light',     nameAr:'كوف سرير يسار',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.left_sitting_cove_light_master_bedroom', name:'Left Sitting Cove',       nameAr:'كوف جلسة يسار',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.left_wall_cove_light_master_bedroom',    name:'Left Wall Cove Light',    nameAr:'كوف جدار يسار',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.mini_lights_master_bedroom',             name:'Mini Lights',             nameAr:'مينيات',           brand:'Fibaro',type:'light',   model:'Fibaro',           protocol:'Z-Wave Plus'},
+          {id:'light.powerful_ceiling_light_master_bedroom',  name:'Powerful Ceiling Light',  nameAr:'إضاءة سقف قوية',  brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.right_bed_cove_light_master_bedroom',    name:'Right Bed Cove Light',    nameAr:'كوف سرير يمين',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.right_sitting_cove_light_master_bedroom',name:'Right Sitting Cove',      nameAr:'كوف جلسة يمين',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.right_wall_cove_light_master_bedroom',   name:'Right Wall Cove Light',   nameAr:'كوف جدار يمين',   brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'light.step_cove_light_master_bedroom',         name:'Step Cove Light',         nameAr:'كوف درج',         brand:'Homey', type:'light',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'cover.big_curtain_master_bedroom',             name:'Big Curtain',             nameAr:'ستارة كبيرة',     brand:'Homey', type:'cover',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'cover.small_curtain_master_bedroom',           name:'Small Curtain',           nameAr:'ستارة صغيرة',     brand:'Homey', type:'cover',   model:'Homey App',        protocol:'Wi-Fi'},
+          {id:'climate.master_bedroom_thermostat',            name:'Thermostat',              nameAr:'ترموستات',        brand:'Ecobee',type:'climate', model:'SmartThermostat',  protocol:'Wi-Fi'},
+          {id:'sensor.presence_sensor_fp2_master_bedroom',    name:'Presence Sensor FP2',     nameAr:'حساس حضور FP2',   brand:'Aqara', type:'sensor',  model:'FP2 mmWave',       protocol:'Wi-Fi',  icoKey:'motion'},
+          {id:'sensor.aqara_cube_t1_pro_master_bedroom',      name:'Cube T1 Pro ×16',         nameAr:'كيوب T1 Pro',     brand:'Aqara', type:'sensor',  model:'Cube T1 Pro',      protocol:'Zigbee 3.0', isError:true},
+          {id:'camera.mj_acusense_master_bedroom',            name:'MJ AcuSense',            nameAr:'كاميرا AcuSense', brand:'Hikvision',type:'camera',model:'DS-7616NXI-I2/16P/S',protocol:'PoE · NVR'},
+          {id:'media_player.master_bedroom_apple_tv',         name:'Apple TV 4K',             nameAr:'أبل تيفي',        brand:'Apple', type:'media',   model:'Apple TV 4K gen 2',protocol:'Wi-Fi'},
+          {id:'media_player.sony_tv_master_bedroom',          name:'Sony TV',                 nameAr:'تلفزيون سوني',    brand:'Sony',  type:'media',   model:'BRAVIA 4K AE2',    protocol:'Wi-Fi'},
+          {id:'media_player.mj_osntv',                        name:'MJ OSNTV',                nameAr:'OSNTV',            brand:'Skyworth',type:'media', model:'NGB22-0SN',        protocol:'Wi-Fi'},
+          {id:'media_player.mj_bose_lifestyle',               name:'BOSE Lifestyle',          nameAr:'بوز لايفستايل',   brand:'Bose',  type:'media',   model:'SoundTouch',       protocol:'Wi-Fi'},
         ]
       },
       {
         id:'mbath', title:'Master Bathroom', titleAr:'حمام ماستر', color:'#22D3EE', colorRgb:'34,211,238',
         devices:[
-          {id:'light.cove_lights_master_bathroom',         name:'Cove Lights',    nameAr:'كوف لايتس',       brand:'Aqara', type:'light',  model:'T1M-G01',     protocol:'Zigbee 3.0'},
-          {id:'binary_sensor.aqara_water_leak_master_bathroom', name:'Water Leak', nameAr:'حساس تسرب',      brand:'Aqara', type:'sensor', model:'Water Leak T1',protocol:'Zigbee 3.0', icoKey:'water'},
-        ]
-      },
-      {
-        id:'closet', title:'Master Closet', titleAr:'كلوزيت ماستر', color:'#4ADE80', colorRgb:'74,222,128',
-        devices:[
-          {id:'light.cove_light_closet_room', name:'Cove Light',  nameAr:'كوف لايت', brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'cover.curtain_master_closet',  name:'Curtain',     nameAr:'ستارة',     brand:'Aqara', type:'cover', model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'light.lights_closet_room',     name:'Lights',      nameAr:'إضاءة',     brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_closet_room',name:'Mini Lights', nameAr:'مينيات',    brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
+          {id:'light.center_cove_light_master_bathroom',       name:'Center Cove Light',       nameAr:'كوف مركزي',     brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.left_cove_light_master_bathroom',         name:'Left Cove Light',         nameAr:'كوف يسار',      brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.right_cove_light_master_bathroom',        name:'Right Cove Light',        nameAr:'كوف يمين',      brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.sink_cove_light_master_bathroom',         name:'Sink Cove Light',         nameAr:'كوف مغسلة',     brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.wall_niche_cove_light_master_bathroom',   name:'Wall Niche Cove Light',   nameAr:'كوف جدار',      brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.step_shower_cove_light_master_bathroom',  name:'Step Shower Cove Light',  nameAr:'كوف شاور',      brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'light.window_cove_light_master_bathroom',       name:'Window Cove Light',       nameAr:'كوف نافذة',     brand:'Homey', type:'light',  model:'Homey App',      protocol:'Wi-Fi'},
+          {id:'sensor.aqara_water_leak_master_bathroom',       name:'Water Leak Sensor',       nameAr:'حساس تسرب',     brand:'Aqara', type:'sensor', model:'Water Leak T1',  protocol:'Zigbee 3.0', icoKey:'water'},
         ]
       },
       {
         id:'office', title:'Office', titleAr:'المكتب', color:'#F59E0B', colorRgb:'245,158,11',
         devices:[
-          {id:'light.center_cove_light_office', name:'Center Cove Light', nameAr:'كوف مركزي', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
+          {id:'light.center_cove_light_office', name:'Center Cove Light', nameAr:'كوف مركزي', brand:'Homey', type:'light', model:'Homey App', protocol:'Wi-Fi'},
+          {id:'switch.mj_printer_hp4303dw',     name:'MJ Printer HP',     nameAr:'طابعة HP',   brand:'HP',    type:'hub',   model:'HP4303dw',  protocol:'Wi-Fi'},
         ]
       },
       {
-        id:'second-r', title:'Second Room', titleAr:'الغرفة الثانية', color:'#EC4899', colorRgb:'236,72,153',
+        id:'closet', title:'Master Closet', titleAr:'كلوزيت ماستر', color:'#4ADE80', colorRgb:'74,222,128',
         devices:[
-          {id:'light.cove_light_second_room',    name:'Cove Light',    nameAr:'كوف لايت',   brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.bathroom_light_second_room',name:'Bathroom Light', nameAr:'إضاءة حمام', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.hallway_light_second_room', name:'Hallway Light',  nameAr:'إضاءة ممر',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_2_second_room',  name:'Cove Light 2',  nameAr:'كوف 2',      brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
+          {id:'light.cove_light_closet_room',  name:'Cove Light',  nameAr:'كوف لايت', brand:'Homey',  type:'light', model:'Homey App',  protocol:'Wi-Fi'},
+          {id:'cover.curtain_master_closet',   name:'Curtain',     nameAr:'ستارة',     brand:'Homey',  type:'cover', model:'Homey App',  protocol:'Wi-Fi'},
+          {id:'light.lights_closet_room',      name:'Lights',      nameAr:'إضاءة',     brand:'Fibaro', type:'light', model:'Fibaro',     protocol:'Z-Wave Plus'},
+          {id:'light.mini_lights_closet_room', name:'Mini Lights', nameAr:'مينيات',    brand:'Fibaro', type:'light', model:'Fibaro',     protocol:'Z-Wave Plus'},
         ]
       },
       {
         id:'sitting-1', title:'Sitting Room', titleAr:'جلوس الدور الأول', color:'#38BDF8', colorRgb:'56,189,248',
         devices:[
-          {id:'light.cove_lights_sitting_room_1f',  name:'Cove Lights',  nameAr:'كوف لايتس', brand:'Aqara',  type:'light',   model:'T1M-G01',       protocol:'Zigbee 3.0'},
-          {id:'climate.thermostat_sitting_room_1f', name:'Thermostat',   nameAr:'ترموستات',  brand:'Ecobee', type:'climate', model:'SmartThermostat',protocol:'Wi-Fi'},
-          {id:'binary_sensor.entry_door_first_floor',name:'Entry Door',  nameAr:'باب المدخل',brand:'Aqara',  type:'sensor',  model:'Door Sensor',   protocol:'Zigbee 3.0', icoKey:'door'},
+          {id:'light.cove_light_1_sitting_room_1f', name:'Cove Light 1',  nameAr:'كوف 1',       brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.cove_light_2_sitting_room_1f', name:'Cove Light 2',  nameAr:'كوف 2',       brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.hallway_light_sitting_room',   name:'Hallway Light', nameAr:'إضاءة ممر',   brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.lights_sitting_room',          name:'Lights',        nameAr:'إضاءة',        brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.pendant_sitting_room',         name:'Pendant',       nameAr:'بندنت',        brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'climate.sitting_room_thermostat',    name:'Thermostat',    nameAr:'ترموستات',     brand:'Ecobee', type:'climate', model:'SmartThermostat', protocol:'Wi-Fi'},
+          {id:'sensor.aqara_motion_sensor_p1',      name:'Motion Sensor P1',nameAr:'حساس حركة', brand:'Aqara',  type:'sensor',  model:'Motion Sensor P1',protocol:'Zigbee 3.0', icoKey:'motion'},
+          {id:'binary_sensor.entry_door_first_floor',name:'Entry Door',   nameAr:'باب المدخل',   brand:'Homey',  type:'sensor',  model:'Door Sensor',    protocol:'Zigbee 3.0', icoKey:'door'},
+        ]
+      },
+      {
+        id:'living', title:'Living Room', titleAr:'غرفة المعيشة', color:'#F472B6', colorRgb:'244,114,182',
+        devices:[
+          {id:'cover.big_curtain_left_living_room',  name:'Big Curtain Left',  nameAr:'ستارة كبيرة يسار', brand:'Homey', type:'cover',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'cover.big_curtain_right_living_room', name:'Big Curtain Right', nameAr:'ستارة كبيرة يمين', brand:'Homey', type:'cover',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_1_living_room',      name:'Cove Light 1',      nameAr:'كوف 1',            brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_2_living_room',      name:'Cove Light 2',      nameAr:'كوف 2',            brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.cove_light_3_living_room',      name:'Cove Light 3',      nameAr:'كوف 3',            brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.mini_lights_living_room',       name:'Mini Lights',       nameAr:'مينيات',           brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.sitting_pendant_living_room',   name:'Sitting Pendant',   nameAr:'بندنت جلوس',       brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.table_pendant_living_room',     name:'Table Pendant',     nameAr:'بندنت طاولة',      brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'light.tv_light_living_room',          name:'TV Light',          nameAr:'إضاءة تلفزيون',    brand:'Homey', type:'light',  model:'Homey App', protocol:'Wi-Fi'},
+          {id:'media_player.living_room_tv',         name:'Living Room TV',    nameAr:'تلفزيون المعيشة',   brand:'LG',    type:'media',  model:'webOS TV',  protocol:'Wi-Fi'},
+        ]
+      },
+      {
+        id:'second-r', title:'Second Room', titleAr:'الغرفة الثانية', color:'#EC4899', colorRgb:'236,72,153',
+        devices:[
+          {id:'light.cove_light_second_room',           name:'Cove Light',          nameAr:'كوف لايت',    brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.cove_light_2_second_room',         name:'Cove Light 2',        nameAr:'كوف 2',       brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.bathroom_light_second_room',       name:'Bathroom Light',      nameAr:'إضاءة حمام',  brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'light.hallway_light_second_room',        name:'Hallway Light',       nameAr:'إضاءة ممر',   brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'switch.bathroom_extractor_fan_second_room',name:'Bathroom Fan',      nameAr:'مروحة حمام',  brand:'Homey',  type:'light',   model:'Homey App',       protocol:'Wi-Fi'},
+          {id:'climate.sitting_room_second_room',       name:'Thermostat',          nameAr:'ترموستات',    brand:'Ecobee', type:'climate', model:'SmartThermostat', protocol:'Wi-Fi'},
+        ]
+      },
+      {
+        id:'cameras-1', title:'Hallway Camera', titleAr:'كاميرا الممر', color:'#E31E24', colorRgb:'227,30,36',
+        devices:[
+          {id:'camera.hallway_first_floor', name:'Hallway First Floor', nameAr:'كاميرا ممر الأول', brand:'Hikvision', type:'camera', model:'DS-2CD2783G2-IZS', protocol:'PoE · NVR'},
         ]
       },
     ]
@@ -743,11 +1188,9 @@ const ROOMS = {
     color:'#8B5CF6', colorRgb:'139,92,246',
     rooms:[
       {
-        id:'cameras-roof', title:'Cameras — Roof', titleAr:'كاميرات السطح', color:'#8B5CF6', colorRgb:'139,92,246',
+        id:'cameras-roof', title:'Roof Camera', titleAr:'كاميرا السطح', color:'#8B5CF6', colorRgb:'139,92,246',
         devices:[
-          {id:'camera.g5_pro_north_roof',   name:'G5 Pro — North',       nameAr:'G5 Pro شمال',    brand:'Aqara',     type:'camera', model:'G5 Pro PoE',       protocol:'PoE · LAN',  resolution:'2K · HDR'},
-          {id:'camera.g5_pro_south_roof',   name:'G5 Pro — South',       nameAr:'G5 Pro جنوب',    brand:'Aqara',     type:'camera', model:'G5 Pro PoE',       protocol:'PoE · LAN',  resolution:'2K · HDR'},
-          {id:'camera.hikvision_perimeter', name:'Hikvision Perimeter',  nameAr:'هيكفيجن محيط',   brand:'Hikvision', type:'camera', model:'DS-2CD2143G2',     protocol:'PoE · NVR',  resolution:'4MP · HDR'},
+          {id:'camera.roof_cam', name:'Roof Camera', nameAr:'كاميرا السطح', brand:'Hikvision', type:'camera', model:'IPCamera 16', protocol:'PoE · NVR'},
         ]
       },
     ]
@@ -853,9 +1296,21 @@ function buildDeviceCard(dev, floor) {
     }
   }
 
+  // Animated type-specific accents
+  let animAccent = '';
+  if (active) {
+    if (dev.type === 'media') {
+      const playing = st && st.state === 'playing';
+      if (playing) animAccent = `<div class="media-waves" style="margin-top:2px">${[1,2,3,4,5].map(()=>`<div class="media-wave-bar" style="background:${c}"></div>`).join('')}</div>`;
+    }
+    if (dev.type === 'camera') {
+      animAccent = `<span class="rec-dot"></span>`;
+    }
+  }
+
   let togHtml = '';
   if (!dev.isError && ['light','cover','climate','media'].includes(dev.type)) {
-    togHtml = `<button class="tog ${active?'on':'off'}" id="tog_${pid}" style="${active?'background:'+c:''}" onclick="event.stopPropagation();doToggle('${dev.id}','${dev.type}')"></button>`;
+    togHtml = `<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><button class="tog ${active?'on':'off'}" id="tog_${pid}" style="--bc:${cr};${active?'background:'+c:''}" onclick="event.stopPropagation();doToggle('${dev.id}','${dev.type}')"></button>${animAccent}</div>`;
   }
 
   const icoSet = ICO_SETS[dev.isError ? 'sensor' : dev.type];
@@ -893,16 +1348,19 @@ function buildDeviceCard(dev, floor) {
        onclick="handleCardClick(this,'${dev.id}','${selFloor}')">
     <div class="sel-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="dc-shm"></div>
+    ${dev.type==='camera'?'<div class="camera-scanline"></div>':''}
+    ${dev.type==='climate'?'<div class="climate-wave-overlay"><div class="climate-wave-inner"></div></div>':''}
+    ${dev.icoKey==='water'?'<div class="water-indicator"><div class="water-indicator-wave"></div></div>':''}
     <div class="dc-r1">
       <div style="position:relative">
         <button class="ico-btn" id="icobtn_${pid}"
           style="background:rgba(${cr},.12);box-shadow:0 4px 18px rgba(${cr},.18);"
           onclick="event.stopPropagation();togglePop('${pid}',event)">
-          <div style="position:absolute;inset:-7px;border-radius:23px;background:radial-gradient(circle,rgba(${cr},.14),transparent 70%);animation:glow 2.5s ease infinite;"></div>
-          <div style="position:absolute;inset:-7px;border-radius:23px;border:1.5px solid rgba(${cr},.5);animation:pulse-ring 2s ease-out infinite;"></div>
+          <div style="position:absolute;inset:-5px;border-radius:20px;background:radial-gradient(circle,rgba(${cr},.08),transparent 70%);"></div>
           <div id="icosvg_${pid}">${icoHtml}</div>
+          ${(active && dev.type==='sensor')?'<div class="sensor-radar" style="--bc:'+cr+'"><div class="sensor-radar-inner"></div></div>':''}
           <div class="chg-dot" style="--bc:${cr}"></div>
-          <div class="nbdg" id="nbdg_${pid}" style="background:${c};color:${c==='#F5C400'?'#08080E':'white'};box-shadow:0 2px 8px rgba(${cr},.5);">${active?(dev.type==='camera'?'●':'ON'):'OFF'}</div>
+          <div class="nbdg" id="nbdg_${pid}" style="background:${active?c:'var(--s3)'};color:${active?(c==='#F5C400'?'#08080E':'white'):'var(--t3)'};box-shadow:${active?'0 2px 6px rgba('+cr+',.3)':'none'}">${active?(dev.type==='camera'?'REC':'ON'):'OFF'}</div>
         </button>
         
         <div class="pop-wrap" id="${pid}" style="display:none">
@@ -993,6 +1451,8 @@ function buildRoomNav(floor) {
     return `<button class="rnav-btn ${i===0?'on':''}" style="--rc:${c};${i===0?`border-color:rgba(${c},.35);color:rgb(${c});background:rgba(${c},.07);`:''}" onclick="scrollToRoom('${r.id}',this)"><div class="rn-dot" style="background:rgb(${c})"></div>${t}</button>`;
   }).join('');
 }
+
+
 
 function renderFloor(floor) {
   const fd = ROOMS[floor];
