@@ -6,75 +6,389 @@
   <title>ALNAJDI SMART VILA</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
-    :root{
-      --bg:#0b0e14;--card:#121722;--card2:#171d2a;--line:rgba(255,255,255,.09);--txt:#f4f7ff;--muted:#95a2bd;
-      --accent:#9ad1ff;--gold:#d1b167;--ok:#39d98a;--warn:#fcbf49;--danger:#ff5f6d;
-      --blur:0px;
+
+    :root {
+      --bg: #0a0e15;
+      --bg-gradient: radial-gradient(1300px 800px at 12% -10%, rgba(49, 79, 129, 0.25) 0%, transparent 50%), radial-gradient(1200px 900px at 100% -10%, rgba(62, 95, 154, 0.18) 0%, transparent 52%), #0a0e15;
+      --surface: rgba(18, 24, 35, 0.86);
+      --surface-2: rgba(26, 34, 47, 0.9);
+      --surface-3: rgba(37, 47, 64, 0.72);
+      --line: rgba(210, 227, 255, 0.12);
+      --txt: #f3f7ff;
+      --muted: #9dadcb;
+      --gold: #d4b97f;
+      --blue: #72b7ff;
+      --glow: rgba(112, 175, 255, 0.28);
+      --good: #46dfa7;
+      --danger: #ff6774;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      --blur: 18px;
     }
-    [data-theme='light']{--bg:#eef2fb;--card:#ffffff;--card2:#f8fbff;--line:rgba(19,33,68,.12);--txt:#0f1c36;--muted:#5f6f8d;--accent:#0f7fff;--gold:#9f7a2f;--blur:0px;}
-    [data-theme='glass']{--bg:radial-gradient(1200px 900px at 8% -10%,#26384f 0%,#0b0e14 38%),radial-gradient(1000px 800px at 100% 0,#1f273f 0%,#0b0e14 42%);--card:rgba(23,30,45,.48);--card2:rgba(25,33,49,.6);--line:rgba(255,255,255,.14);--txt:#f8fbff;--muted:#b7c4db;--accent:#99d0ff;--gold:#dcc187;--blur:14px;}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,Tajawal,sans-serif;overflow:hidden}
-    body.rtl{font-family:Tajawal,Inter,sans-serif}
-    .app{height:100%;overflow:auto;padding:16px 14px 32px;max-width:1400px;margin:auto}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:0 12px 40px rgba(0,0,0,.22)}
-    .header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 12px;position:sticky;top:0;z-index:20;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent)}
-    .title{font-weight:900;letter-spacing:.2em;text-align:center;color:var(--gold);font-size:clamp(15px,2.3vw,22px)}
-    .ctrls{display:flex;gap:8px;align-items:center}
-    .pill{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
-    .pill button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:999px;font-weight:700;cursor:pointer}
-    .pill button.on{background:rgba(131,176,255,.17);color:var(--txt)}
 
-    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:8px}
-    .weather,.clock{padding:18px;position:relative;overflow:hidden}
-    .orb{position:absolute;inset:auto -30px -36px auto;width:140px;height:140px;border-radius:50%;filter:blur(1px);opacity:.35;background:radial-gradient(circle at 30% 30%,#ffe08f,#f8a03e)}
-    .moon{background:radial-gradient(circle at 35% 30%,#edf4ff,#a5b9e2)}
-    .clock-time{font-size:clamp(34px,5.7vw,58px);font-weight:900;line-height:1}
-    .small{font-size:12px;color:var(--muted)}
-    .temp{font-size:40px;font-weight:900;line-height:1}
-    .strip{display:grid;grid-template-columns:repeat(8,minmax(86px,1fr));gap:8px;margin-top:12px}
-    .cat{padding:10px 8px;text-align:center;position:relative;cursor:pointer;transition:.22s transform}
-    .cat:hover{transform:translateY(-2px)}
-    .cat.alert{border-color:rgba(255,95,109,.6);box-shadow:0 0 0 1px rgba(255,95,109,.3) inset,0 0 20px rgba(255,95,109,.17)}
-    .icon{font-size:22px;display:block;margin-bottom:6px}
-    .badge{position:absolute;top:6px;left:6px;background:var(--accent);color:#061126;border-radius:999px;min-width:21px;padding:2px 6px;font-size:11px;font-weight:800}
+    [data-theme='light'] {
+      --bg: #eff4ff;
+      --bg-gradient: radial-gradient(900px 500px at 10% -5%, rgba(118, 166, 241, 0.35) 0%, transparent 56%), #eff4ff;
+      --surface: rgba(255, 255, 255, 0.95);
+      --surface-2: rgba(249, 252, 255, 0.96);
+      --surface-3: rgba(236, 244, 255, 0.86);
+      --line: rgba(26, 50, 91, 0.16);
+      --txt: #111b31;
+      --muted: #5f7091;
+      --gold: #8d6a24;
+      --blue: #1778ff;
+      --glow: rgba(33, 116, 255, 0.2);
+      --good: #1ebf85;
+      --danger: #de3f58;
+      --shadow: 0 12px 30px rgba(23, 56, 106, 0.14);
+      --blur: 0px;
+    }
 
-    .floors{margin-top:14px;display:flex;flex-direction:column;gap:12px}
-    .floor{padding:12px}
-    .floor.inactive{opacity:.52}
-    .floor-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .floor-title{font-size:18px;font-weight:800}
-    .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-    .room{background:var(--card2);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-    .room.hidden{display:none}
-    .room-head{padding:11px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .room-name{font-weight:800}
-    .room-meta{font-size:12px;color:var(--muted)}
-    .room-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px}
-    .room.open .room-body{max-height:550px;padding:0 10px 10px}
-    .chips{display:flex;gap:6px;flex-wrap:wrap}
-    .chip{padding:6px 10px;border-radius:999px;font-size:12px;background:rgba(155,190,255,.12);border:1px solid var(--line)}
-    .suite{border:1px solid rgba(209,177,103,.45);background:linear-gradient(145deg,rgba(209,177,103,.12),transparent 44%),var(--card2)}
-    .subrooms{display:grid;gap:8px}
-    .subroom{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:9px}
-    .muted{color:var(--muted)}
+    [data-theme='glass'] {
+      --bg: #06080e;
+      --bg-gradient: radial-gradient(1000px 700px at 0% -20%, rgba(77, 117, 186, 0.4) 0%, transparent 45%), radial-gradient(1200px 900px at 100% -20%, rgba(74, 131, 210, 0.24) 0%, transparent 48%), #06080e;
+      --surface: rgba(19, 26, 38, 0.52);
+      --surface-2: rgba(30, 40, 57, 0.58);
+      --surface-3: rgba(36, 46, 65, 0.56);
+      --line: rgba(210, 227, 255, 0.18);
+      --txt: #f4f8ff;
+      --muted: #b6c5df;
+      --gold: #dcc187;
+      --blue: #85c3ff;
+      --glow: rgba(130, 190, 255, 0.32);
+      --good: #53e2af;
+      --danger: #ff7585;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
+      --blur: 22px;
+    }
 
-    @media (max-width:980px){.strip{grid-template-columns:repeat(4,1fr)}.hero{grid-template-columns:1fr}}
-    @media (max-width:640px){.header{grid-template-columns:auto 1fr;grid-template-areas:'l c' 'r r';}.header .left{grid-area:l}.header .title{grid-area:c;text-align:end}.header .right{grid-area:r;justify-content:flex-end}.strip{grid-template-columns:repeat(3,1fr)}}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg-gradient);
+      color: var(--txt);
+      font-family: Inter, Tajawal, sans-serif;
+      overflow: hidden;
+    }
+
+    body.rtl { font-family: Tajawal, Inter, sans-serif; }
+
+    .app {
+      max-width: 1500px;
+      margin: auto;
+      height: 100%;
+      padding: 20px 16px 36px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .premium-card {
+      background: linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)) border-box, var(--surface) padding-box;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+    }
+
+    .header {
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(to bottom, rgba(6,10,16,0.55), transparent);
+    }
+
+    .villa-title {
+      text-align: center;
+      font-size: clamp(14px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-shadow: 0 0 16px rgba(212, 185, 127, 0.25);
+      white-space: nowrap;
+    }
+
+    .micro-group { display: flex; align-items: center; gap: 8px; }
+    .header .right { justify-content: flex-end; }
+
+    .seg {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+    }
+
+    .seg button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: 180ms ease;
+    }
+
+    .seg button.on {
+      background: linear-gradient(150deg, rgba(114,183,255,0.28), rgba(114,183,255,0.14));
+      color: var(--txt);
+      box-shadow: inset 0 0 0 1px rgba(140,196,255,0.35), 0 4px 12px var(--glow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 12px;
+    }
+
+    .weather-card, .clock-card { padding: 20px; position: relative; overflow: hidden; }
+
+    .weather-card::after,
+    .clock-card::after {
+      content: '';
+      position: absolute;
+      inset: auto -30px -45px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.48;
+      background: radial-gradient(circle at 36% 30%, rgba(255,235,172,0.9), rgba(247,157,76,0.42));
+    }
+
+    .clock-card::after { background: radial-gradient(circle at 35% 30%, rgba(168,203,255,0.85), rgba(107,136,216,0.36)); }
+
+    .label { color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .weather-main { margin-top: 8px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+    .temp { font-size: clamp(42px, 6vw, 64px); line-height: 1; font-weight: 900; }
+    .condition { margin-top: 6px; font-weight: 600; color: #d4e5ff; }
+    .meta-col { text-align: end; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .clock-time { margin-top: 6px; font-size: clamp(40px, 5.3vw, 58px); line-height: 1; font-weight: 900; }
+    .clock-date { margin-top: 8px; color: var(--muted); font-size: 14px; }
+    .ha-state { margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+    .systems-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(105px, 1fr));
+      gap: 10px;
+    }
+
+    .system-chip {
+      position: relative;
+      overflow: hidden;
+      padding: 12px 10px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      min-height: 116px;
+      cursor: pointer;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .system-chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24), 0 0 18px var(--glow);
+      border-color: rgba(153, 204, 255, 0.34);
+    }
+
+    .system-chip.active { box-shadow: inset 0 0 0 1px rgba(114,183,255,0.4), 0 10px 26px rgba(0,0,0,0.25); }
+
+    .system-chip.alert {
+      border-color: rgba(255,103,116,0.55);
+      box-shadow: inset 0 0 0 1px rgba(255,103,116,0.4), 0 0 22px rgba(255,103,116,0.2);
+      animation: pulseAlert 1600ms infinite;
+    }
+
+    @keyframes pulseAlert {
+      0%,100% { box-shadow: inset 0 0 0 1px rgba(255,103,116,0.35), 0 0 10px rgba(255,103,116,0.15); }
+      50% { box-shadow: inset 0 0 0 1px rgba(255,103,116,0.7), 0 0 26px rgba(255,103,116,0.35); }
+    }
+
+    .icon-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(155deg, rgba(126,185,255,0.3), rgba(126,185,255,0.1));
+      border: 1px solid rgba(148, 199, 255, 0.35);
+      display: grid;
+      place-items: center;
+      color: #d7ebff;
+    }
+
+    .icon-wrap svg { width: 21px; height: 21px; fill: currentColor; }
+
+    .system-title { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
+    .system-count { margin-top: 4px; font-size: 12px; color: var(--muted); }
+
+    .chip-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      min-width: 24px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      background: rgba(97, 170, 255, 0.22);
+      border: 1px solid rgba(142, 202, 255, 0.38);
+      color: #d8edff;
+    }
+
+    .floors { display: flex; flex-direction: column; gap: 12px; }
+
+    .floor-card { padding: 14px; }
+
+    .floor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .floor-name { font-size: 19px; font-weight: 800; }
+    .floor-meta { font-size: 12px; color: var(--muted); }
+
+    .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+
+    .room-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)), var(--surface-2);
+      overflow: hidden;
+    }
+
+    .room-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      padding: 11px 12px;
+    }
+
+    .room-title { font-weight: 800; }
+    .room-stats { color: var(--muted); font-size: 12px; margin-top: 3px; }
+
+    .chev {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(132, 184, 255, 0.15);
+      color: #d7ebff;
+      transition: transform 220ms ease;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .room-card.open .chev { transform: rotate(180deg); }
+
+    .room-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 280ms ease, padding 280ms ease;
+      padding: 0 12px;
+    }
+
+    .room-card.open .room-body {
+      max-height: 540px;
+      padding: 0 12px 12px;
+    }
+
+    .entity-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .entity-chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface-3);
+      color: var(--txt);
+    }
+
+    .entity-chip.off { opacity: 0.62; }
+
+    .suite {
+      border-color: rgba(212,185,127,0.52);
+      background: linear-gradient(145deg, rgba(212,185,127,0.16), rgba(212,185,127,0.02) 40%), var(--surface-2);
+    }
+
+    .suite-subrooms {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .subroom-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      padding: 8px;
+    }
+
+    .subroom-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    .inactive-floor {
+      opacity: 0.72;
+      border-style: dashed;
+    }
+
+    .inactive-note {
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      padding: 14px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1150px) {
+      .systems-strip { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 740px) {
+      .header { grid-template-columns: 1fr; justify-items: center; gap: 8px; }
+      .header .left, .header .right { justify-content: center; }
+      .villa-title { order: -1; }
+      .systems-strip { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
   </style>
 </head>
 <body data-theme="dark">
   <div class="app">
     <header class="header">
-      <div class="ctrls left">
-        <div class="pill" id="langPill">
+      <div class="micro-group left">
+        <div class="seg" id="langSeg">
           <button data-lang="en" class="on">EN</button>
           <button data-lang="ar">عربي</button>
         </div>
       </div>
-      <div class="title">ALNAJDI SMART VILA</div>
-      <div class="ctrls right" style="justify-content:flex-end">
-        <div class="pill" id="themePill">
+
+      <div class="villa-title">ALNAJDI SMART VILA</div>
+
+      <div class="micro-group right">
+        <div class="seg" id="themeSeg">
           <button data-theme="light">Light</button>
           <button data-theme="dark" class="on">Dark</button>
           <button data-theme="glass">Glass</button>
@@ -83,175 +397,424 @@
     </header>
 
     <section class="hero">
-      <article class="card weather">
-        <div class="orb" id="orb"></div>
-        <div class="small" id="weatherLabel">Weather</div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:6px">
+      <article class="premium-card weather-card">
+        <div class="label" id="weatherLabel">Weather</div>
+        <div class="weather-main">
           <div>
-            <div class="temp" id="temp">--°</div>
-            <div id="condition" class="muted">Home Assistant source</div>
+            <div class="temp" id="weatherTemp">--°</div>
+            <div class="condition" id="weatherCondition">--</div>
           </div>
-          <div style="text-align:end">
-            <div id="humidity" class="small">Humidity --%</div>
-            <div id="wind" class="small">Wind --</div>
+          <div class="meta-col">
+            <div class="meta" id="weatherHumidity">Humidity --%</div>
+            <div class="meta" id="weatherWind">Wind --</div>
+            <div class="meta" id="weatherEntity">Entity --</div>
           </div>
         </div>
       </article>
-      <article class="card clock">
-        <div class="clock-time" id="time">00:00</div>
-        <div class="small" id="date">--</div>
-        <div class="small" id="haState" style="margin-top:8px">HA: connecting...</div>
+
+      <article class="premium-card clock-card">
+        <div class="label" id="clockLabel">Local Time</div>
+        <div class="clock-time" id="clockTime">00:00</div>
+        <div class="clock-date" id="clockDate">--</div>
+        <div class="ha-state" id="haStatus">HA: connecting...</div>
       </article>
     </section>
 
-    <section class="strip" id="categoryStrip"></section>
+    <section class="systems-strip" id="systemsStrip"></section>
 
-    <section class="floors" id="floors"></section>
+    <section class="floors" id="floorsRoot"></section>
   </div>
 
 <script>
-const I18N={
-  en:{weather:'Weather',haOk:'HA: connected',haFail:'HA: using fallback data',devices:'devices',inactive:'inactive',empty:'No active entities',masterSuite:'Master Suite',cove:'Cove Lights'},
-  ar:{weather:'الطقس',haOk:'متصل بـ Home Assistant',haFail:'وضع احتياطي',devices:'جهاز',inactive:'غير نشط',empty:'لا توجد كيانات نشطة',masterSuite:'الجناح الرئيسي',cove:'إضاءة مخفية'}
-};
-const HOUSE={
-  floors:[
-    {id:'ground',en:'Ground Floor',ar:'الدور الأرضي',rooms:['Back Doorway','Sitting Room','Prep Kitchen','Father Room']},
-    {id:'first',en:'First Floor',ar:'الدور الأول',rooms:['Office','Sitting Room','Living Room','Second Room']},
-    {id:'second',en:'Second Floor',ar:'الدور الثاني',rooms:[]},
-    {id:'roof',en:'Roof',ar:'السطح',rooms:['Roof']}
-  ],
-  suite:{en:'Master Suite',ar:'الجناح الرئيسي',children:['Master Bedroom','Master Bathroom','Master Closet Room']}
-};
-const ROOM_ALIASES={
-  'Back Doorway':['Back Doorway','Back Door','back_doorway','back_door'],
-  'Sitting Room':['Sitting Room','Majlis','sitting_room'],
-  'Prep Kitchen':['Prep Kitchen','Kitchen Prep','prep_kitchen'],
-  'Father Room':['Father Room','father_room'],
-  'Office':['Office','office_room'],
-  'Living Room':['Living Room','living_room'],
-  'Second Room':['Second Room','second_room'],
-  'Roof':['Roof','roof_top','rooftop'],
-  'Master Bedroom':['Master Bedroom','master_bedroom'],
-  'Master Bathroom':['Master Bathroom','master_bathroom'],
-  'Master Closet Room':['Master Closet Room','Closet Room','master_closet_room']
-};
-let lang='en',states=[];
-const q=(s,p=document)=>p.querySelector(s), qa=(s,p=document)=>[...p.querySelectorAll(s)];
-
-function areaLike(entity,name){
-  const hay=(String(entity.attributes.friendly_name||'')+' '+entity.entity_id).toLowerCase();
-  const needles=ROOM_ALIASES[name]||[name];
-  return needles.some(n=>hay.includes(n.toLowerCase().replace(/_/g,' ')));
-}
-function isOn(e){return !['off','unavailable','unknown','idle','closed','disarmed','standby'].includes((e.state||'').toLowerCase());}
-function domain(e){return e.entity_id.split('.')[0];}
-function getRoomEntities(room){
-  return states.filter(e=>areaLike(e,room));
-}
-
-function renderCategories(){
-  const defs=[['lights','💡',e=>domain(e)==='light'],['climate','❄️',e=>domain(e)==='climate'],['security','🛡️',e=>domain(e)==='alarm_control_panel'||domain(e)==='lock'],['cameras','📹',e=>domain(e)==='camera'],['media','🎵',e=>domain(e)==='media_player'],['doors','🚪',e=>domain(e)==='binary_sensor'&&/door|window/.test(e.entity_id)],['curtains','🪟',e=>domain(e)==='cover'],['leaks','💧',e=>domain(e)==='binary_sensor'&&/moisture|water|leak/.test(e.entity_id)]];
-  const c=q('#categoryStrip'); c.innerHTML='';
-  defs.forEach(([key,emoji,fn])=>{
-    const group=states.filter(fn),active=group.filter(isOn).length;
-    const el=document.createElement('article');
-    el.className='card cat '+((key==='leaks'&&active>0)?'alert':'');
-    el.innerHTML=`<span class='badge'>${active}</span><span class='icon'>${emoji}</span><div>${key}</div><div class='small'>${group.length} ${I18N[lang].devices}</div>`;
-    c.appendChild(el);
-  });
-}
-
-function makeRoom(room,enclosed=false){
-  const ents=getRoomEntities(room);
-  const on=ents.filter(isOn).length;
-  const r=document.createElement('article'); r.className='room'+(ents.length? '':' hidden');
-  r.innerHTML=`<div class='room-head'><div><div class='room-name'>${room}</div><div class='room-meta'>${on}/${ents.length} ${I18N[lang].devices}</div></div><div>▾</div></div><div class='room-body'><div class='chips'>${ents.slice(0,14).map(e=>`<span class='chip'>${e.attributes.friendly_name||e.entity_id}</span>`).join('')||`<span class='muted'>${I18N[lang].empty}</span>`}</div>${enclosed?`<div class='small muted' style='margin-top:8px'>${I18N[lang].cove}: ${ents.filter(e=>/cove/i.test(e.entity_id+JSON.stringify(e.attributes))).length}</div>`:''}</div>`;
-  q('.room-head',r).onclick=()=>r.classList.toggle('open');
-  return r;
-}
-
-function renderFloors(){
-  const root=q('#floors'); root.innerHTML='';
-  HOUSE.floors.forEach(f=>{
-    const floor=document.createElement('section'); floor.className='card floor';
-    const title=lang==='ar'?f.ar:f.en;
-    const allRooms=[...f.rooms];
-    if(f.id==='first') allRooms.unshift(HOUSE.suite.en);
-    let active=0;
-    const roomWrap=document.createElement('div'); roomWrap.className='rooms';
-
-    if(f.id==='first'){
-      const suite=document.createElement('article'); suite.className='room suite';
-      const suiteEnts=HOUSE.suite.children.flatMap(getRoomEntities); active+=suiteEnts.length;
-      suite.innerHTML=`<div class='room-head'><div><div class='room-name'>${lang==='ar'?HOUSE.suite.ar:HOUSE.suite.en}</div><div class='room-meta'>${suiteEnts.filter(isOn).length}/${suiteEnts.length} ${I18N[lang].devices}</div></div><div>▾</div></div><div class='room-body'><div class='subrooms'></div></div>`;
-      const sub=q('.subrooms',suite);
-      HOUSE.suite.children.forEach(name=>{
-        const card=makeRoom(name,/Master (Bedroom|Bathroom)/.test(name));
-        card.classList.remove('room'); card.classList.add('subroom'); card.classList.remove('hidden');
-        sub.appendChild(card);
-      });
-      q('.room-head',suite).onclick=()=>suite.classList.toggle('open');
-      roomWrap.appendChild(suite);
+  const I18N = {
+    en: {
+      weather: 'Weather',
+      time: 'Local Time',
+      connected: 'HA: connected',
+      fallback: 'HA: data unavailable',
+      devices: 'devices',
+      active: 'active',
+      inactiveFloor: 'inactive / no active rooms yet',
+      noEntities: 'No mapped active entities',
+      roof: 'Roof',
+      suite: 'Master Suite'
+    },
+    ar: {
+      weather: 'الطقس',
+      time: 'الوقت المحلي',
+      connected: 'متصل بـ Home Assistant',
+      fallback: 'تعذر تحميل بيانات Home Assistant',
+      devices: 'جهاز',
+      active: 'نشط',
+      inactiveFloor: 'غير نشط / لا توجد غرف نشطة حالياً',
+      noEntities: 'لا توجد كيانات مرتبطة',
+      roof: 'السطح',
+      suite: 'الجناح الرئيسي'
     }
+  };
 
-    f.rooms.forEach(rn=>{const room=makeRoom(rn);active+=getRoomEntities(rn).length;roomWrap.appendChild(room);});
-    if(f.id==='second' && active===0) floor.classList.add('inactive');
-    if(f.id==='second' && active===0){
-      roomWrap.innerHTML=`<div class='muted'>${title}: ${I18N[lang].inactive}</div>`;
-    }
-    if(f.id!=='second' && active===0) return;
+  const ICONS = {
+    lights: '<svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1Zm3-20a7 7 0 0 0-4.39 12.45c.68.55 1.39 1.73 1.39 2.55V17h6v-1c0-.82.71-2 1.39-2.55A7 7 0 0 0 12 1Z"/></svg>',
+    climate: '<svg viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v6.13a4 4 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 10a2 2 0 1 0 2 2 2 2 0 0 0-2-2Z"/></svg>',
+    security: '<svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3Zm0 10.5 4-4 1.41 1.41L12 15.33l-2.91-2.92L10.5 11l1.5 1.5Z"/></svg>',
+    cameras: '<svg viewBox="0 0 24 24"><path d="M17 10.5V7a2 2 0 0 0-2-2h-3l-1-1H8a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3.5l5 5V5.5l-5 5Zm-7 5A3.5 3.5 0 1 1 13.5 12 3.5 3.5 0 0 1 10 15.5Z"/></svg>',
+    media: '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Zm-4 2h2v10H4V7Z"/></svg>',
+    access: '<svg viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 1 5 5v2h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5Zm3 7V6a3 3 0 0 0-6 0v2h6Zm-3 4a2 2 0 0 1 1 3.73V18h-2v-2.27A2 2 0 0 1 12 12Z"/></svg>',
+    curtains: '<svg viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16h-2V5h-6v15h-2V5H5v15H3V4a1 1 0 0 1 1-1Z"/></svg>',
+    leaks: '<svg viewBox="0 0 24 24"><path d="M12 2s6 6.13 6 10a6 6 0 1 1-12 0C6 8.13 12 2 12 2Zm4.24 10.19-.94-.35A3.49 3.49 0 0 1 12 15.5v1a4.5 4.5 0 0 0 4.24-4.31Z"/></svg>'
+  };
 
-    floor.innerHTML=`<div class='floor-head'><div class='floor-title'>${title}</div><div class='small'>${active} ${I18N[lang].devices}</div></div>`;
-    floor.appendChild(roomWrap); root.appendChild(floor);
-  });
-}
+  const HOUSE = {
+    floors: [
+      {
+        id: 'ground',
+        en: 'Ground Floor',
+        ar: 'الدور الأرضي',
+        rooms: ['Back Doorway', 'Sitting Room', 'Prep Kitchen', 'Father Room']
+      },
+      {
+        id: 'first',
+        en: 'First Floor',
+        ar: 'الدور الأول',
+        rooms: ['Office', 'Sitting Room', 'Living Room', 'Second Room'],
+        suite: {
+          en: 'Master Suite',
+          ar: 'الجناح الرئيسي',
+          rooms: ['Master Bedroom', 'Master Bathroom', 'Master Closet Room']
+        }
+      },
+      {
+        id: 'second',
+        en: 'Second Floor',
+        ar: 'الدور الثاني',
+        rooms: []
+      },
+      {
+        id: 'roof',
+        en: 'Roof',
+        ar: 'السطح',
+        rooms: ['Roof']
+      }
+    ]
+  };
 
-function updateClock(){
-  const now=new Date();
-  q('#time').textContent=now.toLocaleTimeString(lang==='ar'?'ar-KW':'en-US',{hour:'2-digit',minute:'2-digit'});
-  q('#date').textContent=now.toLocaleDateString(lang==='ar'?'ar-KW':'en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-}
+  const ROOM_PROFILE = {
+    'Back Doorway': [/back\s?door/i, /doorway/i, /entrance/i],
+    'Sitting Room': [/sitting\s?room/i, /majlis/i, /lounge/i],
+    'Prep Kitchen': [/prep\s?kitchen/i, /service\s?kitchen/i, /dirty\s?kitchen/i],
+    'Father Room': [/father\s?room/i, /dad\s?room/i],
+    'Master Bedroom': [/master\s?bedroom/i, /owner\s?bedroom/i],
+    'Master Bathroom': [/master\s?bath(room)?/i, /owner\s?bath(room)?/i],
+    'Master Closet Room': [/master\s?closet/i, /dressing\s?room/i],
+    'Office': [/office/i, /study/i],
+    'Living Room': [/living\s?room/i, /family\s?room/i],
+    'Second Room': [/second\s?room/i, /bedroom\s?2/i, /guest\s?room/i],
+    'Roof': [/roof/i, /rooftop/i]
+  };
 
-function applyLang(){
-  document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-  document.body.classList.toggle('rtl',lang==='ar');
-  q('#weatherLabel').textContent=I18N[lang].weather;
-  qa('#langPill button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
-  renderCategories();renderFloors();updateClock();
-}
+  const SYSTEMS = [
+    { id: 'lights', label: 'Lighting', domains: ['light'], predicate: e => domain(e) === 'light' },
+    { id: 'climate', label: 'Climate', domains: ['climate', 'fan'], predicate: e => ['climate', 'fan'].includes(domain(e)) },
+    { id: 'security', label: 'Security', domains: ['alarm_control_panel', 'lock'], predicate: e => ['alarm_control_panel', 'lock'].includes(domain(e)) },
+    { id: 'cameras', label: 'Cameras', domains: ['camera'], predicate: e => domain(e) === 'camera' },
+    { id: 'media', label: 'Media', domains: ['media_player'], predicate: e => domain(e) === 'media_player' },
+    { id: 'access', label: 'Doors & Windows', domains: ['binary_sensor', 'sensor'], predicate: e => /door|window|gate|lock/i.test(e.entity_id + ' ' + (e.attributes.friendly_name || '')) },
+    { id: 'curtains', label: 'Curtains', domains: ['cover'], predicate: e => domain(e) === 'cover' },
+    { id: 'leaks', label: 'Water Safety', domains: ['binary_sensor', 'sensor'], predicate: e => /leak|water|moisture|flood/i.test(e.entity_id + ' ' + (e.attributes.friendly_name || '')) }
+  ];
 
-async function loadHA(){
-  try{
-    const r=await fetch('/api/states',{credentials:'same-origin',cache:'no-store'});
-    if(!r.ok) throw new Error('states fail');
-    const payload=await r.json();
-    states=Array.isArray(payload)?payload:[];
-    q('#haState').textContent=I18N[lang].haOk;
-    bindWeather(); renderCategories(); renderFloors();
-  }catch(e){
-    states=[]; q('#haState').textContent=I18N[lang].haFail;
-    q('#temp').textContent='--°'; q('#condition').textContent='No weather entity';
-    renderCategories(); renderFloors();
+  let lang = 'en';
+  let states = [];
+
+  const q = (sel, parent = document) => parent.querySelector(sel);
+  const qa = (sel, parent = document) => [...parent.querySelectorAll(sel)];
+
+  function domain(entity) {
+    return entity.entity_id.split('.')[0] || '';
   }
-}
 
-function bindWeather(){
-  const w=states.find(e=>domain(e)==='weather')||null;
-  if(!w){q('#condition').textContent='No weather entity';return;}
-  const a=w.attributes;
-  q('#condition').textContent=(a.friendly_name||w.state)+' · '+w.state;
-  q('#temp').textContent=`${Math.round(a.temperature ?? 0)}°`;
-  q('#humidity').textContent=`Humidity ${a.humidity ?? '--'}%`;
-  q('#wind').textContent=`Wind ${a.wind_speed ?? '--'}`;
-  const hour=(new Date()).getHours(),night=hour<6||hour>17;
-  q('#orb').classList.toggle('moon',night);
-}
+  function normalizedSource(entity) {
+    const attrs = entity.attributes || {};
+    return [
+      entity.entity_id,
+      attrs.friendly_name,
+      attrs.area_id,
+      attrs.floor_id,
+      attrs.device_class,
+      attrs.room,
+      attrs.location,
+      attrs.zone
+    ].filter(Boolean).join(' ').toLowerCase();
+  }
 
-qa('#themePill button').forEach(b=>b.onclick=()=>{document.body.dataset.theme=b.dataset.theme;qa('#themePill button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
-qa('#langPill button').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;applyLang();});
+  function stateIsActive(entity) {
+    const offStates = new Set(['off', 'unavailable', 'unknown', 'idle', 'closed', 'disarmed', 'standby', 'not_home']);
+    return !offStates.has(String(entity.state || '').toLowerCase());
+  }
 
-setInterval(updateClock,1000); updateClock(); applyLang(); loadHA(); setInterval(loadHA,30000);
+  function mapRoomEntities(roomName) {
+    const profiles = ROOM_PROFILE[roomName] || [new RegExp(roomName, 'i')];
+    return states.filter(entity => {
+      const source = normalizedSource(entity);
+      return profiles.some(rx => rx.test(source));
+    });
+  }
+
+  function renderSystemsStrip() {
+    const root = q('#systemsStrip');
+    root.innerHTML = '';
+
+    SYSTEMS.forEach(system => {
+      const matched = states.filter(system.predicate);
+      const active = matched.filter(stateIsActive);
+      const card = document.createElement('article');
+      card.className = 'system-chip premium-card';
+      if (active.length > 0) card.classList.add('active');
+      if (system.id === 'leaks' && active.length > 0) card.classList.add('alert');
+
+      card.innerHTML = `
+        <div class="chip-badge">${active.length}</div>
+        <div class="icon-wrap">${ICONS[system.id]}</div>
+        <div class="system-title">${system.label}</div>
+        <div class="system-count">${matched.length} ${I18N[lang].devices}</div>
+      `;
+
+      root.appendChild(card);
+    });
+  }
+
+  function entityChip(entity) {
+    const active = stateIsActive(entity);
+    const chip = document.createElement('span');
+    chip.className = `entity-chip ${active ? '' : 'off'}`;
+    chip.textContent = entity.attributes.friendly_name || entity.entity_id;
+    return chip;
+  }
+
+  function buildRoomCard(roomName, entities) {
+    const activeCount = entities.filter(stateIsActive).length;
+    const card = document.createElement('article');
+    card.className = 'room-card';
+
+    card.innerHTML = `
+      <div class="room-head">
+        <div>
+          <div class="room-title">${roomName}</div>
+          <div class="room-stats">${activeCount}/${entities.length} ${I18N[lang].active}</div>
+        </div>
+        <div class="chev">⌄</div>
+      </div>
+      <div class="room-body">
+        <div class="entity-list"></div>
+      </div>
+    `;
+
+    const list = q('.entity-list', card);
+    if (!entities.length) {
+      const empty = document.createElement('span');
+      empty.className = 'entity-chip off';
+      empty.textContent = I18N[lang].noEntities;
+      list.appendChild(empty);
+    } else {
+      entities.slice(0, 30).forEach(entity => list.appendChild(entityChip(entity)));
+    }
+
+    q('.room-head', card).addEventListener('click', () => card.classList.toggle('open'));
+    return card;
+  }
+
+  function buildMasterSuiteCard(suiteDef) {
+    const allSuiteEntities = suiteDef.rooms.flatMap(room => mapRoomEntities(room));
+    const suiteCard = document.createElement('article');
+    suiteCard.className = 'room-card suite';
+
+    suiteCard.innerHTML = `
+      <div class="room-head">
+        <div>
+          <div class="room-title">${lang === 'ar' ? suiteDef.ar : suiteDef.en}</div>
+          <div class="room-stats">${allSuiteEntities.filter(stateIsActive).length}/${allSuiteEntities.length} ${I18N[lang].devices}</div>
+        </div>
+        <div class="chev">⌄</div>
+      </div>
+      <div class="room-body">
+        <div class="suite-subrooms"></div>
+      </div>
+    `;
+
+    const subRoot = q('.suite-subrooms', suiteCard);
+
+    suiteDef.rooms.forEach(roomName => {
+      const roomEntities = mapRoomEntities(roomName);
+      const block = document.createElement('section');
+      block.className = 'subroom-card';
+      const active = roomEntities.filter(stateIsActive).length;
+
+      block.innerHTML = `
+        <div class="subroom-title">${roomName} · ${active}/${roomEntities.length}</div>
+        <div class="entity-list"></div>
+      `;
+
+      const list = q('.entity-list', block);
+      if (!roomEntities.length) {
+        const empty = document.createElement('span');
+        empty.className = 'entity-chip off';
+        empty.textContent = I18N[lang].noEntities;
+        list.appendChild(empty);
+      } else {
+        roomEntities.slice(0, 18).forEach(entity => list.appendChild(entityChip(entity)));
+      }
+
+      subRoot.appendChild(block);
+    });
+
+    q('.room-head', suiteCard).addEventListener('click', () => suiteCard.classList.toggle('open'));
+    return suiteCard;
+  }
+
+  function renderFloors() {
+    const root = q('#floorsRoot');
+    root.innerHTML = '';
+
+    HOUSE.floors.forEach(floor => {
+      const card = document.createElement('section');
+      card.className = 'premium-card floor-card';
+
+      const floorName = lang === 'ar' ? floor.ar : floor.en;
+      const grid = document.createElement('div');
+      grid.className = 'rooms-grid';
+
+      let floorEntitiesTotal = 0;
+
+      if (floor.suite) {
+        const suiteCard = buildMasterSuiteCard(floor.suite);
+        grid.appendChild(suiteCard);
+        floorEntitiesTotal += floor.suite.rooms.flatMap(room => mapRoomEntities(room)).length;
+      }
+
+      floor.rooms.forEach(roomName => {
+        const roomEntities = mapRoomEntities(roomName);
+        floorEntitiesTotal += roomEntities.length;
+        const roomCard = buildRoomCard(roomName, roomEntities);
+        grid.appendChild(roomCard);
+      });
+
+      const isSecondInactive = floor.id === 'second' && floorEntitiesTotal === 0;
+      if (isSecondInactive) {
+        card.classList.add('inactive-floor');
+        grid.innerHTML = `<div class="inactive-note">${I18N[lang].inactiveFloor}</div>`;
+      }
+
+      card.innerHTML = `
+        <div class="floor-head">
+          <div class="floor-name">${floorName}</div>
+          <div class="floor-meta">${floorEntitiesTotal} ${I18N[lang].devices}</div>
+        </div>
+      `;
+
+      card.appendChild(grid);
+      root.appendChild(card);
+    });
+  }
+
+  function updateClock() {
+    const now = new Date();
+    const locale = lang === 'ar' ? 'ar-KW' : 'en-US';
+
+    q('#clockTime').textContent = now.toLocaleTimeString(locale, {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    q('#clockDate').textContent = now.toLocaleDateString(locale, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  function bindWeather() {
+    const weather = states.find(e => domain(e) === 'weather');
+    if (!weather) {
+      q('#weatherTemp').textContent = '--°';
+      q('#weatherCondition').textContent = '--';
+      q('#weatherHumidity').textContent = 'Humidity --%';
+      q('#weatherWind').textContent = 'Wind --';
+      q('#weatherEntity').textContent = 'Entity --';
+      return;
+    }
+
+    const attrs = weather.attributes || {};
+    q('#weatherTemp').textContent = `${Math.round(Number(attrs.temperature ?? 0))}°`;
+    q('#weatherCondition').textContent = attrs.friendly_name || weather.state || '--';
+    q('#weatherHumidity').textContent = `Humidity ${attrs.humidity ?? '--'}%`;
+    q('#weatherWind').textContent = `Wind ${attrs.wind_speed ?? attrs.wind_bearing ?? '--'}`;
+    q('#weatherEntity').textContent = `Entity ${weather.entity_id}`;
+  }
+
+  function applyLanguage() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('rtl', lang === 'ar');
+
+    q('#weatherLabel').textContent = I18N[lang].weather;
+    q('#clockLabel').textContent = I18N[lang].time;
+
+    qa('#langSeg button').forEach(button => {
+      button.classList.toggle('on', button.dataset.lang === lang);
+    });
+
+    updateClock();
+    renderSystemsStrip();
+    renderFloors();
+  }
+
+  async function loadHA() {
+    try {
+      const response = await fetch('/api/states', {
+        method: 'GET',
+        credentials: 'same-origin',
+        cache: 'no-store'
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const payload = await response.json();
+      states = Array.isArray(payload) ? payload : [];
+
+      q('#haStatus').textContent = I18N[lang].connected;
+      bindWeather();
+      renderSystemsStrip();
+      renderFloors();
+    } catch (error) {
+      states = [];
+      q('#haStatus').textContent = I18N[lang].fallback;
+      bindWeather();
+      renderSystemsStrip();
+      renderFloors();
+    }
+  }
+
+  qa('#themeSeg button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.body.dataset.theme = button.dataset.theme;
+      qa('#themeSeg button').forEach(b => b.classList.remove('on'));
+      button.classList.add('on');
+    });
+  });
+
+  qa('#langSeg button').forEach(button => {
+    button.addEventListener('click', () => {
+      lang = button.dataset.lang;
+      applyLanguage();
+    });
+  });
+
+  updateClock();
+  setInterval(updateClock, 1000);
+  applyLanguage();
+  loadHA();
+  setInterval(loadHA, 30000);
 </script>
 </body>
 </html>
