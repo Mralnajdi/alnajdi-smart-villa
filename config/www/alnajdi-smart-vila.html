@@ -39,10 +39,14 @@
     .app{ height:100%; max-width:1700px; margin:0 auto; padding:calc(var(--top-safe) + 10px) 12px calc(var(--bottom-safe) + 16px); display:flex; flex-direction:column; gap:12px; overflow:auto; }
     .shell{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
 
-    .topbar{ position:sticky; top:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; gap:8px; align-items:center; padding:8px; border-radius:var(--radius-lg); background:var(--surface-2); border:1px solid var(--line); box-shadow:var(--shadow-soft); backdrop-filter: blur(16px) saturate(130%); }
+    .topbar{ position:sticky; top:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto auto; gap:8px; align-items:center; padding:8px; border-radius:var(--radius-lg); background:var(--surface-2); border:1px solid var(--line); box-shadow:var(--shadow-soft); backdrop-filter: blur(16px) saturate(130%); }
     .title{ text-align:center; font-weight:800; letter-spacing:.2em; font-size:clamp(12px,1.5vw,20px); }
     .back-btn{ width:40px;height:40px; border:1px solid var(--line); border-radius:12px; background:var(--surface-3); color:var(--text); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
     .control-groups{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+    .ambient{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+    .ambient-chip{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:var(--surface-3); font-size:11px; color:var(--muted); }
+    .ambient-chip .msr{ font-size:16px; color:var(--text); }
+    .ambient-chip b{ color:var(--text); font-size:12px; }
     .seg{ display:flex; align-items:center; gap:4px; border:1px solid var(--line); border-radius:999px; padding:4px; background:var(--surface-3); }
     .seg button{ border:0; background:transparent; color:var(--muted); font-weight:700; font-size:11px; border-radius:999px; padding:7px 10px; cursor:pointer; }
     .seg button.active{ color:var(--text); background:rgba(255,255,255,.14); }
@@ -69,6 +73,9 @@
     .rail-meta span{ font-size:11px; color:var(--muted); }
 
     .section-title{ margin:4px 2px 8px; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    .toolbar{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+    .search{ width:min(460px,100%); border:1px solid var(--line); border-radius:12px; background:var(--surface-2); color:var(--text); padding:10px 12px; }
+    .ghost-btn{ border:1px solid var(--line); background:var(--surface-2); color:var(--text); border-radius:10px; padding:8px 10px; cursor:pointer; font-weight:700; font-size:12px; }
     .grid{ display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
     .node-card{ padding:14px; min-height:110px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer; position:relative; overflow:hidden; }
     .node-card::before{ content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.12), transparent 55%); opacity:.35; pointer-events:none; }
@@ -101,7 +108,7 @@
     .empty{ padding:24px; text-align:center; color:var(--muted); border:1px dashed var(--line-strong); border-radius:16px; }
 
     @media (max-width: 1100px){ .hero{ grid-template-columns:1fr; } }
-    @media (max-width: 860px){ .topbar{ grid-template-columns:1fr; } .title{ order:-1; } .control-groups{ justify-content:flex-start; } .chips{ grid-template-columns:repeat(2,minmax(0,1fr)); } .hero-side{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width: 860px){ .topbar{ grid-template-columns:1fr; } .title{ order:-1; } .control-groups{ justify-content:flex-start; } .ambient{ justify-content:flex-start; } .chips{ grid-template-columns:repeat(2,minmax(0,1fr)); } .hero-side{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width: 720px){ .app{ padding-inline:10px; } .grid,.device-grid{ grid-template-columns:1fr; } .icon-rail{ top:118px; } }
   </style>
 </head>
@@ -136,8 +143,8 @@
       };
 
       const I18N = {
-        en:{home:'Home',floors:'Floors',rooms:'Rooms',devices:'Devices',entities:'Entities',categories:'Categories',summary:'Summary',alerts:'Alerts',active:'Active',online:'Online',back:'Back',loading:'Loading Home Assistant data…',empty:'No useful entities found.',noRooms:'No active rooms for this floor.',noDevices:'No visible devices in this room.',floorSummary:'Floor Summary',roomSummary:'Room Summary',suite:'Master Suite',contains:'Contains',lighting:'Lighting',spot:'Spot Lights',cove:'Cove Lights',main:'Main Lights',accent:'Accent Lights',lamps:'Lamps',wall:'Wall Lights',bed:'Bed Lights',ceiling:'Ceiling Lights',strip:'LED Strips',climate:'Climate',security:'Security',cameras:'Cameras',media:'Media',covers:'Curtains / Covers',doors:'Doors / Windows',locks:'Locks',sensors:'Sensors',power:'Power / Plugs',appliances:'Appliances',water:'Water / Leak',air:'Air Quality',other:'Other Controls',day:'Day',night:'Night',current:'Current',colors:'Colors',glass:'Glass',langEn:'EN',langAr:'AR',open:'Open',close:'Close',stop:'Stop',details:'Details'},
-        ar:{home:'الرئيسية',floors:'الأدوار',rooms:'الغرف',devices:'الأجهزة',entities:'الكيانات',categories:'الفئات',summary:'ملخص',alerts:'تنبيهات',active:'نشط',online:'متصل',back:'رجوع',loading:'جاري تحميل بيانات Home Assistant…',empty:'لا توجد كيانات مفيدة حالياً.',noRooms:'لا توجد غرف نشطة في هذا الدور.',noDevices:'لا توجد أجهزة مرئية في هذه الغرفة.',floorSummary:'ملخص الدور',roomSummary:'ملخص الغرفة',suite:'الجناح الرئيسي',contains:'يحتوي على',lighting:'الإضاءة',spot:'سبوت لايت',cove:'إضاءة مخفية',main:'إضاءة رئيسية',accent:'إضاءة ديكورية',lamps:'مصابيح',wall:'إضاءة جدارية',bed:'إضاءة السرير',ceiling:'إضاءة السقف',strip:'شرائط LED',climate:'المناخ',security:'الأمان',cameras:'الكاميرات',media:'الوسائط',covers:'الستائر / الغطاء',doors:'الأبواب / النوافذ',locks:'الأقفال',sensors:'المستشعرات',power:'الطاقة / المقابس',appliances:'الأجهزة المنزلية',water:'المياه / التسرب',air:'جودة الهواء',other:'تحكمات أخرى',day:'نهار',night:'ليل',current:'Current',colors:'Colors',glass:'Glass',langEn:'EN',langAr:'AR',open:'فتح',close:'إغلاق',stop:'إيقاف',details:'تفاصيل'}
+        en:{home:'Home',floors:'Floors',rooms:'Rooms',devices:'Devices',entities:'Entities',categories:'Categories',summary:'Summary',alerts:'Alerts',active:'Active',online:'Online',back:'Back',loading:'Loading Home Assistant data…',empty:'No useful entities found.',noRooms:'No active rooms for this floor.',noDevices:'No visible devices in this room.',floorSummary:'Floor Summary',roomSummary:'Room Summary',suite:'Master Suite',contains:'Contains',lighting:'Lighting',spot:'Spot Lights',cove:'Cove Lights',main:'Main Lights',accent:'Accent Lights',lamps:'Lamps',wall:'Wall Lights',bed:'Bed Lights',ceiling:'Ceiling Lights',strip:'LED Strips',climate:'Climate',security:'Security',cameras:'Cameras',media:'Media',covers:'Curtains / Covers',doors:'Doors / Windows',locks:'Locks',sensors:'Sensors',power:'Power / Plugs',appliances:'Appliances',water:'Water / Leak',air:'Air Quality',other:'Other Controls',day:'Day',night:'Night',current:'Current',colors:'Colors',glass:'Glass',langEn:'EN',langAr:'AR',open:'Open',close:'Close',stop:'Stop',details:'Details',quickRooms:'Quick Rooms',search:'Search',showMore:'Show More',showLess:'Show Less'},
+        ar:{home:'الرئيسية',floors:'الأدوار',rooms:'الغرف',devices:'الأجهزة',entities:'الكيانات',categories:'الفئات',summary:'ملخص',alerts:'تنبيهات',active:'نشط',online:'متصل',back:'رجوع',loading:'جاري تحميل بيانات Home Assistant…',empty:'لا توجد كيانات مفيدة حالياً.',noRooms:'لا توجد غرف نشطة في هذا الدور.',noDevices:'لا توجد أجهزة مرئية في هذه الغرفة.',floorSummary:'ملخص الدور',roomSummary:'ملخص الغرفة',suite:'الجناح الرئيسي',contains:'يحتوي على',lighting:'الإضاءة',spot:'سبوت لايت',cove:'إضاءة مخفية',main:'إضاءة رئيسية',accent:'إضاءة ديكورية',lamps:'مصابيح',wall:'إضاءة جدارية',bed:'إضاءة السرير',ceiling:'إضاءة السقف',strip:'شرائط LED',climate:'المناخ',security:'الأمان',cameras:'الكاميرات',media:'الوسائط',covers:'الستائر / الغطاء',doors:'الأبواب / النوافذ',locks:'الأقفال',sensors:'المستشعرات',power:'الطاقة / المقابس',appliances:'الأجهزة المنزلية',water:'المياه / التسرب',air:'جودة الهواء',other:'تحكمات أخرى',day:'نهار',night:'ليل',current:'Current',colors:'Colors',glass:'Glass',langEn:'EN',langAr:'AR',open:'فتح',close:'إغلاق',stop:'إيقاف',details:'تفاصيل',quickRooms:'وصول سريع',search:'بحث',showMore:'عرض المزيد',showLess:'عرض أقل'}
       };
 
       const CAT = [
@@ -170,7 +177,7 @@
 
       const state = {
         lang: localStorage.getItem('villa.lang') || 'en', mode: localStorage.getItem('villa.mode') || 'night', family: localStorage.getItem('villa.family') || 'colors',
-        route:{page:'home',floor:null,room:null}, hass:null, loading:true,
+        route:{page:'home',floor:null,room:null}, hass:null, loading:true, activeCat:null, showAllSensors:false, roomQuery:'', now:Date.now(),
         registries:{floors:[],areas:[],devices:[],entities:[]}, cache:{floors:[],metrics:{},categories:{}}, hash:''
       };
 
@@ -209,6 +216,7 @@
         if (cat === 'diagnostic') return true;
         if (cat === 'config' && !['input_boolean','scene','script'].includes(domain)) return true;
         if (/(uptime|firmware|rssi|linkquality|debug|raw|counter|snapshot|last seen|last_seen|battery voltage)/.test(d)) return true;
+        if (/(bluetooth|gps|distance|latitude|longitude|interval|presence source)/.test(d)) return true;
         return false;
       }
 
@@ -234,6 +242,10 @@
         const dclass = entity.attributes.device_class || '';
         return CAT.find(c => c.domains.includes(domain) && (!c.classes || c.classes.includes(dclass))) || CAT.find(c => c.domains.includes(domain)) || CAT.find(c => c.key === 'other');
       }
+      function isNoisyTelemetry(e){
+        const txt = norm(`${e.entity_id} ${e.attributes.friendly_name||''}`);
+        return /(iphone|ipad|macbook|airpods|watch|latitude|longitude|distance|battery.*phone|gps|tracker)/.test(txt);
+      }
       function isOn(e){
         const d = e.entity_id.split('.')[0], s = e.state;
         if (d==='cover') return !['closed','closing'].includes(s);
@@ -254,6 +266,11 @@
         if (d==='sensor') return `${s}${a.unit_of_measurement?` ${a.unit_of_measurement}`:''}`;
         if (d==='cover' && a.current_position != null) return `${s} • ${a.current_position}%`;
         return s;
+      }
+      function canShowInPrimary(e){
+        if (isNoisyTelemetry(e)) return false;
+        if (['unknown','unavailable'].includes(e.state) && ['sensor','binary_sensor'].includes(e.entity_id.split('.')[0])) return false;
+        return true;
       }
 
       function resolveLocation(entity, reg, maps){
@@ -362,10 +379,28 @@
         bindTopbar(); bindActions();
       }
 
+      function formatClock(){
+        const d = new Date(state.now);
+        return new Intl.DateTimeFormat(state.lang === 'ar' ? 'ar-SA' : 'en-US', {hour:'2-digit', minute:'2-digit'}).format(d);
+      }
+      function weatherBadge(){
+        const hass = state.hass || getHass();
+        const states = hass?.states || {};
+        const weather = Object.values(states).find(e => e.entity_id?.startsWith('weather.'));
+        const tempSensor = Object.values(states).find(e => e.attributes?.unit_of_measurement && /°C|°F/.test(String(e.attributes.unit_of_measurement)) && /outside|outdoor|weather|temp/.test(norm(e.entity_id + ' ' + (e.attributes.friendly_name || ''))));
+        const condition = weather?.state || '';
+        const temp = weather?.attributes?.temperature ?? tempSensor?.state;
+        const unit = weather?.attributes?.temperature_unit || tempSensor?.attributes?.unit_of_measurement || '';
+        const icon = /rain|storm/.test(condition) ? 'thunderstorm' : /cloud/.test(condition) ? 'cloud' : /clear|sun|partly/.test(condition) ? 'wb_sunny' : 'partly_cloudy_day';
+        const label = condition ? condition.replace(/_/g, ' ') : (state.lang === 'ar' ? 'الطقس' : 'Weather');
+        return `<span class="ambient-chip" title="${esc(label)}"><span class="msr">${icon}</span><b>${temp != null ? `${temp}${unit}` : '—'}</b></span>`;
+      }
+
       function topbar(){
         const back = state.route.page !== 'home';
         return `<div>${back?`<button class="back-btn" data-back="1" aria-label="${esc(t('back'))}"><span class="msr">${rtl()?'arrow_forward':'arrow_back'}</span></button>`:''}</div>
           <div class="title">ALNAJDI SMART VILA</div>
+          <div class="ambient">${weatherBadge()}<span class="ambient-chip"><span class="msr">schedule</span><b>${formatClock()}</b></span></div>
           <div class="control-groups">
             <div class="seg"><button data-lang="en" class="${state.lang==='en'?'active':''}">${t('langEn')}</button><button data-lang="ar" class="${state.lang==='ar'?'active':''}">${t('langAr')}</button></div>
             <div class="seg"><button data-mode="day" class="${state.mode==='day'?'active':''}">${t('day')}</button><button data-mode="night" class="${state.mode==='night'?'active':''}">${t('night')}</button></div>
@@ -392,7 +427,7 @@
 
         return `<section class="icon-rail">${data.map(item => {
           const grad = `background:linear-gradient(145deg, ${item.cfg.color}, rgba(0,0,0,.15));`;
-          return `<button class="rail-item ${item.alert?'active':''}" data-jump-cat="${item.cfg.key}">
+          return `<button class="rail-item ${(item.alert || state.activeCat===item.cfg.key)?'active':''}" data-jump-cat="${item.cfg.key}">
             <span class="rail-icon" style="${grad}"><span class="msr">${item.cfg.icon}</span></span>
             <span class="rail-meta"><b>${esc(t(item.cfg.key))}</b><span>${item.active}/${item.total}</span></span>
           </button>`;
@@ -402,7 +437,11 @@
       function homePage(){
         const m = state.cache.metrics;
         const floorCards = state.cache.floors.map(f => `<article class="card node-card" data-open-floor="${f.id}"><div><h3>${esc(STRUCTURE[f.id][state.lang])}</h3><div class="meta">${esc(t('floorSummary'))}</div></div><div class="rowmeta"><span>${esc(t('rooms'))}: ${f.counts.rooms}</span><span>${esc(t('devices'))}: ${f.counts.devices}</span></div></article>`).join('');
+        const quickRooms = state.cache.floors.flatMap(f => f.visibleRooms.filter(([rid]) => rid !== 'master_suite').map(([rid,list]) => ({floor:f.id,rid,count:list.length,active:list.filter(isOn).length})))
+          .sort((a,b) => b.active - a.active || b.count - a.count).slice(0,6)
+          .map(r => `<article class="card node-card" data-open-room-direct="${r.rid}" data-room-floor="${r.floor}"><div><h3>${esc(ROOM_INFO[r.rid]?.[state.lang]||r.rid)}</h3><div class="meta">${esc(STRUCTURE[r.floor][state.lang])}</div></div><div class="rowmeta"><span>${r.count} ${esc(t('devices'))}</span><span>${r.active} ${esc(t('active'))}</span></div></article>`).join('');
         return `<section class="card hero"><div><h1>${esc(t('home'))}</h1><p>${esc(t('summary'))}</p><div class="chips"><div class="chip"><b>${m.floors}</b><span>${esc(t('floors'))}</span></div><div class="chip"><b>${m.rooms}</b><span>${esc(t('rooms'))}</span></div><div class="chip"><b>${m.devices}</b><span>${esc(t('devices'))}</span></div></div></div><div class="hero-side"><div class="chip"><b>${m.online}</b><span>${esc(t('online'))}</span></div><div class="chip"><b>${m.active}</b><span>${esc(t('active'))}</span></div><div class="chip"><b>${m.alerts}</b><span>${esc(t('alerts'))}</span></div><div class="chip"><b>${CAT.length-1}</b><span>${esc(t('categories'))}</span></div></div></section>
+        <section><h3 class="section-title">${esc(t('quickRooms'))}</h3><div class="grid">${quickRooms}</div></section>
         <section><h3 class="section-title">${esc(t('floors'))}</h3><div class="grid">${floorCards}</div></section>`;
       }
 
@@ -425,11 +464,22 @@
         else roomEntities = floor.rooms.get(rid) || [];
         if (!roomEntities.length) return `<div class="card empty">${esc(t('noDevices'))}</div>`;
 
+        const q = norm(state.roomQuery);
         const groups = new Map(CAT.map(c=>[c.key,[]]));
-        roomEntities.forEach(e => groups.get(classify(e).key).push(e));
+        roomEntities.forEach(e => {
+          if (!canShowInPrimary(e)) return;
+          if (q) {
+            const text = norm(`${e.entity_id} ${e.attributes.friendly_name||''}`);
+            if (!text.includes(q)) return;
+          }
+          const k = classify(e).key;
+          if (state.activeCat && state.activeCat !== k) return;
+          groups.get(k).push(e);
+        });
 
         const sections = CAT.map(cfg => {
-          const list = groups.get(cfg.key) || [];
+          let list = groups.get(cfg.key) || [];
+          if (cfg.key === 'sensors' && !state.showAllSensors) list = list.slice(0, 36);
           if (!list.length) return '';
 
           if (cfg.key === 'lighting') {
@@ -439,11 +489,15 @@
             return `<section class="card device-section" data-cat="${cfg.key}"><h3 class="section-title">${esc(t(cfg.key))} (${list.length})</h3>${block}</section>`;
           }
 
-          return `<section class="card device-section" data-cat="${cfg.key}"><h3 class="section-title">${esc(t(cfg.key))} (${list.length})</h3><div class="device-grid">${list.map(e => deviceCard(e,cfg)).join('')}</div></section>`;
+          const full = (groups.get(cfg.key) || []).length;
+          const sensorMore = cfg.key === 'sensors' && full > list.length
+            ? `<div style="margin-top:8px"><button class="ghost-btn" data-toggle-sensors="1">${esc(t('showMore'))} (${full - list.length})</button></div>` : '';
+          return `<section class="card device-section" data-cat="${cfg.key}"><h3 class="section-title">${esc(t(cfg.key))} (${full})</h3><div class="device-grid">${list.map(e => deviceCard(e,cfg)).join('')}</div>${sensorMore}</section>`;
         }).filter(Boolean).join('');
 
         const title = rid === 'master_suite' ? t('suite') : (ROOM_INFO[rid]?.[state.lang] || rid);
-        return `<section class="card hero"><div><h1>${esc(title)}</h1><p>${esc(t('roomSummary'))}</p><div class="chips"><div class="chip"><b>${roomEntities.length}</b><span>${esc(t('devices'))}</span></div><div class="chip"><b>${roomEntities.filter(e => e.state!=='unavailable').length}</b><span>${esc(t('online'))}</span></div><div class="chip"><b>${roomEntities.filter(isOn).length}</b><span>${esc(t('active'))}</span></div></div></div>${state.cache.metrics.alerts?`<div class="hero-side"><div class="chip alert"><b>${state.cache.metrics.alerts}</b><span>${esc(t('alerts'))}</span></div></div>`:''}</section>${sections}`;
+        return `<section class="card hero"><div><h1>${esc(title)}</h1><p>${esc(t('roomSummary'))}</p><div class="chips"><div class="chip"><b>${roomEntities.length}</b><span>${esc(t('devices'))}</span></div><div class="chip"><b>${roomEntities.filter(e => e.state!=='unavailable').length}</b><span>${esc(t('online'))}</span></div><div class="chip"><b>${roomEntities.filter(isOn).length}</b><span>${esc(t('active'))}</span></div></div></div>${state.cache.metrics.alerts?`<div class="hero-side"><div class="chip alert"><b>${state.cache.metrics.alerts}</b><span>${esc(t('alerts'))}</span></div></div>`:''}</section>
+        <div class="toolbar"><input class="search" data-room-search="1" value="${esc(state.roomQuery)}" placeholder="${esc(t('search'))}"/>${state.showAllSensors?`<button class="ghost-btn" data-toggle-sensors="1">${esc(t('showLess'))}</button>`:''}</div>${sections}`;
       }
 
       function deviceCard(e,cfg){
@@ -455,17 +509,28 @@
         if (domain==='cover') controls = `<button class="ibtn" data-cover="open" data-eid="${e.entity_id}" title="${esc(t('open'))}"><span class="msr">keyboard_arrow_up</span></button><button class="ibtn" data-cover="stop" data-eid="${e.entity_id}" title="${esc(t('stop'))}"><span class="msr">stop</span></button><button class="ibtn" data-cover="close" data-eid="${e.entity_id}" title="${esc(t('close'))}"><span class="msr">keyboard_arrow_down</span></button>`;
         else if (domain==='lock') controls = `<button class="ibtn" data-lock="${e.state==='locked'?'unlock':'lock'}" data-eid="${e.entity_id}"><span class="msr">${e.state==='locked'?'lock_open':'lock'}</span></button>`;
         else if (domain==='climate' || domain==='media_player' || domain==='camera' || domain==='alarm_control_panel') controls = `<button class="ibtn" data-more="${e.entity_id}" title="${esc(t('details'))}"><span class="msr">more_horiz</span></button>`;
+        else if (domain==='fan') controls = `<button class="ibtn" data-toggle-eid="${e.entity_id}"><span class="msr">power_settings_new</span></button>`;
 
         const showBrightness = domain==='light' && attrs.brightness != null;
         const showTemp = domain==='light' && attrs.color_temp_kelvin != null;
+        const showClimateSet = domain==='climate' && attrs.temperature != null;
+        const showFanSpeed = domain==='fan' && attrs.percentage != null;
+        const showMediaVol = domain==='media_player' && attrs.volume_level != null;
+        const showNumber = ['number','input_number'].includes(domain);
+        const showSelect = ['select','input_select'].includes(domain) && Array.isArray(attrs.options) && attrs.options.length;
 
         return `<article class="device-card" style="--device-grad:${grad};--icon-color:${cfg.color}" data-eid="${e.entity_id}">
           <div class="icon-w"><span class="msr">${cfg.icon}</span></div>
           <div class="device-main"><div class="name">${name}</div><div class="state">${esc(friendlyState(e))}</div></div>
           <div class="tail">${controls}</div>
-          ${(showBrightness||showTemp) ? `<div class="cap-row">
+          ${(showBrightness||showTemp||showClimateSet||showFanSpeed||showMediaVol||showNumber||showSelect) ? `<div class="cap-row">
             ${showBrightness?`<div class="slider-wrap"><span class="msr">brightness_6</span><input type="range" min="1" max="255" value="${attrs.brightness}" data-brightness="${e.entity_id}"/><span>${Math.round((attrs.brightness/255)*100)}%</span></div>`:''}
             ${showTemp?`<div class="slider-wrap"><span class="msr">device_thermostat</span><input type="range" min="2000" max="6500" step="50" value="${attrs.color_temp_kelvin}" data-colortemp="${e.entity_id}"/><span>${attrs.color_temp_kelvin}K</span></div>`:''}
+            ${showClimateSet?`<div class="slider-wrap"><span class="msr">thermostat</span><input type="range" min="${attrs.min_temp || 16}" max="${attrs.max_temp || 32}" step="0.5" value="${attrs.temperature}" data-climate-temp="${e.entity_id}"/><span>${attrs.temperature}°</span></div>`:''}
+            ${showFanSpeed?`<div class="slider-wrap"><span class="msr">air</span><input type="range" min="0" max="100" step="1" value="${attrs.percentage}" data-fan-speed="${e.entity_id}"/><span>${attrs.percentage}%</span></div>`:''}
+            ${showMediaVol?`<div class="slider-wrap"><span class="msr">volume_up</span><input type="range" min="0" max="100" step="1" value="${Math.round((attrs.volume_level || 0)*100)}" data-media-volume="${e.entity_id}"/><span>${Math.round((attrs.volume_level || 0)*100)}%</span></div>`:''}
+            ${showNumber?`<div class="slider-wrap"><span class="msr">tune</span><input type="range" min="${attrs.min ?? 0}" max="${attrs.max ?? 100}" step="${attrs.step ?? 1}" value="${Number(e.state) || attrs.min || 0}" data-number="${e.entity_id}"/><span>${esc(e.state)}</span></div>`:''}
+            ${showSelect?`<div class="slider-wrap"><span class="msr">checklist</span><select data-select="${e.entity_id}" style="width:100%;border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 8px;">${attrs.options.map(opt => `<option value="${esc(opt)}" ${String(opt)===String(e.state)?'selected':''}>${esc(opt)}</option>`).join('')}</select><span></span></div>`:''}
           </div>`:''}
         </article>`;
       }
@@ -488,16 +553,24 @@
       }
 
       function bindActions(){
-        app.querySelectorAll('[data-open-floor]').forEach(c => c.onclick = () => { state.route = {page:'floor',floor:c.dataset.openFloor,room:null}; render(); });
-        app.querySelectorAll('[data-open-room]').forEach(c => c.onclick = () => { state.route = {page:'room',floor:state.route.floor || 'first_floor',room:c.dataset.openRoom}; render(); });
+        app.querySelectorAll('[data-open-floor]').forEach(c => c.onclick = () => { state.route = {page:'floor',floor:c.dataset.openFloor,room:null}; state.activeCat=null; render(); });
+        app.querySelectorAll('[data-open-room]').forEach(c => c.onclick = () => { state.route = {page:'room',floor:state.route.floor || 'first_floor',room:c.dataset.openRoom}; state.activeCat=null; render(); });
+        app.querySelectorAll('[data-open-room-direct]').forEach(c => c.onclick = () => { state.route = {page:'room',floor:c.dataset.roomFloor,room:c.dataset.openRoomDirect}; state.activeCat=null; render(); });
 
         app.querySelectorAll('[data-jump-cat]').forEach(btn => btn.onclick = () => {
+          state.activeCat = btn.dataset.jumpCat;
           const target = app.querySelector(`[data-cat="${btn.dataset.jumpCat}"]`);
-          target?.scrollIntoView({behavior:'smooth',block:'start'});
+          if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+          else {
+            const match = state.cache.floors.flatMap(f => f.visibleRooms.map(([rid,list]) => ({floor:f.id,rid,list})))
+              .find(x => x.list.some(e => classify(e).key === state.activeCat));
+            if (match) state.route = {page:'room',floor:match.floor,room:match.rid};
+            render();
+          }
         });
 
         app.querySelectorAll('.device-card[data-eid]').forEach(card => card.onclick = (ev) => {
-          if (ev.target.closest('button,input')) return;
+          if (ev.target.closest('button,input,select')) return;
           const eid = card.dataset.eid, domain = eid.split('.')[0];
           if (['light','switch','fan','input_boolean'].includes(domain)) call(domain, 'toggle', {entity_id:eid});
           else if (domain==='scene') call('scene','turn_on',{entity_id:eid});
@@ -507,6 +580,7 @@
 
         app.querySelectorAll('[data-cover]').forEach(b => b.onclick = (e) => { e.stopPropagation(); call('cover',{open:'open_cover',close:'close_cover',stop:'stop_cover'}[b.dataset.cover],{entity_id:b.dataset.eid}); });
         app.querySelectorAll('[data-lock]').forEach(b => b.onclick = (e) => { e.stopPropagation(); call('lock',b.dataset.lock,{entity_id:b.dataset.eid}); });
+        app.querySelectorAll('[data-toggle-eid]').forEach(b => b.onclick = (e) => { e.stopPropagation(); const eid=b.dataset.toggleEid; call(eid.split('.')[0], 'toggle', {entity_id:eid}); });
         app.querySelectorAll('[data-more]').forEach(b => b.onclick = (e) => { e.stopPropagation(); moreInfo(b.dataset.more); });
 
         app.querySelectorAll('[data-brightness]').forEach(i => i.onchange = (e) => {
@@ -515,6 +589,24 @@
         app.querySelectorAll('[data-colortemp]').forEach(i => i.onchange = (e) => {
           e.stopPropagation(); const val = Number(i.value); call('light','turn_on',{entity_id:i.dataset.colortemp, color_temp_kelvin: val});
         });
+        app.querySelectorAll('[data-climate-temp]').forEach(i => i.onchange = (e) => {
+          e.stopPropagation(); call('climate','set_temperature',{entity_id:i.dataset.climateTemp, temperature:Number(i.value)});
+        });
+        app.querySelectorAll('[data-fan-speed]').forEach(i => i.onchange = (e) => {
+          e.stopPropagation(); call('fan','set_percentage',{entity_id:i.dataset.fanSpeed, percentage:Number(i.value)});
+        });
+        app.querySelectorAll('[data-media-volume]').forEach(i => i.onchange = (e) => {
+          e.stopPropagation(); call('media_player','volume_set',{entity_id:i.dataset.mediaVolume, volume_level:Number(i.value)/100});
+        });
+        app.querySelectorAll('[data-number]').forEach(i => i.onchange = (e) => {
+          e.stopPropagation(); const domain = i.dataset.number.split('.')[0]; call(domain,'set_value',{entity_id:i.dataset.number, value:Number(i.value)});
+        });
+        app.querySelectorAll('[data-select]').forEach(s => s.onchange = (e) => {
+          e.stopPropagation(); const domain = s.dataset.select.split('.')[0]; call(domain,'select_option',{entity_id:s.dataset.select, option:s.value});
+        });
+        const roomSearch = app.querySelector('[data-room-search]');
+        if (roomSearch) roomSearch.oninput = () => { state.roomQuery = roomSearch.value; render(); };
+        app.querySelectorAll('[data-toggle-sensors]').forEach(b => b.onclick = () => { state.showAllSensors = !state.showAllSensors; render(); });
       }
 
       async function refresh(){
@@ -522,8 +614,8 @@
         if (!hass) { state.loading=true; render(); return; }
         await loadRegistries(hass);
 
-        const ids = Object.keys(hass.states || {});
-        const hash = `${ids.length}:${ids.slice(0,8).join('|')}:${ids.slice(0,10).map(i => hass.states[i]?.state).join('|')}`;
+        const ids = Object.keys(hass.states || {}).sort();
+        const hash = ids.map(i => `${i}:${hass.states[i]?.state}:${hass.states[i]?.last_changed || ''}`).join('|');
         if (hash !== state.hash || state.loading) {
           state.hash = hash;
           compute(hass);
@@ -541,6 +633,7 @@
 
       render();
       refresh();
+      setInterval(() => { state.now = Date.now(); if (!state.loading) render(); }, 10000);
       setInterval(refresh, 3000);
     })();
   </script>
