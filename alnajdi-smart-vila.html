@@ -1,1526 +1,239 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALNAJDI SMART VILA</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;}
-
-:root{
-  --bg:#0A0B10;--s1:#13141B;--s2:#1A1C25;--s3:#22242F;
-  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.16);
-  --t1:#F0EDE6;--t2:#78756F;--t3:#3A3835;--t4:#1C1A16;
-  --gold:#C8A84B;
-  
-  --c-aqara:#0A84FF;
-  --c-hikvision:#E31E24;
-  --c-ecobee:#00B87A;
-  --c-homey:#FF6B35;
-  --c-fibaro:#F5C400;
-  --c-unknown:#94A3B8;
-}
-
-html,body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;height:100%;overflow:hidden;}
-
-@keyframes pulse-ring{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.8);opacity:0}}
-@keyframes flicker{0%,100%{opacity:1}40%{opacity:.55}60%{opacity:.95}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes shimmer{0%{background-position:-300% 0}100%{background-position:300% 0}}
-@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes badge-pop{0%{transform:scale(.2);opacity:0}70%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
-@keyframes glow{0%,100%{opacity:.45}50%{opacity:.9}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-@keyframes popup-in{from{opacity:0;transform:scale(.88) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes slide-down{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-@keyframes select-pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
-
-.app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-
-.tb{height:52px;background:var(--s1);border-bottom:.5px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:9px;flex-shrink:0;z-index:100;}
-.tb-gem{width:28px;height:28px;border-radius:8px;background:rgba(200,168,75,.1);border:.5px solid rgba(200,168,75,.25);display:flex;align-items:center;justify-content:center;}
-.tb-name{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.26em;white-space:nowrap;}
-.tb-sp{flex:1;}
-.ctrl-pill{display:flex;align-items:center;background:var(--s2);border:.5px solid var(--border);border-radius:20px;padding:3px;gap:1px;}
-.cp-btn{width:26px;height:22px;border-radius:13px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.cp-btn.on{background:var(--s3);}
-.cp-btn svg{opacity:.3;transition:opacity .2s;}
-.cp-btn.on svg{opacity:1;}
-.lang-pill{display:flex;align-items:center;background:var(--s2);border:.5px solid var(--border);border-radius:20px;padding:3px;gap:1px;}
-.lp{height:22px;padding:0 8px;border-radius:13px;border:none;background:transparent;cursor:pointer;font-size:10px;font-weight:800;color:var(--t3);transition:all .2s;font-family:'Inter',sans-serif;}
-.lp.on{background:rgba(200,168,75,.1);color:var(--gold);}
-.ha-status{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--t2);}
-.ha-dot{width:5px;height:5px;border-radius:50%;background:#94A3B8;transition:background .3s;}
-.ha-dot.ok{background:#34D399;animation:blink 2.5s ease infinite;}
-.ha-dot.err{background:#EF4444;}
-.tb-clk{font-size:11px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.06em;}
-
-.tabs-wrap{flex-shrink:0;padding:10px 14px 0;background:var(--bg);}
-.tabs{display:flex;gap:3px;background:var(--s2);border:.5px solid var(--border);border-radius:12px;padding:3px;}
-.tab{flex:1;padding:7px 4px;border-radius:9px;border:none;background:transparent;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--t3);transition:all .2s;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;}
-.tab.on{background:var(--s1);box-shadow:0 1px 5px rgba(0,0,0,.2);}
-.tab.dis{opacity:.2;cursor:not-allowed;}
-.t-bdg{min-width:15px;height:15px;border-radius:8px;padding:0 3px;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;color:#08080E;}
-
-.pane{display:none;flex:1;overflow-y:auto;padding:0 14px 60px;}
-.pane.on{display:block;animation:slide-down .2s ease;}
-.pane::-webkit-scrollbar{width:2px;}
-.pane::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-
-.fsumm{margin:10px 0 0;background:var(--s1);border:.5px solid var(--border);border-radius:13px;padding:11px 13px;}
-.fsumm-title{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
-.fsumm-chips{display:flex;flex-wrap:wrap;gap:5px;}
-.fchip{display:flex;align-items:center;gap:5px;padding:5px 9px 5px 6px;border-radius:26px;position:relative;animation:badge-pop .3s ease both;}
-.fchip-ico{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.fchip-bdg{position:absolute;top:-5px;left:-5px;min-width:16px;height:16px;border-radius:8px;padding:0 3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;border:2px solid var(--bg);z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.4);}
-.fchip-lbl{font-size:10px;font-weight:600;}
-
-.rnav{position:sticky;top:0;z-index:90;background:var(--bg);padding:8px 0 6px;border-bottom:.5px solid var(--border);margin-bottom:2px;}
-.rnav-row{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;}
-.rnav-row::-webkit-scrollbar{display:none;}
-.rnav-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:24px;flex-shrink:0;background:var(--s1);border:.5px solid var(--border);font-family:inherit;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .18s;}
-.rnav-btn.on{border-color:rgba(var(--rc),.35);color:rgb(var(--rc));background:rgba(var(--rc),.07);}
-.rn-dot{width:5px;height:5px;border-radius:50%;opacity:0;flex-shrink:0;}
-.rnav-btn.on .rn-dot{opacity:1;animation:blink 1.8s ease infinite;}
-
-.fctrl{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;background:var(--s1);border:.5px solid var(--border);border-radius:12px;padding:8px 12px;margin:9px 0 0;}
-.fctrl-lbl{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
-.fctrl-btns{display:flex;gap:5px;flex-wrap:wrap;}
-.fc-btn{padding:5px 11px;border-radius:17px;border:.5px solid var(--border);background:transparent;font-family:inherit;font-size:10px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .18s;}
-.fc-btn:hover{border-color:var(--border2);color:var(--t1);}
-.fc-btn.red{border-color:rgba(239,68,68,.3);color:#EF4444;}
-
-.room{margin-top:13px;animation:fade-up .25s ease;}
-.room-bar{border-radius:12px 12px 0 0;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;}
-.room-bar-l{display:flex;align-items:center;gap:7px;}
-.room-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.room-title{font-size:13px;font-weight:800;}
-.room-cnt{font-size:10px;color:var(--t3);}
-.room-off-btn{padding:4px 9px;border-radius:17px;border:.5px solid;background:transparent;font-family:inherit;font-size:9px;font-weight:600;cursor:pointer;opacity:.7;transition:opacity .18s;}
-.room-off-btn:hover{opacity:1;}
-.room-summ{background:var(--s1);border-top:none;padding:7px 12px;display:flex;flex-wrap:wrap;gap:5px;}
-.rs-chip{display:flex;align-items:center;gap:4px;padding:3px 8px 3px 5px;border-radius:17px;position:relative;}
-.rs-ico{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.rs-n{font-size:9px;font-weight:700;}
-.rs-l{font-size:9px;color:var(--t2);}
-.rs-bdg{position:absolute;top:-4px;left:-4px;min-width:13px;height:13px;border-radius:7px;padding:0 2px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;border:1.5px solid var(--bg);z-index:2;}
-.room-grid-wrap{background:var(--s1);border-top:none;border-radius:0 0 12px 12px;padding:10px;}
-
-.dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:7px;}
-
-.dc{
-  border-radius:13px;padding:12px;
-  cursor:pointer;position:relative;overflow:visible;
-  transition:transform .15s,border-color .2s;
-  border:.5px solid var(--border);
-  background:var(--s2);
-}
-.dc:hover{transform:translateY(-2px);}
-.dc.active{border-color:rgba(var(--bc),.28);background:rgba(var(--bc),.05);}
-.dc::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;border-radius:0 0 3px 3px;background:radial-gradient(ellipse,rgb(var(--bc)),transparent 70%);opacity:.7;}
-.dc-shm{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.025),transparent);background-size:300% 100%;pointer-events:none;border-radius:13px;animation:shimmer 4s ease infinite;}
-
-.dc-r1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;}
-.ico-btn{
-  position:relative;width:52px;height:52px;border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  border:none;cursor:pointer;transition:transform .15s;flex-shrink:0;
-}
-.ico-btn:hover{transform:scale(1.07);}
-.ico-btn::before{content:'';position:absolute;inset:-7px;border-radius:23px;opacity:.9;animation:glow 2.5s ease infinite;}
-.ico-btn::after{content:'';position:absolute;inset:-7px;border-radius:23px;border:1.5px solid;animation:pulse-ring 2s ease-out infinite;}
-.dc.active .ico-btn svg{filter:drop-shadow(0 0 7px rgb(var(--bc)));}
-
-.dc.active.type-light .ico-btn svg{animation:flicker 3s ease-in-out infinite;}
-
-.dc.active.type-climate .ico-btn svg{animation:spin 5s linear infinite;}
-
-.dc.active.type-cover .ico-btn svg{animation:bounce 2.2s ease-in-out infinite;}
-
-.chg-dot{
-  position:absolute;bottom:-1px;right:-1px;
-  width:13px;height:13px;border-radius:50%;
-  background:var(--s2);border:2px solid var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  z-index:4;cursor:pointer;
-}
-.chg-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:rgb(var(--bc));}
-
-.nbdg{
-  position:absolute;top:-6px;left:-6px;
-  min-width:18px;height:18px;border-radius:9px;padding:0 4px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:8px;font-weight:900;
-  border:2px solid var(--bg);z-index:5;
-  animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both;
-  color:#08080E;
-}
-
-.tog{width:30px;height:17px;border-radius:9px;border:none;cursor:pointer;position:relative;flex-shrink:0;margin-top:3px;transition:background .22s;}
-.tog::after{content:'';position:absolute;width:11px;height:11px;border-radius:50%;background:white;top:3px;transition:all .22s;box-shadow:0 1px 4px rgba(0,0,0,.4);}
-.tog.off{background:var(--s3);}
-.tog.off::after{right:3px;}
-.tog.on::after{left:3px;}
-
-.dc-name{font-size:13px;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:2px;letter-spacing:-.01em;}
-.dc-val{font-size:20px;font-weight:900;line-height:1;letter-spacing:-.02em;margin-bottom:6px;transition:color .2s;}
-.dc-val-u{font-size:11px;font-weight:500;opacity:.65;}
-.dc-prog{margin-bottom:8px;}
-.dc-track{height:2px;background:var(--s3);border-radius:2px;overflow:hidden;}
-.dc-fill{height:100%;border-radius:2px;transition:width .5s ease;}
-
-.dc-det{border-top:.5px solid rgba(255,255,255,.06);padding-top:8px;display:flex;flex-direction:column;gap:4px;}
-.det-row{display:flex;align-items:center;justify-content:space-between;gap:5px;}
-.det-k{font-size:7px;font-weight:600;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
-.det-v{font-size:9px;font-weight:500;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.det-v.hi{font-weight:700;}
-.det-v.ok{color:#34D399;}
-.sd{display:inline-block;width:5px;height:5px;border-radius:50%;margin-left:3px;vertical-align:middle;}
-
-.pop-wrap{position:absolute;z-index:999;bottom:calc(100% + 9px);right:0;left:0;}
-.pop{background:#1B1D2A;border:.5px solid var(--border2);border-radius:13px;padding:11px;box-shadow:0 10px 40px rgba(0,0,0,.75);animation:popup-in .18s cubic-bezier(.34,1.3,.64,1) both;}
-.pop-title{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
-.pop-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
-.pop-opt{display:flex;align-items:center;gap:5px;padding:5px 9px;border-radius:24px;background:var(--s2);border:.5px solid var(--border);cursor:pointer;transition:all .14s;font-size:10px;font-weight:600;color:var(--t2);}
-.pop-opt:hover{border-color:var(--border2);color:var(--t1);}
-.pop-opt.on{background:rgba(var(--bc),.09);border-color:rgba(var(--bc),.35);color:rgb(var(--bc));}
-.pop-ico{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(var(--bc),.15);flex-shrink:0;}
-.pop-divider{height:.5px;background:var(--border);margin:8px 0;}
-
-.pop-colors{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px;}
-.pop-clr{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0;}
-.pop-clr.sel{border-color:white;transform:scale(1.2);}
-
-.pop-upload{display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 10px;border-radius:24px;background:rgba(139,92,246,.08);border:.5px solid rgba(139,92,246,.28);cursor:pointer;font-size:10px;font-weight:600;color:#8B5CF6;width:100%;}
-.pop-upload:hover{background:rgba(139,92,246,.14);}
-.pop-arr{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid #1B1D2A;position:absolute;bottom:-7px;right:19px;}
-
-.status-bar{display:flex;flex-wrap:wrap;gap:5px;padding:9px 0 0;}
-.sch{display:flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;border-radius:34px;background:var(--s1);border:.5px solid var(--border);position:relative;cursor:pointer;transition:all .18s;}
-.sch.on{border-color:rgba(var(--sc),.3);background:rgba(var(--sc),.06);}
-.sch-bub{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(var(--sc),.14);}
-.sch.on .sch-bub svg{animation:bounce 2.2s ease-in-out infinite;}
-.sch-bdg{position:absolute;top:-5px;left:-5px;min-width:17px;height:17px;border-radius:9px;padding:0 3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;background:rgb(var(--sc));color:#08080E;border:2px solid var(--bg);box-shadow:0 2px 6px rgba(var(--sc),.5);z-index:2;animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1) both;}
-.sch-bdg::before{content:'';position:absolute;inset:-3px;border-radius:12px;border:1.5px solid rgba(var(--sc),.4);animation:pulse-ring 2s ease-out infinite;}
-.sch-lbl{font-size:10px;font-weight:600;}
-.sch.on .sch-lbl{color:rgb(var(--sc));}
-.sch-sub{font-size:8px;color:var(--t3);}
-
-.hero{text-align:center;padding:13px 0 9px;}
-.hero-title{font-size:clamp(14px,3.5vw,22px);font-weight:900;color:var(--gold);letter-spacing:.28em;text-transform:uppercase;}
-.hero-line{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:7px auto;}
-.hero-date{font-size:10px;color:var(--t2);letter-spacing:.04em;}
-.sec{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;margin:13px 0 7px;display:flex;align-items:center;gap:7px;}
-.sec::after{content:'';flex:1;height:.5px;background:var(--border);}
-
-.fn-btn{display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:13px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .18s;margin-bottom:6px;}
-.fn-btn:hover{transform:translateY(-2px);}
-.fn-ico{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.fn-info{flex:1;}
-.fn-name{font-size:13px;font-weight:800;margin-bottom:1px;}
-.fn-sub{font-size:10px;color:var(--t2);}
-.fn-arr{color:var(--t3);font-size:16px;}
-
-.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.qa-btn{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--s1);border:.5px solid var(--border);cursor:pointer;transition:all .18s;}
-.qa-btn:hover{transform:translateY(-1px);}
-.qa-ico{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.qa-name{font-size:11px;font-weight:700;}
-
-.scenes{display:flex;flex-wrap:wrap;gap:5px;}
-.sc-chip{display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:23px;background:var(--s1);border:.5px solid var(--border);font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .18s;}
-.sc-chip.on{background:rgba(var(--sc),.07);border-color:rgba(var(--sc),.3);color:rgb(var(--sc));}
-.sc-dot{width:5px;height:5px;border-radius:50%;opacity:0;background:rgb(var(--sc));}
-.sc-chip.on .sc-dot{opacity:1;animation:blink 1.5s ease infinite;}
-
-.sel-bar{position:sticky;top:0;z-index:80;background:#1A1C2E;border:1px solid rgba(139,92,246,.3);border-radius:13px;padding:8px 12px;display:none;align-items:center;gap:7px;flex-wrap:wrap;animation:fade-up .2s ease;margin-top:8px;}
-.sel-bar.show{display:flex;}
-.sel-cnt{font-size:12px;font-weight:700;color:#8B5CF6;}
-.sel-btns{display:flex;gap:5px;margin-right:auto;}
-.sel-btn{padding:5px 11px;border-radius:17px;border:.5px solid var(--border);background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .14s;}
-.sel-btn.primary{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#8B5CF6;}
-.sel-btn.cancel{color:var(--t3);}
-.grp-btn{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:17px;border:.5px solid var(--border);background:transparent;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .14s;}
-.grp-btn.on{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#8B5CF6;}
-.sel-check{position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;background:#8B5CF6;border:2px solid var(--bg);display:none;align-items:center;justify-content:center;z-index:10;animation:select-pop .2s ease;}
-.dc.sel .sel-check{display:flex;}
-.dc.sel{outline:2px solid #8B5CF6;outline-offset:2px;}
-
-.gc{background:var(--s1);border:1px solid rgba(139,92,246,.28);border-radius:13px;overflow:hidden;margin-top:11px;position:relative;}
-.gc::before{content:'';position:absolute;top:0;left:6%;right:6%;height:1px;background:radial-gradient(ellipse,#8B5CF6,transparent 70%);opacity:.8;}
-.gc-head{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.gc-ico{width:44px;height:44px;border-radius:14px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;}
-.gc-ico::after{content:'';position:absolute;inset:-5px;border-radius:19px;border:1.5px solid rgba(139,92,246,.5);animation:pulse-ring 2s ease-out infinite;}
-.gc-ico svg{filter:drop-shadow(0 0 6px rgba(139,92,246,.9));}
-.gc-info{flex:1;}
-.gc-name{font-size:13px;font-weight:800;color:var(--t1);margin-bottom:2px;}
-.gc-sub{font-size:10px;color:var(--t3);display:flex;align-items:center;gap:4px;}
-.gc-badge{background:rgba(139,92,246,.1);border:.5px solid rgba(139,92,246,.28);color:#8B5CF6;font-size:8px;font-weight:700;padding:2px 6px;border-radius:7px;}
-.gc-tog{width:32px;height:18px;border-radius:9px;background:#8B5CF6;border:none;cursor:pointer;position:relative;flex-shrink:0;}
-.gc-tog::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:white;top:3px;left:3px;}
-.gc-exp{width:26px;height:26px;border-radius:8px;background:rgba(139,92,246,.08);border:.5px solid rgba(139,92,246,.22);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .25s;flex-shrink:0;}
-.gc-exp.open{transform:rotate(180deg);}
-.gc-devs{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;border-top:0 solid rgba(139,92,246,.14);padding:0 10px;}
-.gc-devs.open{max-height:600px;padding:10px;border-top:.5px solid rgba(139,92,246,.14);}
-.gc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;}
-.gd{background:rgba(139,92,246,.05);border:.5px solid rgba(139,92,246,.16);border-radius:11px;padding:9px;}
-.gd-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.gd-ico{width:28px;height:28px;border-radius:9px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;}
-.gd-tog{width:24px;height:14px;border-radius:7px;background:#8B5CF6;border:none;cursor:pointer;position:relative;}
-.gd-tog::after{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:white;top:3px;left:3px;}
-.gd-name{font-size:9px;font-weight:600;color:var(--t2);}
-.gd-val{font-size:13px;font-weight:900;color:#8B5CF6;}
-.gd-brand{font-size:7px;color:var(--t3);margin-top:1px;}
-
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;}
-.modal-bg.show{display:flex;}
-.modal{background:#1A1C2E;border:1px solid rgba(139,92,246,.28);border-radius:17px;padding:18px;width:100%;max-width:340px;animation:popup-in .22s cubic-bezier(.34,1.3,.64,1) both;}
-.modal-title{font-size:15px;font-weight:800;color:var(--t1);margin-bottom:3px;}
-.modal-sub{font-size:10px;color:var(--t3);margin-bottom:14px;}
-.modal-lbl{font-size:8px;font-weight:700;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;display:block;}
-.modal-inp{width:100%;background:var(--s2);border:.5px solid var(--border2);border-radius:9px;padding:8px 11px;font-family:'Inter',sans-serif;font-size:12px;color:var(--t1);outline:none;margin-bottom:10px;}
-.modal-inp:focus{border-color:rgba(139,92,246,.4);}
-.modal-devs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px;}
-.mdp{padding:3px 8px;border-radius:11px;background:rgba(139,92,246,.1);border:.5px solid rgba(139,92,246,.24);font-size:9px;font-weight:600;color:#8B5CF6;}
-.modal-footer{display:flex;gap:7px;justify-content:flex-end;}
-.modal-cancel{padding:7px 13px;border-radius:9px;border:.5px solid var(--border);background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;}
-.modal-create{padding:7px 15px;border-radius:9px;background:#8B5CF6;border:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:white;cursor:pointer;}
-
-.brand-logo{display:flex;align-items:center;opacity:.75;}
-</style>
-</head>
-<body>
-<div class="app" id="app">
-
-<div class="tb">
-  <div class="tb-gem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-  <div class="tb-name">A&nbsp;L&nbsp;N&nbsp;A&nbsp;J&nbsp;D&nbsp;I&nbsp;&nbsp;&nbsp;V&nbsp;I&nbsp;L&nbsp;A</div>
-  <div class="tb-sp"></div>
-  <div style="display:flex;align-items:center;gap:5px;">
-    <div class="ctrl-pill">
-      <button class="cp-btn on" id="btn-dk" onclick="setTheme('dark')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="#8B9CF4" stroke-width="1.7"/></svg></button>
-      <button class="cp-btn" id="btn-lt" onclick="setTheme('light')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#FBB024" stroke-width="1.7"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#FBB024" stroke-width="1.7" stroke-linecap="round"/></svg></button>
-    </div>
-    <div class="lang-pill">
-      <button class="lp on" id="btn-en" onclick="setLang('en')">EN</button>
-      <button class="lp" id="btn-ar" onclick="setLang('ar')">ع</button>
-    </div>
-    <div class="ha-status"><div class="ha-dot" id="ha-dot"></div><span id="ha-txt">Connecting</span></div>
-    
-  </div>
-</div>
-
-<div class="tabs-wrap">
-  <div class="tabs">
-    <button class="tab on" id="tab-home" onclick="showPane('home',this)" style="color:var(--gold)">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span class="en">Home</span><span class="ar" style="display:none">الرئيسية</span>
-      <span class="t-bdg" style="background:var(--gold)">●</span>
-    </button>
-    <button class="tab" id="tab-g" onclick="showPane('g',this)" style="">
-      <span class="en">Ground</span><span class="ar" style="display:none">أرضي</span>
-      <span class="t-bdg" id="tb-g" style="background:#C8A84B">30</span>
-    </button>
-    <button class="tab" id="tab-1" onclick="showPane('1',this)">
-      <span class="en">First</span><span class="ar" style="display:none">أول</span>
-      <span class="t-bdg" id="tb-1" style="background:#0A84FF;color:white">24</span>
-    </button>
-    <button class="tab dis">
-      <span class="en">2nd</span><span class="ar" style="display:none">ثاني</span>
-    </button>
-    <button class="tab" id="tab-r" onclick="showPane('r',this)">
-      <span class="en">Roof</span><span class="ar" style="display:none">سطح</span>
-      <span class="t-bdg" id="tb-r" style="background:#8B5CF6;color:white">3</span>
-    </button>
-  </div>
-</div>
-
-<div class="pane on" id="pane-home">
-  <!-- HERO WIDGET: Clock + Date + Weather -->
-  <div id="hero-widget" style="
-    background: linear-gradient(135deg, rgba(19,20,27,0.9), rgba(26,28,37,0.95));
-    border: 0.5px solid rgba(200,168,75,0.18);
-    border-radius: 18px;
-    padding: 18px 20px 14px;
-    margin: 10px 0 0;
-    position: relative;
-    overflow: hidden;
-  ">
-    <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:radial-gradient(ellipse,rgba(200,168,75,0.6),transparent 70%);"></div>
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <!-- Clock + Date -->
-      <div>
-        <div id="hw-clk" style="font-size:clamp(36px,7vw,56px);font-weight:900;color:#C8A84B;letter-spacing:-0.02em;line-height:1;font-variant-numeric:tabular-nums;">00:00</div>
-        <div id="hw-date" style="font-size:13px;color:rgba(120,117,111,1);margin-top:4px;letter-spacing:0.04em;"></div>
-        <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:#34D399;animation:blink-anim 2.5s ease infinite;"></div>
-          <span style="font-size:10px;color:rgba(120,117,111,1);">ALNAJDI VILA · Kuwait</span>
-        </div>
-      </div>
-      <!-- Weather -->
-      <div id="hw-weather" style="text-align:right;min-width:120px;">
-        <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
-          <div id="hw-temp" style="font-size:clamp(28px,5vw,42px);font-weight:900;color:#F0EDE6;line-height:1;">--°</div>
-          <div id="hw-icon" style="font-size:32px;line-height:1;">🌤</div>
-        </div>
-        <div id="hw-desc" style="font-size:11px;color:rgba(120,117,111,1);margin-top:3px;">Loading...</div>
-        <div id="hw-location" style="font-size:10px;color:rgba(200,168,75,0.8);margin-top:2px;font-weight:600;">Kuwait · Sabah Al-Salem</div>
-        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:6px;">
-          <div style="text-align:center;">
-            <div id="hw-humidity" style="font-size:12px;font-weight:700;color:#38BDF8;">--%</div>
-            <div style="font-size:8px;color:rgba(120,117,111,1);">Humidity</div>
-          </div>
-          <div style="text-align:center;">
-            <div id="hw-wind" style="font-size:12px;font-weight:700;color:#34D399;">-- km/h</div>
-            <div style="font-size:8px;color:rgba(120,117,111,1);">Wind</div>
-          </div>
-          <div style="text-align:center;">
-            <div id="hw-feels" style="font-size:12px;font-weight:700;color:#F59E0B;">--°</div>
-            <div style="font-size:8px;color:rgba(120,117,111,1);">Feels</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALNAJDI SMART VILA</title>
   <style>
-    @keyframes blink-anim{0%,100%{opacity:1}50%{opacity:.15}}
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
+    :root{
+      --bg:#0b0e14;--card:#121722;--card2:#171d2a;--line:rgba(255,255,255,.09);--txt:#f4f7ff;--muted:#95a2bd;
+      --accent:#9ad1ff;--gold:#d1b167;--ok:#39d98a;--warn:#fcbf49;--danger:#ff5f6d;
+      --blur:0px;
+    }
+    [data-theme='light']{--bg:#eef2fb;--card:#ffffff;--card2:#f8fbff;--line:rgba(19,33,68,.12);--txt:#0f1c36;--muted:#5f6f8d;--accent:#0f7fff;--gold:#9f7a2f;--blur:0px;}
+    [data-theme='glass']{--bg:radial-gradient(1200px 900px at 8% -10%,#26384f 0%,#0b0e14 38%),radial-gradient(1000px 800px at 100% 0,#1f273f 0%,#0b0e14 42%);--card:rgba(23,30,45,.48);--card2:rgba(25,33,49,.6);--line:rgba(255,255,255,.14);--txt:#f8fbff;--muted:#b7c4db;--accent:#99d0ff;--gold:#dcc187;--blur:14px;}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,Tajawal,sans-serif;overflow:hidden}
+    body.rtl{font-family:Tajawal,Inter,sans-serif}
+    .app{height:100%;overflow:auto;padding:16px 14px 32px;max-width:1400px;margin:auto}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:0 12px 40px rgba(0,0,0,.22)}
+    .header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 12px;position:sticky;top:0;z-index:20;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent)}
+    .title{font-weight:900;letter-spacing:.2em;text-align:center;color:var(--gold);font-size:clamp(15px,2.3vw,22px)}
+    .ctrls{display:flex;gap:8px;align-items:center}
+    .pill{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+    .pill button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:999px;font-weight:700;cursor:pointer}
+    .pill button.on{background:rgba(131,176,255,.17);color:var(--txt)}
+
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:8px}
+    .weather,.clock{padding:18px;position:relative;overflow:hidden}
+    .orb{position:absolute;inset:auto -30px -36px auto;width:140px;height:140px;border-radius:50%;filter:blur(1px);opacity:.35;background:radial-gradient(circle at 30% 30%,#ffe08f,#f8a03e)}
+    .moon{background:radial-gradient(circle at 35% 30%,#edf4ff,#a5b9e2)}
+    .clock-time{font-size:clamp(34px,5.7vw,58px);font-weight:900;line-height:1}
+    .small{font-size:12px;color:var(--muted)}
+    .temp{font-size:40px;font-weight:900;line-height:1}
+    .strip{display:grid;grid-template-columns:repeat(8,minmax(86px,1fr));gap:8px;margin-top:12px}
+    .cat{padding:10px 8px;text-align:center;position:relative;cursor:pointer;transition:.22s transform}
+    .cat:hover{transform:translateY(-2px)}
+    .cat.alert{border-color:rgba(255,95,109,.6);box-shadow:0 0 0 1px rgba(255,95,109,.3) inset,0 0 20px rgba(255,95,109,.17)}
+    .icon{font-size:22px;display:block;margin-bottom:6px}
+    .badge{position:absolute;top:6px;left:6px;background:var(--accent);color:#061126;border-radius:999px;min-width:21px;padding:2px 6px;font-size:11px;font-weight:800}
+
+    .floors{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+    .floor{padding:12px}
+    .floor.inactive{opacity:.52}
+    .floor-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .floor-title{font-size:18px;font-weight:800}
+    .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+    .room{background:var(--card2);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .room.hidden{display:none}
+    .room-head{padding:11px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .room-name{font-weight:800}
+    .room-meta{font-size:12px;color:var(--muted)}
+    .room-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px}
+    .room.open .room-body{max-height:550px;padding:0 10px 10px}
+    .chips{display:flex;gap:6px;flex-wrap:wrap}
+    .chip{padding:6px 10px;border-radius:999px;font-size:12px;background:rgba(155,190,255,.12);border:1px solid var(--line)}
+    .suite{border:1px solid rgba(209,177,103,.45);background:linear-gradient(145deg,rgba(209,177,103,.12),transparent 44%),var(--card2)}
+    .subrooms{display:grid;gap:8px}
+    .subroom{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:9px}
+    .muted{color:var(--muted)}
+
+    @media (max-width:980px){.strip{grid-template-columns:repeat(4,1fr)}.hero{grid-template-columns:1fr}}
+    @media (max-width:640px){.header{grid-template-columns:auto 1fr;grid-template-areas:'l c' 'r r';}.header .left{grid-area:l}.header .title{grid-area:c;text-align:end}.header .right{grid-area:r;justify-content:flex-end}.strip{grid-template-columns:repeat(3,1fr)}}
   </style>
+</head>
+<body data-theme="dark">
+  <div class="app">
+    <header class="header">
+      <div class="ctrls left">
+        <div class="pill" id="langPill">
+          <button data-lang="en" class="on">EN</button>
+          <button data-lang="ar">عربي</button>
+        </div>
+      </div>
+      <div class="title">ALNAJDI SMART VILA</div>
+      <div class="ctrls right" style="justify-content:flex-end">
+        <div class="pill" id="themePill">
+          <button data-theme="light">Light</button>
+          <button data-theme="dark" class="on">Dark</button>
+          <button data-theme="glass">Glass</button>
+        </div>
+      </div>
+    </header>
 
-  <div class="hero-line"></div>
-    <div class="hero-date" id="hdate"></div>
-  </div>
-  <div class="sec"><span class="en">Home Status</span><span class="ar" style="display:none">حالة المنزل</span></div>
-  <div class="status-bar">
-    <div class="sch on" style="--sc:10,132,255">
-      <div class="sch-bub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="#0A84FF" stroke-width="1.5"/></svg></div>
-      <div class="sch-bdg" id="cnt-lights">—</div>
-      <div><div class="sch-lbl"><span class="en">Lights</span><span class="ar" style="display:none">إضاءة</span></div><div class="sch-sub"><span class="en">Active</span><span class="ar" style="display:none">شغال</span></div></div>
-    </div>
-    <div class="sch on" style="--sc:0,184,122">
-      <div class="sch-bub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="3" stroke="#00B87A" stroke-width="1.5"/><path d="M6 11h12" stroke="#00B87A" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="sch-bdg" id="cnt-ac">—</div>
-      <div><div class="sch-lbl"><span class="en">AC</span><span class="ar" style="display:none">مكيفات</span></div><div class="sch-sub"><span class="en">Cooling</span><span class="ar" style="display:none">تبريد</span></div></div>
-    </div>
-    <div class="sch on" style="--sc:52,211,153">
-      <div class="sch-bub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 4.42 3.36 8.57 8 9.57C16.64 20.57 20 16.42 20 12V7l-8-4z" stroke="#34D399" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="sch-bdg">✓</div>
-      <div><div class="sch-lbl"><span class="en">Security</span><span class="ar" style="display:none">أمن</span></div><div class="sch-sub"><span class="en">Secured</span><span class="ar" style="display:none">محمي</span></div></div>
-    </div>
-    <div class="sch on" style="--sc:139,92,246">
-      <div class="sch-bub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#8B5CF6" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-      <div class="sch-bdg">17</div>
-      <div><div class="sch-lbl"><span class="en">Cameras</span><span class="ar" style="display:none">كاميرات</span></div><div class="sch-sub">REC</div></div>
-    </div>
-    <div class="sch on" style="--sc:167,139,250">
-      <div class="sch-bub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="sch-bdg" id="cnt-curtains">—</div>
-      <div><div class="sch-lbl"><span class="en">Curtains</span><span class="ar" style="display:none">ستائر</span></div><div class="sch-sub"><span class="en">Open</span><span class="ar" style="display:none">مفتوحة</span></div></div>
-    </div>
-  </div>
-  <div class="sec"><span class="en">Quick Actions</span><span class="ar" style="display:none">تحكم سريع</span></div>
-  <div class="qa-grid">
-    <div class="qa-btn" style="border-color:rgba(10,132,255,.2);background:rgba(10,132,255,.05);" onclick="callSvc('light','turn_off',{entity_id:'all'})">
-      <div class="qa-ico" style="background:rgba(10,132,255,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="#0A84FF" stroke-width="1.5"/><line x1="4" y1="4" x2="20" y2="20" stroke="#0A84FF" stroke-width="1.5"/></svg></div>
-      <div class="qa-name" style="color:#0A84FF"><span class="en">All Lights Off</span><span class="ar" style="display:none">إيقاف الأضواء</span></div>
-    </div>
-    <div class="qa-btn" style="border-color:rgba(0,184,122,.2);background:rgba(0,184,122,.05);" onclick="callSvc('climate','turn_off',{entity_id:'all'})">
-      <div class="qa-ico" style="background:rgba(0,184,122,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="3" stroke="#00B87A" stroke-width="1.5"/><line x1="2" y1="7" x2="22" y2="17" stroke="#00B87A" stroke-width="1.5"/></svg></div>
-      <div class="qa-name" style="color:#00B87A"><span class="en">All AC Off</span><span class="ar" style="display:none">إيقاف المكيفات</span></div>
-    </div>
-    <div class="qa-btn" style="border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.05);" onclick="callSvc('cover','close_cover',{entity_id:'all'})">
-      <div class="qa-ico" style="background:rgba(167,139,250,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="qa-name" style="color:#A78BFA"><span class="en">Close Curtains</span><span class="ar" style="display:none">إغلاق الستائر</span></div>
-    </div>
-    <div class="qa-btn" style="border-color:rgba(99,102,241,.2);background:rgba(99,102,241,.05);" onclick="callSvc('scene','turn_on',{entity_id:'scene.good_night'})">
-      <div class="qa-ico" style="background:rgba(99,102,241,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="#6366F1" stroke-width="1.5"/></svg></div>
-      <div class="qa-name" style="color:#6366F1"><span class="en">Good Night</span><span class="ar" style="display:none">وضع النوم</span></div>
-    </div>
-  </div>
-  <div class="sec"><span class="en">Floors</span><span class="ar" style="display:none">الطوابق</span></div>
-  <div class="fn-btn" style="border-color:rgba(200,168,75,.28);background:rgba(200,168,75,.05);border-top:2px solid #C8A84B;" onclick="showPane('g',document.getElementById('tab-g'))">
-    <div class="fn-ico" style="background:rgba(200,168,75,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#C8A84B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#C8A84B"><span class="en">Ground Floor</span><span class="ar" style="display:none">الدور الأرضي</span></div><div class="fn-sub"><span class="en">Ali Room · Back Doorway · Prep Kitchen · Sitting Room</span><span class="ar" style="display:none">غرفة علي · مدخل خلفي · مطبخ · جلوس</span></div></div>
-    <div class="fn-arr">›</div>
-  </div>
-  <div class="fn-btn" style="border-color:rgba(10,132,255,.28);background:rgba(10,132,255,.05);border-top:2px solid #0A84FF;" onclick="showPane('1',document.getElementById('tab-1'))">
-    <div class="fn-ico" style="background:rgba(10,132,255,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1H14v-5h-4v5H4a1 1 0 01-1-1v-8z" stroke="#0A84FF" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#0A84FF"><span class="en">First Floor</span><span class="ar" style="display:none">الدور الأول</span></div><div class="fn-sub"><span class="en">Living Room · Master Suite · Master Bedroom · Office</span><span class="ar" style="display:none">معيشة · ماستر سويت · ماستر بيدروم · مكتب</span></div></div>
-    <div class="fn-arr">›</div>
-  </div>
-  <div class="fn-btn" style="border-color:rgba(139,92,246,.28);background:rgba(139,92,246,.05);border-top:2px solid #8B5CF6;" onclick="showPane('r',document.getElementById('tab-r'))">
-    <div class="fn-ico" style="background:rgba(139,92,246,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#8B5CF6" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-    <div class="fn-info"><div class="fn-name" style="color:#8B5CF6"><span class="en">Roof</span><span class="ar" style="display:none">السطح</span></div><div class="fn-sub"><span class="en">Cameras · Aqara G5 Pro · Hikvision NVR</span><span class="ar" style="display:none">كاميرات · أكارا G5 Pro · هيكفيجن</span></div></div>
-    <div class="fn-arr">›</div>
-  </div>
-  <div class="sec"><span class="en">Scenes</span><span class="ar" style="display:none">المشاهد</span></div>
-  <div class="scenes">
-    <div class="sc-chip on" style="--sc:200,168,75" onclick="runScene(this,'scene.cinema')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.5 4.5h4.5l-3.75 2.75 1.5 4.5L12 12 8.25 14.75l1.5-4.5L6 7.5h4.5L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><div class="sc-dot"></div><span class="en">Cinema</span><span class="ar" style="display:none">سينما</span></div>
-    <div class="sc-chip" style="--sc:99,102,241" onclick="runScene(this,'scene.good_night')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5"/></svg><div class="sc-dot"></div><span class="en">Good Night</span><span class="ar" style="display:none">وضع النوم</span></div>
-    <div class="sc-chip" style="--sc:200,168,75" onclick="runScene(this,'scene.morning')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="sc-dot"></div><span class="en">Morning</span><span class="ar" style="display:none">صباح</span></div>
-    <div class="sc-chip" style="--sc:52,211,153" onclick="runScene(this,'scene.away_mode')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="sc-dot"></div><span class="en">Away</span><span class="ar" style="display:none">مغادرة</span></div>
-    <div class="sc-chip" style="--sc:167,139,250" onclick="runScene(this,'scene.defender_home')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="sc-dot"></div><span class="en">Defender</span><span class="ar" style="display:none">ديفندر</span></div>
-  </div>
-</div>
+    <section class="hero">
+      <article class="card weather">
+        <div class="orb" id="orb"></div>
+        <div class="small" id="weatherLabel">Weather</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:6px">
+          <div>
+            <div class="temp" id="temp">--°</div>
+            <div id="condition" class="muted">Home Assistant source</div>
+          </div>
+          <div style="text-align:end">
+            <div id="humidity" class="small">Humidity --%</div>
+            <div id="wind" class="small">Wind --</div>
+          </div>
+        </div>
+      </article>
+      <article class="card clock">
+        <div class="clock-time" id="time">00:00</div>
+        <div class="small" id="date">--</div>
+        <div class="small" id="haState" style="margin-top:8px">HA: connecting...</div>
+      </article>
+    </section>
 
-<div class="pane" id="pane-g">
-  <div id="fsumm-g"></div>
-  <div class="rnav"><div class="rnav-row" id="rnav-g"></div></div>
-  <div class="fctrl">
-    <div><div class="fctrl-lbl en">Ground Floor Control</div><div class="fctrl-lbl ar" style="display:none">تحكم الدور الأرضي</div></div>
-    <div class="fctrl-btns">
-      <button class="fc-btn" onclick="callSvc('light','turn_off',{area_id:'ground_floor'})"><span class="en">Lights Off</span><span class="ar" style="display:none">أضواء</span></button>
-      <button class="fc-btn" onclick="callSvc('cover','close_cover',{area_id:'ground_floor'})"><span class="en">Curtains</span><span class="ar" style="display:none">ستائر</span></button>
-      <button class="fc-btn red" onclick="callSvc('homeassistant','turn_off',{area_id:'ground_floor'})"><span class="en">All Off</span><span class="ar" style="display:none">إيقاف الكل</span></button>
-    </div>
-  </div>
-  <div class="sel-bar" id="selbar-g">
-    <span class="sel-cnt" id="selcnt-g">0 selected</span>
-    <div class="sel-btns">
-      <button class="sel-btn primary" onclick="openModal('g')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:3px"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
-        <span class="en">Create Group</span><span class="ar" style="display:none">إنشاء Group</span>
-      </button>
-      <button class="sel-btn cancel" onclick="cancelSel('g')"><span class="en">Cancel</span><span class="ar" style="display:none">إلغاء</span></button>
-    </div>
-  </div>
-  <div id="rooms-g"></div>
-  <div class="sec" id="grp-lbl-g" style="display:none"><span class="en">Groups</span><span class="ar" style="display:none">المجموعات</span></div>
-  <div id="grp-con-g"></div>
-</div>
+    <section class="strip" id="categoryStrip"></section>
 
-<div class="pane" id="pane-1">
-  <div id="fsumm-1"></div>
-  <div class="rnav"><div class="rnav-row" id="rnav-1"></div></div>
-  <div class="fctrl">
-    <div><div class="fctrl-lbl en">First Floor Control</div><div class="fctrl-lbl ar" style="display:none">تحكم الدور الأول</div></div>
-    <div class="fctrl-btns">
-      <button class="fc-btn" onclick="callSvc('light','turn_off',{area_id:'first_floor'})"><span class="en">Lights Off</span><span class="ar" style="display:none">أضواء</span></button>
-      <button class="fc-btn" onclick="callSvc('climate','turn_off',{area_id:'first_floor'})"><span class="en">AC Off</span><span class="ar" style="display:none">مكيفات</span></button>
-      <button class="fc-btn red" onclick="callSvc('homeassistant','turn_off',{area_id:'first_floor'})"><span class="en">All Off</span><span class="ar" style="display:none">إيقاف الكل</span></button>
-    </div>
+    <section class="floors" id="floors"></section>
   </div>
-  <div class="sel-bar" id="selbar-1">
-    <span class="sel-cnt" id="selcnt-1">0 selected</span>
-    <div class="sel-btns">
-      <button class="sel-btn primary" onclick="openModal('1')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:3px"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
-        <span class="en">Create Group</span><span class="ar" style="display:none">إنشاء Group</span>
-      </button>
-      <button class="sel-btn cancel" onclick="cancelSel('1')"><span class="en">Cancel</span><span class="ar" style="display:none">إلغاء</span></button>
-    </div>
-  </div>
-  <div id="rooms-1"></div>
-  <div class="sec" id="grp-lbl-1" style="display:none"><span class="en">Groups</span><span class="ar" style="display:none">المجموعات</span></div>
-  <div id="grp-con-1"></div>
-</div>
-
-<div class="pane" id="pane-r">
-  <div id="fsumm-r"></div>
-  <div id="rooms-r"></div>
-  <div class="sec" id="grp-lbl-r" style="display:none"><span class="en">Groups</span><span class="ar" style="display:none">المجموعات</span></div>
-  <div id="grp-con-r"></div>
-</div>
-
-<div class="modal-bg" id="modal">
-  <div class="modal">
-    <div class="modal-title"><span class="en">Create New Group</span><span class="ar" style="display:none">إنشاء Group جديد</span></div>
-    <div class="modal-sub"><span class="en">Selected devices will be grouped together</span><span class="ar" style="display:none">الأجهزة المحددة ستُجمع معاً</span></div>
-    <label class="modal-lbl"><span class="en">Group Name</span><span class="ar" style="display:none">اسم الـ Group</span></label>
-    <input class="modal-inp" id="grp-name" placeholder="e.g. Cove Lights — Sitting Room">
-    <label class="modal-lbl"><span class="en">Room</span><span class="ar" style="display:none">الغرفة</span></label>
-    <input class="modal-inp" id="grp-room" placeholder="e.g. Sitting Room">
-    <label class="modal-lbl"><span class="en">Selected Devices</span><span class="ar" style="display:none">الأجهزة المحددة</span></label>
-    <div class="modal-devs" id="modal-devs"></div>
-    <div class="modal-footer">
-      <button class="modal-cancel" onclick="closeModal()"><span class="en">Cancel</span><span class="ar" style="display:none">إلغاء</span></button>
-      <button class="modal-create" onclick="createGroup()">✦ <span class="en">Create</span><span class="ar" style="display:none">إنشاء</span></button>
-    </div>
-  </div>
-</div>
-
-</div>
 
 <script>
-'use strict';
-
-const BRAND_COLORS = {
-  'Aqara':     { hex:'#0A84FF', rgb:'10,132,255' },
-  'Hikvision': { hex:'#E31E24', rgb:'227,30,36'  },
-  'Ecobee':    { hex:'#00B87A', rgb:'0,184,122'  },
-  'Homey':     { hex:'#FF6B35', rgb:'255,107,53' },
-  'Fibaro':    { hex:'#F5C400', rgb:'245,196,0'  },
-  'default':   { hex:'#94A3B8', rgb:'148,163,184' }
+const I18N={
+  en:{weather:'Weather',haOk:'HA: connected',haFail:'HA: using fallback data',devices:'devices',inactive:'inactive',empty:'No active entities',masterSuite:'Master Suite',cove:'Cove Lights'},
+  ar:{weather:'الطقس',haOk:'متصل بـ Home Assistant',haFail:'وضع احتياطي',devices:'جهاز',inactive:'غير نشط',empty:'لا توجد كيانات نشطة',masterSuite:'الجناح الرئيسي',cove:'إضاءة مخفية'}
 };
-
-function brandColor(brand) {
-  return BRAND_COLORS[brand] || BRAND_COLORS['default'];
-}
-
-const ICO_SETS = {
-  light: [
-    { key:'cove',    label:'Cove',    path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="${c}" stroke-width="1.6"/><path d="M9 21h6M10 17v2M14 17v2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'ceiling', label:'Ceiling', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="${c}" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'pendant', label:'Pendant', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2v5" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="11" r="5" stroke="${c}" stroke-width="1.6"/><path d="M8 21h8" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'wall',    label:'Wall',    path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="9" height="12" rx="2" stroke="${c}" stroke-width="1.6"/><path d="M11 12h11" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'strip',   label:'Strip',   path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M2 7h20M2 12h20M2 17h20" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>` },
+const HOUSE={
+  floors:[
+    {id:'ground',en:'Ground Floor',ar:'الدور الأرضي',rooms:['Back Doorway','Sitting Room','Prep Kitchen','Father Room']},
+    {id:'first',en:'First Floor',ar:'الدور الأول',rooms:['Office','Sitting Room','Living Room','Second Room']},
+    {id:'second',en:'Second Floor',ar:'الدور الثاني',rooms:[]},
+    {id:'roof',en:'Roof',ar:'السطح',rooms:['Roof']}
   ],
-  cover: [
-    { key:'rod',      label:'Rod',      path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 5h18M3 12h18M3 19h18" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/></svg>` },
-    { key:'track',    label:'Track',    path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M2 4h20M5 4v16M19 4v16" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/></svg>` },
-    { key:'roller',   label:'Roller',   path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="3.5" rx="1.5" stroke="${c}" stroke-width="1.6"/><path d="M12 6.5v15M8 21.5h8" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'venetian', label:'Venetian', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 11h18M3 16h18M3 21h18" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/></svg>` },
-  ],
-  climate: [
-    { key:'ac',        label:'AC Unit',    path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="3" stroke="${c}" stroke-width="1.6"/><path d="M6 10.5h12M8 14l2.5-2.5M13.5 14l2.5-2.5" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'thermostat',label:'Thermostat',path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="15" r="4.5" stroke="${c}" stroke-width="1.6"/><path d="M12 2v8.5" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'fan',       label:'Fan',       path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.5-3.5 6-4.5 6-8a6 6 0 00-12 0c0 3.5 3.5 4.5 6 8z" stroke="${c}" stroke-width="1.6"/><circle cx="12" cy="12" r="2" fill="${c}"/></svg>` },
-  ],
-  camera: [
-    { key:'poe',      label:'PoE',      path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M22 7.5l-8 5 8 5V7.5z" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/><rect x="1" y="5.5" width="14" height="13" rx="2.5" stroke="${c}" stroke-width="1.6"/><circle cx="8" cy="12" r="2.5" stroke="${c}" stroke-width="1.4"/></svg>` },
-    { key:'dome',     label:'Dome',     path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3.5a9 9 0 019 9H3a9 9 0 019-9z" stroke="${c}" stroke-width="1.6"/><circle cx="12" cy="12.5" r="2.5" stroke="${c}" stroke-width="1.4"/></svg>` },
-    { key:'bullet',   label:'Bullet',   path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="8.5" width="16" height="7" rx="2.5" stroke="${c}" stroke-width="1.6"/><path d="M18 9.5l4 2.5-4 2.5V9.5z" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/></svg>` },
-    { key:'ptz',      label:'PTZ',      path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="${c}" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="${c}"/></svg>` },
-    { key:'intercom', label:'Intercom', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="${c}" stroke-width="1.6"/><circle cx="12" cy="8" r="2.5" stroke="${c}" stroke-width="1.4"/><path d="M9 15h6M9 18h4" stroke="${c}" stroke-width="1.4" stroke-linecap="round"/></svg>` },
-  ],
-  hub: [
-    { key:'hub', label:'Hub', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.5" stroke="${c}" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-  ],
-  sensor: [
-    { key:'motion', label:'Motion',  path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="${c}" stroke-width="1.6"/><path d="M6.34 6.34a8 8 0 000 11.31M17.66 6.34a8 8 0 010 11.31" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'water',  label:'Water',   path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C6 10 4 14 4 16a8 8 0 0016 0c0-2-2-6-8-14z" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/></svg>` },
-    { key:'door',   label:'Door',    path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="${c}" stroke-width="1.6"/><circle cx="15" cy="12" r="1.5" fill="${c}"/></svg>` },
-  ],
-  media: [
-    { key:'tv',     label:'TV',      path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="${c}" stroke-width="1.6"/><path d="M8 20h8M12 18v2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>` },
-    { key:'speaker',label:'Speaker', path: c=>`<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="3" stroke="${c}" stroke-width="1.6"/><circle cx="12" cy="14" r="3" stroke="${c}" stroke-width="1.4"/><circle cx="12" cy="7" r="1" fill="${c}"/></svg>` },
-  ],
+  suite:{en:'Master Suite',ar:'الجناح الرئيسي',children:['Master Bedroom','Master Bathroom','Master Closet Room']}
 };
+let lang='en',states=[];
+const q=(s,p=document)=>p.querySelector(s), qa=(s,p=document)=>[...p.querySelectorAll(s)];
 
-function getDefaultIco(type, color) {
-  const sets = ICO_SETS[type];
-  if (sets && sets[0]) return sets[0].path(color);
-  return `<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="${color}" stroke-width="1.6"/></svg>`;
+function areaLike(entity,name){const x=(entity.attributes.friendly_name+' '+entity.entity_id).toLowerCase();return name.toLowerCase().split(' ').every(t=>x.includes(t.toLowerCase().replace('_',' ')));}
+function isOn(e){return !['off','unavailable','unknown','idle','closed','disarmed','standby'].includes((e.state||'').toLowerCase());}
+function domain(e){return e.entity_id.split('.')[0];}
+function getRoomEntities(room){
+  return states.filter(e=>areaLike(e,room));
 }
 
-function brandLogo(brand, hex) {
-  const logos = {
-    Aqara: `<svg width="42" height="11" viewBox="0 0 120 28" fill="none"><path d="M8 22L14 6L20 22" stroke="${hex}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 16.5h7" stroke="${hex}" stroke-width="2.4" stroke-linecap="round"/><path d="M38 14a7 7 0 11-7-7 7 7 0 017 7z" stroke="${hex}" stroke-width="2.4"/><path d="M35 17l3 3" stroke="${hex}" stroke-width="2.4" stroke-linecap="round"/><path d="M45 22L51 6L57 22" stroke="${hex}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.5 16.5h7" stroke="${hex}" stroke-width="2.4" stroke-linecap="round"/><path d="M63 22V6h6a5 5 0 010 10h-6" stroke="${hex}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M69 16l4 6" stroke="${hex}" stroke-width="2.4" stroke-linecap="round"/><path d="M80 22L86 6L92 22" stroke="${hex}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M82.5 16.5h7" stroke="${hex}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
-    Hikvision: `<svg width="58" height="11" viewBox="0 0 160 28" fill="none"><path d="M4 6v16M12 6v16M4 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><circle cx="21" cy="7" r="1.5" fill="${hex}"/><path d="M21 11v11" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M29 6v16M29 14l7-8M29 14l7 8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M43 6l5 16 5-16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M59 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M72 8a4 4 0 00-4 4c0 2 2 3 4 4s4 2 4 4a4 4 0 01-8 0" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M84 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M94 14a7 7 0 1114 0 7 7 0 01-14 0z" stroke="${hex}" stroke-width="2.2"/><path d="M114 22V6l10 16V6" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    Ecobee: `<svg width="48" height="11" viewBox="0 0 140 28" fill="none"><path d="M6 14a6 6 0 116 6 6 6 0 01-6-6z" stroke="${hex}" stroke-width="2.2"/><path d="M6 14h10" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M30 18a6 6 0 110-8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><circle cx="46" cy="14" r="6" stroke="${hex}" stroke-width="2.2"/><path d="M58 8v12" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M64 20a6 6 0 100-12" stroke="${hex}" stroke-width="2.2"/><path d="M72 14a6 6 0 116 6 6 6 0 01-6-6z" stroke="${hex}" stroke-width="2.2"/><path d="M72 14h10" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M90 14a6 6 0 116 6 6 6 0 01-6-6z" stroke="${hex}" stroke-width="2.2"/><path d="M90 14h10" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/></svg>`,
-    Homey: `<svg width="44" height="11" viewBox="0 0 130 28" fill="none"><path d="M4 6v16M12 6v16M4 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><circle cx="26" cy="14" r="7" stroke="${hex}" stroke-width="2.2"/><path d="M39 6v16M47 6v16M39 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M57 14a7 7 0 1014 0 7 7 0 00-14 0z" stroke="${hex}" stroke-width="2.2"/><path d="M77 22V6l8 10 8-10v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M101 6v16M109 6v16M101 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/></svg>`,
-    Fibaro: `<svg width="44" height="11" viewBox="0 0 130 28" fill="none"><path d="M4 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M4 6h8a6 6 0 010 12H4" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 6v16" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M24 6h6M24 14h5M24 22h6" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M38 6v16M46 6v16M38 14h8" stroke="${hex}" stroke-width="2.2" stroke-linecap="round"/><path d="M52 6h6a6 6 0 010 12h-6V6z" stroke="${hex}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  };
-  return logos[brand] || `<span style="font-size:9px;font-weight:700;color:${hex}">${brand}</span>`;
-}
-
-const COLOR_PALETTE = [
-  '#0A84FF','#E31E24','#00B87A','#FF6B35','#F5C400',
-  '#8B5CF6','#F472B6','#34D399','#38BDF8','#FB923C',
-  '#94A3B8','#EF4444','#FBBF24','#A78BFA','#6EE7B7',
-];
-
-const ROOMS = {
-  g: {
-    title:'Ground Floor', titleAr:'الدور الأرضي',
-    color:'#C8A84B', colorRgb:'200,168,75',
-    rooms:[
-      {
-        id:'ali', title:'Ali Room', titleAr:'غرفة علي', color:'#F472B6', colorRgb:'244,114,182',
-        devices:[
-          {id:'light.ali_back_cove_light',   name:'Back Cove Light',   nameAr:'كوف خلفي',   brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-          {id:'light.ali_curtain_cove_light', name:'Curtain Cove Light',nameAr:'كوف ستارة',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-          {id:'light.ali_front_cove_light',   name:'Front Cove Light',  nameAr:'كوف أمامي',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-        ]
-      },
-      {
-        id:'back', title:'Back Doorway', titleAr:'المدخل الخلفي', color:'#FB923C', colorRgb:'251,146,60',
-        devices:[
-          {id:'light.cove_light_backdoor_hall',  name:'Cove Light',   nameAr:'كوف لايت',      brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.main_lights_backdoor_hall', name:'Main Lights',  nameAr:'رئيسية',         brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_backdoor_hall', name:'Mini Lights',  nameAr:'مينيات',         brand:'Aqara',  type:'light', model:'T1M-G01',  protocol:'Zigbee 3.0'},
-          {id:'light.wall_lights_backdoor_hall', name:'Wall Lights',  nameAr:'جداريات',        brand:'Fibaro', type:'light', model:'Dimmer 2',  protocol:'Z-Wave Plus'},
-        ]
-      },
-      {
-        id:'kitchen', title:'Prep Kitchen', titleAr:'المطبخ', color:'#34D399', colorRgb:'52,211,153',
-        devices:[
-          {id:'light.cove_light_1_prep_kitchen', name:'Cove Light 1', nameAr:'كوف 1', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_2_prep_kitchen', name:'Cove Light 2', nameAr:'كوف 2', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_3_prep_kitchen', name:'Cove Light 3', nameAr:'كوف 3', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_4_prep_kitchen', name:'Cove Light 4', nameAr:'كوف 4', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_5_prep_kitchen', name:'Cove Light 5', nameAr:'كوف 5', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_6_prep_kitchen', name:'Cove Light 6', nameAr:'كوف 6', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_7_prep_kitchen', name:'Cove Light 7', nameAr:'كوف 7', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_8_prep_kitchen', name:'Cove Light 8', nameAr:'كوف 8', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-        ]
-      },
-      {
-        id:'sitting-g', title:'Sitting Room', titleAr:'غرفة الجلوس', color:'#60A5FA', colorRgb:'96,165,250',
-        devices:[
-          {id:'binary_sensor.aqara_hub_m2_status',    name:'Hub M2',       nameAr:'هاب M2',        brand:'Aqara', type:'hub',    model:'Hub M2',     protocol:'Zigbee GW'},
-          {id:'light.cove_lights_sitting_room_group', name:'Cove Lights (9)',nameAr:'كوف لايتس (9)', brand:'Aqara', type:'light',  model:'T1M-G01',    protocol:'Zigbee 3.0'},
-          {id:'switch.homey_bridge',                  name:'Homey Bridge',  nameAr:'هومي بريدج',    brand:'Homey', type:'hub',    model:'Bridge',     protocol:'Multi'},
-        ]
-      },
-    ]
-  },
-  '1': {
-    title:'First Floor', titleAr:'الدور الأول',
-    color:'#0A84FF', colorRgb:'10,132,255',
-    rooms:[
-      {
-        id:'living', title:'Living Room', titleAr:'غرفة المعيشة', color:'#F472B6', colorRgb:'244,114,182',
-        devices:[
-          {id:'cover.big_curtain_left_living_room',  name:'Big Curtain Left',  nameAr:'ستارة كبيرة يسار', brand:'Aqara', type:'cover',  model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'cover.big_curtain_right_living_room', name:'Big Curtain Right', nameAr:'ستارة كبيرة يمين', brand:'Aqara', type:'cover',  model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'light.cove_lights_living_room',       name:'Cove Lights',       nameAr:'كوف لايتس',        brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.sitting_pendant_living_room',   name:'Sitting Pendant',   nameAr:'بندينت جلوس',      brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.table_pendant_living_room',     name:'Table Pendant',     nameAr:'بندينت طاولة',     brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_living_room',       name:'Mini Lights',       nameAr:'مينيات',           brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.tv_light_living_room',          name:'TV Light',          nameAr:'إضاءة TV',         brand:'Aqara', type:'light',  model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'media_player.living_room_tv',         name:'Living Room TV',    nameAr:'تلفزيون المعيشة',  brand:'Aqara', type:'media',  model:'Smart TV',         protocol:'Wi-Fi'},
-        ]
-      },
-      {
-        id:'mbed', title:'Master Bedroom', titleAr:'ماستر بيدروم', color:'#FB923C', colorRgb:'251,146,60',
-        devices:[
-          {id:'light.colourful_ceiling_light_master_bedroom', name:'Ceiling Light',     nameAr:'سقف ملون',     brand:'Aqara',    type:'light',   model:'T1M RGB',         protocol:'Zigbee 3.0'},
-          {id:'light.cove_lights_master_bedroom',             name:'Cove Lights (10+)', nameAr:'كوف لايتس',   brand:'Aqara',    type:'light',   model:'T1M-G01',         protocol:'Zigbee 3.0'},
-          {id:'climate.ecobee_master_bedroom',                name:'AC Thermostat',     nameAr:'مكيف ترموستات', brand:'Ecobee', type:'climate', model:'SmartThermostat', protocol:'Wi-Fi'},
-          {id:'cover.big_curtain_master_bedroom',             name:'Big Curtain',       nameAr:'ستارة كبيرة',  brand:'Aqara',    type:'cover',   model:'Curtain Motor E1',protocol:'Zigbee 3.0'},
-          {id:'cover.small_curtain_master_bedroom',           name:'Small Curtain',     nameAr:'ستارة صغيرة',  brand:'Aqara',    type:'cover',   model:'Curtain Motor E1',protocol:'Zigbee 3.0'},
-          {id:'sensor.presence_sensor_fp2_master_bedroom',    name:'FP2 Presence',      nameAr:'FP2 حضور',     brand:'Aqara',    type:'sensor',  model:'FP2 mmWave',      protocol:'Wi-Fi',  icoKey:'motion'},
-          {id:'switch.aqara_hub_m3',                          name:'Hub M3',            nameAr:'هاب M3',       brand:'Aqara',    type:'hub',     model:'Hub M3',          protocol:'Zigbee·Z-Wave·BLE'},
-          {id:'sensor.aqara_cube_t1_pro_status',              name:'Cube T1 Pro ×14',   nameAr:'كيوب T1 Pro',  brand:'Aqara',    type:'sensor',  model:'Cube T1 Pro',     protocol:'Zigbee 3.0', isError:true},
-          {id:'media_player.master_bedroom_tv',               name:'Bedroom TV',        nameAr:'تلفزيون',      brand:'Aqara',    type:'media',   model:'Smart TV',        protocol:'Wi-Fi'},
-        ]
-      },
-      {
-        id:'mbath', title:'Master Bathroom', titleAr:'حمام ماستر', color:'#22D3EE', colorRgb:'34,211,238',
-        devices:[
-          {id:'light.cove_lights_master_bathroom',         name:'Cove Lights',    nameAr:'كوف لايتس',       brand:'Aqara', type:'light',  model:'T1M-G01',     protocol:'Zigbee 3.0'},
-          {id:'binary_sensor.aqara_water_leak_master_bathroom', name:'Water Leak', nameAr:'حساس تسرب',      brand:'Aqara', type:'sensor', model:'Water Leak T1',protocol:'Zigbee 3.0', icoKey:'water'},
-        ]
-      },
-      {
-        id:'closet', title:'Master Closet', titleAr:'كلوزيت ماستر', color:'#4ADE80', colorRgb:'74,222,128',
-        devices:[
-          {id:'light.cove_light_closet_room', name:'Cove Light',  nameAr:'كوف لايت', brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'cover.curtain_master_closet',  name:'Curtain',     nameAr:'ستارة',     brand:'Aqara', type:'cover', model:'Curtain Motor E1', protocol:'Zigbee 3.0'},
-          {id:'light.lights_closet_room',     name:'Lights',      nameAr:'إضاءة',     brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
-          {id:'light.mini_lights_closet_room',name:'Mini Lights', nameAr:'مينيات',    brand:'Aqara', type:'light', model:'T1M-G01',          protocol:'Zigbee 3.0'},
-        ]
-      },
-      {
-        id:'office', title:'Office', titleAr:'المكتب', color:'#F59E0B', colorRgb:'245,158,11',
-        devices:[
-          {id:'light.center_cove_light_office', name:'Center Cove Light', nameAr:'كوف مركزي', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0', temp:'2700K'},
-        ]
-      },
-      {
-        id:'second-r', title:'Second Room', titleAr:'الغرفة الثانية', color:'#EC4899', colorRgb:'236,72,153',
-        devices:[
-          {id:'light.cove_light_second_room',    name:'Cove Light',    nameAr:'كوف لايت',   brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.bathroom_light_second_room',name:'Bathroom Light', nameAr:'إضاءة حمام', brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.hallway_light_second_room', name:'Hallway Light',  nameAr:'إضاءة ممر',  brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-          {id:'light.cove_light_2_second_room',  name:'Cove Light 2',  nameAr:'كوف 2',      brand:'Aqara', type:'light', model:'T1M-G01', protocol:'Zigbee 3.0'},
-        ]
-      },
-      {
-        id:'sitting-1', title:'Sitting Room', titleAr:'جلوس الدور الأول', color:'#38BDF8', colorRgb:'56,189,248',
-        devices:[
-          {id:'light.cove_lights_sitting_room_1f',  name:'Cove Lights',  nameAr:'كوف لايتس', brand:'Aqara',  type:'light',   model:'T1M-G01',       protocol:'Zigbee 3.0'},
-          {id:'climate.thermostat_sitting_room_1f', name:'Thermostat',   nameAr:'ترموستات',  brand:'Ecobee', type:'climate', model:'SmartThermostat',protocol:'Wi-Fi'},
-          {id:'binary_sensor.entry_door_first_floor',name:'Entry Door',  nameAr:'باب المدخل',brand:'Aqara',  type:'sensor',  model:'Door Sensor',   protocol:'Zigbee 3.0', icoKey:'door'},
-        ]
-      },
-    ]
-  },
-  r: {
-    title:'Roof', titleAr:'السطح',
-    color:'#8B5CF6', colorRgb:'139,92,246',
-    rooms:[
-      {
-        id:'cameras-roof', title:'Cameras — Roof', titleAr:'كاميرات السطح', color:'#8B5CF6', colorRgb:'139,92,246',
-        devices:[
-          {id:'camera.g5_pro_north_roof',   name:'G5 Pro — North',       nameAr:'G5 Pro شمال',    brand:'Aqara',     type:'camera', model:'G5 Pro PoE',       protocol:'PoE · LAN',  resolution:'2K · HDR'},
-          {id:'camera.g5_pro_south_roof',   name:'G5 Pro — South',       nameAr:'G5 Pro جنوب',    brand:'Aqara',     type:'camera', model:'G5 Pro PoE',       protocol:'PoE · LAN',  resolution:'2K · HDR'},
-          {id:'camera.hikvision_perimeter', name:'Hikvision Perimeter',  nameAr:'هيكفيجن محيط',   brand:'Hikvision', type:'camera', model:'DS-2CD2143G2',     protocol:'PoE · NVR',  resolution:'4MP · HDR'},
-        ]
-      },
-    ]
-  }
-};
-
-let STATE = {};           // entity_id -> {state, attributes}
-let COLOR_OVERRIDES = {}; // entity_id -> hex color override
-let ICO_OVERRIDES = {};   // entity_id -> {svgHtml}
-let SEL = {};             // floor -> Set of entity_ids
-let SEL_MODE = {};        // floor -> bool
-let activeModalFloor = '';
-
-function devColor(dev) {
-  if (COLOR_OVERRIDES[dev.id]) return COLOR_OVERRIDES[dev.id];
-  return brandColor(dev.brand).hex;
-}
-function devColorRgb(dev) {
-  const hex = devColor(dev);
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
-}
-
-function isActive(dev, st) {
-  if (dev.isError) return false;
-  const s = st ? st.state : '';
-  if (dev.type === 'light') return s === 'on';
-  if (dev.type === 'cover') return s === 'open';
-  if (dev.type === 'climate') return s !== 'off' && s !== 'unavailable' && s !== '';
-  if (dev.type === 'camera') return s !== 'unavailable' && s !== '';
-  if (dev.type === 'hub') return s === 'on' || s === 'connected';
-  return false;
-}
-
-function stateText(dev, st) {
-  const s = st ? st.state : '—';
-  const a = st ? st.attributes : {};
-  if (dev.isError) return 'Error';
-  if (dev.type === 'light') {
-    if (s === 'on') return a && a.brightness ? Math.round(a.brightness/255*100)+'%' : 'ON';
-    return 'OFF';
-  }
-  if (dev.type === 'cover') {
-    if (s === 'open') return a && a.current_position !== undefined ? 'Open '+a.current_position+'%' : 'Open';
-    return 'Closed';
-  }
-  if (dev.type === 'climate') {
-    if (s === 'off' || s === '') return 'Off';
-    return a && a.current_temperature ? a.current_temperature+'°C' : s;
-  }
-  if (dev.type === 'camera') return s !== 'unavailable' && s !== '' ? '● REC' : 'Offline';
-  if (dev.type === 'hub') return s === 'on' || s === 'connected' ? 'Online' : 'Offline';
-  if (dev.type === 'sensor') return s === 'on' ? '⚠ ALERT' : s === 'detected' ? 'Detected' : s || '—';
-  if (dev.type === 'media') return s === 'playing' ? 'Playing' : s === 'idle' ? 'Idle' : s === 'off' ? 'Off' : 'Standby';
-  return s || '—';
-}
-
-function stateValColor(dev, st) {
-  const active = isActive(dev, st);
-  if (dev.isError) return '#EF4444';
-  if (!active) return 'var(--t4)';
-  return devColor(dev);
-}
-
-function progressPct(dev, st) {
-  if (!st) return 0;
-  const a = st.attributes || {};
-  if (dev.type === 'light' && a.brightness) return Math.round(a.brightness/255*100);
-  if (dev.type === 'cover' && a.current_position !== undefined) return a.current_position;
-  if (dev.type === 'climate' && a.current_temperature) {
-    const mn = a.min_temp||16, mx = a.max_temp||30;
-    return Math.round((a.current_temperature-mn)/(mx-mn)*100);
-  }
-  return 0;
-}
-
-let AR = false;
-let popOpenId = null;
-
-function buildDeviceCard(dev, floor) {
-  const st = STATE[dev.id];
-  const active = isActive(dev, st);
-  const c = devColor(dev);
-  const cr = devColorRgb(dev);
-  const val = stateText(dev, st);
-  const valCol = stateValColor(dev, st);
-  const pct = progressPct(dev, st);
-  const pid = 'pop_' + dev.id.replace(/[^a-zA-Z0-9]/g,'_');
-
-  let icoHtml = '';
-  if (ICO_OVERRIDES[dev.id]) {
-    icoHtml = ICO_OVERRIDES[dev.id];
-  } else {
-    const icoSet = ICO_SETS[dev.isError ? 'sensor' : dev.type];
-    if (icoSet) {
-      let idx = 0;
-      if (dev.icoKey) idx = icoSet.findIndex(x => x.key === dev.icoKey) || 0;
-      icoHtml = icoSet[Math.max(0,idx)].path(c);
-    } else {
-      icoHtml = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="${c}" stroke-width="1.6"/></svg>`;
-    }
-  }
-
-  let togHtml = '';
-  if (!dev.isError && ['light','cover','climate','media'].includes(dev.type)) {
-    togHtml = `<button class="tog ${active?'on':'off'}" id="tog_${pid}" style="${active?'background:'+c:''}" onclick="event.stopPropagation();doToggle('${dev.id}','${dev.type}')"></button>`;
-  }
-
-  const icoSet = ICO_SETS[dev.isError ? 'sensor' : dev.type];
-  const popTitle = AR ? 'تغيير الأيقونة والألوان' : 'Change Icon & Color';
-  let popOpts = '';
-  if (icoSet) {
-    popOpts = icoSet.map((o,i) => {
-      const si = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none">${o.path(c).match(/<svg[^>]*>([\s\S]*?)<\/svg>/)?.[1]||''}</svg>`;
-      return `<div class="pop-opt ${i===0?'on':''}" style="--bc:${cr}" onclick="event.stopPropagation();setIco('${dev.id}',${i},'${pid}')"><div class="pop-ico">${si}</div>${o.label}</div>`;
-    }).join('');
-  }
-
-  const clrOpts = COLOR_PALETTE.map(h => {
-    const sel = (COLOR_OVERRIDES[dev.id]||c) === h;
-    return `<div class="pop-clr ${sel?'sel':''}" style="background:${h}" title="${h}" onclick="event.stopPropagation();setDevColor('${dev.id}','${h}','${pid}')"></div>`;
-  }).join('');
-
-  const dv = (val, hi=false, cls='') => `<span class="det-v ${hi?'hi':''} ${cls}" style="${hi?'color:'+c:''}">${val}</span>`;
-  const bc = brandColor(dev.brand);
-  let detRows = `
-    <div class="det-row"><span class="det-k">Brand</span><div class="brand-logo">${brandLogo(dev.brand, bc.hex)}</div></div>
-    <div class="det-row"><span class="det-k">Model</span>${dv(dev.model||'—',true)}</div>
-    <div class="det-row"><span class="det-k">Protocol</span>${dv(dev.protocol||'—')}</div>`;
-  if (dev.temp) detRows += `<div class="det-row"><span class="det-k">Temp</span>${dv(dev.temp)}</div>`;
-  if (dev.resolution) detRows += `<div class="det-row"><span class="det-k">Resolution</span>${dv(dev.resolution)}</div>`;
-  detRows += `<div class="det-row"><span class="det-k">Status</span><span class="det-v ok"><span class="sd" style="background:${active?'#34D399':'var(--t3)'}"></span>${active?'Online':'Offline'}</span></div>`;
-
-  const selFloor = floor;
-  const selSet = SEL[selFloor] || new Set();
-
-  return `
-  <div class="dc ${active?'active':''} ${dev.isError?'error':''} type-${dev.type} ${selSet.has(dev.id)?'sel':''}"
-       id="card_${pid}"
-       style="--bc:${cr};${active?`background:rgba(${cr},.05);border:.5px solid rgba(${cr},.28);`:`background:var(--s2);border:.5px solid var(--border);`}"
-       onclick="handleCardClick(this,'${dev.id}','${selFloor}')">
-    <div class="sel-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div class="dc-shm"></div>
-    <div class="dc-r1">
-      <div style="position:relative">
-        <button class="ico-btn" id="icobtn_${pid}"
-          style="background:rgba(${cr},.12);box-shadow:0 4px 18px rgba(${cr},.18);"
-          onclick="event.stopPropagation();togglePop('${pid}',event)">
-          <div style="position:absolute;inset:-7px;border-radius:23px;background:radial-gradient(circle,rgba(${cr},.14),transparent 70%);animation:glow 2.5s ease infinite;"></div>
-          <div style="position:absolute;inset:-7px;border-radius:23px;border:1.5px solid rgba(${cr},.5);animation:pulse-ring 2s ease-out infinite;"></div>
-          <div id="icosvg_${pid}">${icoHtml}</div>
-          <div class="chg-dot" style="--bc:${cr}"></div>
-          <div class="nbdg" id="nbdg_${pid}" style="background:${c};color:${c==='#F5C400'?'#08080E':'white'};box-shadow:0 2px 8px rgba(${cr},.5);">${active?(dev.type==='camera'?'●':'ON'):'OFF'}</div>
-        </button>
-        
-        <div class="pop-wrap" id="${pid}" style="display:none">
-          <div class="pop" style="--bc:${cr}">
-            <div class="pop-title">${popTitle}</div>
-            ${popOpts ? `<div class="pop-row">${popOpts}</div><div class="pop-divider"></div>` : ''}
-            <div class="pop-title" style="margin-bottom:6px">${AR?'لون الجهاز':'Device Color'}</div>
-            <div class="pop-colors">${clrOpts}</div>
-            <div class="pop-divider"></div>
-            <label class="pop-upload" onclick="event.stopPropagation()">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>${AR?'رفع أيقونة مخصصة (PNG/SVG)':'Upload Custom Icon (PNG/SVG)'}</span>
-              <input type="file" accept="image/*" style="display:none" onchange="uploadIco('${dev.id}','${pid}',this,event)">
-            </label>
-            <div class="pop-arr"></div>
-          </div>
-        </div>
-      </div>
-      ${togHtml}
-    </div>
-    <div class="dc-name" id="dcname_${pid}">${AR?(dev.nameAr||dev.name):dev.name}</div>
-    <div class="dc-val" id="dcval_${pid}" style="color:${valCol}">${val}${dev.type==='climate'&&val!=='Off'?'':''}</div>
-    ${(pct>0||dev.type==='cover'||dev.type==='climate')?`<div class="dc-prog"><div class="dc-track"><div class="dc-fill" id="dcfill_${pid}" style="width:${pct}%;background:${c}"></div></div></div>`:''}
-    <div class="dc-det">${detRows}</div>
-  </div>`;
-}
-
-function buildRoom(room, floor) {
-  const rc = room.colorRgb;
-  const devices = room.devices;
-  const title = AR ? room.titleAr : room.title;
-
-  const lights = devices.filter(d=>d.type==='light');
-  const covers = devices.filter(d=>d.type==='cover');
-  const climates = devices.filter(d=>d.type==='climate');
-  let summ = '';
-  if (lights.length) summ += `<div class="rs-chip" style="background:rgba(${rc},.06);border:.5px solid rgba(${rc},.2);"><div class="rs-ico" style="background:rgba(${rc},.14)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="rgb(${rc})" stroke-width="1.5"/></svg></div><div class="rs-bdg" style="background:rgb(${rc});color:${room.color==='#F5C400'?'#08080E':'white'}" id="rs_lights_${room.id}">${lights.length}</div><div><div class="rs-n" style="color:rgb(${rc})">${lights.length}</div><div class="rs-l">${AR?'أضواء':'Lights'}</div></div></div>`;
-  if (covers.length) summ += `<div class="rs-chip" style="background:rgba(167,139,250,.06);border:.5px solid rgba(167,139,250,.2);"><div class="rs-ico" style="background:rgba(167,139,250,.14)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="rs-bdg" style="background:#A78BFA;color:#08080E">${covers.length}</div><div><div class="rs-n" style="color:#A78BFA">${covers.length}</div><div class="rs-l">${AR?'ستائر':'Curtains'}</div></div></div>`;
-  if (climates.length) summ += `<div class="rs-chip" style="background:rgba(0,184,122,.06);border:.5px solid rgba(0,184,122,.2);"><div class="rs-ico" style="background:rgba(0,184,122,.14)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="3" stroke="#00B87A" stroke-width="1.5"/></svg></div><div class="rs-bdg" style="background:#00B87A;color:white">${climates.length}</div><div><div class="rs-n" style="color:#00B87A">${climates.length}</div><div class="rs-l">AC</div></div></div>`;
-
-  const grpBtn = `<button class="grp-btn" id="grpbtn_${room.id}" onclick="event.stopPropagation();toggleSelMode('${floor}','${room.id}')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>${AR?'جروب':'Group'}</button>`;
-
-  return `
-  <div id="room_${room.id}" style="margin-top:12px;">
-    <div class="room-bar" style="background:rgba(${rc},.08);border:.5px solid rgba(${rc},.22);border-bottom:none;border-radius:12px 12px 0 0;">
-      <div class="room-bar-l">
-        <div class="room-dot" style="background:rgb(${rc})"></div>
-        <div class="room-title" style="color:rgb(${rc})">${title}</div>
-        <div class="room-cnt">${devices.length}</div>
-        ${grpBtn}
-      </div>
-      <button class="room-off-btn" style="border-color:rgba(${rc},.28);color:rgb(${rc})" onclick="roomOff('${room.id}','${floor}')"><span class="en">${AR?'':'Off'}</span><span class="ar" style="display:${AR?'':'none'}">إيقاف</span></button>
-    </div>
-    ${summ ? `<div class="room-summ" style="background:var(--s1);border:.5px solid rgba(${rc},.12);border-top:none;border-bottom:none;">${summ}</div>` : ''}
-    <div class="room-grid-wrap" style="border:.5px solid rgba(${rc},.12);border-top:none;">
-      <div class="dev-grid" id="grid_${room.id}">
-        ${devices.map(d => buildDeviceCard(d, floor)).join('')}
-      </div>
-    </div>
-  </div>`;
-}
-
-function buildFloorSummary(floor) {
-  const fd = ROOMS[floor];
-  const allDevs = fd.rooms.flatMap(r => r.devices);
-  const lights = allDevs.filter(d=>d.type==='light');
-  const ac = allDevs.filter(d=>d.type==='climate');
-  const covers = allDevs.filter(d=>d.type==='cover');
-  const cams = allDevs.filter(d=>d.type==='camera');
-  const errors = allDevs.filter(d=>d.isError);
-  const fc = fd.color;
-  const chips = [
-    lights.length ? `<div class="fchip" style="background:rgba(10,132,255,.07);border:.5px solid rgba(10,132,255,.25);"><div class="fchip-ico" style="background:rgba(10,132,255,.15)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.87-3.13-7-7-7z" stroke="#0A84FF" stroke-width="1.5"/></svg></div><div class="fchip-bdg" id="fsc_lights_${floor}" style="background:#0A84FF;color:white">${lights.length}</div><div><div class="fchip-lbl" style="color:#0A84FF">${AR?'إضاءة':'Lights'}</div></div></div>` : '',
-    ac.length ? `<div class="fchip" style="background:rgba(0,184,122,.07);border:.5px solid rgba(0,184,122,.25);"><div class="fchip-ico" style="background:rgba(0,184,122,.15)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="3" stroke="#00B87A" stroke-width="1.5"/></svg></div><div class="fchip-bdg" style="background:#00B87A;color:white">${ac.length}</div><div><div class="fchip-lbl" style="color:#00B87A">AC</div></div></div>` : '',
-    covers.length ? `<div class="fchip" style="background:rgba(167,139,250,.07);border:.5px solid rgba(167,139,250,.25);"><div class="fchip-ico" style="background:rgba(167,139,250,.15)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="fchip-bdg" style="background:#A78BFA;color:#08080E">${covers.length}</div><div><div class="fchip-lbl" style="color:#A78BFA">${AR?'ستائر':'Curtains'}</div></div></div>` : '',
-    cams.length ? `<div class="fchip" style="background:rgba(139,92,246,.07);border:.5px solid rgba(139,92,246,.25);"><div class="fchip-ico" style="background:rgba(139,92,246,.15)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="#8B5CF6" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#8B5CF6" stroke-width="1.5"/></svg></div><div class="fchip-bdg" style="background:#8B5CF6;color:white">${cams.length}</div><div><div class="fchip-lbl" style="color:#8B5CF6">${AR?'كاميرات':'Cameras'}</div></div></div>` : '',
-    errors.length ? `<div class="fchip" style="background:rgba(239,68,68,.07);border:.5px solid rgba(239,68,68,.25);"><div class="fchip-ico" style="background:rgba(239,68,68,.15)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#EF4444" stroke-width="1.5"/></svg></div><div class="fchip-bdg" style="background:#EF4444;color:white">${errors.length}!</div><div><div class="fchip-lbl" style="color:#EF4444">Alert</div></div></div>` : '',
-  ].filter(Boolean).join('');
-
-  return `<div class="fsumm" style="border-top:2px solid ${fc}"><div class="fsumm-title" style="color:${fc}">${AR?fd.titleAr:fd.title} — ${AR?'ملخص':'Summary'}</div><div class="fsumm-chips">${chips}</div></div>`;
-}
-
-function buildRoomNav(floor) {
-  const fd = ROOMS[floor];
-  return fd.rooms.map((r,i) => {
-    const c = r.colorRgb;
-    const t = AR ? r.titleAr : r.title;
-    return `<button class="rnav-btn ${i===0?'on':''}" style="--rc:${c};${i===0?`border-color:rgba(${c},.35);color:rgb(${c});background:rgba(${c},.07);`:''}" onclick="scrollToRoom('${r.id}',this)"><div class="rn-dot" style="background:rgb(${c})"></div>${t}</button>`;
-  }).join('');
-}
-
-function renderFloor(floor) {
-  const fd = ROOMS[floor];
-  document.getElementById('fsumm-'+floor).innerHTML = buildFloorSummary(floor);
-  const rnav = document.getElementById('rnav-'+floor);
-  if (rnav) rnav.innerHTML = buildRoomNav(floor);
-  document.getElementById('rooms-'+floor).innerHTML = fd.rooms.map(r => buildRoom(r, floor)).join('');
-}
-
-function renderAll() {
-  renderFloor('g');
-  renderFloor('1');
-  renderFloor('r');
-  updateCounts();
-}
-
-function updateCard(entityId) {
-  const st = STATE[entityId];
-  let dev = null;
-  let floor = '';
-  for (const [f, fd] of Object.entries(ROOMS)) {
-    for (const r of fd.rooms) {
-      const d = r.devices.find(x => x.id === entityId);
-      if (d) { dev = d; floor = f; break; }
-    }
-    if (dev) break;
-  }
-  if (!dev) return;
-
-  const pid = 'pop_' + entityId.replace(/[^a-zA-Z0-9]/g,'_');
-  const cardEl = document.getElementById('card_'+pid);
-  const valEl = document.getElementById('dcval_'+pid);
-  const nbdgEl = document.getElementById('nbdg_'+pid);
-  const togEl = document.getElementById('tog_'+pid);
-  const fillEl = document.getElementById('dcfill_'+pid);
-  if (!cardEl || !valEl) return;
-
-  const active = isActive(dev, st);
-  const c = devColor(dev);
-  const cr = devColorRgb(dev);
-  const val = stateText(dev, st);
-  const valCol = stateValColor(dev, st);
-  const pct = progressPct(dev, st);
-
-  valEl.textContent = val;
-  valEl.style.color = valCol;
-  if (nbdgEl) nbdgEl.textContent = active ? (dev.type==='camera'?'●':'ON') : 'OFF';
-  if (togEl) {
-    togEl.className = `tog ${active?'on':'off'}`;
-    togEl.style.background = active ? c : '';
-  }
-  if (fillEl) fillEl.style.width = pct + '%';
-  if (active) {
-    cardEl.classList.add('active');
-    cardEl.style.background = `rgba(${cr},.05)`;
-    cardEl.style.borderColor = `rgba(${cr},.28)`;
-  } else {
-    cardEl.classList.remove('active');
-    cardEl.style.background = 'var(--s2)';
-    cardEl.style.borderColor = 'var(--border)';
-  }
-  updateCounts();
-}
-
-function updateCounts() {
-  let lights=0, ac=0, curtains=0;
-  for (const fd of Object.values(ROOMS)) {
-    for (const r of fd.rooms) {
-      for (const d of r.devices) {
-        const st = STATE[d.id];
-        if (d.type==='light' && isActive(d,st)) lights++;
-        if (d.type==='climate' && isActive(d,st)) ac++;
-        if (d.type==='cover' && isActive(d,st)) curtains++;
-      }
-    }
-  }
-  const el = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
-  el('cnt-lights', lights);
-  el('cnt-ac', ac);
-  el('cnt-curtains', curtains);
-}
-
-function setIco(entityId, idx, pid) {
-  let dev = null;
-  for (const fd of Object.values(ROOMS)) {
-    for (const r of fd.rooms) {
-      dev = r.devices.find(d => d.id === entityId);
-      if (dev) break;
-    }
-    if (dev) break;
-  }
-  if (!dev) return;
-  const icoSet = ICO_SETS[dev.isError?'sensor':dev.type];
-  if (!icoSet || !icoSet[idx]) return;
-  const c = devColor(dev);
-  const newSvg = icoSet[idx].path(c);
-  ICO_OVERRIDES[entityId] = newSvg;
-  const svgEl = document.getElementById('icosvg_'+pid);
-  if (svgEl) svgEl.innerHTML = newSvg;
-  const popEl = document.getElementById(pid);
-  if (popEl) popEl.querySelectorAll('.pop-opt').forEach((o,i) => o.classList.toggle('on', i===idx));
-  setTimeout(() => { closePop(); }, 280);
-}
-
-function setDevColor(entityId, hex, pid) {
-  COLOR_OVERRIDES[entityId] = hex;
-  let dev = null, floor = '';
-  for (const [f,fd] of Object.entries(ROOMS)) {
-    for (const r of fd.rooms) {
-      const d = r.devices.find(x=>x.id===entityId);
-      if (d) { dev=d; floor=f; break; }
-    }
-    if (dev) break;
-  }
-  if (!dev) return;
-  if (!ICO_OVERRIDES[entityId]) {
-    const icoSet = ICO_SETS[dev.isError?'sensor':dev.type];
-    if (icoSet) {
-      let idx = 0;
-      if (dev.icoKey) idx = icoSet.findIndex(x=>x.key===dev.icoKey)||0;
-      ICO_OVERRIDES[entityId] = icoSet[Math.max(0,idx)].path(hex);
-    }
-  }
-  const gridEl = document.getElementById('grid_' + Object.values(ROOMS).flatMap(fd=>fd.rooms).find(r=>r.devices.some(d=>d.id===entityId))?.id);
-  if (gridEl) {
-    const pid2 = 'pop_' + entityId.replace(/[^a-zA-Z0-9]/g,'_');
-    const cardEl = document.getElementById('card_'+pid2);
-    if (cardEl) {
-      const tmp = document.createElement('div');
-      tmp.innerHTML = buildDeviceCard(dev, floor);
-      cardEl.replaceWith(tmp.firstChild);
-    }
-  }
-  closePop();
-}
-
-function uploadIco(entityId, pid, input, e) {
-  e.stopPropagation();
-  const file = input.files[0]; if (!file) return;
-  const url = URL.createObjectURL(file);
-  ICO_OVERRIDES[entityId] = `<img src="${url}" style="width:28px;height:28px;object-fit:contain;border-radius:6px;">`;
-  const svgEl = document.getElementById('icosvg_'+pid);
-  if (svgEl) svgEl.innerHTML = ICO_OVERRIDES[entityId];
-  setTimeout(() => closePop(), 280);
-}
-
-function togglePop(id, e) {
-  e.stopPropagation();
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (popOpenId && popOpenId !== id) {
-    const prev = document.getElementById(popOpenId);
-    if (prev) prev.style.display='none';
-  }
-  const open = el.style.display === 'block';
-  el.style.display = open ? 'none' : 'block';
-  popOpenId = open ? null : id;
-}
-function closePop() {
-  if (popOpenId) { const el=document.getElementById(popOpenId); if(el) el.style.display='none'; popOpenId=null; }
-}
-document.addEventListener('click', closePop);
-
-function doToggle(entityId, type) {
-  const st = STATE[entityId];
-  const s = st ? st.state : 'off';
-  let domain, service;
-  if (type==='light') { domain='light'; service=s==='on'?'turn_off':'turn_on'; }
-  else if (type==='cover') { domain='cover'; service=s==='open'?'close_cover':'open_cover'; }
-  else if (type==='climate') { domain='climate'; service=s!=='off'?'turn_off':'turn_on'; }
-  else if (type==='media') { domain='media_player'; service=s==='playing'?'media_pause':'media_play'; }
-  else return;
-  callSvc(domain, service, {entity_id: entityId});
-}
-
-function callSvc(domain, service, data) {
-  sendMsg({type:'call_service', domain, service, service_data:data});
-}
-
-function roomOff(roomId, floor) {
-  const fd = ROOMS[floor];
-  if (!fd) return;
-  for (const r of fd.rooms) {
-    if (r.id === roomId) {
-      for (const d of r.devices) {
-        if (d.type==='light') callSvc('light','turn_off',{entity_id:d.id});
-        else if (d.type==='cover') callSvc('cover','close_cover',{entity_id:d.id});
-      }
-      break;
-    }
-  }
-}
-
-function toggleSelMode(floor, roomId) {
-  SEL_MODE[floor] = !SEL_MODE[floor];
-  const bar = document.getElementById('selbar-'+floor);
-  const btn = document.getElementById('grpbtn_'+roomId);
-  if (bar) bar.classList.toggle('show', SEL_MODE[floor]);
-  if (btn) btn.classList.toggle('on', SEL_MODE[floor]);
-  if (!SEL_MODE[floor]) {
-    SEL[floor] = new Set();
-    document.querySelectorAll(`#pane-${floor} .dc`).forEach(c => c.classList.remove('sel'));
-    updateSelCnt(floor);
-  }
-}
-
-function handleCardClick(el, entityId, floor) {
-  if (!SEL_MODE[floor]) return;
-  if (!SEL[floor]) SEL[floor] = new Set();
-  if (SEL[floor].has(entityId)) { SEL[floor].delete(entityId); el.classList.remove('sel'); }
-  else { SEL[floor].add(entityId); el.classList.add('sel'); }
-  updateSelCnt(floor);
-}
-
-function updateSelCnt(floor) {
-  const el = document.getElementById('selcnt-'+floor);
-  const n = (SEL[floor]||new Set()).size;
-  if (el) el.textContent = `${n} ${AR?'محدد':'selected'}`;
-}
-
-function cancelSel(floor) {
-  SEL_MODE[floor] = false;
-  SEL[floor] = new Set();
-  document.querySelectorAll(`#pane-${floor} .dc`).forEach(c => c.classList.remove('sel'));
-  document.querySelectorAll(`#pane-${floor} .grp-btn`).forEach(b => b.classList.remove('on'));
-  const bar = document.getElementById('selbar-'+floor);
-  if (bar) bar.classList.remove('show');
-  updateSelCnt(floor);
-}
-
-function openModal(floor) {
-  activeModalFloor = floor;
-  const sel = SEL[floor] || new Set();
-  if (sel.size === 0) return;
-  const devsEl = document.getElementById('modal-devs');
-  const modal = document.getElementById('modal');
-  if (!devsEl || !modal) return;
-  devsEl.innerHTML = '';
-  sel.forEach(id => {
-    let dev = null;
-    for (const fd of Object.values(ROOMS)) for (const r of fd.rooms) { const d=r.devices.find(x=>x.id===id); if(d) dev=d; }
-    if (dev) { const c=document.createElement('div'); c.className='mdp'; c.textContent=AR?dev.nameAr:dev.name; devsEl.appendChild(c); }
+function renderCategories(){
+  const defs=[['lights','💡',e=>domain(e)==='light'],['climate','❄️',e=>domain(e)==='climate'],['security','🛡️',e=>domain(e)==='alarm_control_panel'||domain(e)==='lock'],['cameras','📹',e=>domain(e)==='camera'],['media','🎵',e=>domain(e)==='media_player'],['doors','🚪',e=>domain(e)==='binary_sensor'&&/door|window/.test(e.entity_id)],['curtains','🪟',e=>domain(e)==='cover'],['leaks','💧',e=>domain(e)==='binary_sensor'&&/moisture|water|leak/.test(e.entity_id)]];
+  const c=q('#categoryStrip'); c.innerHTML='';
+  defs.forEach(([key,emoji,fn])=>{
+    const group=states.filter(fn),active=group.filter(isOn).length;
+    const el=document.createElement('article');
+    el.className='card cat '+((key==='leaks'&&active>0)?'alert':'');
+    el.innerHTML=`<span class='badge'>${active}</span><span class='icon'>${emoji}</span><div>${key}</div><div class='small'>${group.length} ${I18N[lang].devices}</div>`;
+    c.appendChild(el);
   });
-  modal.classList.add('show');
-}
-function closeModal() {
-  const modal = document.getElementById('modal');
-  if (modal) modal.classList.remove('show');
 }
 
-function createGroup() {
-  const name = document.getElementById('grp-name').value || 'New Group';
-  const room = document.getElementById('grp-room').value || '—';
-  const floor = activeModalFloor;
-  const sel = SEL[floor] || new Set();
-
-  const devItems = [...sel].map(id => {
-    let dev = null;
-    for (const fd of Object.values(ROOMS)) for (const r of fd.rooms) { const d=r.devices.find(x=>x.id===id); if(d) dev=d; }
-    if (!dev) return '';
-    const c = devColor(dev);
-    const icoSet = ICO_SETS[dev.type];
-    const icoSvg = icoSet ? icoSet[0].path(c) : '';
-    return `<div class="gd"><div class="gd-top"><div class="gd-ico">${icoSvg}</div><button class="gd-tog" onclick="doToggle('${dev.id}','${dev.type}')"></button></div><div class="gd-name">${AR?dev.nameAr:dev.name}</div><div class="gd-val">${stateText(dev,STATE[dev.id])}</div><div class="gd-brand">${dev.brand}</div></div>`;
-  }).join('');
-
-  const gcId = 'gc_'+Date.now();
-  const gc = `
-  <div class="gc" id="${gcId}">
-    <div class="gc-head" onclick="toggleGC('${gcId}')">
-      <div class="gc-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/></svg></div>
-      <div class="gc-info"><div class="gc-name">${name}</div><div class="gc-sub"><span class="gc-badge">Group</span>${sel.size} ${AR?'جهاز':'devices'} · ${room}</div></div>
-      <button class="gc-tog" onclick="event.stopPropagation()"></button>
-      <div class="gc-exp" id="exp_${gcId}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </div>
-    <div class="gc-devs" id="devs_${gcId}"><div class="gc-grid">${devItems}</div></div>
-  </div>`;
-
-  const con = document.getElementById('grp-con-'+floor);
-  const lbl = document.getElementById('grp-lbl-'+floor);
-  if (con) con.insertAdjacentHTML('beforeend', gc);
-  if (lbl) lbl.style.display='flex';
-  closeModal();
-  cancelSel(floor);
-  document.getElementById('grp-name').value='';
-  document.getElementById('grp-room').value='';
+function makeRoom(room,enclosed=false){
+  const ents=getRoomEntities(room);
+  const on=ents.filter(isOn).length;
+  const r=document.createElement('article'); r.className='room'+(ents.length? '':' hidden');
+  r.innerHTML=`<div class='room-head'><div><div class='room-name'>${room}</div><div class='room-meta'>${on}/${ents.length} ${I18N[lang].devices}</div></div><div>▾</div></div><div class='room-body'><div class='chips'>${ents.slice(0,14).map(e=>`<span class='chip'>${e.attributes.friendly_name||e.entity_id}</span>`).join('')||`<span class='muted'>${I18N[lang].empty}</span>`}</div>${enclosed?`<div class='small muted' style='margin-top:8px'>${I18N[lang].cove}: ${ents.filter(e=>/cove/i.test(e.entity_id+JSON.stringify(e.attributes))).length}</div>`:''}</div>`;
+  q('.room-head',r).onclick=()=>r.classList.toggle('open');
+  return r;
 }
 
-function toggleGC(id) {
-  const d=document.getElementById('devs_'+id), b=document.getElementById('exp_'+id);
-  if(!d) return;
-  d.classList.toggle('open');
-  if(b) b.classList.toggle('open', d.classList.contains('open'));
+function renderFloors(){
+  const root=q('#floors'); root.innerHTML='';
+  HOUSE.floors.forEach(f=>{
+    const floor=document.createElement('section'); floor.className='card floor';
+    const title=lang==='ar'?f.ar:f.en;
+    const allRooms=[...f.rooms];
+    if(f.id==='first') allRooms.unshift(HOUSE.suite.en);
+    let active=0;
+    const roomWrap=document.createElement('div'); roomWrap.className='rooms';
+
+    if(f.id==='first'){
+      const suite=document.createElement('article'); suite.className='room suite';
+      const suiteEnts=HOUSE.suite.children.flatMap(getRoomEntities); active+=suiteEnts.length;
+      suite.innerHTML=`<div class='room-head'><div><div class='room-name'>${lang==='ar'?HOUSE.suite.ar:HOUSE.suite.en}</div><div class='room-meta'>${suiteEnts.filter(isOn).length}/${suiteEnts.length} ${I18N[lang].devices}</div></div><div>▾</div></div><div class='room-body'><div class='subrooms'></div></div>`;
+      const sub=q('.subrooms',suite);
+      HOUSE.suite.children.forEach(name=>{
+        const card=makeRoom(name,/Master (Bedroom|Bathroom)/.test(name));
+        card.classList.remove('room'); card.classList.add('subroom'); card.classList.remove('hidden');
+        sub.appendChild(card);
+      });
+      q('.room-head',suite).onclick=()=>suite.classList.toggle('open');
+      roomWrap.appendChild(suite);
+    }
+
+    f.rooms.forEach(rn=>{const room=makeRoom(rn);active+=getRoomEntities(rn).length;roomWrap.appendChild(room);});
+    if(f.id==='second' && active===0) floor.classList.add('inactive');
+    if(f.id==='second' && active===0){
+      roomWrap.innerHTML=`<div class='muted'>${title}: ${I18N[lang].inactive}</div>`;
+    }
+    if(f.id!=='second' && active===0) return;
+
+    floor.innerHTML=`<div class='floor-head'><div class='floor-title'>${title}</div><div class='small'>${active} ${I18N[lang].devices}</div></div>`;
+    floor.appendChild(roomWrap); root.appendChild(floor);
+  });
 }
 
-function showPane(id, btn) {
-  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
-  const pane = document.getElementById('pane-'+id);
-  if (pane) pane.classList.add('on');
-  document.querySelectorAll('.tab:not(.dis)').forEach(t => { t.classList.remove('on'); t.style.color=''; });
-  if (btn) {
-    btn.classList.add('on');
-    const color = id==='home'?'var(--gold)':id==='g'?'#C8A84B':id==='1'?'#0A84FF':id==='r'?'#8B5CF6':'';
-    btn.style.color = color;
+function updateClock(){
+  const now=new Date();
+  q('#time').textContent=now.toLocaleTimeString(lang==='ar'?'ar-KW':'en-US',{hour:'2-digit',minute:'2-digit'});
+  q('#date').textContent=now.toLocaleDateString(lang==='ar'?'ar-KW':'en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+
+function applyLang(){
+  document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.body.classList.toggle('rtl',lang==='ar');
+  q('#weatherLabel').textContent=I18N[lang].weather;
+  qa('#langPill button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+  renderCategories();renderFloors();updateClock();
+}
+
+async function loadHA(){
+  try{
+    const r=await fetch('/api/states');
+    if(!r.ok) throw new Error('states fail');
+    states=await r.json();
+    q('#haState').textContent=I18N[lang].haOk;
+    bindWeather(); renderCategories(); renderFloors();
+  }catch(e){
+    states=[]; q('#haState').textContent=I18N[lang].haFail;
+    q('#temp').textContent='--°'; q('#condition').textContent='No weather entity';
+    renderCategories(); renderFloors();
   }
 }
 
-function scrollToRoom(id, btn) {
-  const el = document.getElementById('room_'+id);
-  if (el) {
-    const pane = el.closest('.pane');
-    if (pane) pane.scrollTo({top: el.offsetTop - 115, behavior:'smooth'});
-  }
-  if (btn) {
-    const row = btn.closest('.rnav-row');
-    if (row) row.querySelectorAll('.rnav-btn').forEach(b => { b.classList.remove('on'); b.style.borderColor=''; b.style.color=''; b.style.background=''; });
-    btn.classList.add('on');
-    const rc = btn.style.getPropertyValue('--rc') || btn.getAttribute('style')?.match(/--rc:([^;]+)/)?.[1];
-    if (rc) { btn.style.borderColor=`rgba(${rc},.35)`; btn.style.color=`rgb(${rc})`; btn.style.background=`rgba(${rc},.07)`; }
-  }
+function bindWeather(){
+  const w=states.find(e=>domain(e)==='weather')||null;
+  if(!w){q('#condition').textContent='No weather entity';return;}
+  const a=w.attributes;
+  q('#condition').textContent=(a.friendly_name||w.state)+' · '+w.state;
+  q('#temp').textContent=`${Math.round(a.temperature ?? 0)}°`;
+  q('#humidity').textContent=`Humidity ${a.humidity ?? '--'}%`;
+  q('#wind').textContent=`Wind ${a.wind_speed ?? '--'}`;
+  const hour=(new Date()).getHours(),night=hour<6||hour>17;
+  q('#orb').classList.toggle('moon',night);
 }
 
-function runScene(el, sceneId) {
-  document.querySelectorAll('.sc-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  callSvc('scene','turn_on',{entity_id:sceneId});
-}
+qa('#themePill button').forEach(b=>b.onclick=()=>{document.body.dataset.theme=b.dataset.theme;qa('#themePill button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+qa('#langPill button').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;applyLang();});
 
-function setTheme(t) {
-  const dark = t==='dark';
-  document.getElementById('btn-dk').classList.toggle('on', dark);
-  document.getElementById('btn-lt').classList.toggle('on', !dark);
-  const r = document.documentElement.style;
-  if (dark) {
-    r.setProperty('--bg','#0A0B10'); r.setProperty('--s1','#13141B'); r.setProperty('--s2','#1A1C25');
-    r.setProperty('--s3','#22242F'); r.setProperty('--t1','#F0EDE6'); r.setProperty('--t2','#78756F');
-    r.setProperty('--t3','#3A3835'); r.setProperty('--t4','#1C1A16');
-    r.setProperty('--border','rgba(255,255,255,.08)'); r.setProperty('--border2','rgba(255,255,255,.16)');
-  } else {
-    r.setProperty('--bg','#EDEEF4'); r.setProperty('--s1','#FFFFFF'); r.setProperty('--s2','#F4F5FA');
-    r.setProperty('--s3','#EAEBF2'); r.setProperty('--t1','#0F1018'); r.setProperty('--t2','#6A6865');
-    r.setProperty('--t3','#C2BFB9'); r.setProperty('--t4','#E2DFD9');
-    r.setProperty('--border','rgba(0,0,0,.07)'); r.setProperty('--border2','rgba(0,0,0,.14)');
-  }
-}
-
-function setLang(l) {
-  AR = l === 'ar';
-  const enBtn = document.getElementById('btn-en');
-  const arBtn = document.getElementById('btn-ar');
-  if (enBtn) enBtn.classList.toggle('on', !AR);
-  if (arBtn) arBtn.classList.toggle('on', AR);
-  document.querySelectorAll('.en').forEach(e => e.style.display = AR?'none':'');
-  document.querySelectorAll('.ar').forEach(e => e.style.display = AR?'':'none');
-  setDate();
-  updateHeroClock();
-  fetchWeather();
-  renderAll();
-}
-
-function tick() {
-  const n = new Date();
-  const timeText = [n.getHours(), n.getMinutes()].map(v => String(v).padStart(2,'0')).join(':');
-  const clk = document.getElementById('clk');
-  const heroClk = document.getElementById('hw-clk');
-  if (clk) clk.textContent = timeText;
-  if (heroClk) heroClk.textContent = timeText;
-}
-function setDate() {
-  const n=new Date();
-  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const arD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  const arM=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  const el=document.getElementById('hdate');
-  if(el) el.innerHTML=AR
-    ? `${arD[n.getDay()]} ${n.getDate()} ${arM[n.getMonth()]} ${n.getFullYear()}`
-    : `${days[n.getDay()]} ${n.getDate()} ${months[n.getMonth()]} ${n.getFullYear()}`;
-}
-
-let ws, msgId=1;
-
-function sendMsg(msg) {
-  if (!ws || ws.readyState!==WebSocket.OPEN) return;
-  msg.id = msgId++;
-  ws.send(JSON.stringify(msg));
-}
-
-function getToken() {
-  try {
-    if (window.parent && window.parent.hassConnection) {
-      const hc = window.parent.hassConnection;
-      if (hc.options && hc.options.authData) return hc.options.authData.access_token;
-    }
-  } catch(e) {}
-  try {
-    for (const k of Object.keys(localStorage)) {
-      if (k.includes('hassTokens')) {
-        const v = JSON.parse(localStorage.getItem(k));
-        if (v && v.access_token) return v.access_token;
-      }
-    }
-    for (const k of Object.keys(localStorage)) {
-      const v = JSON.parse(localStorage.getItem(k)||'{}');
-      if (v && v.hassTokens && v.hassTokens.access_token) return v.hassTokens.access_token;
-    }
-  } catch(e) {}
-  return null;
-}
-
-function getWSUrl() {
-  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-  return `${proto}//${location.host}/api/websocket`;
-}
-
-function connect() {
-  try { ws = new WebSocket(getWSUrl()); } catch(e) { onDisconnect(); return; }
-  ws.onopen = () => {};
-  ws.onmessage = ev => {
-    const msg = JSON.parse(ev.data);
-    if (msg.type === 'auth_required') {
-      const tok = getToken();
-      if (tok) {
-        ws.send(JSON.stringify({type:'auth', access_token: tok}));
-      } else {
-        const t = prompt('Enter your Long-Lived Access Token from HA Profile:');
-        if (t) ws.send(JSON.stringify({type:'auth', access_token: t}));
-      }
-    }
-    else if (msg.type === 'auth_ok') {
-      document.getElementById('ha-dot').className = 'ha-dot ok';
-      document.getElementById('ha-txt').textContent = 'Online';
-      sendMsg({type:'subscribe_events', event_type:'state_changed'});
-      sendMsg({type:'get_states'});
-    }
-    else if (msg.type === 'auth_invalid') {
-      document.getElementById('ha-dot').className = 'ha-dot err';
-      document.getElementById('ha-txt').textContent = 'Auth Error';
-    }
-    else if (msg.type === 'result' && Array.isArray(msg.result)) {
-      msg.result.forEach(s => { STATE[s.entity_id]={state:s.state, attributes:s.attributes}; });
-      renderAll();
-    }
-    else if (msg.type === 'event' && msg.event?.event_type === 'state_changed') {
-      const d = msg.event.data;
-      if (d?.new_state) {
-        STATE[d.entity_id] = {state:d.new_state.state, attributes:d.new_state.attributes};
-        updateCard(d.entity_id);
-      }
-    }
-  };
-  ws.onclose = onDisconnect;
-  ws.onerror = () => { document.getElementById('ha-dot').className='ha-dot err'; };
-}
-
-let reconnectTimer = null;
-
-function onDisconnect() {
-  const dot = document.getElementById('ha-dot');
-  const txt = document.getElementById('ha-txt');
-  if (dot) dot.className = 'ha-dot';
-  if (txt) txt.textContent = 'Reconnecting...';
-  if (reconnectTimer) clearTimeout(reconnectTimer);
-  reconnectTimer = setTimeout(connect, 5000);
-}
-
-setTheme('dark');
-tick(); setInterval(tick,1000);
-setDate();
-renderAll();
-if ('WebSocket' in window) connect(); else { const txt = document.getElementById('ha-txt'); const dot = document.getElementById('ha-dot'); if (dot) dot.className='ha-dot err'; if (txt) txt.textContent='WebSocket unavailable'; }
-
-function updateHeroClock() {
-  const n = new Date();
-  const hw = document.getElementById('hw-clk');
-  if (hw) hw.textContent = [n.getHours(),n.getMinutes()].map(v=>String(v).padStart(2,'0')).join(':');
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const arD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  const arM=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  const hd = document.getElementById('hw-date');
-  if (hd) hd.textContent = AR
-    ? arD[n.getDay()] + ' ' + n.getDate() + ' ' + arM[n.getMonth()] + ' ' + n.getFullYear()
-    : days[n.getDay()] + ', ' + n.getDate() + ' ' + months[n.getMonth()] + ' ' + n.getFullYear();
-}
-
-function fetchWeather() {
-  const LAT = 29.1769;
-  const LON = 48.0845;
-  const url = 'https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LON+'&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&wind_speed_unit=kmh&temperature_unit=celsius';
-  fetch(url)
-    .then(r => r.json())
-    .then(d => {
-      const c = d.current;
-      const wc = c.weather_code;
-      const icons = {
-        0:'☀️', 1:'🌤', 2:'⛅', 3:'☁️',
-        45:'🌫', 48:'🌫', 51:'🌦', 53:'🌦', 55:'🌧',
-        61:'🌧', 63:'🌧', 65:'🌧', 71:'🌨', 73:'🌨', 75:'❄️',
-        80:'🌦', 81:'🌧', 82:'⛈', 95:'⛈', 96:'⛈', 99:'⛈'
-      };
-      const descs = {
-        0:'Clear sky', 1:'Mostly clear', 2:'Partly cloudy', 3:'Overcast',
-        45:'Foggy', 48:'Foggy', 51:'Light drizzle', 53:'Drizzle', 55:'Heavy drizzle',
-        61:'Light rain', 63:'Rain', 65:'Heavy rain', 71:'Light snow', 73:'Snow', 75:'Heavy snow',
-        80:'Rain showers', 81:'Rain showers', 82:'Heavy showers', 95:'Thunderstorm', 96:'Thunderstorm', 99:'Thunderstorm'
-      };
-      const getIcon = code => { for(const k of Object.keys(icons)) if(code<=+k) return icons[k]; return '🌡'; };
-      const getDesc = code => { for(const k of Object.keys(descs)) if(code<=+k) return descs[k]; return 'Unknown'; };
-      const el = id => document.getElementById(id);
-      if(el('hw-temp')) el('hw-temp').textContent = Math.round(c.temperature_2m) + '°';
-      if(el('hw-icon')) el('hw-icon').textContent = getIcon(wc);
-      if(el('hw-desc')) el('hw-desc').textContent = getDesc(wc);
-      if(el('hw-humidity')) el('hw-humidity').textContent = c.relative_humidity_2m + '%';
-      if(el('hw-wind')) el('hw-wind').textContent = Math.round(c.wind_speed_10m) + ' km/h';
-      if(el('hw-feels')) el('hw-feels').textContent = Math.round(c.apparent_temperature) + '°';
-    })
-    .catch(() => {
-      const el = document.getElementById('hw-desc');
-      if(el) el.textContent = 'Weather unavailable';
-    });
-}
-
-updateHeroClock();
-setInterval(updateHeroClock, 1000);
-fetchWeather();
-setInterval(fetchWeather, 600000);
-
+setInterval(updateClock,1000); updateClock(); applyLang(); loadHA(); setInterval(loadHA,30000);
 </script>
 </body>
 </html>
