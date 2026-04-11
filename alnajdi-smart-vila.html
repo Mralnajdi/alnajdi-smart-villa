@@ -2,1054 +2,1065 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>ALNAJDI SMART VILA</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap');
 
     :root {
-      color-scheme: dark;
-      --bg: #0a101a;
-      --bg-gradient: radial-gradient(1300px 800px at 12% -10%, rgba(64, 112, 191, 0.24) 0%, transparent 52%), radial-gradient(1200px 900px at 100% -10%, rgba(72, 120, 209, 0.2) 0%, transparent 50%), #0a101a;
-      --surface: rgba(16, 24, 36, 0.88);
-      --surface-2: rgba(23, 33, 48, 0.9);
-      --surface-3: rgba(37, 51, 74, 0.62);
-      --line: rgba(197, 220, 255, 0.14);
-      --line-strong: rgba(157, 202, 255, 0.35);
-      --txt: #f3f7ff;
-      --muted: #a0b0ce;
-      --gold: #d6bb83;
-      --blue: #75bbff;
-      --good: #4adeaa;
-      --danger: #ff6f7e;
-      --chip-glow: rgba(120, 182, 255, 0.28);
-      --hero-sun: radial-gradient(circle at 36% 30%, rgba(255,235,172,0.9), rgba(247,157,76,0.42));
-      --hero-moon: radial-gradient(circle at 35% 30%, rgba(168,203,255,0.85), rgba(107,136,216,0.36));
-      --shadow: 0 20px 45px rgba(0, 0, 0, 0.34);
-      --blur: 16px;
-      --room-open-bg: rgba(255, 255, 255, 0.04);
-      --active-gradient: linear-gradient(140deg, rgba(117, 187, 255, 0.35), rgba(98, 165, 255, 0.1));
-      --suite-accent: rgba(214, 187, 131, 0.42);
-      --body-noise: 0.03;
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 22px 50px rgba(0,0,0,.35);
+      --shadow-soft: 0 8px 22px rgba(0,0,0,.24);
+      --ease: 180ms cubic-bezier(.2,.6,.2,1);
+      --top-safe: env(safe-area-inset-top, 0px);
+      --bottom-safe: env(safe-area-inset-bottom, 0px);
+      --bg: #090b10;
+      --bg-accent: radial-gradient(1000px 600px at -10% -20%, rgba(71,98,179,.35) 0%, transparent 52%), radial-gradient(980px 620px at 120% -20%, rgba(47,132,188,.20) 0%, transparent 52%), #090b10;
+      --surface: #14171e;
+      --surface-2: #1a1f29;
+      --surface-3: #212735;
+      --line: rgba(255,255,255,.1);
+      --line-strong: rgba(255,255,255,.2);
+      --text: #f4f6fb;
+      --muted: #abb5c9;
+      --good: #50d88e;
+      --warn: #ffbc55;
+      --danger: #ff5e74;
+      --info: #53b7ff;
+      --glass: rgba(255,255,255,.05);
     }
 
     body[data-family='current'][data-mode='day'] {
-      color-scheme: light;
-      --bg: #eef4ff;
-      --bg-gradient: radial-gradient(1000px 560px at 10% -10%, rgba(125, 177, 255, 0.34) 0%, transparent 58%), radial-gradient(1000px 560px at 100% 0%, rgba(122, 168, 245, 0.2) 0%, transparent 58%), #eef4ff;
-      --surface: rgba(255, 255, 255, 0.95);
-      --surface-2: rgba(251, 254, 255, 0.94);
-      --surface-3: rgba(235, 245, 255, 0.92);
-      --line: rgba(22, 49, 95, 0.14);
-      --line-strong: rgba(31, 102, 209, 0.35);
-      --txt: #14213c;
-      --muted: #607192;
-      --gold: #876722;
-      --blue: #1d78ef;
-      --good: #15a975;
-      --danger: #db4359;
-      --chip-glow: rgba(40, 113, 232, 0.24);
-      --shadow: 0 12px 28px rgba(36, 77, 142, 0.16);
-      --blur: 0px;
-      --room-open-bg: rgba(28, 72, 147, 0.04);
-      --active-gradient: linear-gradient(140deg, rgba(48, 128, 252, 0.2), rgba(48, 128, 252, 0.08));
-      --suite-accent: rgba(155, 115, 24, 0.42);
+      --bg: #eef3fb;
+      --bg-accent: radial-gradient(1100px 760px at -10% -25%, rgba(81,141,255,.36) 0%, transparent 56%), radial-gradient(1000px 640px at 115% -10%, rgba(125,169,255,.27) 0%, transparent 55%), #eef3fb;
+      --surface: #ffffff;
+      --surface-2: #f7faff;
+      --surface-3: #eef4ff;
+      --line: rgba(30,56,94,.16);
+      --line-strong: rgba(30,56,94,.24);
+      --text: #15223a;
+      --muted: #607391;
+      --glass: rgba(0,0,0,.03);
+      --shadow: 0 12px 30px rgba(31,69,129,.15);
+      --shadow-soft: 0 8px 20px rgba(38,77,137,.12);
     }
 
-    body[data-family='anashost'][data-mode='night'] {
-      --bg: #070d16;
-      --bg-gradient: radial-gradient(1250px 850px at -10% -15%, rgba(28, 97, 196, 0.44) 0%, transparent 50%), radial-gradient(900px 600px at 115% -10%, rgba(208, 167, 80, 0.2) 0%, transparent 55%), linear-gradient(130deg, #070d16 0%, #0c1628 60%, #0a1220 100%);
-      --surface: rgba(12, 23, 42, 0.84);
-      --surface-2: rgba(17, 31, 56, 0.88);
-      --surface-3: rgba(31, 48, 78, 0.66);
-      --line: rgba(201, 230, 255, 0.18);
-      --line-strong: rgba(219, 178, 89, 0.42);
-      --txt: #f2f8ff;
-      --muted: #a9bddf;
-      --gold: #dcb978;
-      --blue: #75bbff;
-      --good: #51dba8;
-      --danger: #ff7a88;
-      --chip-glow: rgba(219, 178, 89, 0.24);
-      --shadow: 0 22px 52px rgba(2, 8, 21, 0.46);
-      --blur: 12px;
-      --room-open-bg: rgba(255, 224, 153, 0.06);
-      --active-gradient: linear-gradient(145deg, rgba(220, 185, 120, 0.27), rgba(104, 177, 255, 0.11));
-      --suite-accent: rgba(220, 185, 120, 0.58);
-      --hero-sun: radial-gradient(circle at 32% 28%, rgba(255, 225, 163, 0.95), rgba(210, 149, 69, 0.52));
-      --hero-moon: radial-gradient(circle at 36% 24%, rgba(127, 193, 255, 0.95), rgba(87, 126, 231, 0.42));
+    body[data-family='colors'][data-mode='night'] {
+      --bg: #07090f;
+      --bg-accent: radial-gradient(1150px 700px at -15% -25%, rgba(102,71,224,.38) 0%, transparent 50%), radial-gradient(1000px 680px at 120% -10%, rgba(27,180,162,.22) 0%, transparent 52%), #07090f;
+      --surface: #151820;
+      --surface-2: #1b2030;
+      --surface-3: #252d40;
+      --line: rgba(255,255,255,.1);
+      --line-strong: rgba(255,255,255,.2);
+      --text: #f7f8fd;
+      --muted: #b4bed3;
+      --shadow: 0 22px 55px rgba(0,0,0,.45);
+      --shadow-soft: 0 10px 24px rgba(0,0,0,.34);
+      --glass: rgba(255,255,255,.04);
     }
 
-    body[data-family='anashost'][data-mode='day'] {
-      color-scheme: light;
-      --bg: #f4f8ff;
-      --bg-gradient: radial-gradient(1200px 670px at -6% -15%, rgba(56, 124, 224, 0.34) 0%, transparent 54%), radial-gradient(1000px 580px at 120% 0%, rgba(225, 184, 108, 0.26) 0%, transparent 56%), #f4f8ff;
-      --surface: rgba(255, 255, 255, 0.93);
-      --surface-2: rgba(250, 253, 255, 0.95);
-      --surface-3: rgba(232, 241, 255, 0.9);
-      --line: rgba(16, 55, 114, 0.16);
-      --line-strong: rgba(181, 126, 27, 0.42);
-      --txt: #162341;
-      --muted: #5f6f92;
-      --gold: #9b6f16;
-      --blue: #1f7ff2;
-      --good: #129f72;
-      --danger: #d63f56;
-      --chip-glow: rgba(173, 124, 41, 0.22);
-      --shadow: 0 12px 30px rgba(28, 73, 148, 0.16);
-      --blur: 2px;
-      --room-open-bg: rgba(217, 175, 87, 0.08);
-      --active-gradient: linear-gradient(140deg, rgba(223, 180, 106, 0.25), rgba(42, 128, 243, 0.1));
-      --suite-accent: rgba(170, 123, 30, 0.52);
+    body[data-family='colors'][data-mode='day'] {
+      --bg: #f2f6ff;
+      --bg-accent: radial-gradient(1100px 740px at -10% -25%, rgba(117,136,255,.34) 0%, transparent 54%), radial-gradient(980px 640px at 120% -10%, rgba(66,187,208,.22) 0%, transparent 52%), #f2f6ff;
+      --surface: #fff;
+      --surface-2: #f9fbff;
+      --surface-3: #eef3ff;
+      --line: rgba(43,68,112,.15);
+      --line-strong: rgba(43,68,112,.23);
+      --text: #132138;
+      --muted: #5e7190;
+      --glass: rgba(0,0,0,.03);
+      --shadow: 0 12px 30px rgba(38,71,140,.14);
+      --shadow-soft: 0 7px 18px rgba(38,71,140,.10);
     }
 
     body[data-family='glass'][data-mode='night'] {
-      --bg: #04070c;
-      --bg-gradient: radial-gradient(1100px 720px at 0% -20%, rgba(125, 188, 255, 0.4) 0%, transparent 44%), radial-gradient(1200px 900px at 100% -20%, rgba(109, 147, 235, 0.3) 0%, transparent 48%), radial-gradient(900px 600px at 50% 120%, rgba(66, 107, 198, 0.2) 0%, transparent 60%), #04070c;
-      --surface: linear-gradient(155deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03));
-      --surface-2: linear-gradient(155deg, rgba(255,255,255,0.2), rgba(255,255,255,0.04));
-      --surface-3: rgba(176, 208, 255, 0.16);
-      --line: rgba(220, 236, 255, 0.27);
-      --line-strong: rgba(190, 220, 255, 0.56);
-      --txt: #f5f9ff;
-      --muted: #c7d6f0;
-      --gold: #e1c386;
-      --blue: #98ccff;
-      --good: #5de8b5;
-      --danger: #ff8492;
-      --chip-glow: rgba(153, 208, 255, 0.34);
-      --shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-      --blur: 24px;
-      --room-open-bg: rgba(198, 226, 255, 0.09);
-      --active-gradient: linear-gradient(145deg, rgba(171, 220, 255, 0.35), rgba(145, 173, 255, 0.11));
-      --suite-accent: rgba(223, 195, 134, 0.64);
-      --hero-sun: radial-gradient(circle at 32% 28%, rgba(255, 238, 197, 0.96), rgba(242, 164, 91, 0.52));
-      --hero-moon: radial-gradient(circle at 35% 30%, rgba(188, 221, 255, 0.92), rgba(120, 150, 237, 0.44));
-      --body-noise: 0.08;
+      --bg: #04060a;
+      --bg-accent: radial-gradient(1050px 680px at -10% -20%, rgba(111,173,255,.38) 0%, transparent 50%), radial-gradient(980px 650px at 115% -15%, rgba(166,190,255,.22) 0%, transparent 55%), #04060a;
+      --surface: linear-gradient(150deg, rgba(255,255,255,.14), rgba(255,255,255,.02));
+      --surface-2: linear-gradient(150deg, rgba(255,255,255,.18), rgba(255,255,255,.03));
+      --surface-3: rgba(255,255,255,.10);
+      --line: rgba(255,255,255,.2);
+      --line-strong: rgba(255,255,255,.32);
+      --text: #f6f9ff;
+      --muted: #cad5ea;
+      --glass: rgba(255,255,255,.08);
+      --shadow: 0 26px 65px rgba(0,0,0,.48);
+      --shadow-soft: 0 10px 26px rgba(0,0,0,.32);
+      backdrop-filter: saturate(140%);
     }
 
     body[data-family='glass'][data-mode='day'] {
-      color-scheme: light;
-      --bg: #edf6ff;
-      --bg-gradient: radial-gradient(1100px 720px at 0% -20%, rgba(128, 194, 255, 0.52) 0%, transparent 45%), radial-gradient(1200px 850px at 100% -20%, rgba(169, 199, 255, 0.44) 0%, transparent 50%), #edf6ff;
-      --surface: linear-gradient(155deg, rgba(255,255,255,0.8), rgba(255,255,255,0.5));
-      --surface-2: linear-gradient(155deg, rgba(255,255,255,0.86), rgba(255,255,255,0.52));
-      --surface-3: rgba(255, 255, 255, 0.66);
-      --line: rgba(95, 139, 220, 0.24);
-      --line-strong: rgba(75, 120, 209, 0.48);
-      --txt: #11233f;
-      --muted: #5d7197;
-      --gold: #91661f;
-      --blue: #287ee8;
-      --good: #11996c;
-      --danger: #d84258;
-      --chip-glow: rgba(74, 128, 220, 0.24);
-      --shadow: 0 16px 34px rgba(57, 95, 161, 0.2);
-      --blur: 14px;
-      --room-open-bg: rgba(124, 173, 244, 0.11);
-      --active-gradient: linear-gradient(145deg, rgba(142, 199, 255, 0.38), rgba(123, 145, 234, 0.12));
-      --suite-accent: rgba(161, 117, 32, 0.56);
-      --body-noise: 0.06;
+      --bg: #ecf6ff;
+      --bg-accent: radial-gradient(1100px 720px at -10% -20%, rgba(117,193,255,.46) 0%, transparent 52%), radial-gradient(1000px 640px at 120% -15%, rgba(167,188,255,.34) 0%, transparent 55%), #ecf6ff;
+      --surface: linear-gradient(150deg, rgba(255,255,255,.8), rgba(255,255,255,.45));
+      --surface-2: linear-gradient(150deg, rgba(255,255,255,.88), rgba(255,255,255,.56));
+      --surface-3: rgba(255,255,255,.66);
+      --line: rgba(79,118,176,.25);
+      --line-strong: rgba(79,118,176,.35);
+      --text: #12233d;
+      --muted: #5a7092;
+      --glass: rgba(255,255,255,.45);
+      --shadow: 0 14px 32px rgba(47,84,145,.2);
+      --shadow-soft: 0 8px 20px rgba(47,84,145,.14);
     }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-
     body {
       margin: 0;
-      background: var(--bg-gradient);
-      color: var(--txt);
+      background: var(--bg-accent);
+      color: var(--text);
       font-family: Inter, Tajawal, sans-serif;
       overflow: hidden;
-      transition: background 250ms ease, color 220ms ease;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(120deg, rgba(255,255,255,var(--body-noise)) 0 1px, transparent 1px 5px);
-      mix-blend-mode: soft-light;
-      opacity: 0.25;
-      z-index: 0;
+      transition: background .25s ease, color .2s ease;
     }
 
     body.rtl { font-family: Tajawal, Inter, sans-serif; }
 
     .app {
-      position: relative;
-      z-index: 1;
-      max-width: 1540px;
-      margin: auto;
+      max-width: 1560px;
+      margin: 0 auto;
       height: 100%;
-      padding: 18px 16px 32px;
-      overflow: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      padding: calc(var(--top-safe) + 10px) 12px calc(var(--bottom-safe) + 22px);
+      gap: 12px;
+      overflow: auto;
     }
 
-    .premium-card {
+    .card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(var(--blur)) saturate(138%);
-      -webkit-backdrop-filter: blur(var(--blur)) saturate(138%);
-      transition: border-color 200ms ease, box-shadow 200ms ease, transform 180ms ease;
-      position: relative;
-      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px) saturate(135%);
+      -webkit-backdrop-filter: blur(14px) saturate(135%);
     }
 
-    body[data-family='glass'] .premium-card::before {
-      content: '';
-      position: absolute;
-      inset: 1px;
-      border-radius: 22px;
-      pointer-events: none;
-      background: linear-gradient(145deg, rgba(255,255,255,0.32), rgba(255,255,255,0.02) 35%, rgba(130,175,255,0.07) 75%, rgba(255,255,255,0.1));
-      opacity: 0.75;
-    }
-
-    .header {
-      padding: 9px 12px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 8px;
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 40;
-      background: linear-gradient(to bottom, rgba(6,10,16,0.55), transparent);
+      z-index: 45;
+      padding: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.02));
+      border-radius: var(--radius-lg);
     }
 
-    .villa-title {
+    .topbar .title {
       text-align: center;
-      font-size: clamp(14px, 2.15vw, 24px);
-      font-weight: 900;
-      letter-spacing: 0.28em;
-      color: var(--gold);
-      text-shadow: 0 0 16px rgba(212, 185, 127, 0.28);
+      font-size: clamp(13px, 2.1vw, 22px);
+      letter-spacing: .2em;
+      font-weight: 800;
       white-space: nowrap;
+      color: var(--text);
+      opacity: .95;
     }
-
-    .micro-group { display: flex; align-items: center; gap: 8px; }
-    .header .right { justify-content: flex-end; }
 
     .seg {
       display: inline-flex;
+      align-items: center;
       gap: 4px;
       padding: 4px;
       border-radius: 999px;
       background: var(--surface-2);
       border: 1px solid var(--line);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      max-width: 100%;
+      overflow: auto hidden;
+      scrollbar-width: none;
     }
 
-    .seg button {
+    .seg::-webkit-scrollbar { display:none; }
+
+    .seg button, .btn {
       border: 0;
+      border-radius: 999px;
+      padding: 7px 11px;
       background: transparent;
       color: var(--muted);
-      padding: 6px 10px;
-      border-radius: 999px;
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
+      font-weight: 700;
       cursor: pointer;
-      transition: 180ms ease;
-      min-width: 52px;
+      transition: all var(--ease);
       white-space: nowrap;
     }
 
-    .seg button.on {
-      background: var(--active-gradient);
-      color: var(--txt);
-      box-shadow: inset 0 0 0 1px var(--line-strong), 0 4px 12px var(--chip-glow);
+    .seg button.active, .btn.active {
+      color: var(--text);
+      background: rgba(255,255,255,.13);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 0 0 1px rgba(0,0,0,.08);
+    }
+
+    .back-btn {
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
     .hero {
+      padding: 16px;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
       gap: 12px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: stretch;
     }
 
-    .weather-card, .clock-card { padding: 20px; position: relative; overflow: hidden; }
+    .hero-main h1 { margin: 0; font-size: clamp(20px, 3vw, 34px); }
+    .hero-main p { margin: 8px 0 0; color: var(--muted); }
+    .hero-meta { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-top: 14px; }
 
-    .weather-card::after,
-    .clock-card::after {
-      content: '';
-      position: absolute;
-      inset: auto -24px -42px auto;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0.54;
-      background: var(--hero-sun);
-    }
-
-    .clock-card::after { background: var(--hero-moon); }
-
-    .label { color: var(--muted); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 700; }
-    .weather-main { margin-top: 8px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-    .temp { font-size: clamp(42px, 6vw, 66px); line-height: 1; font-weight: 900; }
-    .condition { margin-top: 6px; font-weight: 700; color: color-mix(in srgb, var(--txt) 83%, var(--blue) 17%); }
-    .meta-col { text-align: end; }
-    .meta { font-size: 12px; color: var(--muted); margin-top: 5px; }
-
-    .clock-time { margin-top: 6px; font-size: clamp(40px, 5.3vw, 58px); line-height: 1; font-weight: 900; }
-    .clock-date { margin-top: 8px; color: var(--muted); font-size: 14px; }
-    .ha-state { margin-top: 10px; font-size: 12px; color: var(--muted); }
-    .ha-state.good { color: var(--good); }
-    .ha-state.warn { color: var(--danger); }
-
-    .systems-strip {
-      display: grid;
-      grid-template-columns: repeat(8, minmax(105px, 1fr));
-      gap: 10px;
-    }
-
-    .system-chip {
-      position: relative;
-      padding: 12px 10px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: linear-gradient(150deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-      min-height: 118px;
-      cursor: pointer;
-      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-    }
-
-    .system-chip:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.22), 0 0 16px var(--chip-glow);
-      border-color: var(--line-strong);
-    }
-
-    .system-chip.active {
-      background: linear-gradient(150deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03));
-      box-shadow: inset 0 0 0 1px var(--line-strong), 0 12px 26px rgba(0,0,0,0.2);
-    }
-
-    .system-chip.alert {
-      border-color: color-mix(in srgb, var(--danger) 62%, white 0%);
-      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 52%, white 0%), 0 0 22px color-mix(in srgb, var(--danger) 26%, black 0%);
-      animation: pulseAlert 1700ms infinite;
-    }
-
-    @keyframes pulseAlert {
-      0%,100% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 44%, white 0%), 0 0 10px color-mix(in srgb, var(--danger) 18%, black 0%); }
-      50% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 72%, white 0%), 0 0 24px color-mix(in srgb, var(--danger) 38%, black 0%); }
-    }
-
-    .icon-wrap {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(155deg, color-mix(in srgb, var(--blue) 36%, transparent), color-mix(in srgb, var(--blue) 12%, transparent));
-      border: 1px solid color-mix(in srgb, var(--blue) 44%, white 0%);
-      display: grid;
-      place-items: center;
-      color: color-mix(in srgb, var(--txt) 75%, var(--blue) 25%);
-      transition: transform 180ms ease;
-    }
-
-    .system-chip:hover .icon-wrap { transform: scale(1.05); }
-    .icon-wrap svg { width: 21px; height: 21px; fill: currentColor; }
-
-    .system-title { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
-    .system-count { margin-top: 4px; font-size: 12px; color: var(--muted); }
-
-    .chip-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      min-width: 26px;
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 11px;
-      font-weight: 900;
-      text-align: center;
-      background: linear-gradient(145deg, color-mix(in srgb, var(--blue) 42%, transparent), color-mix(in srgb, var(--blue) 14%, transparent));
-      border: 1px solid color-mix(in srgb, var(--blue) 52%, white 0%);
-      color: color-mix(in srgb, var(--txt) 80%, var(--blue) 20%);
-      box-shadow: 0 3px 10px color-mix(in srgb, var(--blue) 30%, transparent);
-    }
-
-    .floors { display: flex; flex-direction: column; gap: 12px; }
-    .floor-card { padding: 14px; }
-
-    .floor-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .floor-name { font-size: 19px; font-weight: 800; }
-    .floor-meta { font-size: 12px; color: var(--muted); }
-
-    .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
-
-    .room-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)), var(--surface-2);
-      overflow: hidden;
-      transition: border-color 180ms ease, transform 180ms ease;
-    }
-
-    .room-card:hover { border-color: var(--line-strong); }
-
-    .room-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      cursor: pointer;
-      padding: 11px 12px;
-    }
-
-    .room-title { font-weight: 800; }
-    .room-stats { color: var(--muted); font-size: 12px; margin-top: 3px; }
-
-    .chev {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: color-mix(in srgb, var(--blue) 18%, transparent);
-      color: color-mix(in srgb, var(--txt) 85%, var(--blue) 15%);
-      transition: transform 220ms ease;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .room-card.open .chev { transform: rotate(180deg); }
-
-    .room-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 280ms ease, padding 280ms ease;
-      padding: 0 12px;
-      background: var(--room-open-bg);
-    }
-
-    .room-card.open .room-body {
-      max-height: 560px;
-      padding: 0 12px 12px;
-    }
-
-    .entity-list { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .entity-chip {
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid var(--line);
-      background: var(--surface-3);
-      color: var(--txt);
-    }
-
-    .entity-chip.off { opacity: 0.66; }
-
-    .suite {
-      border-color: var(--suite-accent);
-      background: linear-gradient(145deg, color-mix(in srgb, var(--gold) 18%, transparent), rgba(255,255,255,0.02) 45%), var(--surface-2);
-    }
-
-    .suite-subrooms {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-
-    .subroom-card {
-      border: 1px solid var(--line);
+    .stat-chip {
+      padding: 10px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.03);
-      padding: 8px;
-    }
-
-    .subroom-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-
-    .empty-state {
-      border: 1px dashed var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.02);
-      color: var(--muted);
-      padding: 14px;
+      background: var(--glass);
+      border: 1px solid var(--line);
       text-align: center;
-      font-weight: 600;
     }
 
-    @media (max-width: 1150px) {
-      .systems-strip { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+    .stat-chip b { font-size: 18px; display:block; }
+    .stat-chip span { font-size: 11px; color: var(--muted); }
+
+    .hero-side {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 8px;
+      align-content: start;
+    }
+
+    .summary-card { padding: 10px; border-radius: 14px; border:1px solid var(--line); background: var(--glass); }
+    .summary-card h4 { margin: 0; font-size: 12px; color: var(--muted); }
+    .summary-card p { margin: 6px 0 0; font-size: 19px; font-weight: 800; }
+
+    .section-title {
+      margin: 2px 0 8px;
+      font-size: 14px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .floors-grid, .rooms-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    }
+
+    .floor-card, .room-card {
+      padding: 14px;
+      cursor: pointer;
+      transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+      min-height: 112px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .floor-card:hover, .room-card:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+    .card-title { font-size: 17px; font-weight: 700; }
+    .card-sub { font-size: 12px; color: var(--muted); margin-top: 5px; }
+    .card-meta { display:flex; justify-content:space-between; font-size: 11px; color: var(--muted); }
+
+    .suite-badge {
+      display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 8px;border-radius:999px;
+      background: rgba(255,207,92,.14); color: #ffc96e; border:1px solid rgba(255,207,92,.3);
+    }
+
+    .devices-layout { display: grid; gap: 14px; }
+    .device-section { padding: 12px; }
+    .device-grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); }
+
+    .device-card {
+      min-height: 76px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(95deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:grid;
+      grid-template-columns: 58px 1fr auto;
+      align-items:center;
+      overflow:hidden;
+      position:relative;
+      isolation: isolate;
+      cursor:pointer;
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+    }
+
+    .device-card::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background: var(--device-grad, linear-gradient(95deg, rgba(72,132,255,.42), rgba(72,132,255,0) 58%));
+      opacity: .9;
+      z-index:-1;
+    }
+
+    .device-card:hover { transform: translateY(-1px); box-shadow: 0 12px 25px rgba(0,0,0,.24); border-color: rgba(255,255,255,.2); }
+    .device-icon-wrap {
+      height: 100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 55% 45%, rgba(255,255,255,.16), rgba(255,255,255,.04));
+      border-inline-end: 1px solid rgba(255,255,255,.08);
+    }
+    .device-icon { font-size: 25px; filter: drop-shadow(0 0 9px rgba(255,255,255,.22)); }
+    .device-main { padding: 8px 10px; }
+    .device-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .device-state { font-size: 12px; color: rgba(255,255,255,.82); margin-top: 3px; white-space: nowrap; overflow:hidden; text-overflow:ellipsis; }
+    body[data-mode='day'] .device-state { color: rgba(18,31,57,.78); }
+
+    .device-tail { padding-inline: 8px; display:flex; align-items:center; gap:7px; }
+    .tiny { border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:var(--text); border-radius:9px; height:30px; min-width:30px; cursor:pointer; }
+
+    .empty, .loading {
+      padding: 24px;
+      text-align:center;
+      color: var(--muted);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius-lg);
+      background: var(--glass);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,14,.62);
+      z-index: 99;
+      display:none;
+      padding: 16px;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .modal.show { display:flex; }
+    .modal-panel {
+      width:min(520px,100%);
+      padding:16px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background: var(--surface-2);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-row { display:flex; gap:8px; flex-wrap: wrap; margin-top: 10px; }
+
+    .footer-note { text-align:center; color:var(--muted); font-size:11px; margin-top: 10px; }
+
+    @media (max-width: 980px) {
+      .topbar { grid-template-columns: 1fr; }
+      .topbar .title { order: -1; }
       .hero { grid-template-columns: 1fr; }
+      .hero-side { grid-template-columns: repeat(4,minmax(0,1fr)); }
     }
 
-    @media (max-width: 780px) {
-      .header { grid-template-columns: 1fr; justify-items: center; gap: 8px; }
-      .header .left, .header .right { justify-content: center; }
-      .villa-title { order: -1; }
-      .systems-strip { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
-      .micro-group { flex-wrap: wrap; justify-content: center; }
+    @media (max-width: 720px) {
+      .app { padding-inline: 10px; }
+      .hero-meta { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .hero-side { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .floors-grid, .rooms-grid, .device-grid { grid-template-columns: 1fr; }
+      .device-card { grid-template-columns: 54px 1fr auto; }
+      .seg button { padding: 8px 10px; }
     }
   </style>
 </head>
-<body data-family="current" data-mode="night">
-  <div class="app">
-    <header class="header">
-      <div class="micro-group left">
-        <div class="seg" id="langSeg">
-          <button data-lang="en" class="on">EN</button>
-          <button data-lang="ar">عربي</button>
-        </div>
-      </div>
+<body data-family="colors" data-mode="night">
+  <div class="app" id="app"></div>
+  <div class="modal" id="modal"></div>
 
-      <div class="villa-title">ALNAJDI SMART VILA</div>
+  <script>
+    (function () {
+      'use strict';
 
-      <div class="micro-group right">
-        <div class="seg" id="familySeg">
-          <button data-family="current" class="on">Current</button>
-          <button data-family="anashost">Anashost</button>
-          <button data-family="glass">Glass</button>
-        </div>
-        <div class="seg" id="modeSeg">
-          <button data-mode="day">Day</button>
-          <button data-mode="night" class="on">Night</button>
-        </div>
-      </div>
-    </header>
+      const REQUIRED_STRUCTURE = {
+        ground_floor: { en: 'Ground Floor', ar: 'الدور الأرضي', rooms: ['back_doorway', 'sitting_room_g', 'prep_kitchen', 'father_room'] },
+        first_floor: { en: 'First Floor', ar: 'الدور الأول', rooms: ['master_suite', 'office', 'sitting_room_1', 'living_room', 'second_room'] },
+        second_floor: { en: 'Second Floor', ar: 'الدور الثاني', rooms: [] },
+        roof: { en: 'Roof', ar: 'السطح', rooms: ['roof'] }
+      };
 
-    <section class="hero">
-      <article class="premium-card weather-card">
-        <div class="label" id="weatherLabel">Weather</div>
-        <div class="weather-main">
-          <div>
-            <div class="temp" id="weatherTemp">--°</div>
-            <div class="condition" id="weatherCondition">--</div>
-          </div>
-          <div class="meta-col">
-            <div class="meta" id="weatherHumidity">Humidity --%</div>
-            <div class="meta" id="weatherWind">Wind --</div>
-            <div class="meta" id="weatherEntity">Entity --</div>
-          </div>
-        </div>
-      </article>
+      const MASTER_SUITE_CHILDREN = ['master_bedroom', 'master_bathroom', 'master_closet_room'];
 
-      <article class="premium-card clock-card">
-        <div class="label" id="clockLabel">Local Time</div>
-        <div class="clock-time" id="clockTime">00:00</div>
-        <div class="clock-date" id="clockDate">--</div>
-        <div class="ha-state" id="haStatus">HA: connecting...</div>
-      </article>
-    </section>
+      const ROOMS = {
+        back_doorway: { en: 'Back Doorway', ar: 'مدخل الباب الخلفي', aliases: ['back doorway', 'back door', 'rear door'] },
+        sitting_room_g: { en: 'Sitting Room', ar: 'غرفة الجلوس', aliases: ['sitting room ground', 'ground sitting', 'majlis ground', 'sitting room g'] },
+        prep_kitchen: { en: 'Prep Kitchen', ar: 'مطبخ التحضير', aliases: ['prep kitchen', 'preparation kitchen', 'dirty kitchen'] },
+        father_room: { en: 'Father Room', ar: 'غرفة الأب', aliases: ['father room', 'dad room'] },
+        master_suite: { en: 'Master Suite', ar: 'الجناح الرئيسي', aliases: ['master suite', 'suite'] },
+        master_bedroom: { en: 'Master Bedroom', ar: 'غرفة النوم الرئيسية', aliases: ['master bedroom'] },
+        master_bathroom: { en: 'Master Bathroom', ar: 'حمام الجناح الرئيسي', aliases: ['master bathroom', 'master bath'] },
+        master_closet_room: { en: 'Master Closet Room', ar: 'غرفة ملابس الجناح الرئيسي', aliases: ['master closet', 'closet room'] },
+        office: { en: 'Office', ar: 'المكتب', aliases: ['office'] },
+        sitting_room_1: { en: 'Sitting Room', ar: 'غرفة الجلوس', aliases: ['first floor sitting', 'upper sitting', 'sitting room first'] },
+        living_room: { en: 'Living Room', ar: 'غرفة المعيشة', aliases: ['living room'] },
+        second_room: { en: 'Second Room', ar: 'الغرفة الثانية', aliases: ['second room'] },
+        roof: { en: 'Roof', ar: 'السطح', aliases: ['roof'] }
+      };
 
-    <section class="systems-strip" id="systemsStrip"></section>
-
-    <section class="floors" id="floorsRoot"></section>
-  </div>
-
-<script>
-  const I18N = {
-    en: {
-      weather: 'Weather',
-      time: 'Local Time',
-      connected: 'HA: connected (live)',
-      reconnecting: 'HA: reconnecting...',
-      fallback: 'HA: limited data mode',
-      devices: 'devices',
-      active: 'active',
-      noEntities: 'No mapped entities',
-      noVisible: 'No floors with detected entities yet',
-      humidity: 'Humidity',
-      wind: 'Wind',
-      entity: 'Entity'
-    },
-    ar: {
-      weather: 'الطقس',
-      time: 'الوقت المحلي',
-      connected: 'متصل بـ Home Assistant (مباشر)',
-      reconnecting: 'إعادة الاتصال بـ Home Assistant...',
-      fallback: 'وضع بيانات محدود',
-      devices: 'جهاز',
-      active: 'نشط',
-      noEntities: 'لا توجد كيانات مرتبطة',
-      noVisible: 'لا توجد طوابق تحتوي كيانات فعلية حالياً',
-      humidity: 'الرطوبة',
-      wind: 'الرياح',
-      entity: 'الكيان'
-    }
-  };
-
-  const ICONS = {
-    lights: '<svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1Zm3-20a7 7 0 0 0-4.39 12.45c.68.55 1.39 1.73 1.39 2.55V17h6v-1c0-.82.71-2 1.39-2.55A7 7 0 0 0 12 1Z"/></svg>',
-    climate: '<svg viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v6.13a4 4 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 10a2 2 0 1 0 2 2 2 2 0 0 0-2-2Z"/></svg>',
-    security: '<svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3Zm0 10.5 4-4 1.41 1.41L12 15.33l-2.91-2.92L10.5 11l1.5 1.5Z"/></svg>',
-    cameras: '<svg viewBox="0 0 24 24"><path d="M17 10.5V7a2 2 0 0 0-2-2h-3l-1-1H8a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3.5l5 5V5.5l-5 5Zm-7 5A3.5 3.5 0 1 1 13.5 12 3.5 3.5 0 0 1 10 15.5Z"/></svg>',
-    media: '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Zm-4 2h2v10H4V7Z"/></svg>',
-    access: '<svg viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 1 5 5v2h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5Zm3 7V6a3 3 0 0 0-6 0v2h6Zm-3 4a2 2 0 0 1 1 3.73V18h-2v-2.27A2 2 0 0 1 12 12Z"/></svg>',
-    curtains: '<svg viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16h-2V5h-6v15h-2V5H5v15H3V4a1 1 0 0 1 1-1Z"/></svg>',
-    leaks: '<svg viewBox="0 0 24 24"><path d="M12 2s6 6.13 6 10a6 6 0 1 1-12 0C6 8.13 12 2 12 2Zm4.24 10.19-.94-.35A3.49 3.49 0 0 1 12 15.5v1a4.5 4.5 0 0 0 4.24-4.31Z"/></svg>'
-  };
-
-  const HOUSE = {
-    floors: [
-      {
-        id: 'ground',
-        en: 'Ground Floor',
-        ar: 'الدور الأرضي',
-        rooms: ['Back Doorway', 'Sitting Room', 'Prep Kitchen', 'Father Room']
-      },
-      {
-        id: 'first',
-        en: 'First Floor',
-        ar: 'الدور الأول',
-        rooms: ['Office', 'Sitting Room', 'Living Room', 'Second Room'],
-        suite: {
-          en: 'Master Suite',
-          ar: 'الجناح الرئيسي',
-          rooms: ['Master Bedroom', 'Master Bathroom', 'Master Closet Room']
+      const I18N = {
+        en: {
+          loading: 'Loading Home Assistant data…', unavailable: 'Unavailable', unknown: 'Unknown',
+          floors: 'Floors', rooms: 'Rooms', devices: 'Devices', entities: 'Entities',
+          categories: 'Categories', noData: 'No matching entities available right now.',
+          noRooms: 'No rooms with active entities on this floor.',
+          noDevices: 'No visible devices in this room.',
+          home: 'Home', back: 'Back', summary: 'Summary',
+          homeSub: 'Premium villa control with floor and room hierarchy.',
+          allOnline: 'Online', alert: 'Alerts', favorites: 'Active',
+          floorSummary: 'Floor Summary', roomSummary: 'Room Summary',
+          lighting: 'Lighting', climate: 'Climate', security: 'Security', cameras: 'Cameras', media: 'Media',
+          curtains: 'Curtains', sensors: 'Sensors', power: 'Power / Plugs', appliances: 'Appliances', locks: 'Locks', water: 'Water / Leak', other: 'Other Controls',
+          open: 'Open', close: 'Close', stop: 'Stop', lock: 'Lock', unlock: 'Unlock', details: 'Details',
+          day: 'Day', night: 'Night', current: 'Current', colors: 'Colors', glass: 'Glass',
+          langEn: 'EN', langAr: 'AR', suite: 'Master Suite', contains: 'Contains'
+        },
+        ar: {
+          loading: 'جاري تحميل بيانات Home Assistant…', unavailable: 'غير متاح', unknown: 'غير معروف',
+          floors: 'الأدوار', rooms: 'الغرف', devices: 'الأجهزة', entities: 'الكيانات',
+          categories: 'الفئات', noData: 'لا توجد كيانات مناسبة للعرض حالياً.',
+          noRooms: 'لا توجد غرف تحتوي على كيانات نشطة في هذا الدور.',
+          noDevices: 'لا توجد أجهزة مرئية في هذه الغرفة.',
+          home: 'الرئيسية', back: 'رجوع', summary: 'ملخص',
+          homeSub: 'تحكم فاخر للفيلا بهيكلية الأدوار والغرف.',
+          allOnline: 'متصل', alert: 'تنبيهات', favorites: 'نشط',
+          floorSummary: 'ملخص الدور', roomSummary: 'ملخص الغرفة',
+          lighting: 'الإضاءة', climate: 'المناخ', security: 'الأمان', cameras: 'الكاميرات', media: 'الوسائط',
+          curtains: 'الستائر', sensors: 'المستشعرات', power: 'الطاقة / المقابس', appliances: 'الأجهزة المنزلية', locks: 'الأقفال', water: 'المياه / التسرب', other: 'تحكمات أخرى',
+          open: 'فتح', close: 'إغلاق', stop: 'إيقاف', lock: 'قفل', unlock: 'فتح القفل', details: 'تفاصيل',
+          day: 'نهار', night: 'ليل', current: 'Current', colors: 'Colors', glass: 'Glass',
+          langEn: 'EN', langAr: 'AR', suite: 'الجناح الرئيسي', contains: 'يحتوي على'
         }
-      },
-      {
-        id: 'second',
-        en: 'Second Floor',
-        ar: 'الدور الثاني',
-        rooms: ['Second Floor Hall']
-      },
-      {
-        id: 'roof',
-        en: 'Roof',
-        ar: 'السطح',
-        rooms: ['Roof']
+      };
+
+      const CATEGORY_CONFIG = [
+        { key: 'lighting', domains: ['light'], icon: '💡', gradOn: 'linear-gradient(95deg, rgba(255,198,64,.58), rgba(255,198,64,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(255,198,64,.2), rgba(255,198,64,0) 64%)' },
+        { key: 'climate', domains: ['climate','water_heater'], icon: '🌡️', gradOn: 'linear-gradient(95deg, rgba(255,106,92,.58), rgba(255,106,92,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(255,106,92,.25), rgba(255,106,92,0) 64%)' },
+        { key: 'security', domains: ['alarm_control_panel','binary_sensor'], classes: ['safety','problem'], icon: '🛡️', gradOn: 'linear-gradient(95deg, rgba(123,214,128,.56), rgba(123,214,128,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(123,214,128,.2), rgba(123,214,128,0) 64%)' },
+        { key: 'cameras', domains: ['camera'], icon: '📷', gradOn: 'linear-gradient(95deg, rgba(98,199,255,.56), rgba(98,199,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(98,199,255,.23), rgba(98,199,255,0) 64%)' },
+        { key: 'media', domains: ['media_player','remote'], icon: '🎵', gradOn: 'linear-gradient(95deg, rgba(192,134,255,.56), rgba(192,134,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(192,134,255,.23), rgba(192,134,255,0) 64%)' },
+        { key: 'curtains', domains: ['cover'], icon: '🪟', gradOn: 'linear-gradient(95deg, rgba(132,191,255,.56), rgba(132,191,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(132,191,255,.23), rgba(132,191,255,0) 64%)' },
+        { key: 'power', domains: ['switch','fan'], icon: '🔌', gradOn: 'linear-gradient(95deg, rgba(82,196,255,.56), rgba(82,196,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(82,196,255,.23), rgba(82,196,255,0) 64%)' },
+        { key: 'appliances', domains: ['vacuum','button','input_button'], icon: '🧺', gradOn: 'linear-gradient(95deg, rgba(149,176,255,.56), rgba(149,176,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(149,176,255,.23), rgba(149,176,255,0) 64%)' },
+        { key: 'locks', domains: ['lock'], icon: '🔒', gradOn: 'linear-gradient(95deg, rgba(125,218,126,.56), rgba(125,218,126,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(125,218,126,.23), rgba(125,218,126,0) 64%)' },
+        { key: 'water', domains: ['water_heater'], classes: ['moisture'], icon: '💧', gradOn: 'linear-gradient(95deg, rgba(90,178,255,.56), rgba(90,178,255,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(90,178,255,.23), rgba(90,178,255,0) 64%)' },
+        { key: 'sensors', domains: ['sensor','binary_sensor'], icon: '📊', gradOn: 'linear-gradient(95deg, rgba(255,176,81,.56), rgba(255,176,81,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(255,176,81,.23), rgba(255,176,81,0) 64%)' },
+        { key: 'other', domains: ['scene','script','number','select','input_number','input_select','input_boolean'], icon: '⚙️', gradOn: 'linear-gradient(95deg, rgba(173,189,214,.56), rgba(173,189,214,0) 64%)', gradOff: 'linear-gradient(95deg, rgba(173,189,214,.23), rgba(173,189,214,0) 64%)' }
+      ];
+
+      const state = {
+        lang: localStorage.getItem('villa.lang') || 'en',
+        mode: localStorage.getItem('villa.mode') || 'night',
+        family: localStorage.getItem('villa.family') || 'colors',
+        route: { page: 'home', floorId: null, roomId: null },
+        hass: null,
+        lastStateHash: '',
+        cache: { floors: [], metrics: {}, roomMap: {} },
+        registries: { floors: [], areas: [], devices: [], entities: [] },
+        loading: true,
+        error: ''
+      };
+
+      const app = document.getElementById('app');
+      const modal = document.getElementById('modal');
+
+      const t = (k) => I18N[state.lang][k] || k;
+      const isRTL = () => state.lang === 'ar';
+
+      function safeText(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
       }
-    ]
-  };
 
-  const ROOM_PROFILE = {
-    'Back Doorway': [/back\s?door/i, /doorway/i, /entrance/i],
-    'Sitting Room': [/sitting\s?room/i, /majlis/i, /lounge/i],
-    'Prep Kitchen': [/prep\s?kitchen/i, /service\s?kitchen/i, /dirty\s?kitchen/i],
-    'Father Room': [/father\s?room/i, /dad\s?room/i],
-    'Master Bedroom': [/master\s?bedroom/i, /owner\s?bedroom/i],
-    'Master Bathroom': [/master\s?bath(room)?/i, /owner\s?bath(room)?/i],
-    'Master Closet Room': [/master\s?closet/i, /dressing\s?room/i],
-    'Office': [/office/i, /study/i],
-    'Living Room': [/living\s?room/i, /family\s?room/i],
-    'Second Room': [/second\s?room/i, /bedroom\s?2/i, /guest\s?room/i],
-    'Second Floor Hall': [/second\s?floor/i, /upper\s?hall/i],
-    'Roof': [/roof/i, /rooftop/i]
-  };
+      function normalize(str) {
+        return String(str || '').toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+      }
 
-  const SYSTEMS = [
-    { id: 'lights', label: 'Lighting', predicate: e => domain(e) === 'light' },
-    { id: 'climate', label: 'Climate', predicate: e => ['climate', 'fan'].includes(domain(e)) },
-    { id: 'security', label: 'Security', predicate: e => ['alarm_control_panel', 'lock'].includes(domain(e)) },
-    { id: 'cameras', label: 'Cameras', predicate: e => domain(e) === 'camera' },
-    { id: 'media', label: 'Media', predicate: e => domain(e) === 'media_player' },
-    { id: 'access', label: 'Doors & Windows', predicate: e => /door|window|gate|lock/i.test(`${e.entity_id} ${friendly(e)}`) },
-    { id: 'curtains', label: 'Curtains', predicate: e => domain(e) === 'cover' },
-    { id: 'leaks', label: 'Water Safety', predicate: e => /leak|water|moisture|flood/i.test(`${e.entity_id} ${friendly(e)}`) }
-  ];
-
-  const STATE = {
-    lang: localStorage.getItem('villa_lang') || 'en',
-    family: localStorage.getItem('villa_family') || 'current',
-    mode: localStorage.getItem('villa_mode') || 'night',
-    states: [],
-    ws: null,
-    wsMsgId: 1,
-    connectedVia: 'none',
-    wsAuthOk: false
-  };
-
-  const q = (sel, parent = document) => parent.querySelector(sel);
-  const qa = (sel, parent = document) => [...parent.querySelectorAll(sel)];
-
-  function domain(entity) { return entity.entity_id.split('.')[0] || ''; }
-  function friendly(entity) { return entity.attributes?.friendly_name || entity.entity_id; }
-
-  function normalizedSource(entity) {
-    const attrs = entity.attributes || {};
-    return [
-      entity.entity_id,
-      attrs.friendly_name,
-      attrs.area_id,
-      attrs.floor_id,
-      attrs.device_class,
-      attrs.room,
-      attrs.location,
-      attrs.zone,
-      attrs.assigned_room,
-      attrs.level
-    ].filter(Boolean).join(' ').toLowerCase();
-  }
-
-  function stateIsActive(entity) {
-    const offStates = new Set(['off', 'unavailable', 'unknown', 'idle', 'closed', 'disarmed', 'standby', 'not_home']);
-    return !offStates.has(String(entity.state || '').toLowerCase());
-  }
-
-  function entityIsRenderable(entity) {
-    return !!entity?.entity_id && !['zone', 'sun', 'person'].includes(domain(entity));
-  }
-
-  function mapRoomEntities(roomName) {
-    const profiles = ROOM_PROFILE[roomName] || [new RegExp(roomName, 'i')];
-    return STATE.states.filter(entity => {
-      if (!entityIsRenderable(entity)) return false;
-      const source = normalizedSource(entity);
-      return profiles.some(rx => rx.test(source));
-    });
-  }
-
-  function renderSystemsStrip() {
-    const root = q('#systemsStrip');
-    root.innerHTML = '';
-
-    SYSTEMS.forEach(system => {
-      const matched = STATE.states.filter(e => entityIsRenderable(e) && system.predicate(e));
-      const active = matched.filter(stateIsActive);
-      const card = document.createElement('article');
-      card.className = 'system-chip premium-card';
-      if (active.length > 0) card.classList.add('active');
-      if (system.id === 'leaks' && active.length > 0) card.classList.add('alert');
-
-      card.innerHTML = `
-        <div class="chip-badge">${active.length}</div>
-        <div class="icon-wrap">${ICONS[system.id]}</div>
-        <div class="system-title">${system.label}</div>
-        <div class="system-count">${matched.length} ${I18N[STATE.lang].devices}</div>
-      `;
-
-      root.appendChild(card);
-    });
-  }
-
-  function entityChip(entity) {
-    const chip = document.createElement('span');
-    chip.className = `entity-chip ${stateIsActive(entity) ? '' : 'off'}`;
-    chip.textContent = friendly(entity);
-    return chip;
-  }
-
-  function buildRoomCard(roomName, entities) {
-    const card = document.createElement('article');
-    card.className = 'room-card';
-    const activeCount = entities.filter(stateIsActive).length;
-
-    card.innerHTML = `
-      <div class="room-head">
-        <div>
-          <div class="room-title">${roomName}</div>
-          <div class="room-stats">${activeCount}/${entities.length} ${I18N[STATE.lang].active}</div>
-        </div>
-        <div class="chev">⌄</div>
-      </div>
-      <div class="room-body"><div class="entity-list"></div></div>
-    `;
-
-    const list = q('.entity-list', card);
-    entities.slice(0, 35).forEach(entity => list.appendChild(entityChip(entity)));
-    q('.room-head', card).addEventListener('click', () => card.classList.toggle('open'));
-    return card;
-  }
-
-  function buildMasterSuiteCard(suiteDef) {
-    const subrooms = suiteDef.rooms
-      .map(room => ({ room, entities: mapRoomEntities(room) }))
-      .filter(item => item.entities.length > 0);
-
-    if (!subrooms.length) return null;
-
-    const suiteEntities = subrooms.flatMap(s => s.entities);
-    const suiteCard = document.createElement('article');
-    suiteCard.className = 'room-card suite';
-
-    suiteCard.innerHTML = `
-      <div class="room-head">
-        <div>
-          <div class="room-title">${STATE.lang === 'ar' ? suiteDef.ar : suiteDef.en}</div>
-          <div class="room-stats">${suiteEntities.filter(stateIsActive).length}/${suiteEntities.length} ${I18N[STATE.lang].devices}</div>
-        </div>
-        <div class="chev">⌄</div>
-      </div>
-      <div class="room-body"><div class="suite-subrooms"></div></div>
-    `;
-
-    const subRoot = q('.suite-subrooms', suiteCard);
-    subrooms.forEach(({ room, entities }) => {
-      const activeCount = entities.filter(stateIsActive).length;
-      const block = document.createElement('section');
-      block.className = 'subroom-card';
-      block.innerHTML = `
-        <div class="subroom-title">${room} · ${activeCount}/${entities.length}</div>
-        <div class="entity-list"></div>
-      `;
-      const list = q('.entity-list', block);
-      entities.slice(0, 22).forEach(entity => list.appendChild(entityChip(entity)));
-      subRoot.appendChild(block);
-    });
-
-    q('.room-head', suiteCard).addEventListener('click', () => suiteCard.classList.toggle('open'));
-    return suiteCard;
-  }
-
-  function renderFloors() {
-    const root = q('#floorsRoot');
-    root.innerHTML = '';
-    let visibleFloorCount = 0;
-
-    HOUSE.floors.forEach(floor => {
-      const roomBlocks = floor.rooms
-        .map(roomName => ({ roomName, entities: mapRoomEntities(roomName) }))
-        .filter(item => item.entities.length > 0);
-
-      const suiteCard = floor.suite ? buildMasterSuiteCard(floor.suite) : null;
-      const floorEntitiesTotal = roomBlocks.reduce((acc, room) => acc + room.entities.length, 0) + (suiteCard ? floor.suite.rooms.flatMap(r => mapRoomEntities(r)).length : 0);
-
-      if (floorEntitiesTotal === 0) return;
-
-      visibleFloorCount += 1;
-      const card = document.createElement('section');
-      card.className = 'premium-card floor-card';
-      const floorName = STATE.lang === 'ar' ? floor.ar : floor.en;
-      const grid = document.createElement('div');
-      grid.className = 'rooms-grid';
-
-      if (suiteCard) grid.appendChild(suiteCard);
-      roomBlocks.forEach(room => grid.appendChild(buildRoomCard(room.roomName, room.entities)));
-
-      card.innerHTML = `
-        <div class="floor-head">
-          <div class="floor-name">${floorName}</div>
-          <div class="floor-meta">${floorEntitiesTotal} ${I18N[STATE.lang].devices}</div>
-        </div>
-      `;
-      card.appendChild(grid);
-      root.appendChild(card);
-    });
-
-    if (!visibleFloorCount) {
-      const empty = document.createElement('div');
-      empty.className = 'empty-state premium-card';
-      empty.textContent = I18N[STATE.lang].noVisible;
-      root.appendChild(empty);
-    }
-  }
-
-  function updateClock() {
-    const now = new Date();
-    const locale = STATE.lang === 'ar' ? 'ar-KW' : 'en-US';
-
-    q('#clockTime').textContent = now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
-    q('#clockDate').textContent = now.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
-  function bestWeatherEntity() {
-    const weatherEntities = STATE.states.filter(e => domain(e) === 'weather');
-    if (weatherEntities.length) {
-      return weatherEntities.find(e => e.state !== 'unavailable' && e.state !== 'unknown') || weatherEntities[0];
-    }
-    const fallbackTemp = STATE.states.find(e => /outside.*temp|temperature.*outside|outdoor.*temp/i.test(e.entity_id + ' ' + friendly(e)));
-    if (fallbackTemp) return fallbackTemp;
-    return null;
-  }
-
-  function bindWeather() {
-    const weather = bestWeatherEntity();
-    if (!weather) {
-      q('#weatherTemp').textContent = '--°';
-      q('#weatherCondition').textContent = '--';
-      q('#weatherHumidity').textContent = `${I18N[STATE.lang].humidity} --%`;
-      q('#weatherWind').textContent = `${I18N[STATE.lang].wind} --`;
-      q('#weatherEntity').textContent = `${I18N[STATE.lang].entity} --`;
-      return;
-    }
-
-    const attrs = weather.attributes || {};
-    const t = Number(attrs.temperature);
-    const h = attrs.humidity;
-    const wind = attrs.wind_speed ?? attrs.wind_bearing ?? attrs.wind_speed_unit ?? '--';
-
-    q('#weatherTemp').textContent = Number.isFinite(t) ? `${Math.round(t)}°` : `${Number(weather.state) || '--'}°`;
-    q('#weatherCondition').textContent = attrs.friendly_name || weather.state || '--';
-    q('#weatherHumidity').textContent = `${I18N[STATE.lang].humidity} ${h ?? '--'}%`;
-    q('#weatherWind').textContent = `${I18N[STATE.lang].wind} ${wind}`;
-    q('#weatherEntity').textContent = `${I18N[STATE.lang].entity} ${weather.entity_id}`;
-  }
-
-  function setHaStatus(key, className = '') {
-    const el = q('#haStatus');
-    el.textContent = I18N[STATE.lang][key];
-    el.className = `ha-state ${className}`.trim();
-  }
-
-  function renderAll() {
-    bindWeather();
-    renderSystemsStrip();
-    renderFloors();
-  }
-
-  function applyLanguage() {
-    document.documentElement.lang = STATE.lang;
-    document.documentElement.dir = STATE.lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', STATE.lang === 'ar');
-
-    q('#weatherLabel').textContent = I18N[STATE.lang].weather;
-    q('#clockLabel').textContent = I18N[STATE.lang].time;
-    qa('#langSeg button').forEach(button => button.classList.toggle('on', button.dataset.lang === STATE.lang));
-
-    updateClock();
-    renderAll();
-  }
-
-  function applyTheme() {
-    document.body.dataset.family = STATE.family;
-    document.body.dataset.mode = STATE.mode;
-
-    qa('#familySeg button').forEach(b => b.classList.toggle('on', b.dataset.family === STATE.family));
-    qa('#modeSeg button').forEach(b => b.classList.toggle('on', b.dataset.mode === STATE.mode));
-  }
-
-  function snapshotFromHassObject(hass) {
-    const list = Object.values(hass.states || {}).filter(Boolean);
-    if (!list.length) return false;
-    STATE.states = list;
-    STATE.connectedVia = 'hass';
-    setHaStatus('connected', 'good');
-    renderAll();
-    return true;
-  }
-
-  function tryConnectViaWindowHass() {
-    const candidates = [window.hass, window.parent?.hass, document.querySelector('home-assistant')?.hass].filter(Boolean);
-    for (const hass of candidates) {
-      if (snapshotFromHassObject(hass)) return true;
-    }
-    return false;
-  }
-
-  function getStoredAccessToken() {
-    try {
-      const raw = localStorage.getItem('hassTokens');
-      if (!raw) return '';
-      const parsed = JSON.parse(raw);
-      return parsed?.access_token || '';
-    } catch {
-      return '';
-    }
-  }
-
-  async function loadStatesViaRest() {
-    const token = getStoredAccessToken();
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    const res = await fetch('/api/states', { credentials: 'same-origin', cache: 'no-store', headers });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const payload = await res.json();
-    if (!Array.isArray(payload)) throw new Error('Invalid payload');
-    STATE.states = payload;
-    STATE.connectedVia = 'rest';
-    setHaStatus('fallback');
-    renderAll();
-  }
-
-  function openWs() {
-    const token = getStoredAccessToken();
-    if (!token) return false;
-
-    try {
-      const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const socket = new WebSocket(`${proto}//${location.host}/api/websocket`);
-      STATE.ws = socket;
-      setHaStatus('reconnecting');
-
-      socket.onmessage = event => {
-        let msg;
-        try { msg = JSON.parse(event.data); } catch { return; }
-
-        if (msg.type === 'auth_required') {
-          socket.send(JSON.stringify({ type: 'auth', access_token: token }));
-        } else if (msg.type === 'auth_ok') {
-          STATE.wsAuthOk = true;
-          socket.send(JSON.stringify({ id: STATE.wsMsgId++, type: 'get_states' }));
-          socket.send(JSON.stringify({ id: STATE.wsMsgId++, type: 'subscribe_events', event_type: 'state_changed' }));
-          setHaStatus('connected', 'good');
-        } else if (msg.type === 'result' && Array.isArray(msg.result)) {
-          STATE.states = msg.result;
-          renderAll();
-        } else if (msg.type === 'event' && msg.event?.event_type === 'state_changed') {
-          const changed = msg.event.data?.new_state;
-          if (!changed?.entity_id) return;
-          const ix = STATE.states.findIndex(s => s.entity_id === changed.entity_id);
-          if (ix >= 0) STATE.states[ix] = changed;
-          else STATE.states.push(changed);
-          renderAll();
+      function detectRoomFromText(textRaw) {
+        const text = normalize(textRaw);
+        if (!text) return null;
+        for (const [roomId, room] of Object.entries(ROOMS)) {
+          const names = [room.en, room.ar, ...(room.aliases || [])].map(normalize);
+          if (names.some((name) => name && text.includes(name))) return roomId;
         }
-      };
+        return null;
+      }
 
-      socket.onclose = () => {
-        STATE.ws = null;
-        STATE.wsAuthOk = false;
-        setHaStatus('reconnecting');
-      };
-      return true;
-    } catch {
-      return false;
-    }
-  }
+      function getHass() {
+        if (state.hass && state.hass.states) return state.hass;
+        try {
+          const root = window.parent?.document?.querySelector('home-assistant');
+          const hass = root?.hass
+            || root?.shadowRoot?.querySelector('home-assistant-main')?.hass
+            || root?.shadowRoot?.querySelector('home-assistant-main')?.shadowRoot?.querySelector('app-drawer-layout partial-panel-resolver')?.hass;
+          if (hass && hass.states) {
+            state.hass = hass;
+            return hass;
+          }
+        } catch (_) {}
+        return null;
+      }
 
-  async function refreshHA() {
-    if (tryConnectViaWindowHass()) return;
+      async function fetchRegistries(hass) {
+        if (!hass?.connection?.sendMessagePromise) return;
+        const req = (type) => hass.connection.sendMessagePromise({ type }).catch(() => []);
+        const [floors, areas, devices, entities] = await Promise.all([
+          req('config/floor_registry/list'),
+          req('config/area_registry/list'),
+          req('config/device_registry/list'),
+          req('config/entity_registry/list')
+        ]);
+        state.registries = {
+          floors: Array.isArray(floors) ? floors : [],
+          areas: Array.isArray(areas) ? areas : [],
+          devices: Array.isArray(devices) ? devices : [],
+          entities: Array.isArray(entities) ? entities : []
+        };
+      }
 
-    if (!STATE.ws && openWs()) return;
+      function floorIdByName(name) {
+        const key = normalize(name);
+        if (key.includes('ground') || key.includes('ارض')) return 'ground_floor';
+        if (key.includes('first') || key.includes('اول')) return 'first_floor';
+        if (key.includes('second') || key.includes('ثان')) return 'second_floor';
+        if (key.includes('roof') || key.includes('سطح')) return 'roof';
+        return null;
+      }
 
-    try {
-      await loadStatesViaRest();
-    } catch {
-      STATE.states = [];
-      setHaStatus('fallback', 'warn');
-      renderAll();
-    }
-  }
+      function buildAreaMap() {
+        const areaById = new Map(state.registries.areas.map((a) => [a.area_id, a]));
+        const floorByArea = new Map();
 
-  qa('#familySeg button').forEach(button => {
-    button.addEventListener('click', () => {
-      STATE.family = button.dataset.family;
-      localStorage.setItem('villa_family', STATE.family);
-      applyTheme();
-    });
-  });
+        for (const area of state.registries.areas) {
+          let floorId = null;
+          if (area.floor_id) {
+            const regFloor = state.registries.floors.find((f) => f.floor_id === area.floor_id);
+            floorId = floorIdByName(regFloor?.name || regFloor?.aliases?.[0] || '') || floorIdByName(area.name);
+          }
+          floorId = floorId || floorIdByName(area.name) || null;
+          if (floorId) floorByArea.set(area.area_id, floorId);
+        }
+        return { areaById, floorByArea };
+      }
 
-  qa('#modeSeg button').forEach(button => {
-    button.addEventListener('click', () => {
-      STATE.mode = button.dataset.mode;
-      localStorage.setItem('villa_mode', STATE.mode);
-      applyTheme();
-    });
-  });
+      function isJunkEntity(entity, reg) {
+        const id = entity.entity_id;
+        const domain = id.split('.')[0];
+        const attrs = entity.attributes || {};
+        const category = reg?.entity_category || attrs.entity_category;
+        const name = normalize(attrs.friendly_name || id);
 
-  qa('#langSeg button').forEach(button => {
-    button.addEventListener('click', () => {
-      STATE.lang = button.dataset.lang;
-      localStorage.setItem('villa_lang', STATE.lang);
-      applyLanguage();
-    });
-  });
+        const blockedDomains = new Set(['automation', 'update', 'conversation', 'assist_satellite', 'person', 'zone', 'sun', 'weather', 'calendar', 'tts', 'stt', 'tts_engine']);
+        if (blockedDomains.has(domain)) return true;
+        if (reg?.hidden_by || reg?.disabled_by) return true;
+        if (category === 'diagnostic' || category === 'config') return true;
+        if (/(snapshot|counter|firmware|uptime|rssi|linkquality|last seen|last_seen|debug|raw|signal)/.test(name)) return true;
+        if (/^(sensor|binary_sensor)\..*(voltage|current|power_factor)$/.test(id)) return true;
+        return false;
+      }
 
-  applyTheme();
-  updateClock();
-  setInterval(updateClock, 1000);
-  applyLanguage();
-  refreshHA();
-  setInterval(refreshHA, 30000);
-</script>
+      function classifyCategory(entity) {
+        const domain = entity.entity_id.split('.')[0];
+        const dclass = entity.attributes.device_class || '';
+        const cfg = CATEGORY_CONFIG.find((c) => c.domains.includes(domain) && (!c.classes || c.classes.includes(dclass)))
+          || CATEGORY_CONFIG.find((c) => c.domains.includes(domain))
+          || CATEGORY_CONFIG.find((c) => c.key === 'other');
+        return cfg;
+      }
+
+      function roomAndFloorForEntity(entity, regEntity, areaMap, deviceById) {
+        const attrs = entity.attributes || {};
+        const areaId = regEntity?.area_id || (regEntity?.device_id ? deviceById.get(regEntity.device_id)?.area_id : null);
+        const area = areaId ? areaMap.areaById.get(areaId) : null;
+        let roomId = null;
+        let floorId = null;
+
+        if (area) {
+          roomId = detectRoomFromText(`${area.name} ${area.aliases || ''}`);
+          floorId = areaMap.floorByArea.get(area.area_id) || null;
+        }
+
+        const refText = `${attrs.friendly_name || ''} ${entity.entity_id}`;
+        if (!roomId) roomId = detectRoomFromText(refText);
+
+        if (!floorId) {
+          if (roomId && REQUIRED_STRUCTURE.first_floor.rooms.includes(roomId)) floorId = 'first_floor';
+          else if (roomId && REQUIRED_STRUCTURE.ground_floor.rooms.includes(roomId)) floorId = 'ground_floor';
+          else if (roomId && REQUIRED_STRUCTURE.roof.rooms.includes(roomId)) floorId = 'roof';
+          else floorId = floorIdByName(refText) || 'ground_floor';
+        }
+
+        if (roomId === 'master_suite') {
+          const child = detectRoomFromText(refText.replace('master suite', ''));
+          if (MASTER_SUITE_CHILDREN.includes(child)) roomId = child;
+        }
+
+        return { roomId, floorId };
+      }
+
+      function formatState(entity) {
+        const attrs = entity.attributes || {};
+        const stateVal = entity.state;
+        if (stateVal === 'unavailable') return t('unavailable');
+        if (stateVal === 'unknown') return t('unknown');
+        const domain = entity.entity_id.split('.')[0];
+
+        if (domain === 'light') {
+          const parts = [stateVal];
+          if (attrs.brightness != null) parts.push(`${Math.round((attrs.brightness / 255) * 100)}%`);
+          if (attrs.color_temp_kelvin) parts.push(`${attrs.color_temp_kelvin}K`);
+          return parts.join(' • ');
+        }
+        if (domain === 'climate') {
+          const c = attrs.current_temperature != null ? `${attrs.current_temperature}°` : '';
+          const s = attrs.temperature != null ? `${attrs.temperature}°` : '';
+          return [stateVal, c && `Now ${c}`, s && `Set ${s}`].filter(Boolean).join(' • ');
+        }
+        if (domain === 'sensor') {
+          const u = attrs.unit_of_measurement ? ` ${attrs.unit_of_measurement}` : '';
+          return `${stateVal}${u}`;
+        }
+        if (domain === 'camera') return stateVal === 'recording' ? 'Recording' : stateVal;
+        return stateVal;
+      }
+
+      function isOn(entity) {
+        const st = entity.state;
+        const d = entity.entity_id.split('.')[0];
+        if (d === 'cover') return !['closed','closing'].includes(st);
+        if (d === 'lock') return st === 'unlocked';
+        if (d === 'alarm_control_panel') return !['disarmed','off'].includes(st);
+        return ['on','open','playing','cool','heat','unlocked','arming','armed_away','armed_home','armed_night'].includes(st);
+      }
+
+      function computeData(hass) {
+        const states = Object.values(hass.states || {});
+        const entityRegById = new Map(state.registries.entities.map((e) => [e.entity_id, e]));
+        const deviceById = new Map(state.registries.devices.map((d) => [d.id, d]));
+        const areaMap = buildAreaMap();
+
+        const floorMap = new Map(Object.keys(REQUIRED_STRUCTURE).map((fid) => [fid, { id: fid, rooms: new Map(), entities: [] }]));
+
+        states.forEach((entity) => {
+          const reg = entityRegById.get(entity.entity_id);
+          if (isJunkEntity(entity, reg)) return;
+
+          const { roomId, floorId } = roomAndFloorForEntity(entity, reg, areaMap, deviceById);
+          if (!roomId || !floorMap.has(floorId)) return;
+
+          const floor = floorMap.get(floorId);
+          if (!floor.rooms.has(roomId)) floor.rooms.set(roomId, []);
+          floor.rooms.get(roomId).push(entity);
+          floor.entities.push(entity);
+        });
+
+        // master suite derived group
+        const first = floorMap.get('first_floor');
+        const suiteEntities = MASTER_SUITE_CHILDREN.flatMap((r) => first.rooms.get(r) || []);
+        if (suiteEntities.length) first.rooms.set('master_suite', suiteEntities);
+
+        const floors = [];
+        floorMap.forEach((floor) => {
+          const visibleRooms = Array.from(floor.rooms.entries()).filter(([, entities]) => entities.length);
+          if (!visibleRooms.length) return;
+          floors.push({
+            ...floor,
+            visibleRooms,
+            counts: {
+              rooms: visibleRooms.filter(([r]) => r !== 'master_suite' || suiteEntities.length).length,
+              devices: floor.entities.length
+            }
+          });
+        });
+
+        const allEntities = floors.flatMap((f) => f.entities);
+        const metrics = {
+          floors: floors.length,
+          rooms: floors.reduce((sum, f) => sum + f.visibleRooms.filter(([r]) => r !== 'master_suite').length, 0),
+          devices: allEntities.length,
+          online: allEntities.filter((e) => e.state !== 'unavailable').length,
+          alerts: allEntities.filter((e) => ['problem','safety','smoke','gas','moisture'].includes(e.attributes.device_class) && ['on','detected','open'].includes(e.state)).length,
+          active: allEntities.filter((e) => isOn(e)).length
+        };
+
+        state.cache = { floors, metrics };
+      }
+
+      function render() {
+        document.body.dataset.mode = state.mode;
+        document.body.dataset.family = state.family;
+        document.body.classList.toggle('rtl', isRTL());
+        document.documentElement.lang = state.lang;
+        document.documentElement.dir = isRTL() ? 'rtl' : 'ltr';
+
+        if (state.loading) {
+          app.innerHTML = `<div class="topbar card">${topbarHTML()}</div><div class="loading">${safeText(t('loading'))}</div>`;
+          wireTopbar();
+          return;
+        }
+
+        let content = '';
+        if (!state.cache.floors.length) {
+          content = `<div class="empty">${safeText(t('noData'))}</div>`;
+        } else if (state.route.page === 'home') {
+          content = renderHome();
+        } else if (state.route.page === 'floor') {
+          content = renderFloor(state.route.floorId);
+        } else if (state.route.page === 'suite') {
+          content = renderSuite();
+        } else {
+          content = renderRoom(state.route.floorId, state.route.roomId);
+        }
+
+        app.innerHTML = `<div class="topbar card">${topbarHTML()}</div>${content}<div class="footer-note">ALNAJDI SMART VILA</div>`;
+        wireTopbar();
+        wireActions();
+      }
+
+      function topbarHTML() {
+        const canBack = state.route.page !== 'home';
+        return `
+          <div>${canBack ? `<button class="back-btn" data-act="back" aria-label="${safeText(t('back'))}">${isRTL() ? '→' : '←'}</button>` : ''}</div>
+          <div class="title">ALNAJDI SMART VILA</div>
+          <div style="display:flex;gap:6px;justify-content:${isRTL() ? 'start' : 'end'};flex-wrap:wrap;">
+            <div class="seg" role="tablist">
+              <button data-lang="en" class="${state.lang==='en'?'active':''}">${t('langEn')}</button>
+              <button data-lang="ar" class="${state.lang==='ar'?'active':''}">${t('langAr')}</button>
+            </div>
+            <div class="seg" role="tablist">
+              <button data-mode="day" class="${state.mode==='day'?'active':''}">${t('day')}</button>
+              <button data-mode="night" class="${state.mode==='night'?'active':''}">${t('night')}</button>
+            </div>
+            <div class="seg" role="tablist">
+              <button data-family="current" class="${state.family==='current'?'active':''}">${t('current')}</button>
+              <button data-family="colors" class="${state.family==='colors'?'active':''}">${t('colors')}</button>
+              <button data-family="glass" class="${state.family==='glass'?'active':''}">${t('glass')}</button>
+            </div>
+          </div>`;
+      }
+
+      function renderHome() {
+        const m = state.cache.metrics;
+        const floorCards = state.cache.floors.map((floor) => {
+          const label = REQUIRED_STRUCTURE[floor.id]?.[state.lang] || floor.id;
+          return `<article class="floor-card card" data-open-floor="${floor.id}">
+            <div>
+              <div class="card-title">${safeText(label)}</div>
+              <div class="card-sub">${safeText(t('floorSummary'))}</div>
+            </div>
+            <div class="card-meta">
+              <span>${safeText(t('rooms'))}: ${floor.counts.rooms}</span>
+              <span>${safeText(t('devices'))}: ${floor.counts.devices}</span>
+            </div>
+          </article>`;
+        }).join('');
+
+        return `
+          <section class="hero card">
+            <div class="hero-main">
+              <h1>${safeText(t('home'))}</h1>
+              <p>${safeText(t('homeSub'))}</p>
+              <div class="hero-meta">
+                <div class="stat-chip"><b>${m.floors}</b><span>${safeText(t('floors'))}</span></div>
+                <div class="stat-chip"><b>${m.rooms}</b><span>${safeText(t('rooms'))}</span></div>
+                <div class="stat-chip"><b>${m.devices}</b><span>${safeText(t('devices'))}</span></div>
+              </div>
+            </div>
+            <div class="hero-side">
+              <div class="summary-card"><h4>${safeText(t('allOnline'))}</h4><p>${m.online}</p></div>
+              <div class="summary-card"><h4>${safeText(t('favorites'))}</h4><p>${m.active}</p></div>
+              <div class="summary-card"><h4>${safeText(t('alert'))}</h4><p>${m.alerts}</p></div>
+              <div class="summary-card"><h4>${safeText(t('categories'))}</h4><p>${CATEGORY_CONFIG.length-1}</p></div>
+            </div>
+          </section>
+          <section>
+            <h3 class="section-title">${safeText(t('floors'))}</h3>
+            <div class="floors-grid">${floorCards}</div>
+          </section>`;
+      }
+
+      function renderFloor(floorId) {
+        const floor = state.cache.floors.find((f) => f.id === floorId);
+        if (!floor) return `<div class="empty">${safeText(t('noRooms'))}</div>`;
+        const title = REQUIRED_STRUCTURE[floorId]?.[state.lang] || floorId;
+
+        const roomCards = floor.visibleRooms
+          .filter(([roomId]) => roomId !== 'master_suite')
+          .map(([roomId, entities]) => {
+            const isSuiteChild = MASTER_SUITE_CHILDREN.includes(roomId);
+            const roomMeta = ROOMS[roomId] || { en: roomId, ar: roomId };
+            const onclick = isSuiteChild ? `data-open-suite="1"` : `data-open-room="${roomId}"`;
+            return `<article class="room-card card" ${onclick}>
+              <div>
+                <div class="card-title">${safeText(roomMeta[state.lang] || roomMeta.en)}</div>
+                ${isSuiteChild ? `<div class="suite-badge">${safeText(t('suite'))}</div>` : ''}
+              </div>
+              <div class="card-meta"><span>${safeText(t('devices'))}: ${entities.length}</span><span>→</span></div>
+            </article>`;
+          }).join('');
+
+        const showSuite = MASTER_SUITE_CHILDREN.some((r) => floor.visibleRooms.some(([id]) => id === r));
+
+        return `
+          <section class="hero card">
+            <div class="hero-main">
+              <h1>${safeText(title)}</h1>
+              <p>${safeText(t('floorSummary'))}</p>
+              <div class="hero-meta">
+                <div class="stat-chip"><b>${floor.counts.rooms}</b><span>${safeText(t('rooms'))}</span></div>
+                <div class="stat-chip"><b>${floor.counts.devices}</b><span>${safeText(t('entities'))}</span></div>
+                <div class="stat-chip"><b>${floor.entities.filter(isOn).length}</b><span>${safeText(t('favorites'))}</span></div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3 class="section-title">${safeText(t('rooms'))}</h3>
+            <div class="rooms-grid">
+              ${showSuite ? `<article class="room-card card" data-open-suite="1"><div><div class="card-title">${safeText(t('suite'))}</div><div class="card-sub">${safeText(t('contains'))}: ${MASTER_SUITE_CHILDREN.map((r) => ROOMS[r][state.lang]).join(' • ')}</div></div><div class="card-meta"><span>${MASTER_SUITE_CHILDREN.reduce((sum, r) => sum + ((floor.rooms.get(r) || []).length), 0)} ${safeText(t('devices'))}</span><span>→</span></div></article>` : ''}
+              ${roomCards || `<div class="empty">${safeText(t('noRooms'))}</div>`}
+            </div>
+          </section>`;
+      }
+
+      function renderSuite() {
+        const floor = state.cache.floors.find((f) => f.id === 'first_floor');
+        if (!floor) return `<div class="empty">${safeText(t('noRooms'))}</div>`;
+        const cards = MASTER_SUITE_CHILDREN
+          .filter((r) => (floor.rooms.get(r) || []).length > 0)
+          .map((roomId) => `<article class="room-card card" data-open-room="${roomId}"><div class="card-title">${safeText(ROOMS[roomId][state.lang])}</div><div class="card-sub">${(floor.rooms.get(roomId) || []).length} ${safeText(t('devices'))}</div><div class="card-meta"><span>${safeText(t('roomSummary'))}</span><span>→</span></div></article>`)
+          .join('');
+
+        return `<section class="hero card"><div class="hero-main"><h1>${safeText(t('suite'))}</h1><p>${safeText(t('contains'))}: ${MASTER_SUITE_CHILDREN.map((r) => ROOMS[r][state.lang]).join(' • ')}</p></div></section><section><div class="rooms-grid">${cards || `<div class="empty">${safeText(t('noRooms'))}</div>`}</div></section>`;
+      }
+
+      function renderRoom(floorId, roomId) {
+        const floor = state.cache.floors.find((f) => f.id === floorId);
+        const roomEntities = floor?.rooms.get(roomId) || [];
+        const roomTitle = ROOMS[roomId]?.[state.lang] || roomId;
+        if (!roomEntities.length) return `<div class="empty">${safeText(t('noDevices'))}</div>`;
+
+        const byCategory = new Map(CATEGORY_CONFIG.map((c) => [c.key, []]));
+        roomEntities.forEach((entity) => {
+          const cat = classifyCategory(entity);
+          byCategory.get(cat.key).push(entity);
+        });
+
+        const sections = CATEGORY_CONFIG
+          .map((cfg) => {
+            const items = byCategory.get(cfg.key) || [];
+            if (!items.length) return '';
+            return `<section class="device-section card"><h3 class="section-title">${safeText(t(cfg.key))} <span style="font-size:11px;opacity:.8;">(${items.length})</span></h3><div class="device-grid">${items.map((e) => deviceCard(e, cfg)).join('')}</div></section>`;
+          })
+          .filter(Boolean)
+          .join('');
+
+        return `<section class="hero card"><div class="hero-main"><h1>${safeText(roomTitle)}</h1><p>${safeText(t('roomSummary'))}</p><div class="hero-meta"><div class="stat-chip"><b>${roomEntities.length}</b><span>${safeText(t('devices'))}</span></div><div class="stat-chip"><b>${roomEntities.filter((e) => e.state !== 'unavailable').length}</b><span>${safeText(t('allOnline'))}</span></div><div class="stat-chip"><b>${roomEntities.filter(isOn).length}</b><span>${safeText(t('favorites'))}</span></div></div></div></section><div class="devices-layout">${sections || `<div class="empty">${safeText(t('noDevices'))}</div>`}</div>`;
+      }
+
+      function deviceCard(entity, cat) {
+        const attrs = entity.attributes || {};
+        const name = attrs.friendly_name || entity.entity_id;
+        const on = isOn(entity);
+        const grad = on ? cat.gradOn : cat.gradOff;
+        const domain = entity.entity_id.split('.')[0];
+        const extra = controlTail(entity, domain);
+        return `<article class="device-card" data-eid="${entity.entity_id}" style="--device-grad:${grad}">
+          <div class="device-icon-wrap"><span class="device-icon">${cat.icon}</span></div>
+          <div class="device-main">
+            <div class="device-name">${safeText(name)}</div>
+            <div class="device-state">${safeText(formatState(entity))}</div>
+          </div>
+          <div class="device-tail">${extra}</div>
+        </article>`;
+      }
+
+      function controlTail(entity, domain) {
+        if (domain === 'cover') {
+          return `<button class="tiny" data-cover="open" data-eid="${entity.entity_id}">↑</button><button class="tiny" data-cover="stop" data-eid="${entity.entity_id}">■</button><button class="tiny" data-cover="close" data-eid="${entity.entity_id}">↓</button>`;
+        }
+        if (domain === 'lock') {
+          const unlock = entity.state === 'locked';
+          return `<button class="tiny" data-lock="${unlock ? 'unlock' : 'lock'}" data-eid="${entity.entity_id}">${unlock ? '🔓' : '🔒'}</button>`;
+        }
+        if (domain === 'climate') {
+          return `<button class="tiny" data-climate="details" data-eid="${entity.entity_id}">⋯</button>`;
+        }
+        return '';
+      }
+
+      async function callService(domain, service, data) {
+        const hass = getHass();
+        if (!hass) return;
+        try { await hass.callService(domain, service, data); } catch (_) {}
+      }
+
+      function openClimateModal(entityId) {
+        const hass = getHass();
+        const ent = hass?.states?.[entityId];
+        if (!ent) return;
+        const attrs = ent.attributes || {};
+        const hvacModes = attrs.hvac_modes || [];
+        const cur = attrs.temperature;
+
+        modal.innerHTML = `<div class="modal-panel"><h3 style="margin:0;">${safeText(attrs.friendly_name || entityId)}</h3><p style="margin:6px 0 0;color:var(--muted);">${safeText(formatState(ent))}</p><div class="modal-row">${hvacModes.map((m) => `<button class="btn ${ent.state===m?'active':''}" data-hvac="${m}" data-eid="${entityId}">${safeText(m)}</button>`).join('')}</div><div class="modal-row"><button class="btn" data-temp="down" data-eid="${entityId}" data-cur="${cur ?? ''}">-1°</button><button class="btn" data-temp="up" data-eid="${entityId}" data-cur="${cur ?? ''}">+1°</button><button class="btn" data-modal-close="1">Close</button></div></div>`;
+        modal.classList.add('show');
+      }
+
+      function wireTopbar() {
+        app.querySelectorAll('[data-lang]').forEach((el) => el.onclick = () => {
+          state.lang = el.dataset.lang;
+          localStorage.setItem('villa.lang', state.lang);
+          render();
+        });
+        app.querySelectorAll('[data-mode]').forEach((el) => el.onclick = () => {
+          state.mode = el.dataset.mode;
+          localStorage.setItem('villa.mode', state.mode);
+          render();
+        });
+        app.querySelectorAll('[data-family]').forEach((el) => el.onclick = () => {
+          state.family = el.dataset.family;
+          localStorage.setItem('villa.family', state.family);
+          render();
+        });
+        const b = app.querySelector('[data-act="back"]');
+        if (b) b.onclick = () => {
+          if (state.route.page === 'room' && MASTER_SUITE_CHILDREN.includes(state.route.roomId)) {
+            state.route = { page: 'suite', floorId: 'first_floor', roomId: null };
+          } else if (state.route.page === 'room') {
+            state.route = { page: 'floor', floorId: state.route.floorId, roomId: null };
+          } else if (state.route.page === 'suite') {
+            state.route = { page: 'floor', floorId: 'first_floor', roomId: null };
+          } else {
+            state.route = { page: 'home', floorId: null, roomId: null };
+          }
+          render();
+        };
+      }
+
+      function wireActions() {
+        app.querySelectorAll('[data-open-floor]').forEach((el) => el.onclick = () => {
+          state.route = { page: 'floor', floorId: el.dataset.openFloor, roomId: null };
+          render();
+        });
+
+        app.querySelectorAll('[data-open-room]').forEach((el) => el.onclick = () => {
+          state.route = { page: 'room', floorId: state.route.floorId || 'first_floor', roomId: el.dataset.openRoom };
+          render();
+        });
+
+        app.querySelectorAll('[data-open-suite]').forEach((el) => el.onclick = () => {
+          state.route = { page: 'suite', floorId: 'first_floor', roomId: null };
+          render();
+        });
+
+        app.querySelectorAll('.device-card[data-eid]').forEach((el) => {
+          const eid = el.dataset.eid;
+          const domain = eid.split('.')[0];
+          el.onclick = (ev) => {
+            if (ev.target.closest('.tiny')) return;
+            if (domain === 'light' || domain === 'switch' || domain === 'fan' || domain === 'input_boolean') {
+              callService(domain, 'toggle', { entity_id: eid });
+            } else if (domain === 'scene') {
+              callService('scene', 'turn_on', { entity_id: eid });
+            } else if (domain === 'button' || domain === 'input_button') {
+              callService(domain, 'press', { entity_id: eid });
+            } else if (domain === 'camera' || domain === 'climate' || domain === 'media_player' || domain === 'alarm_control_panel') {
+              fireMoreInfo(eid);
+            }
+          };
+        });
+
+        app.querySelectorAll('[data-cover]').forEach((btn) => btn.onclick = (e) => {
+          e.stopPropagation();
+          const service = { open: 'open_cover', close: 'close_cover', stop: 'stop_cover' }[btn.dataset.cover];
+          callService('cover', service, { entity_id: btn.dataset.eid });
+        });
+
+        app.querySelectorAll('[data-lock]').forEach((btn) => btn.onclick = (e) => {
+          e.stopPropagation();
+          callService('lock', btn.dataset.lock, { entity_id: btn.dataset.eid });
+        });
+
+        app.querySelectorAll('[data-climate="details"]').forEach((btn) => btn.onclick = (e) => {
+          e.stopPropagation();
+          openClimateModal(btn.dataset.eid);
+        });
+      }
+
+      function wireModal() {
+        modal.onclick = (e) => {
+          if (e.target === modal || e.target.dataset.modalClose) {
+            modal.classList.remove('show');
+            modal.innerHTML = '';
+            return;
+          }
+
+          const hvac = e.target.dataset.hvac;
+          if (hvac) callService('climate', 'set_hvac_mode', { entity_id: e.target.dataset.eid, hvac_mode: hvac });
+
+          const temp = e.target.dataset.temp;
+          if (temp) {
+            const cur = Number(e.target.dataset.cur);
+            if (!Number.isFinite(cur)) return;
+            callService('climate', 'set_temperature', { entity_id: e.target.dataset.eid, temperature: temp === 'up' ? cur + 1 : cur - 1 });
+          }
+        };
+      }
+
+      function fireMoreInfo(entityId) {
+        try {
+          const event = new Event('hass-more-info', { bubbles: true, composed: true });
+          event.detail = { entityId };
+          const root = window.parent?.document?.querySelector('home-assistant');
+          root?.dispatchEvent(event);
+        } catch (_) {}
+      }
+
+      async function refresh() {
+        const hass = getHass();
+        if (!hass) {
+          state.loading = true;
+          render();
+          return;
+        }
+
+        if (!state.registries.entities.length) await fetchRegistries(hass);
+
+        const keys = Object.keys(hass.states || {});
+        const hash = `${keys.length}:${keys.slice(0,4).join('|')}:${keys.map((k) => hass.states[k]?.last_changed || '').slice(0,8).join('|')}`;
+        if (hash !== state.lastStateHash || state.loading) {
+          state.lastStateHash = hash;
+          computeData(hass);
+          state.loading = false;
+          if (state.route.page === 'floor' && !state.cache.floors.some((f) => f.id === state.route.floorId)) state.route = { page: 'home', floorId: null, roomId: null };
+          if (state.route.page === 'room') {
+            const floor = state.cache.floors.find((f) => f.id === state.route.floorId);
+            if (!floor?.rooms?.get(state.route.roomId)?.length) state.route = { page: 'floor', floorId: state.route.floorId, roomId: null };
+          }
+          render();
+        }
+      }
+
+      wireModal();
+      render();
+      refresh();
+      setInterval(refresh, 3500);
+    })();
+  </script>
 </body>
 </html>
