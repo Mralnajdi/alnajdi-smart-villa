@@ -8,57 +8,148 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
 
     :root {
-      --bg: #0a0e15;
-      --bg-gradient: radial-gradient(1300px 800px at 12% -10%, rgba(49, 79, 129, 0.25) 0%, transparent 50%), radial-gradient(1200px 900px at 100% -10%, rgba(62, 95, 154, 0.18) 0%, transparent 52%), #0a0e15;
-      --surface: rgba(18, 24, 35, 0.86);
-      --surface-2: rgba(26, 34, 47, 0.9);
-      --surface-3: rgba(37, 47, 64, 0.72);
-      --line: rgba(210, 227, 255, 0.12);
+      color-scheme: dark;
+      --bg: #0a101a;
+      --bg-gradient: radial-gradient(1300px 800px at 12% -10%, rgba(64, 112, 191, 0.24) 0%, transparent 52%), radial-gradient(1200px 900px at 100% -10%, rgba(72, 120, 209, 0.2) 0%, transparent 50%), #0a101a;
+      --surface: rgba(16, 24, 36, 0.88);
+      --surface-2: rgba(23, 33, 48, 0.9);
+      --surface-3: rgba(37, 51, 74, 0.62);
+      --line: rgba(197, 220, 255, 0.14);
+      --line-strong: rgba(157, 202, 255, 0.35);
       --txt: #f3f7ff;
-      --muted: #9dadcb;
-      --gold: #d4b97f;
-      --blue: #72b7ff;
-      --glow: rgba(112, 175, 255, 0.28);
-      --good: #46dfa7;
-      --danger: #ff6774;
-      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-      --blur: 18px;
+      --muted: #a0b0ce;
+      --gold: #d6bb83;
+      --blue: #75bbff;
+      --good: #4adeaa;
+      --danger: #ff6f7e;
+      --chip-glow: rgba(120, 182, 255, 0.28);
+      --hero-sun: radial-gradient(circle at 36% 30%, rgba(255,235,172,0.9), rgba(247,157,76,0.42));
+      --hero-moon: radial-gradient(circle at 35% 30%, rgba(168,203,255,0.85), rgba(107,136,216,0.36));
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.34);
+      --blur: 16px;
+      --room-open-bg: rgba(255, 255, 255, 0.04);
+      --active-gradient: linear-gradient(140deg, rgba(117, 187, 255, 0.35), rgba(98, 165, 255, 0.1));
+      --suite-accent: rgba(214, 187, 131, 0.42);
+      --body-noise: 0.03;
     }
 
-    [data-theme='light'] {
-      --bg: #eff4ff;
-      --bg-gradient: radial-gradient(900px 500px at 10% -5%, rgba(118, 166, 241, 0.35) 0%, transparent 56%), #eff4ff;
+    body[data-family='current'][data-mode='day'] {
+      color-scheme: light;
+      --bg: #eef4ff;
+      --bg-gradient: radial-gradient(1000px 560px at 10% -10%, rgba(125, 177, 255, 0.34) 0%, transparent 58%), radial-gradient(1000px 560px at 100% 0%, rgba(122, 168, 245, 0.2) 0%, transparent 58%), #eef4ff;
       --surface: rgba(255, 255, 255, 0.95);
-      --surface-2: rgba(249, 252, 255, 0.96);
-      --surface-3: rgba(236, 244, 255, 0.86);
-      --line: rgba(26, 50, 91, 0.16);
-      --txt: #111b31;
-      --muted: #5f7091;
-      --gold: #8d6a24;
-      --blue: #1778ff;
-      --glow: rgba(33, 116, 255, 0.2);
-      --good: #1ebf85;
-      --danger: #de3f58;
-      --shadow: 0 12px 30px rgba(23, 56, 106, 0.14);
+      --surface-2: rgba(251, 254, 255, 0.94);
+      --surface-3: rgba(235, 245, 255, 0.92);
+      --line: rgba(22, 49, 95, 0.14);
+      --line-strong: rgba(31, 102, 209, 0.35);
+      --txt: #14213c;
+      --muted: #607192;
+      --gold: #876722;
+      --blue: #1d78ef;
+      --good: #15a975;
+      --danger: #db4359;
+      --chip-glow: rgba(40, 113, 232, 0.24);
+      --shadow: 0 12px 28px rgba(36, 77, 142, 0.16);
       --blur: 0px;
+      --room-open-bg: rgba(28, 72, 147, 0.04);
+      --active-gradient: linear-gradient(140deg, rgba(48, 128, 252, 0.2), rgba(48, 128, 252, 0.08));
+      --suite-accent: rgba(155, 115, 24, 0.42);
     }
 
-    [data-theme='glass'] {
-      --bg: #06080e;
-      --bg-gradient: radial-gradient(1000px 700px at 0% -20%, rgba(77, 117, 186, 0.4) 0%, transparent 45%), radial-gradient(1200px 900px at 100% -20%, rgba(74, 131, 210, 0.24) 0%, transparent 48%), #06080e;
-      --surface: rgba(19, 26, 38, 0.52);
-      --surface-2: rgba(30, 40, 57, 0.58);
-      --surface-3: rgba(36, 46, 65, 0.56);
-      --line: rgba(210, 227, 255, 0.18);
-      --txt: #f4f8ff;
-      --muted: #b6c5df;
-      --gold: #dcc187;
-      --blue: #85c3ff;
-      --glow: rgba(130, 190, 255, 0.32);
-      --good: #53e2af;
-      --danger: #ff7585;
-      --shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
-      --blur: 22px;
+    body[data-family='anashost'][data-mode='night'] {
+      --bg: #070d16;
+      --bg-gradient: radial-gradient(1250px 850px at -10% -15%, rgba(28, 97, 196, 0.44) 0%, transparent 50%), radial-gradient(900px 600px at 115% -10%, rgba(208, 167, 80, 0.2) 0%, transparent 55%), linear-gradient(130deg, #070d16 0%, #0c1628 60%, #0a1220 100%);
+      --surface: rgba(12, 23, 42, 0.84);
+      --surface-2: rgba(17, 31, 56, 0.88);
+      --surface-3: rgba(31, 48, 78, 0.66);
+      --line: rgba(201, 230, 255, 0.18);
+      --line-strong: rgba(219, 178, 89, 0.42);
+      --txt: #f2f8ff;
+      --muted: #a9bddf;
+      --gold: #dcb978;
+      --blue: #75bbff;
+      --good: #51dba8;
+      --danger: #ff7a88;
+      --chip-glow: rgba(219, 178, 89, 0.24);
+      --shadow: 0 22px 52px rgba(2, 8, 21, 0.46);
+      --blur: 12px;
+      --room-open-bg: rgba(255, 224, 153, 0.06);
+      --active-gradient: linear-gradient(145deg, rgba(220, 185, 120, 0.27), rgba(104, 177, 255, 0.11));
+      --suite-accent: rgba(220, 185, 120, 0.58);
+      --hero-sun: radial-gradient(circle at 32% 28%, rgba(255, 225, 163, 0.95), rgba(210, 149, 69, 0.52));
+      --hero-moon: radial-gradient(circle at 36% 24%, rgba(127, 193, 255, 0.95), rgba(87, 126, 231, 0.42));
+    }
+
+    body[data-family='anashost'][data-mode='day'] {
+      color-scheme: light;
+      --bg: #f4f8ff;
+      --bg-gradient: radial-gradient(1200px 670px at -6% -15%, rgba(56, 124, 224, 0.34) 0%, transparent 54%), radial-gradient(1000px 580px at 120% 0%, rgba(225, 184, 108, 0.26) 0%, transparent 56%), #f4f8ff;
+      --surface: rgba(255, 255, 255, 0.93);
+      --surface-2: rgba(250, 253, 255, 0.95);
+      --surface-3: rgba(232, 241, 255, 0.9);
+      --line: rgba(16, 55, 114, 0.16);
+      --line-strong: rgba(181, 126, 27, 0.42);
+      --txt: #162341;
+      --muted: #5f6f92;
+      --gold: #9b6f16;
+      --blue: #1f7ff2;
+      --good: #129f72;
+      --danger: #d63f56;
+      --chip-glow: rgba(173, 124, 41, 0.22);
+      --shadow: 0 12px 30px rgba(28, 73, 148, 0.16);
+      --blur: 2px;
+      --room-open-bg: rgba(217, 175, 87, 0.08);
+      --active-gradient: linear-gradient(140deg, rgba(223, 180, 106, 0.25), rgba(42, 128, 243, 0.1));
+      --suite-accent: rgba(170, 123, 30, 0.52);
+    }
+
+    body[data-family='glass'][data-mode='night'] {
+      --bg: #04070c;
+      --bg-gradient: radial-gradient(1100px 720px at 0% -20%, rgba(125, 188, 255, 0.4) 0%, transparent 44%), radial-gradient(1200px 900px at 100% -20%, rgba(109, 147, 235, 0.3) 0%, transparent 48%), radial-gradient(900px 600px at 50% 120%, rgba(66, 107, 198, 0.2) 0%, transparent 60%), #04070c;
+      --surface: linear-gradient(155deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03));
+      --surface-2: linear-gradient(155deg, rgba(255,255,255,0.2), rgba(255,255,255,0.04));
+      --surface-3: rgba(176, 208, 255, 0.16);
+      --line: rgba(220, 236, 255, 0.27);
+      --line-strong: rgba(190, 220, 255, 0.56);
+      --txt: #f5f9ff;
+      --muted: #c7d6f0;
+      --gold: #e1c386;
+      --blue: #98ccff;
+      --good: #5de8b5;
+      --danger: #ff8492;
+      --chip-glow: rgba(153, 208, 255, 0.34);
+      --shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      --blur: 24px;
+      --room-open-bg: rgba(198, 226, 255, 0.09);
+      --active-gradient: linear-gradient(145deg, rgba(171, 220, 255, 0.35), rgba(145, 173, 255, 0.11));
+      --suite-accent: rgba(223, 195, 134, 0.64);
+      --hero-sun: radial-gradient(circle at 32% 28%, rgba(255, 238, 197, 0.96), rgba(242, 164, 91, 0.52));
+      --hero-moon: radial-gradient(circle at 35% 30%, rgba(188, 221, 255, 0.92), rgba(120, 150, 237, 0.44));
+      --body-noise: 0.08;
+    }
+
+    body[data-family='glass'][data-mode='day'] {
+      color-scheme: light;
+      --bg: #edf6ff;
+      --bg-gradient: radial-gradient(1100px 720px at 0% -20%, rgba(128, 194, 255, 0.52) 0%, transparent 45%), radial-gradient(1200px 850px at 100% -20%, rgba(169, 199, 255, 0.44) 0%, transparent 50%), #edf6ff;
+      --surface: linear-gradient(155deg, rgba(255,255,255,0.8), rgba(255,255,255,0.5));
+      --surface-2: linear-gradient(155deg, rgba(255,255,255,0.86), rgba(255,255,255,0.52));
+      --surface-3: rgba(255, 255, 255, 0.66);
+      --line: rgba(95, 139, 220, 0.24);
+      --line-strong: rgba(75, 120, 209, 0.48);
+      --txt: #11233f;
+      --muted: #5d7197;
+      --gold: #91661f;
+      --blue: #287ee8;
+      --good: #11996c;
+      --danger: #d84258;
+      --chip-glow: rgba(74, 128, 220, 0.24);
+      --shadow: 0 16px 34px rgba(57, 95, 161, 0.2);
+      --blur: 14px;
+      --room-open-bg: rgba(124, 173, 244, 0.11);
+      --active-gradient: linear-gradient(145deg, rgba(142, 199, 255, 0.38), rgba(123, 145, 234, 0.12));
+      --suite-accent: rgba(161, 117, 32, 0.56);
+      --body-noise: 0.06;
     }
 
     * { box-sizing: border-box; }
@@ -70,15 +161,29 @@
       color: var(--txt);
       font-family: Inter, Tajawal, sans-serif;
       overflow: hidden;
+      transition: background 250ms ease, color 220ms ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(120deg, rgba(255,255,255,var(--body-noise)) 0 1px, transparent 1px 5px);
+      mix-blend-mode: soft-light;
+      opacity: 0.25;
+      z-index: 0;
     }
 
     body.rtl { font-family: Tajawal, Inter, sans-serif; }
 
     .app {
-      max-width: 1500px;
+      position: relative;
+      z-index: 1;
+      max-width: 1540px;
       margin: auto;
       height: 100%;
-      padding: 20px 16px 36px;
+      padding: 18px 16px 32px;
       overflow: auto;
       display: flex;
       flex-direction: column;
@@ -86,20 +191,33 @@
     }
 
     .premium-card {
-      background: linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)) border-box, var(--surface) padding-box;
+      background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 24px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
+      backdrop-filter: blur(var(--blur)) saturate(138%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(138%);
+      transition: border-color 200ms ease, box-shadow 200ms ease, transform 180ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body[data-family='glass'] .premium-card::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 22px;
+      pointer-events: none;
+      background: linear-gradient(145deg, rgba(255,255,255,0.32), rgba(255,255,255,0.02) 35%, rgba(130,175,255,0.07) 75%, rgba(255,255,255,0.1));
+      opacity: 0.75;
     }
 
     .header {
-      padding: 10px 12px;
+      padding: 9px 12px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       position: sticky;
       top: 0;
       z-index: 40;
@@ -108,11 +226,11 @@
 
     .villa-title {
       text-align: center;
-      font-size: clamp(14px, 2.2vw, 24px);
+      font-size: clamp(14px, 2.15vw, 24px);
       font-weight: 900;
       letter-spacing: 0.28em;
       color: var(--gold);
-      text-shadow: 0 0 16px rgba(212, 185, 127, 0.25);
+      text-shadow: 0 0 16px rgba(212, 185, 127, 0.28);
       white-space: nowrap;
     }
 
@@ -126,25 +244,28 @@
       border-radius: 999px;
       background: var(--surface-2);
       border: 1px solid var(--line);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
     }
 
     .seg button {
       border: 0;
       background: transparent;
       color: var(--muted);
-      padding: 6px 11px;
+      padding: 6px 10px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
       cursor: pointer;
       transition: 180ms ease;
+      min-width: 52px;
+      white-space: nowrap;
     }
 
     .seg button.on {
-      background: linear-gradient(150deg, rgba(114,183,255,0.28), rgba(114,183,255,0.14));
+      background: var(--active-gradient);
       color: var(--txt);
-      box-shadow: inset 0 0 0 1px rgba(140,196,255,0.35), 0 4px 12px var(--glow);
+      box-shadow: inset 0 0 0 1px var(--line-strong), 0 4px 12px var(--chip-glow);
     }
 
     .hero {
@@ -159,27 +280,29 @@
     .clock-card::after {
       content: '';
       position: absolute;
-      inset: auto -30px -45px auto;
-      width: 180px;
-      height: 180px;
+      inset: auto -24px -42px auto;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       pointer-events: none;
-      opacity: 0.48;
-      background: radial-gradient(circle at 36% 30%, rgba(255,235,172,0.9), rgba(247,157,76,0.42));
+      opacity: 0.54;
+      background: var(--hero-sun);
     }
 
-    .clock-card::after { background: radial-gradient(circle at 35% 30%, rgba(168,203,255,0.85), rgba(107,136,216,0.36)); }
+    .clock-card::after { background: var(--hero-moon); }
 
-    .label { color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .label { color: var(--muted); font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 700; }
     .weather-main { margin-top: 8px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-    .temp { font-size: clamp(42px, 6vw, 64px); line-height: 1; font-weight: 900; }
-    .condition { margin-top: 6px; font-weight: 600; color: #d4e5ff; }
+    .temp { font-size: clamp(42px, 6vw, 66px); line-height: 1; font-weight: 900; }
+    .condition { margin-top: 6px; font-weight: 700; color: color-mix(in srgb, var(--txt) 83%, var(--blue) 17%); }
     .meta-col { text-align: end; }
-    .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 5px; }
 
     .clock-time { margin-top: 6px; font-size: clamp(40px, 5.3vw, 58px); line-height: 1; font-weight: 900; }
     .clock-date { margin-top: 8px; color: var(--muted); font-size: 14px; }
     .ha-state { margin-top: 10px; font-size: 12px; color: var(--muted); }
+    .ha-state.good { color: var(--good); }
+    .ha-state.warn { color: var(--danger); }
 
     .systems-strip {
       display: grid;
@@ -189,46 +312,50 @@
 
     .system-chip {
       position: relative;
-      overflow: hidden;
       padding: 12px 10px;
       border-radius: 18px;
       border: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      min-height: 116px;
+      background: linear-gradient(150deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      min-height: 118px;
       cursor: pointer;
       transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     }
 
     .system-chip:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.24), 0 0 18px var(--glow);
-      border-color: rgba(153, 204, 255, 0.34);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22), 0 0 16px var(--chip-glow);
+      border-color: var(--line-strong);
     }
 
-    .system-chip.active { box-shadow: inset 0 0 0 1px rgba(114,183,255,0.4), 0 10px 26px rgba(0,0,0,0.25); }
+    .system-chip.active {
+      background: linear-gradient(150deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03));
+      box-shadow: inset 0 0 0 1px var(--line-strong), 0 12px 26px rgba(0,0,0,0.2);
+    }
 
     .system-chip.alert {
-      border-color: rgba(255,103,116,0.55);
-      box-shadow: inset 0 0 0 1px rgba(255,103,116,0.4), 0 0 22px rgba(255,103,116,0.2);
-      animation: pulseAlert 1600ms infinite;
+      border-color: color-mix(in srgb, var(--danger) 62%, white 0%);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 52%, white 0%), 0 0 22px color-mix(in srgb, var(--danger) 26%, black 0%);
+      animation: pulseAlert 1700ms infinite;
     }
 
     @keyframes pulseAlert {
-      0%,100% { box-shadow: inset 0 0 0 1px rgba(255,103,116,0.35), 0 0 10px rgba(255,103,116,0.15); }
-      50% { box-shadow: inset 0 0 0 1px rgba(255,103,116,0.7), 0 0 26px rgba(255,103,116,0.35); }
+      0%,100% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 44%, white 0%), 0 0 10px color-mix(in srgb, var(--danger) 18%, black 0%); }
+      50% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 72%, white 0%), 0 0 24px color-mix(in srgb, var(--danger) 38%, black 0%); }
     }
 
     .icon-wrap {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      background: linear-gradient(155deg, rgba(126,185,255,0.3), rgba(126,185,255,0.1));
-      border: 1px solid rgba(148, 199, 255, 0.35);
+      background: linear-gradient(155deg, color-mix(in srgb, var(--blue) 36%, transparent), color-mix(in srgb, var(--blue) 12%, transparent));
+      border: 1px solid color-mix(in srgb, var(--blue) 44%, white 0%);
       display: grid;
       place-items: center;
-      color: #d7ebff;
+      color: color-mix(in srgb, var(--txt) 75%, var(--blue) 25%);
+      transition: transform 180ms ease;
     }
 
+    .system-chip:hover .icon-wrap { transform: scale(1.05); }
     .icon-wrap svg { width: 21px; height: 21px; fill: currentColor; }
 
     .system-title { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
@@ -238,19 +365,19 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      min-width: 24px;
+      min-width: 26px;
       border-radius: 999px;
       padding: 3px 8px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       text-align: center;
-      background: rgba(97, 170, 255, 0.22);
-      border: 1px solid rgba(142, 202, 255, 0.38);
-      color: #d8edff;
+      background: linear-gradient(145deg, color-mix(in srgb, var(--blue) 42%, transparent), color-mix(in srgb, var(--blue) 14%, transparent));
+      border: 1px solid color-mix(in srgb, var(--blue) 52%, white 0%);
+      color: color-mix(in srgb, var(--txt) 80%, var(--blue) 20%);
+      box-shadow: 0 3px 10px color-mix(in srgb, var(--blue) 30%, transparent);
     }
 
     .floors { display: flex; flex-direction: column; gap: 12px; }
-
     .floor-card { padding: 14px; }
 
     .floor-head {
@@ -272,7 +399,10 @@
       border-radius: 16px;
       background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)), var(--surface-2);
       overflow: hidden;
+      transition: border-color 180ms ease, transform 180ms ease;
     }
+
+    .room-card:hover { border-color: var(--line-strong); }
 
     .room-head {
       display: flex;
@@ -292,8 +422,8 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(132, 184, 255, 0.15);
-      color: #d7ebff;
+      background: color-mix(in srgb, var(--blue) 18%, transparent);
+      color: color-mix(in srgb, var(--txt) 85%, var(--blue) 15%);
       transition: transform 220ms ease;
       font-size: 12px;
       font-weight: 900;
@@ -306,10 +436,11 @@
       overflow: hidden;
       transition: max-height 280ms ease, padding 280ms ease;
       padding: 0 12px;
+      background: var(--room-open-bg);
     }
 
     .room-card.open .room-body {
-      max-height: 540px;
+      max-height: 560px;
       padding: 0 12px 12px;
     }
 
@@ -324,11 +455,11 @@
       color: var(--txt);
     }
 
-    .entity-chip.off { opacity: 0.62; }
+    .entity-chip.off { opacity: 0.66; }
 
     .suite {
-      border-color: rgba(212,185,127,0.52);
-      background: linear-gradient(145deg, rgba(212,185,127,0.16), rgba(212,185,127,0.02) 40%), var(--surface-2);
+      border-color: var(--suite-accent);
+      background: linear-gradient(145deg, color-mix(in srgb, var(--gold) 18%, transparent), rgba(255,255,255,0.02) 45%), var(--surface-2);
     }
 
     .suite-subrooms {
@@ -347,12 +478,7 @@
 
     .subroom-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
 
-    .inactive-floor {
-      opacity: 0.72;
-      border-style: dashed;
-    }
-
-    .inactive-note {
+    .empty-state {
       border: 1px dashed var(--line);
       border-radius: 14px;
       background: rgba(255,255,255,0.02);
@@ -367,15 +493,16 @@
       .hero { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 740px) {
+    @media (max-width: 780px) {
       .header { grid-template-columns: 1fr; justify-items: center; gap: 8px; }
       .header .left, .header .right { justify-content: center; }
       .villa-title { order: -1; }
       .systems-strip { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .micro-group { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
-<body data-theme="dark">
+<body data-family="current" data-mode="night">
   <div class="app">
     <header class="header">
       <div class="micro-group left">
@@ -388,10 +515,14 @@
       <div class="villa-title">ALNAJDI SMART VILA</div>
 
       <div class="micro-group right">
-        <div class="seg" id="themeSeg">
-          <button data-theme="light">Light</button>
-          <button data-theme="dark" class="on">Dark</button>
-          <button data-theme="glass">Glass</button>
+        <div class="seg" id="familySeg">
+          <button data-family="current" class="on">Current</button>
+          <button data-family="anashost">Anashost</button>
+          <button data-family="glass">Glass</button>
+        </div>
+        <div class="seg" id="modeSeg">
+          <button data-mode="day">Day</button>
+          <button data-mode="night" class="on">Night</button>
         </div>
       </div>
     </header>
@@ -430,26 +561,30 @@
     en: {
       weather: 'Weather',
       time: 'Local Time',
-      connected: 'HA: connected',
-      fallback: 'HA: data unavailable',
+      connected: 'HA: connected (live)',
+      reconnecting: 'HA: reconnecting...',
+      fallback: 'HA: limited data mode',
       devices: 'devices',
       active: 'active',
-      inactiveFloor: 'inactive / no active rooms yet',
-      noEntities: 'No mapped active entities',
-      roof: 'Roof',
-      suite: 'Master Suite'
+      noEntities: 'No mapped entities',
+      noVisible: 'No floors with detected entities yet',
+      humidity: 'Humidity',
+      wind: 'Wind',
+      entity: 'Entity'
     },
     ar: {
       weather: 'الطقس',
       time: 'الوقت المحلي',
-      connected: 'متصل بـ Home Assistant',
-      fallback: 'تعذر تحميل بيانات Home Assistant',
+      connected: 'متصل بـ Home Assistant (مباشر)',
+      reconnecting: 'إعادة الاتصال بـ Home Assistant...',
+      fallback: 'وضع بيانات محدود',
       devices: 'جهاز',
       active: 'نشط',
-      inactiveFloor: 'غير نشط / لا توجد غرف نشطة حالياً',
       noEntities: 'لا توجد كيانات مرتبطة',
-      roof: 'السطح',
-      suite: 'الجناح الرئيسي'
+      noVisible: 'لا توجد طوابق تحتوي كيانات فعلية حالياً',
+      humidity: 'الرطوبة',
+      wind: 'الرياح',
+      entity: 'الكيان'
     }
   };
 
@@ -487,7 +622,7 @@
         id: 'second',
         en: 'Second Floor',
         ar: 'الدور الثاني',
-        rooms: []
+        rooms: ['Second Floor Hall']
       },
       {
         id: 'roof',
@@ -509,29 +644,37 @@
     'Office': [/office/i, /study/i],
     'Living Room': [/living\s?room/i, /family\s?room/i],
     'Second Room': [/second\s?room/i, /bedroom\s?2/i, /guest\s?room/i],
+    'Second Floor Hall': [/second\s?floor/i, /upper\s?hall/i],
     'Roof': [/roof/i, /rooftop/i]
   };
 
   const SYSTEMS = [
-    { id: 'lights', label: 'Lighting', domains: ['light'], predicate: e => domain(e) === 'light' },
-    { id: 'climate', label: 'Climate', domains: ['climate', 'fan'], predicate: e => ['climate', 'fan'].includes(domain(e)) },
-    { id: 'security', label: 'Security', domains: ['alarm_control_panel', 'lock'], predicate: e => ['alarm_control_panel', 'lock'].includes(domain(e)) },
-    { id: 'cameras', label: 'Cameras', domains: ['camera'], predicate: e => domain(e) === 'camera' },
-    { id: 'media', label: 'Media', domains: ['media_player'], predicate: e => domain(e) === 'media_player' },
-    { id: 'access', label: 'Doors & Windows', domains: ['binary_sensor', 'sensor'], predicate: e => /door|window|gate|lock/i.test(e.entity_id + ' ' + (e.attributes.friendly_name || '')) },
-    { id: 'curtains', label: 'Curtains', domains: ['cover'], predicate: e => domain(e) === 'cover' },
-    { id: 'leaks', label: 'Water Safety', domains: ['binary_sensor', 'sensor'], predicate: e => /leak|water|moisture|flood/i.test(e.entity_id + ' ' + (e.attributes.friendly_name || '')) }
+    { id: 'lights', label: 'Lighting', predicate: e => domain(e) === 'light' },
+    { id: 'climate', label: 'Climate', predicate: e => ['climate', 'fan'].includes(domain(e)) },
+    { id: 'security', label: 'Security', predicate: e => ['alarm_control_panel', 'lock'].includes(domain(e)) },
+    { id: 'cameras', label: 'Cameras', predicate: e => domain(e) === 'camera' },
+    { id: 'media', label: 'Media', predicate: e => domain(e) === 'media_player' },
+    { id: 'access', label: 'Doors & Windows', predicate: e => /door|window|gate|lock/i.test(`${e.entity_id} ${friendly(e)}`) },
+    { id: 'curtains', label: 'Curtains', predicate: e => domain(e) === 'cover' },
+    { id: 'leaks', label: 'Water Safety', predicate: e => /leak|water|moisture|flood/i.test(`${e.entity_id} ${friendly(e)}`) }
   ];
 
-  let lang = 'en';
-  let states = [];
+  const STATE = {
+    lang: localStorage.getItem('villa_lang') || 'en',
+    family: localStorage.getItem('villa_family') || 'current',
+    mode: localStorage.getItem('villa_mode') || 'night',
+    states: [],
+    ws: null,
+    wsMsgId: 1,
+    connectedVia: 'none',
+    wsAuthOk: false
+  };
 
   const q = (sel, parent = document) => parent.querySelector(sel);
   const qa = (sel, parent = document) => [...parent.querySelectorAll(sel)];
 
-  function domain(entity) {
-    return entity.entity_id.split('.')[0] || '';
-  }
+  function domain(entity) { return entity.entity_id.split('.')[0] || ''; }
+  function friendly(entity) { return entity.attributes?.friendly_name || entity.entity_id; }
 
   function normalizedSource(entity) {
     const attrs = entity.attributes || {};
@@ -543,7 +686,9 @@
       attrs.device_class,
       attrs.room,
       attrs.location,
-      attrs.zone
+      attrs.zone,
+      attrs.assigned_room,
+      attrs.level
     ].filter(Boolean).join(' ').toLowerCase();
   }
 
@@ -552,9 +697,14 @@
     return !offStates.has(String(entity.state || '').toLowerCase());
   }
 
+  function entityIsRenderable(entity) {
+    return !!entity?.entity_id && !['zone', 'sun', 'person'].includes(domain(entity));
+  }
+
   function mapRoomEntities(roomName) {
     const profiles = ROOM_PROFILE[roomName] || [new RegExp(roomName, 'i')];
-    return states.filter(entity => {
+    return STATE.states.filter(entity => {
+      if (!entityIsRenderable(entity)) return false;
       const source = normalizedSource(entity);
       return profiles.some(rx => rx.test(source));
     });
@@ -565,7 +715,7 @@
     root.innerHTML = '';
 
     SYSTEMS.forEach(system => {
-      const matched = states.filter(system.predicate);
+      const matched = STATE.states.filter(e => entityIsRenderable(e) && system.predicate(e));
       const active = matched.filter(stateIsActive);
       const card = document.createElement('article');
       card.className = 'system-chip premium-card';
@@ -576,7 +726,7 @@
         <div class="chip-badge">${active.length}</div>
         <div class="icon-wrap">${ICONS[system.id]}</div>
         <div class="system-title">${system.label}</div>
-        <div class="system-count">${matched.length} ${I18N[lang].devices}</div>
+        <div class="system-count">${matched.length} ${I18N[STATE.lang].devices}</div>
       `;
 
       root.appendChild(card);
@@ -584,86 +734,67 @@
   }
 
   function entityChip(entity) {
-    const active = stateIsActive(entity);
     const chip = document.createElement('span');
-    chip.className = `entity-chip ${active ? '' : 'off'}`;
-    chip.textContent = entity.attributes.friendly_name || entity.entity_id;
+    chip.className = `entity-chip ${stateIsActive(entity) ? '' : 'off'}`;
+    chip.textContent = friendly(entity);
     return chip;
   }
 
   function buildRoomCard(roomName, entities) {
-    const activeCount = entities.filter(stateIsActive).length;
     const card = document.createElement('article');
     card.className = 'room-card';
+    const activeCount = entities.filter(stateIsActive).length;
 
     card.innerHTML = `
       <div class="room-head">
         <div>
           <div class="room-title">${roomName}</div>
-          <div class="room-stats">${activeCount}/${entities.length} ${I18N[lang].active}</div>
+          <div class="room-stats">${activeCount}/${entities.length} ${I18N[STATE.lang].active}</div>
         </div>
         <div class="chev">⌄</div>
       </div>
-      <div class="room-body">
-        <div class="entity-list"></div>
-      </div>
+      <div class="room-body"><div class="entity-list"></div></div>
     `;
 
     const list = q('.entity-list', card);
-    if (!entities.length) {
-      const empty = document.createElement('span');
-      empty.className = 'entity-chip off';
-      empty.textContent = I18N[lang].noEntities;
-      list.appendChild(empty);
-    } else {
-      entities.slice(0, 30).forEach(entity => list.appendChild(entityChip(entity)));
-    }
-
+    entities.slice(0, 35).forEach(entity => list.appendChild(entityChip(entity)));
     q('.room-head', card).addEventListener('click', () => card.classList.toggle('open'));
     return card;
   }
 
   function buildMasterSuiteCard(suiteDef) {
-    const allSuiteEntities = suiteDef.rooms.flatMap(room => mapRoomEntities(room));
+    const subrooms = suiteDef.rooms
+      .map(room => ({ room, entities: mapRoomEntities(room) }))
+      .filter(item => item.entities.length > 0);
+
+    if (!subrooms.length) return null;
+
+    const suiteEntities = subrooms.flatMap(s => s.entities);
     const suiteCard = document.createElement('article');
     suiteCard.className = 'room-card suite';
 
     suiteCard.innerHTML = `
       <div class="room-head">
         <div>
-          <div class="room-title">${lang === 'ar' ? suiteDef.ar : suiteDef.en}</div>
-          <div class="room-stats">${allSuiteEntities.filter(stateIsActive).length}/${allSuiteEntities.length} ${I18N[lang].devices}</div>
+          <div class="room-title">${STATE.lang === 'ar' ? suiteDef.ar : suiteDef.en}</div>
+          <div class="room-stats">${suiteEntities.filter(stateIsActive).length}/${suiteEntities.length} ${I18N[STATE.lang].devices}</div>
         </div>
         <div class="chev">⌄</div>
       </div>
-      <div class="room-body">
-        <div class="suite-subrooms"></div>
-      </div>
+      <div class="room-body"><div class="suite-subrooms"></div></div>
     `;
 
     const subRoot = q('.suite-subrooms', suiteCard);
-
-    suiteDef.rooms.forEach(roomName => {
-      const roomEntities = mapRoomEntities(roomName);
+    subrooms.forEach(({ room, entities }) => {
+      const activeCount = entities.filter(stateIsActive).length;
       const block = document.createElement('section');
       block.className = 'subroom-card';
-      const active = roomEntities.filter(stateIsActive).length;
-
       block.innerHTML = `
-        <div class="subroom-title">${roomName} · ${active}/${roomEntities.length}</div>
+        <div class="subroom-title">${room} · ${activeCount}/${entities.length}</div>
         <div class="entity-list"></div>
       `;
-
       const list = q('.entity-list', block);
-      if (!roomEntities.length) {
-        const empty = document.createElement('span');
-        empty.className = 'entity-chip off';
-        empty.textContent = I18N[lang].noEntities;
-        list.appendChild(empty);
-      } else {
-        roomEntities.slice(0, 18).forEach(entity => list.appendChild(entityChip(entity)));
-      }
-
+      entities.slice(0, 22).forEach(entity => list.appendChild(entityChip(entity)));
       subRoot.appendChild(block);
     });
 
@@ -674,147 +805,251 @@
   function renderFloors() {
     const root = q('#floorsRoot');
     root.innerHTML = '';
+    let visibleFloorCount = 0;
 
     HOUSE.floors.forEach(floor => {
+      const roomBlocks = floor.rooms
+        .map(roomName => ({ roomName, entities: mapRoomEntities(roomName) }))
+        .filter(item => item.entities.length > 0);
+
+      const suiteCard = floor.suite ? buildMasterSuiteCard(floor.suite) : null;
+      const floorEntitiesTotal = roomBlocks.reduce((acc, room) => acc + room.entities.length, 0) + (suiteCard ? floor.suite.rooms.flatMap(r => mapRoomEntities(r)).length : 0);
+
+      if (floorEntitiesTotal === 0) return;
+
+      visibleFloorCount += 1;
       const card = document.createElement('section');
       card.className = 'premium-card floor-card';
-
-      const floorName = lang === 'ar' ? floor.ar : floor.en;
+      const floorName = STATE.lang === 'ar' ? floor.ar : floor.en;
       const grid = document.createElement('div');
       grid.className = 'rooms-grid';
 
-      let floorEntitiesTotal = 0;
-
-      if (floor.suite) {
-        const suiteCard = buildMasterSuiteCard(floor.suite);
-        grid.appendChild(suiteCard);
-        floorEntitiesTotal += floor.suite.rooms.flatMap(room => mapRoomEntities(room)).length;
-      }
-
-      floor.rooms.forEach(roomName => {
-        const roomEntities = mapRoomEntities(roomName);
-        floorEntitiesTotal += roomEntities.length;
-        const roomCard = buildRoomCard(roomName, roomEntities);
-        grid.appendChild(roomCard);
-      });
-
-      const isSecondInactive = floor.id === 'second' && floorEntitiesTotal === 0;
-      if (isSecondInactive) {
-        card.classList.add('inactive-floor');
-        grid.innerHTML = `<div class="inactive-note">${I18N[lang].inactiveFloor}</div>`;
-      }
+      if (suiteCard) grid.appendChild(suiteCard);
+      roomBlocks.forEach(room => grid.appendChild(buildRoomCard(room.roomName, room.entities)));
 
       card.innerHTML = `
         <div class="floor-head">
           <div class="floor-name">${floorName}</div>
-          <div class="floor-meta">${floorEntitiesTotal} ${I18N[lang].devices}</div>
+          <div class="floor-meta">${floorEntitiesTotal} ${I18N[STATE.lang].devices}</div>
         </div>
       `;
-
       card.appendChild(grid);
       root.appendChild(card);
     });
+
+    if (!visibleFloorCount) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state premium-card';
+      empty.textContent = I18N[STATE.lang].noVisible;
+      root.appendChild(empty);
+    }
   }
 
   function updateClock() {
     const now = new Date();
-    const locale = lang === 'ar' ? 'ar-KW' : 'en-US';
+    const locale = STATE.lang === 'ar' ? 'ar-KW' : 'en-US';
 
-    q('#clockTime').textContent = now.toLocaleTimeString(locale, {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    q('#clockTime').textContent = now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+    q('#clockDate').textContent = now.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
 
-    q('#clockDate').textContent = now.toLocaleDateString(locale, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+  function bestWeatherEntity() {
+    const weatherEntities = STATE.states.filter(e => domain(e) === 'weather');
+    if (weatherEntities.length) {
+      return weatherEntities.find(e => e.state !== 'unavailable' && e.state !== 'unknown') || weatherEntities[0];
+    }
+    const fallbackTemp = STATE.states.find(e => /outside.*temp|temperature.*outside|outdoor.*temp/i.test(e.entity_id + ' ' + friendly(e)));
+    if (fallbackTemp) return fallbackTemp;
+    return null;
   }
 
   function bindWeather() {
-    const weather = states.find(e => domain(e) === 'weather');
+    const weather = bestWeatherEntity();
     if (!weather) {
       q('#weatherTemp').textContent = '--°';
       q('#weatherCondition').textContent = '--';
-      q('#weatherHumidity').textContent = 'Humidity --%';
-      q('#weatherWind').textContent = 'Wind --';
-      q('#weatherEntity').textContent = 'Entity --';
+      q('#weatherHumidity').textContent = `${I18N[STATE.lang].humidity} --%`;
+      q('#weatherWind').textContent = `${I18N[STATE.lang].wind} --`;
+      q('#weatherEntity').textContent = `${I18N[STATE.lang].entity} --`;
       return;
     }
 
     const attrs = weather.attributes || {};
-    q('#weatherTemp').textContent = `${Math.round(Number(attrs.temperature ?? 0))}°`;
+    const t = Number(attrs.temperature);
+    const h = attrs.humidity;
+    const wind = attrs.wind_speed ?? attrs.wind_bearing ?? attrs.wind_speed_unit ?? '--';
+
+    q('#weatherTemp').textContent = Number.isFinite(t) ? `${Math.round(t)}°` : `${Number(weather.state) || '--'}°`;
     q('#weatherCondition').textContent = attrs.friendly_name || weather.state || '--';
-    q('#weatherHumidity').textContent = `Humidity ${attrs.humidity ?? '--'}%`;
-    q('#weatherWind').textContent = `Wind ${attrs.wind_speed ?? attrs.wind_bearing ?? '--'}`;
-    q('#weatherEntity').textContent = `Entity ${weather.entity_id}`;
+    q('#weatherHumidity').textContent = `${I18N[STATE.lang].humidity} ${h ?? '--'}%`;
+    q('#weatherWind').textContent = `${I18N[STATE.lang].wind} ${wind}`;
+    q('#weatherEntity').textContent = `${I18N[STATE.lang].entity} ${weather.entity_id}`;
   }
 
-  function applyLanguage() {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', lang === 'ar');
+  function setHaStatus(key, className = '') {
+    const el = q('#haStatus');
+    el.textContent = I18N[STATE.lang][key];
+    el.className = `ha-state ${className}`.trim();
+  }
 
-    q('#weatherLabel').textContent = I18N[lang].weather;
-    q('#clockLabel').textContent = I18N[lang].time;
-
-    qa('#langSeg button').forEach(button => {
-      button.classList.toggle('on', button.dataset.lang === lang);
-    });
-
-    updateClock();
+  function renderAll() {
+    bindWeather();
     renderSystemsStrip();
     renderFloors();
   }
 
-  async function loadHA() {
+  function applyLanguage() {
+    document.documentElement.lang = STATE.lang;
+    document.documentElement.dir = STATE.lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('rtl', STATE.lang === 'ar');
+
+    q('#weatherLabel').textContent = I18N[STATE.lang].weather;
+    q('#clockLabel').textContent = I18N[STATE.lang].time;
+    qa('#langSeg button').forEach(button => button.classList.toggle('on', button.dataset.lang === STATE.lang));
+
+    updateClock();
+    renderAll();
+  }
+
+  function applyTheme() {
+    document.body.dataset.family = STATE.family;
+    document.body.dataset.mode = STATE.mode;
+
+    qa('#familySeg button').forEach(b => b.classList.toggle('on', b.dataset.family === STATE.family));
+    qa('#modeSeg button').forEach(b => b.classList.toggle('on', b.dataset.mode === STATE.mode));
+  }
+
+  function snapshotFromHassObject(hass) {
+    const list = Object.values(hass.states || {}).filter(Boolean);
+    if (!list.length) return false;
+    STATE.states = list;
+    STATE.connectedVia = 'hass';
+    setHaStatus('connected', 'good');
+    renderAll();
+    return true;
+  }
+
+  function tryConnectViaWindowHass() {
+    const candidates = [window.hass, window.parent?.hass, document.querySelector('home-assistant')?.hass].filter(Boolean);
+    for (const hass of candidates) {
+      if (snapshotFromHassObject(hass)) return true;
+    }
+    return false;
+  }
+
+  function getStoredAccessToken() {
     try {
-      const response = await fetch('/api/states', {
-        method: 'GET',
-        credentials: 'same-origin',
-        cache: 'no-store'
-      });
-
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-      const payload = await response.json();
-      states = Array.isArray(payload) ? payload : [];
-
-      q('#haStatus').textContent = I18N[lang].connected;
-      bindWeather();
-      renderSystemsStrip();
-      renderFloors();
-    } catch (error) {
-      states = [];
-      q('#haStatus').textContent = I18N[lang].fallback;
-      bindWeather();
-      renderSystemsStrip();
-      renderFloors();
+      const raw = localStorage.getItem('hassTokens');
+      if (!raw) return '';
+      const parsed = JSON.parse(raw);
+      return parsed?.access_token || '';
+    } catch {
+      return '';
     }
   }
 
-  qa('#themeSeg button').forEach(button => {
+  async function loadStatesViaRest() {
+    const token = getStoredAccessToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const res = await fetch('/api/states', { credentials: 'same-origin', cache: 'no-store', headers });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+    if (!Array.isArray(payload)) throw new Error('Invalid payload');
+    STATE.states = payload;
+    STATE.connectedVia = 'rest';
+    setHaStatus('fallback');
+    renderAll();
+  }
+
+  function openWs() {
+    const token = getStoredAccessToken();
+    if (!token) return false;
+
+    try {
+      const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const socket = new WebSocket(`${proto}//${location.host}/api/websocket`);
+      STATE.ws = socket;
+      setHaStatus('reconnecting');
+
+      socket.onmessage = event => {
+        let msg;
+        try { msg = JSON.parse(event.data); } catch { return; }
+
+        if (msg.type === 'auth_required') {
+          socket.send(JSON.stringify({ type: 'auth', access_token: token }));
+        } else if (msg.type === 'auth_ok') {
+          STATE.wsAuthOk = true;
+          socket.send(JSON.stringify({ id: STATE.wsMsgId++, type: 'get_states' }));
+          socket.send(JSON.stringify({ id: STATE.wsMsgId++, type: 'subscribe_events', event_type: 'state_changed' }));
+          setHaStatus('connected', 'good');
+        } else if (msg.type === 'result' && Array.isArray(msg.result)) {
+          STATE.states = msg.result;
+          renderAll();
+        } else if (msg.type === 'event' && msg.event?.event_type === 'state_changed') {
+          const changed = msg.event.data?.new_state;
+          if (!changed?.entity_id) return;
+          const ix = STATE.states.findIndex(s => s.entity_id === changed.entity_id);
+          if (ix >= 0) STATE.states[ix] = changed;
+          else STATE.states.push(changed);
+          renderAll();
+        }
+      };
+
+      socket.onclose = () => {
+        STATE.ws = null;
+        STATE.wsAuthOk = false;
+        setHaStatus('reconnecting');
+      };
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async function refreshHA() {
+    if (tryConnectViaWindowHass()) return;
+
+    if (!STATE.ws && openWs()) return;
+
+    try {
+      await loadStatesViaRest();
+    } catch {
+      STATE.states = [];
+      setHaStatus('fallback', 'warn');
+      renderAll();
+    }
+  }
+
+  qa('#familySeg button').forEach(button => {
     button.addEventListener('click', () => {
-      document.body.dataset.theme = button.dataset.theme;
-      qa('#themeSeg button').forEach(b => b.classList.remove('on'));
-      button.classList.add('on');
+      STATE.family = button.dataset.family;
+      localStorage.setItem('villa_family', STATE.family);
+      applyTheme();
+    });
+  });
+
+  qa('#modeSeg button').forEach(button => {
+    button.addEventListener('click', () => {
+      STATE.mode = button.dataset.mode;
+      localStorage.setItem('villa_mode', STATE.mode);
+      applyTheme();
     });
   });
 
   qa('#langSeg button').forEach(button => {
     button.addEventListener('click', () => {
-      lang = button.dataset.lang;
+      STATE.lang = button.dataset.lang;
+      localStorage.setItem('villa_lang', STATE.lang);
       applyLanguage();
     });
   });
 
+  applyTheme();
   updateClock();
   setInterval(updateClock, 1000);
   applyLanguage();
-  loadHA();
-  setInterval(loadHA, 30000);
+  refreshHA();
+  setInterval(refreshHA, 30000);
 </script>
 </body>
 </html>
