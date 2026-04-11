@@ -123,10 +123,27 @@ const HOUSE={
   ],
   suite:{en:'Master Suite',ar:'الجناح الرئيسي',children:['Master Bedroom','Master Bathroom','Master Closet Room']}
 };
+const ROOM_ALIASES={
+  'Back Doorway':['Back Doorway','Back Door','back_doorway','back_door'],
+  'Sitting Room':['Sitting Room','Majlis','sitting_room'],
+  'Prep Kitchen':['Prep Kitchen','Kitchen Prep','prep_kitchen'],
+  'Father Room':['Father Room','father_room'],
+  'Office':['Office','office_room'],
+  'Living Room':['Living Room','living_room'],
+  'Second Room':['Second Room','second_room'],
+  'Roof':['Roof','roof_top','rooftop'],
+  'Master Bedroom':['Master Bedroom','master_bedroom'],
+  'Master Bathroom':['Master Bathroom','master_bathroom'],
+  'Master Closet Room':['Master Closet Room','Closet Room','master_closet_room']
+};
 let lang='en',states=[];
 const q=(s,p=document)=>p.querySelector(s), qa=(s,p=document)=>[...p.querySelectorAll(s)];
 
-function areaLike(entity,name){const x=(entity.attributes.friendly_name+' '+entity.entity_id).toLowerCase();return name.toLowerCase().split(' ').every(t=>x.includes(t.toLowerCase().replace('_',' ')));}
+function areaLike(entity,name){
+  const hay=(String(entity.attributes.friendly_name||'')+' '+entity.entity_id).toLowerCase();
+  const needles=ROOM_ALIASES[name]||[name];
+  return needles.some(n=>hay.includes(n.toLowerCase().replace(/_/g,' ')));
+}
 function isOn(e){return !['off','unavailable','unknown','idle','closed','disarmed','standby'].includes((e.state||'').toLowerCase());}
 function domain(e){return e.entity_id.split('.')[0];}
 function getRoomEntities(room){
@@ -206,9 +223,10 @@ function applyLang(){
 
 async function loadHA(){
   try{
-    const r=await fetch('/api/states');
+    const r=await fetch('/api/states',{credentials:'same-origin',cache:'no-store'});
     if(!r.ok) throw new Error('states fail');
-    states=await r.json();
+    const payload=await r.json();
+    states=Array.isArray(payload)?payload:[];
     q('#haState').textContent=I18N[lang].haOk;
     bindWeather(); renderCategories(); renderFloors();
   }catch(e){
