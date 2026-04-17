@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALNAJDI Smart Villa • First Row Premium Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@600;700;800&family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #e7edf7;
+      --bg-2: #dfe7f4;
+      --text: #18243b;
+      --muted: #66799d;
+      --line: #cdd8ea;
+      --surface: rgba(255, 255, 255, .72);
+      --surface-strong: rgba(255, 255, 255, .9);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow-xl: 0 30px 60px rgba(16, 33, 69, .16);
+      --shadow-md: 0 12px 28px rgba(16, 33, 69, .12);
+
+      --serie: #3f72ff;
+      --ucl: #6d5cf3;
+      --coppa: #10a17b;
+
+      --ok: #0d9f76;
+      --warn: #d8792f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Tajawal", "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 0% -20%, rgba(255,255,255,.86), transparent 65%),
+        radial-gradient(900px 500px at 100% -10%, rgba(158,192,244,.35), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      padding: 24px;
+    }
+
+    .msr {
+      font-family: "Material Symbols Rounded";
+      font-variation-settings: 'FILL' 1;
+      font-size: 24px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app {
+      max-width: 1520px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    .top-row {
+      display: grid;
+      grid-template-columns: 1.15fr .9fr 1.15fr;
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,.8);
+      backdrop-filter: blur(14px) saturate(125%);
+      min-height: 310px;
+      padding: 20px;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(130deg, rgba(255,255,255,.18), transparent 48%);
+      pointer-events: none;
+    }
+
+    .weather {
+      background: linear-gradient(165deg, #cfe1fb, #b8d1f1 48%, #b0c7e8);
+      border-color: #afc5e4;
+    }
+
+    .weather-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .weather-main b {
+      display: block;
+      font-size: clamp(46px, 5.2vw, 78px);
+      line-height: .88;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .weather-main span {
+      display: block;
+      font-size: clamp(28px, 2.2vw, 42px);
+      color: #2f4f7d;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .forecast {
+      position: absolute;
+      right: 20px;
+      left: 20px;
+      bottom: 16px;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .day {
+      text-align: center;
+      background: rgba(255,255,255,.28);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 12px;
+      padding: 6px 4px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+    }
+
+    .day b {
+      display: block;
+      font-size: 16px;
+      color: #385988;
+      font-weight: 700;
+    }
+
+    .day span {
+      display: block;
+      font-size: 18px;
+      color: #1f3f6e;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .clock {
+      background: var(--surface-strong);
+      text-align: center;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+    }
+
+    .clock .time {
+      font-size: clamp(72px, 7.5vw, 122px);
+      line-height: .82;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .clock .date {
+      font-size: clamp(42px, 3.2vw, 66px);
+      line-height: 1;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chip {
+      border: 1px solid #c7d4ea;
+      background: #edf3fb;
+      color: #2a436b;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    }
+
+    .inter {
+      background: var(--surface-strong);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+    }
+
+    .inter-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .inter-title {
+      text-align: right;
+    }
+
+    .inter-title b {
+      display: block;
+      font-size: clamp(44px, 3.6vw, 64px);
+      line-height: .92;
+      font-weight: 800;
+    }
+
+    .inter-title span {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(24px, 1.7vw, 34px);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .matches {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .match {
+      border-radius: 14px;
+      border: 1px solid #c9d5e9;
+      background: #fff;
+      min-height: 68px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .match::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(95deg, var(--tone, rgba(60,100,200,.16)), transparent 72%);
+      pointer-events: none;
+    }
+
+    .comp {
+      position: relative;
+      z-index: 1;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      min-width: 86px;
+      text-align: center;
+    }
+
+    .serie { background: var(--serie); }
+    .ucl { background: var(--ucl); }
+    .coppa { background: var(--coppa); }
+
+    .teams {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 3px;
+      line-height: 1;
+    }
+
+    .teams b {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 34px;
+      font-weight: 800;
+      color: #1d2b46;
+    }
+
+    .teams span {
+      font-size: 24px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      border-radius: 10px;
+      padding: 7px 9px;
+      min-width: 92px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .ft { background: #e8eef9; color: #2a4268; }
+    .up { background: #eef5ff; color: #37527f; }
+    .live { background: #ffe9e9; color: #b32727; }
+
+    .note {
+      min-height: 86px;
+      border: 1px dashed #bccae2;
+      border-radius: 18px;
+      color: #60739a;
+      font-weight: 700;
+      font-size: 34px;
+      background: rgba(255,255,255,.35);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 12px;
+    }
+
+    @media (max-width: 1360px) {
+      .top-row { grid-template-columns: 1fr; }
+      .card { min-height: 250px; }
+      .teams b { font-size: 28px; }
+      .teams span { font-size: 20px; }
+      .chip { font-size: 20px; }
+      .note { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="top-row">
+      <article class="card weather" aria-label="Weekly Weather">
+        <header class="weather-head">
+          <span class="msr" style="font-size:42px;color:#2b4f7d">partly_cloudy_day</span>
+          <div class="weather-main" style="text-align:left">
+            <b>11.4°C</b>
+            <span>Partly cloudy</span>
+          </div>
+        </header>
+
+        <div class="forecast">
+          <div class="day"><b>Tue</b><span>2° / 8°</span></div>
+          <div class="day"><b>Wed</b><span>11° / 5°</span></div>
+          <div class="day"><b>Thu</b><span>6° / -6°</span></div>
+          <div class="day"><b>Fri</b><span>4° / -7°</span></div>
+          <div class="day"><b>Sat</b><span>3° / -1°</span></div>
+          <div class="day"><b>Sun</b><span>2° / -4°</span></div>
+          <div class="day"><b>Mon</b><span>6° / -10°</span></div>
+        </div>
+      </article>
+
+      <article class="card clock" aria-label="Time and Home Status">
+        <div class="time">16:49</div>
+        <div class="date">Wednesday, January 7</div>
+        <div class="chips">
+          <span class="chip">Active 18</span>
+          <span class="chip">Online 146 / 152</span>
+          <span class="chip">Alerts 2</span>
+        </div>
+      </article>
+
+      <article class="card inter" aria-label="Inter Milan Weekly Matches">
+        <header class="inter-header">
+          <span class="msr" style="font-size:36px;color:#2d4268">sports_soccer</span>
+          <div class="inter-title">
+            <b>Inter Milan</b>
+            <span>مباريات الأسبوع (نتيجة / موعد / بطولة)</span>
+          </div>
+        </header>
+
+        <div class="matches">
+          <div class="match" style="--tone:rgba(63,114,255,.16)">
+            <span class="comp serie">Serie A</span>
+            <div class="teams">
+              <b>Inter 3 - 0 Cagliari</b>
+              <span>Played • Apr 17</span>
+            </div>
+            <span class="badge ft">FT</span>
+          </div>
+
+          <div class="match" style="--tone:rgba(109,92,243,.16)">
+            <span class="comp ucl">UCL</span>
+            <div class="teams">
+              <b>Inter vs Bayern</b>
+              <span>Wed 21:00 • Quarter Final</span>
+            </div>
+            <span class="badge up">UPCOMING</span>
+          </div>
+
+          <div class="match" style="--tone:rgba(16,161,123,.16)">
+            <span class="comp coppa">Coppa</span>
+            <div class="teams">
+              <b>Inter vs Como</b>
+              <span>Tue 20:45 • Coppa Italia SF</span>
+            </div>
+            <span class="badge up">UPCOMING</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="note">هذا نموذج فخم للصف الأول فقط — اعتماد الشكل قبل الانتقال لباقي الأقسام.</section>
+  </main>
+</body>
+</html>
