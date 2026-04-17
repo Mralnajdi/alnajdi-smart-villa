@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALNAJDI SMART VILLA • Floors Home (Design Mockup v2)</title>
+  <title>ALNAJDI Smart Villa • Home Design v3</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@500;700;800&family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet" />
   <style>
     :root{
-      --bg:#d9dee6;
-      --surface:#f2f4f8;
-      --card:#f8fafc;
-      --line:#cfd7e3;
-      --text:#212735;
-      --muted:#5f6e8a;
-      --chip:#eff3f8;
-      --ok:#1ca781;
-      --warn:#d9802f;
-      --shadow:0 12px 30px rgba(16,31,63,.12);
-      --inset:inset 0 1px 0 rgba(255,255,255,.75);
-      --r-xl:26px;
-      --r-lg:20px;
-      --r-md:16px;
-      --r-sm:12px;
+      --bg:#e7ebf2;
+      --surface:#f6f8fc;
+      --card:#ffffff;
+      --line:#d6deea;
+      --text:#1f2737;
+      --muted:#647693;
+      --shadow:0 10px 30px rgba(33,49,79,.12);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --ok:#10a37f;
+      --warn:#e08a3a;
+      --dark:#0d1016;
+      --dark-card:#171b24;
+      --dark-line:rgba(255,255,255,.08);
+      --dark-text:#f4f6fb;
+      --dark-muted:#a9b4c7;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Tajawal",system-ui,sans-serif;
+      font-family:"Tajawal","Inter",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 8% -15%, rgba(255,255,255,.8), transparent 60%),
-        radial-gradient(1000px 550px at 100% 0%, rgba(175,196,229,.36), transparent 65%),
+        radial-gradient(1200px 650px at 8% -20%, rgba(255,255,255,.78), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(172,196,228,.42), transparent 58%),
         var(--bg);
       padding:18px;
     }
@@ -42,7 +44,6 @@
     .msr{
       font-family:"Material Symbols Rounded";
       font-variation-settings:'FILL' 1;
-      font-style:normal;
       font-size:22px;
       line-height:1;
       display:inline-flex;
@@ -50,490 +51,351 @@
       justify-content:center;
     }
 
-    .app{max-width:1380px;margin-inline:auto;display:grid;gap:14px}
-
+    .app{max-width:1440px;margin:0 auto;display:grid;gap:14px}
     .panel{
       background:var(--surface);
       border:1px solid var(--line);
-      border-radius:var(--r-xl);
-      box-shadow:var(--shadow),var(--inset);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.75);
     }
 
     .topbar{
+      padding:18px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:14px;
+      align-items:start;
+    }
+    .top-left{display:grid;gap:12px}
+
+    .time-block b{display:block;font-size:78px;line-height:.88;font-weight:800;letter-spacing:.01em}
+    .time-block span{display:block;font-size:48px;line-height:1.1;color:#1f2737;font-weight:700}
+
+    .status-row{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background:#eef2f8;
+      border-radius:999px;
+      padding:9px 14px;
+      font-size:20px;
+      font-weight:800;
+      color:#334969;
+    }
+
+    .weather-card{
+      min-width:520px;
+      background:linear-gradient(155deg,#dce7f6,#b9d2ee);
+      border:1px solid #a9c0df;
+      border-radius:22px;
       padding:16px 18px;
+      display:grid;
+      gap:10px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+    }
+    .weather-top{display:flex;justify-content:space-between;align-items:center}
+    .weather-temp{font-size:58px;font-weight:800;line-height:.9}
+    .weather-sub{font-size:30px;color:#34537d;font-weight:700}
+    .forecast{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:6px}
+    .forecast div{font-size:18px;color:#284668;font-weight:700;text-align:center}
+
+    .quick-devices{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+    }
+    .mini-device{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      min-height:90px;
+      padding:12px 14px;
       display:grid;
       grid-template-columns:auto 1fr auto;
       align-items:center;
-      gap:12px;
-    }
-
-    .timebox{text-align:right;min-width:220px}
-    .timebox b{display:block;font-size:66px;line-height:.88;font-weight:800;letter-spacing:.01em}
-    .timebox span{display:block;margin-top:7px;color:var(--muted);font-size:31px;font-weight:700}
-
-    .top-middle{display:grid;gap:10px;justify-items:start}
-
-    .stat-row{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{
-      border:1px solid var(--line);
-      background:var(--chip);
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:22px;
-      font-weight:800;
-      color:#2f3c59;
-      box-shadow:var(--inset);
-    }
-
-    .weather{
-      background:linear-gradient(150deg,#c4d6ef,#9ebfe6);
-      border:1px solid #9ab6da;
-      border-radius:20px;
-      padding:12px 16px;
-      min-width:320px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
-    }
-    .weather b{display:block;font-size:56px;line-height:1.02;font-weight:800}
-    .weather span{display:block;margin-top:4px;font-size:30px;font-weight:700;color:#37527d}
-
-    .section-label{
-      text-align:right;
-      font-size:22px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#6f7f9f;
-      margin-inline:8px;
-      font-weight:800;
-    }
-
-    .floors{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
-
-    .floor-card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--r-xl);
-      box-shadow:var(--shadow),var(--inset);
-      min-height:340px;
-      padding:18px;
-      display:grid;
-      grid-template-rows:auto 1fr auto;
       gap:10px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
     }
+    .mini-device .icon{width:42px;height:42px;border-radius:999px;background:#eef2f8;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:#3e5070}
+    .mini-device b{font-size:28px;line-height:1}
+    .mini-device span{display:block;color:var(--muted);font-size:26px;font-weight:600;margin-top:4px}
+    .mini-device small{font-size:24px;color:#334969;font-weight:800}
 
-    .floor-head{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      align-items:start;
-      gap:12px;
-    }
+    .main-grid{display:grid;grid-template-columns:2.2fr 1fr;gap:12px;align-items:start}
 
-    .status-col{display:grid;gap:10px;justify-items:start}
-    .status-pill{
-      border-radius:999px;
-      font-size:24px;
-      font-weight:800;
-      padding:8px 16px;
-      border:2px solid;
-      white-space:nowrap;
-      line-height:1;
-    }
-    .status-pill.ok{color:var(--ok);background:#e9faf4;border-color:#a7e5d2}
-    .status-pill.warn{color:var(--warn);background:#fff2e7;border-color:#f3c79f}
-
-    .floor-title{text-align:right}
-    .floor-title b{display:block;font-size:56px;line-height:.9;font-weight:800}
-    .floor-title span{display:block;color:#5a6e92;font-size:38px;font-weight:800;letter-spacing:.02em}
-
-    .floor-meta{
-      justify-self:end;
-      display:flex;
-      gap:26px;
-      color:#617292;
-      font-size:36px;
-      font-weight:700;
-      margin-top:auto;
-    }
-
-    .icon-row{display:flex;gap:12px;justify-content:flex-end;align-items:center}
-
-    .icon-chip{
-      width:58px;height:58px;
-      border-radius:999px;
-      border:2px solid #cad5e4;
-      background:#eef2f8;
-      color:#4a5d81;
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.75);
-    }
-    .icon-chip.on{background:#e8faf3;border-color:#a9e5d3;color:#137f63}
-    .icon-chip.warn{background:#fff2e8;border-color:#f3c79f;color:#b7641f}
-
-    .counter{
-      position:absolute;
-      top:-6px;
-      left:-6px;
-      min-width:23px;
-      height:23px;
-      border-radius:999px;
-      background:#2c3e60;
-      color:#fff;
-      font-size:14px;
-      font-weight:800;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding-inline:5px;
-      border:2px solid #e7edf7;
-    }
-
-    .rooms-preview{
-      padding:14px;
-      display:grid;
-      gap:12px;
-    }
-
-    .preview-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom:1px dashed #ccd6e6;
-      padding-bottom:12px;
-    }
-
-    .preview-title{text-align:right}
-    .preview-title b{display:block;font-size:50px;line-height:.95}
-    .preview-title span{display:block;font-size:36px;color:#617292;font-weight:700}
-
-    .rooms{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:10px;
-    }
-
+    .rooms-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .room-card{
-      background:#fbfcff;
-      border:1px solid #cfd8e8;
-      border-radius:var(--r-lg);
-      padding:14px;
-      min-height:178px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:16px;
+      min-height:320px;
+      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.6);
       display:grid;
-      gap:10px;
-      box-shadow:var(--inset);
+      grid-template-rows:auto auto 1fr auto;
+      gap:12px;
+      position:relative;
+      overflow:hidden;
     }
+    .room-card::after{content:"";position:absolute;inset:auto -40px -80px auto;width:180px;height:180px;background:radial-gradient(circle at center, rgba(255,255,255,.45), transparent 70%);pointer-events:none}
+    .room-icon-wrap{display:flex;justify-content:center}
+    .room-icon{
+      width:132px;height:132px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.5);
+      color:rgba(30,47,77,.68);
+    }
+    .room-icon .msr{font-size:76px}
+    .room-title{text-align:center}
+    .room-title b{display:block;font-size:44px;line-height:1}
+    .room-title span{display:block;font-size:30px;color:#526586;font-weight:700;margin-top:8px}
 
-    .room-card h4{margin:0;font-size:42px;line-height:.95}
-    .room-card p{margin:0;color:#617292;font-size:31px;font-weight:700}
-    .room-card .icon-row{justify-content:flex-start}
+    .floor-strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .floor-pill{border-radius:999px;padding:8px 14px;font-size:20px;font-weight:800;border:2px solid}
+    .floor-pill.ok{color:var(--ok);border-color:#9fe2ce;background:#eafaf5}
+    .floor-pill.warn{color:var(--warn);border-color:#f2c79f;background:#fff3e8}
 
-    .sensor-strip{
-      background:#080b11;
-      border-radius:var(--r-lg);
+    .icon-row{display:flex;gap:10px;justify-content:center}
+    .bubble{
+      width:54px;height:54px;border-radius:999px;border:2px solid rgba(255,255,255,.65);
+      background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;position:relative;color:#466086;
+    }
+    .bubble.on{background:#e7f9f2;color:#147e64;border-color:#9be1cd}
+    .bubble.warn{background:#fff1e5;color:#ba6927;border-color:#f0c092}
+    .bubble .msr{font-size:26px}
+    .count{position:absolute;top:-7px;left:-7px;min-width:22px;height:22px;border-radius:999px;background:#2b3f61;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid rgba(255,255,255,.75)}
+
+    .pink{background:linear-gradient(160deg,#f7d2cf,#f4bdba)}
+    .yellow{background:linear-gradient(160deg,#f6e8b4,#f2d98e)}
+    .mint{background:linear-gradient(160deg,#c7efde,#ade5ce)}
+    .blue{background:linear-gradient(160deg,#cce6fb,#b5d8f6)}
+
+    .sensor-panel{
+      background:var(--dark);
       border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
       padding:10px;
       display:grid;
       gap:8px;
+      box-shadow:0 12px 34px rgba(0,0,0,.35);
     }
-
     .sensor-item{
-      position:relative;
-      background:#161c26;
+      background:var(--dark-card);
+      border:1px solid var(--dark-line);
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.09);
-      min-height:78px;
+      min-height:84px;
       display:grid;
       grid-template-columns:68px 1fr;
       align-items:center;
       overflow:hidden;
-    }
-
-    .sensor-item::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(95deg,var(--glow, rgba(80,140,255,.34)), transparent 62%);
-      pointer-events:none;
-    }
-
-    .sensor-icon{
       position:relative;
-      z-index:2;
-      width:68px;height:100%;
-      display:flex;align-items:center;justify-content:center;
-      color:var(--icon,#9ad0ff);
-      background:radial-gradient(circle at center, rgba(255,255,255,.06), rgba(255,255,255,0));
-      border-inline-end:1px solid rgba(255,255,255,.08);
+    }
+    .sensor-item::before{content:"";position:absolute;inset:0;background:linear-gradient(95deg,var(--glow,rgba(93,141,255,.33)), transparent 62%);pointer-events:none}
+    .sensor-icon{height:100%;display:flex;align-items:center;justify-content:center;border-inline-end:1px solid rgba(255,255,255,.08);color:var(--ic,#8fd0ff);background:radial-gradient(circle at center, rgba(255,255,255,.06), transparent 70%)}
+    .sensor-icon .msr{font-size:34px}
+    .sensor-text{padding-inline:10px;position:relative;z-index:2}
+    .sensor-text b{display:block;color:var(--dark-text);font-size:42px;line-height:1}
+    .sensor-text span{display:block;color:var(--dark-muted);font-size:24px;font-weight:600;margin-top:4px}
+
+    .bottom-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .ac-card{background:var(--card);border:1px solid var(--line);border-radius:999px;min-height:84px;padding:10px 16px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+    .ac-left{display:flex;gap:8px;align-items:center}
+    .ac-circle{width:44px;height:44px;border-radius:999px;background:#eef2f8;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+    .ac-card b{font-size:34px;line-height:1}
+    .ac-card span{display:block;color:#5e7090;font-size:26px;font-weight:600}
+    .ac-set{display:flex;gap:8px;align-items:center}
+    .btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:#eef2f8;display:flex;align-items:center;justify-content:center;font-size:28px;color:#2f4366;font-weight:800}
+    .temp{font-size:32px;font-weight:800;color:#283a5b;min-width:80px;text-align:center}
+
+    .dock{display:flex;justify-content:center;gap:10px;padding-top:2px}
+    .dock-btn{width:62px;height:62px;border-radius:999px;border:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;color:#2f4366;box-shadow:0 6px 14px rgba(30,52,92,.14)}
+    .dock-btn.active{background:#2b3f61;color:#fff;border-color:#2b3f61}
+    .dock-btn .msr{font-size:30px}
+
+    @media (max-width:1400px){
+      .time-block b{font-size:62px}.time-block span{font-size:38px}
+      .weather-temp{font-size:46px}.weather-sub{font-size:24px}
+      .forecast div{font-size:15px}
+      .mini-device b{font-size:22px}.mini-device span,.mini-device small{font-size:19px}
+      .room-title b{font-size:34px}.room-title span{font-size:22px}
+      .sensor-text b{font-size:34px}.sensor-text span{font-size:19px}
+      .ac-card b{font-size:26px}.ac-card span,.temp{font-size:22px}
     }
 
-    .sensor-text{position:relative;z-index:2;padding-inline:10px;line-height:1.08}
-    .sensor-text b{display:block;color:#f2f6ff;font-size:30px}
-    .sensor-text span{display:block;color:#a8b3c8;font-size:21px;font-weight:600;margin-top:4px}
-
-    .bottom-nav{
-      justify-self:center;
-      display:flex;
-      gap:8px;
-      border:1px solid #ccd6e6;
-      border-radius:999px;
-      padding:5px;
-      background:#f5f8fd;
-      box-shadow:var(--inset), 0 8px 20px rgba(25,47,86,.12);
-    }
-
-    .nav-btn{
-      border:0;
-      background:transparent;
-      border-radius:999px;
-      min-width:112px;
-      height:46px;
-      font-size:28px;
-      font-weight:800;
-      color:#33476d;
-      padding-inline:18px;
-    }
-    .nav-btn.active{background:#2c3e60;color:#fff}
-
-    @media (max-width:1360px){
-      .timebox b{font-size:52px}.timebox span{font-size:24px}
-      .weather b{font-size:44px}.weather span{font-size:24px}
-      .floor-title b{font-size:44px}.floor-title span{font-size:31px}
-      .floor-meta{font-size:28px}.status-pill{font-size:20px}
-      .room-card h4{font-size:34px}.room-card p{font-size:24px}
-      .preview-title b{font-size:40px}.preview-title span{font-size:29px}
-      .chip{font-size:18px}
-      .nav-btn{font-size:22px;min-width:94px}
-    }
-
-    @media (max-width:980px){
-      body{padding:10px}
-      .topbar{grid-template-columns:1fr;justify-items:start}
-      .timebox{text-align:right;width:100%}
-      .top-middle{width:100%}.weather{min-width:0;width:100%}
-      .floors{grid-template-columns:1fr}
-      .rooms{grid-template-columns:1fr}
-      .floor-card{min-height:300px}
-      .bottom-nav{width:100%;justify-content:space-between}
-      .nav-btn{flex:1;min-width:0}
+    @media (max-width:1080px){
+      .topbar{grid-template-columns:1fr}
+      .weather-card{min-width:0}
+      .quick-devices{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .main-grid{grid-template-columns:1fr}
+      .rooms-grid{grid-template-columns:1fr}
+      .bottom-controls{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
   <main class="app">
-    <header class="panel topbar">
-      <div class="timebox">
-        <b>16:49</b>
-        <span>الأربعاء، 7 يناير</span>
-      </div>
-
-      <div class="top-middle">
-        <div class="stat-row">
-          <span class="chip">Alerts 2</span>
-          <span class="chip">Active 18</span>
-          <span class="chip">Online 146 / 152</span>
+    <section class="panel topbar">
+      <div class="top-left">
+        <div class="time-block">
+          <b>16:49</b>
+          <span>Wednesday, January 7</span>
         </div>
 
-        <div class="weather">
-          <b>11.4°C</b>
-          <span>Partly cloudy</span>
+        <div class="status-row">
+          <span class="pill">Alerts 2</span>
+          <span class="pill">Active 18</span>
+          <span class="pill">Online 146 / 152</span>
         </div>
       </div>
 
-      <div style="width:24px"></div>
-    </header>
-
-    <h3 class="section-label">FLOORS OVERVIEW</h3>
-
-    <section class="floors">
-      <article class="floor-card">
-        <div class="floor-head">
-          <div class="status-col">
-            <span class="status-pill ok">Active 6</span>
-            <span class="status-pill warn">Alert 0</span>
-          </div>
-          <div class="floor-title">
-            <b>الدور الأول</b>
-            <span>FIRST FLOOR</span>
+      <aside class="weather-card">
+        <div class="weather-top">
+          <span class="msr" style="font-size:36px;color:#2f4f78">partly_cloudy_day</span>
+          <div style="text-align:left">
+            <div class="weather-temp">11.4°C</div>
+            <div class="weather-sub">Partly cloudy</div>
           </div>
         </div>
-
-        <div class="floor-meta">
-          <span>الغرف: 6</span>
-          <span>الأجهزة: 42</span>
+        <div class="forecast">
+          <div>Wed<br>11° / 5°</div>
+          <div>Thu<br>6° / -6°</div>
+          <div>Fri<br>4° / -7°</div>
+          <div>Sat<br>3° / -1°</div>
+          <div>Sun<br>-2° / -4°</div>
+          <div>Mon<br>-6° / -10°</div>
         </div>
+      </aside>
+    </section>
 
-        <div class="icon-row">
-          <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">3</i></span>
-          <span class="icon-chip on"><span class="msr">ac_unit</span><i class="counter">1</i></span>
-          <span class="icon-chip"><span class="msr">door_sliding</span><i class="counter">0</i></span>
-          <span class="icon-chip on"><span class="msr">music_note</span><i class="counter">2</i></span>
-          <span class="icon-chip"><span class="msr">fire_extinguisher</span><i class="counter">0</i></span>
+    <section class="quick-devices">
+      <article class="mini-device">
+        <span class="icon"><span class="msr">door_front</span></span>
+        <div><b>Front Door Lock</b><span>Unlocked</span></div>
+        <small>!</small>
+      </article>
+      <article class="mini-device">
+        <span class="icon"><span class="msr">door_open</span></span>
+        <div><b>Block Door Unlock</b><span>Off</span></div>
+        <small>—</small>
+      </article>
+      <article class="mini-device">
+        <span class="icon"><span class="msr">robot_2</span></span>
+        <div><b>S8 MaxV Ultra</b><span>Docked</span></div>
+        <small>OK</small>
+      </article>
+      <article class="mini-device">
+        <span class="icon"><span class="msr">local_laundry_service</span></span>
+        <div><b>Miele WVI860</b><span>Running</span></div>
+        <small>19:03</small>
+      </article>
+    </section>
+
+    <section class="main-grid">
+      <div class="rooms-grid">
+        <article class="room-card pink">
+          <div class="floor-strip"><span class="floor-pill ok">Active 4</span><span class="floor-pill warn">Alert 0</span></div>
+          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">weekend</span></div></div>
+          <div class="room-title"><b>Living Room</b><span>22.8 °C / 48.3 %</span></div>
+          <div class="icon-row">
+            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">3</i></span>
+            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
+            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
+            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
+          </div>
+        </article>
+
+        <article class="room-card yellow">
+          <div class="floor-strip"><span class="floor-pill ok">Active 5</span><span class="floor-pill warn">Alert 0</span></div>
+          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">kitchen</span></div></div>
+          <div class="room-title"><b>Kitchen</b><span>22.8 °C / 48.3 %</span></div>
+          <div class="icon-row">
+            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">4</i></span>
+            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
+            <span class="bubble warn"><span class="msr">water_drop</span><i class="count">1</i></span>
+            <span class="bubble"><span class="msr">local_fire_department</span><i class="count">0</i></span>
+          </div>
+        </article>
+
+        <article class="room-card mint">
+          <div class="floor-strip"><span class="floor-pill ok">Active 3</span><span class="floor-pill warn">Alert 0</span></div>
+          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">bed</span></div></div>
+          <div class="room-title"><b>Bedroom</b><span>20.5 °C / 54 %</span></div>
+          <div class="icon-row">
+            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
+            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">2</i></span>
+            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
+            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
+          </div>
+        </article>
+
+        <article class="room-card blue">
+          <div class="floor-strip"><span class="floor-pill ok">Active 2</span><span class="floor-pill warn">Alert 0</span></div>
+          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">toys</span></div></div>
+          <div class="room-title"><b>Kids Room</b><span>21.0 °C / 52 %</span></div>
+          <div class="icon-row">
+            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">2</i></span>
+            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
+            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
+            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
+          </div>
+        </article>
+      </div>
+
+      <aside class="sensor-panel">
+        <article class="sensor-item" style="--glow:rgba(255,73,73,.35);--ic:#ff5d5d">
+          <div class="sensor-icon"><span class="msr">thermostat</span></div>
+          <div class="sensor-text"><b>23.1 °C</b><span>Living room temp (C)</span></div>
+        </article>
+        <article class="sensor-item" style="--glow:rgba(255,160,52,.3);--ic:#ffa944">
+          <div class="sensor-icon"><span class="msr">thermostat</span></div>
+          <div class="sensor-text"><b>72 °F</b><span>Living room temp (F)</span></div>
+        </article>
+        <article class="sensor-item" style="--glow:rgba(89,190,255,.34);--ic:#6cc7ff">
+          <div class="sensor-icon"><span class="msr">humidity_percentage</span></div>
+          <div class="sensor-text"><b>43.1%</b><span>Living room humidity</span></div>
+        </article>
+        <article class="sensor-item" style="--glow:rgba(130,228,146,.3);--ic:#8be896">
+          <div class="sensor-icon"><span class="msr">air</span></div>
+          <div class="sensor-text"><b>14 μg/m³</b><span>Air quality Home</span></div>
+        </article>
+        <article class="sensor-item" style="--glow:rgba(255,189,74,.3);--ic:#ffbf55">
+          <div class="sensor-icon"><span class="msr">airwave</span></div>
+          <div class="sensor-text"><b>51 AQI</b><span>Air quality Amsterdam</span></div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="bottom-controls">
+      <article class="ac-card">
+        <div class="ac-left">
+          <span class="ac-circle"><span class="msr">mode_fan</span></span>
+          <div><b>A/C Living Room</b><span>Heat</span></div>
+        </div>
+        <div class="ac-set">
+          <button class="btn">−</button>
+          <div class="temp">22 °C</div>
+          <button class="btn">+</button>
         </div>
       </article>
 
-      <article class="floor-card">
-        <div class="floor-head">
-          <div class="status-col">
-            <span class="status-pill ok">Active 9</span>
-            <span class="status-pill warn">Alert 1</span>
-          </div>
-          <div class="floor-title">
-            <b>الدور الأرضي</b>
-            <span>GROUND FLOOR</span>
-          </div>
+      <article class="ac-card">
+        <div class="ac-left">
+          <span class="ac-circle"><span class="msr">mode_fan</span></span>
+          <div><b>A/C Bedroom</b><span>Heat</span></div>
         </div>
-
-        <div class="floor-meta">
-          <span>الغرف: 5</span>
-          <span>الأجهزة: 38</span>
-        </div>
-
-        <div class="icon-row">
-          <span class="icon-chip warn"><span class="msr">lock</span><i class="counter">1</i></span>
-          <span class="icon-chip on"><span class="msr">music_note</span><i class="counter">1</i></span>
-          <span class="icon-chip"><span class="msr">door_sliding</span><i class="counter">0</i></span>
-          <span class="icon-chip on"><span class="msr">ac_unit</span><i class="counter">2</i></span>
-          <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">5</i></span>
-        </div>
-      </article>
-
-      <article class="floor-card">
-        <div class="floor-head">
-          <div class="status-col">
-            <span class="status-pill ok">Active 1</span>
-            <span class="status-pill warn">Alert 1</span>
-          </div>
-          <div class="floor-title">
-            <b>السطح</b>
-            <span>ROOF</span>
-          </div>
-        </div>
-
-        <div class="floor-meta">
-          <span>المناطق: 2</span>
-          <span>الأجهزة: 11</span>
-        </div>
-
-        <div class="icon-row">
-          <span class="icon-chip"><span class="msr">lock</span><i class="counter">0</i></span>
-          <span class="icon-chip"><span class="msr">door_sliding</span><i class="counter">0</i></span>
-          <span class="icon-chip on"><span class="msr">videocam</span><i class="counter">2</i></span>
-          <span class="icon-chip warn"><span class="msr">water_drop</span><i class="counter">1</i></span>
-          <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">1</i></span>
-        </div>
-      </article>
-
-      <article class="floor-card">
-        <div class="floor-head">
-          <div class="status-col">
-            <span class="status-pill ok">Active 2</span>
-            <span class="status-pill warn">Alert 0</span>
-          </div>
-          <div class="floor-title">
-            <b>الدور الثاني</b>
-            <span>SECOND FLOOR</span>
-          </div>
-        </div>
-
-        <div class="floor-meta">
-          <span>الغرف: 3</span>
-          <span>الأجهزة: 17</span>
-        </div>
-
-        <div class="icon-row">
-          <span class="icon-chip"><span class="msr">lock</span><i class="counter">0</i></span>
-          <span class="icon-chip"><span class="msr">music_note</span><i class="counter">0</i></span>
-          <span class="icon-chip on"><span class="msr">door_sliding</span><i class="counter">1</i></span>
-          <span class="icon-chip"><span class="msr">ac_unit</span><i class="counter">0</i></span>
-          <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">1</i></span>
+        <div class="ac-set">
+          <button class="btn">−</button>
+          <div class="temp">19 °C</div>
+          <button class="btn">+</button>
         </div>
       </article>
     </section>
 
-    <section class="panel rooms-preview">
-      <header class="preview-head">
-        <div class="stat-row">
-          <span class="chip">Alerts 0</span>
-          <span class="chip">Active 6</span>
-          <span class="chip">Rooms 6</span>
-        </div>
-
-        <div class="preview-title">
-          <b>الدور الأول</b>
-          <span>معاينة شكل الغرف بعد الضغط على الطابق</span>
-        </div>
-      </header>
-
-      <div class="rooms">
-        <article class="room-card">
-          <h4>غرفة النوم الرئيسية</h4>
-          <p>22.1°C / 49% • Devices 9</p>
-          <div class="icon-row">
-            <span class="icon-chip"><span class="msr">music_note</span><i class="counter">0</i></span>
-            <span class="icon-chip"><span class="msr">door_sliding</span><i class="counter">0</i></span>
-            <span class="icon-chip on"><span class="msr">ac_unit</span><i class="counter">1</i></span>
-            <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">2</i></span>
-          </div>
-        </article>
-
-        <article class="room-card">
-          <h4>المكتب</h4>
-          <p>21.7°C / 51% • Devices 6</p>
-          <div class="icon-row">
-            <span class="icon-chip"><span class="msr">door_sliding</span><i class="counter">0</i></span>
-            <span class="icon-chip on"><span class="msr">music_note</span><i class="counter">1</i></span>
-            <span class="icon-chip"><span class="msr">ac_unit</span><i class="counter">0</i></span>
-            <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">1</i></span>
-          </div>
-        </article>
-
-        <article class="room-card">
-          <h4>غرفة المعيشة</h4>
-          <p>23.0°C / 47% • Devices 12</p>
-          <div class="icon-row">
-            <span class="icon-chip"><span class="msr">lock</span><i class="counter">0</i></span>
-            <span class="icon-chip on"><span class="msr">music_note</span><i class="counter">1</i></span>
-            <span class="icon-chip on"><span class="msr">ac_unit</span><i class="counter">1</i></span>
-            <span class="icon-chip on"><span class="msr">lightbulb</span><i class="counter">3</i></span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="sensor-strip">
-      <article class="sensor-item" style="--glow:rgba(255,76,76,.35);--icon:#ff5959">
-        <div class="sensor-icon"><span class="msr">thermostat</span></div>
-        <div class="sensor-text"><b>23.1 °C</b><span>Living room temp (C)</span></div>
-      </article>
-
-      <article class="sensor-item" style="--glow:rgba(255,162,47,.3);--icon:#ffa63a">
-        <div class="sensor-icon"><span class="msr">thermostat</span></div>
-        <div class="sensor-text"><b>72 °F</b><span>Living room temp (F)</span></div>
-      </article>
-
-      <article class="sensor-item" style="--glow:rgba(99,198,255,.3);--icon:#63c6ff">
-        <div class="sensor-icon"><span class="msr">humidity_percentage</span></div>
-        <div class="sensor-text"><b>43.1%</b><span>Living room humidity</span></div>
-      </article>
-
-      <article class="sensor-item" style="--glow:rgba(127,228,145,.3);--icon:#7fe491">
-        <div class="sensor-icon"><span class="msr">air</span></div>
-        <div class="sensor-text"><b>14 μg/m³</b><span>Air quality Home</span></div>
-      </article>
-    </section>
-
-    <nav class="bottom-nav" aria-label="Bottom Navigation">
-      <button class="nav-btn">Settings</button>
-      <button class="nav-btn">Energy</button>
-      <button class="nav-btn">Scenes</button>
-      <button class="nav-btn">Security</button>
-      <button class="nav-btn active">Home</button>
+    <nav class="dock" aria-label="Navigation">
+      <button class="dock-btn"><span class="msr">cleaning_services</span></button>
+      <button class="dock-btn"><span class="msr">weekend</span></button>
+      <button class="dock-btn active"><span class="msr">bed</span></button>
+      <button class="dock-btn"><span class="msr">settings</span></button>
+      <button class="dock-btn"><span class="msr">chair</span></button>
     </nav>
   </main>
 </body>
