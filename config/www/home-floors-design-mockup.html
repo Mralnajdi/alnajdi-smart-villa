@@ -3,376 +3,278 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALNAJDI Smart Villa • Home v4 (First Row)</title>
+  <title>ALNAJDI • First Row v5 (Clean Rebuild)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@600;700;800&family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #e8edf6;
-      --bg-soft: #dfe7f4;
-      --surface: #f7faff;
-      --card: #ffffff;
-      --line: #d3dced;
-      --text: #16233a;
-      --muted: #627696;
-      --shadow-lg: 0 18px 36px rgba(22, 39, 71, 0.14);
-      --shadow-sm: 0 8px 16px rgba(22, 39, 71, 0.08);
-      --r-xl: 28px;
-      --r-lg: 20px;
-      --r-md: 14px;
+    :root{
+      --bg:#edf1f7;
+      --surface:#ffffff;
+      --ink:#15233b;
+      --muted:#607396;
+      --line:#d4dced;
+      --ring:#e8eef9;
+      --shadow:0 14px 32px rgba(15,32,69,.10);
+      --radius-xl:28px;
+      --radius-lg:18px;
+      --radius-md:12px;
 
-      --serie: #3a6cff;
-      --ucl: #6a58f2;
-      --coppa: #11a47d;
+      --blue:#3c6dff;
+      --violet:#6a58f2;
+      --green:#12a37e;
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Tajawal", "Inter", system-ui, sans-serif;
-      color: var(--text);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Tajawal","Inter",system-ui,sans-serif;
+      color:var(--ink);
       background:
-        radial-gradient(900px 520px at 6% -15%, rgba(255,255,255,.82), transparent 64%),
-        radial-gradient(900px 520px at 100% -10%, rgba(172,196,235,.4), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg-soft));
-      padding: 22px;
+        radial-gradient(900px 500px at 100% -15%, rgba(151,182,229,.28), transparent 65%),
+        radial-gradient(900px 500px at 0% -20%, rgba(255,255,255,.86), transparent 62%),
+        var(--bg);
+      padding:24px;
     }
 
-    .msr {
-      font-family: "Material Symbols Rounded";
-      font-variation-settings: 'FILL' 1;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .msr{
+      font-family:"Material Symbols Rounded";
+      font-variation-settings:'FILL' 1;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .wrap {
-      max-width: 1520px;
-      margin-inline: auto;
-      display: grid;
-      gap: 14px;
+    .page{max-width:1540px;margin-inline:auto;display:grid;gap:14px}
+
+    .first-row{
+      display:grid;
+      grid-template-columns:3fr 2.2fr 3.3fr;
+      gap:14px;
+      align-items:stretch;
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr 1.2fr;
-      gap: 14px;
-      align-items: stretch;
+    .card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      min-height:330px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .card {
-      position: relative;
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.8);
-      min-height: 320px;
-      padding: 18px;
+    .top-accent::before{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:6px;
+      background:linear-gradient(90deg,#7ea3ff,#9dc2ff,#c5dcff);
+      opacity:.8;
+      pointer-events:none;
     }
 
-    .card:after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(130deg, rgba(255,255,255,.18), transparent 48%);
-      pointer-events: none;
+    /* INTER CARD */
+    .inter-card{display:grid;grid-template-rows:auto 1fr;gap:12px}
+    .inter-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+    .inter-head h2{margin:0;font-size:62px;line-height:.9;font-weight:800;letter-spacing:-.01em}
+    .inter-head p{margin:6px 0 0;color:var(--muted);font-size:31px;font-weight:700;line-height:1}
+
+    .match-list{display:grid;gap:8px;align-content:start}
+    .match{
+      border:1px solid #d2dced;
+      border-radius:14px;
+      background:#fbfcff;
+      min-height:76px;
+      padding:8px 10px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:10px;
+      align-items:center;
+    }
+    .comp{
+      border-radius:999px;
+      padding:6px 10px;
+      min-width:92px;
+      text-align:center;
+      color:#fff;
+      font-size:16px;
+      font-weight:800;
+      line-height:1;
+    }
+    .serie{background:var(--blue)}
+    .ucl{background:var(--violet)}
+    .coppa{background:var(--green)}
+
+    .teams{display:grid;gap:2px}
+    .teams b{font-size:40px;line-height:1;font-weight:800;color:#1a2a45}
+    .teams span{font-size:24px;line-height:1;color:var(--muted);font-weight:700}
+
+    .status{border-radius:10px;padding:7px 10px;font-size:17px;font-weight:800;min-width:98px;text-align:center;line-height:1}
+    .ft{background:#e9eef9;color:#2f466e}
+    .up{background:#edf4ff;color:#385580}
+
+    /* CLOCK CARD */
+    .clock-card{
+      display:grid;
+      align-content:center;
+      gap:16px;
+      text-align:center;
+      background:linear-gradient(180deg,#ffffff,#f7f9fd);
     }
 
-    /* Weather */
-    .weather {
-      background: linear-gradient(165deg, #d2e3fb, #bfd4f1 52%, #b2c8e8);
-      border-color: #afc3e2;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 10px;
+    .clock-time{font-size:130px;line-height:.78;letter-spacing:-.03em;font-weight:800}
+    .clock-date{font-size:72px;line-height:.93;font-weight:700}
+
+    .chip-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+    .chip{
+      border:1px solid #ccd8eb;
+      background:#eef3fb;
+      color:#2f486f;
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:25px;
+      font-weight:800;
+      line-height:1;
     }
 
-    .weather-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      z-index: 1;
-      position: relative;
+    /* WEATHER CARD */
+    .weather-card{
+      background:linear-gradient(165deg,#d2e2fb,#c0d4f1 55%,#b7cbe7);
+      border-color:#afc4e2;
+      display:grid;
+      grid-template-rows:auto 1fr;
+      gap:10px;
     }
 
-    .weather-temp {
-      font-size: clamp(50px, 5vw, 82px);
-      line-height: .88;
-      font-weight: 800;
-      letter-spacing: -.02em;
+    .weather-head{display:flex;justify-content:space-between;align-items:flex-start}
+    .weather-head b{display:block;font-size:84px;line-height:.85;font-weight:800;letter-spacing:-.02em}
+    .weather-head span{display:block;margin-top:4px;font-size:47px;color:#2f4f7c;font-weight:700;line-height:1}
+
+    .forecast-grid{align-self:end;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+    .f-item{
+      background:rgba(255,255,255,.34);
+      border:1px solid rgba(255,255,255,.55);
+      border-radius:12px;
+      text-align:center;
+      padding:7px 4px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
+    }
+    .f-item b{display:block;font-size:15px;color:#3b5e8f}
+    .f-item span{display:block;font-size:17px;font-weight:800;color:#1f416f;margin-top:2px}
+
+    .note{
+      min-height:84px;
+      border:1px dashed #bed0e7;
+      border-radius:18px;
+      background:rgba(255,255,255,.4);
+      color:#5f759f;
+      font-size:34px;
+      font-weight:700;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:12px;
     }
 
-    .weather-state {
-      font-size: clamp(30px, 2.2vw, 44px);
-      color: #304f7a;
-      font-weight: 700;
-      margin-top: 4px;
+    @media (max-width:1460px){
+      .inter-head h2{font-size:50px}
+      .inter-head p{font-size:26px}
+      .teams b{font-size:32px}
+      .teams span{font-size:20px}
+      .clock-time{font-size:104px}
+      .clock-date{font-size:58px}
+      .weather-head b{font-size:66px}
+      .weather-head span{font-size:36px}
+      .chip{font-size:20px}
+      .note{font-size:26px}
     }
 
-    .days {
-      align-self: end;
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 8px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .day {
-      text-align: center;
-      background: rgba(255,255,255,.32);
-      border: 1px solid rgba(255,255,255,.52);
-      border-radius: 12px;
-      padding: 7px 4px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
-    }
-
-    .day b { display: block; font-size: 15px; color: #3b5d8e; }
-    .day span { display: block; font-size: 17px; font-weight: 800; color: #203f6e; margin-top: 2px; }
-
-    /* Clock */
-    .clock {
-      background: var(--card);
-      display: grid;
-      align-content: center;
-      text-align: center;
-      gap: 14px;
-    }
-
-    .time {
-      font-size: clamp(80px, 7.7vw, 128px);
-      line-height: .8;
-      font-weight: 800;
-      letter-spacing: -.03em;
-      z-index: 1;
-      position: relative;
-    }
-
-    .date {
-      font-size: clamp(44px, 3.2vw, 68px);
-      line-height: 1;
-      font-weight: 700;
-      z-index: 1;
-      position: relative;
-    }
-
-    .chips {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      z-index: 1;
-      position: relative;
-    }
-
-    .chip {
-      border: 1px solid #c9d5ea;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 24px;
-      font-weight: 800;
-      line-height: 1;
-      color: #2e456d;
-      background: #edf3fc;
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.65);
-    }
-
-    /* Inter */
-    .inter {
-      background: var(--card);
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 10px;
-    }
-
-    .inter-head {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 8px;
-      align-items: start;
-      z-index: 1;
-      position: relative;
-    }
-
-    .inter-title { text-align: right; }
-    .inter-title b {
-      display: block;
-      font-size: clamp(46px, 3.8vw, 66px);
-      line-height: .9;
-      font-weight: 800;
-    }
-
-    .inter-title span {
-      display: block;
-      margin-top: 4px;
-      font-size: clamp(24px, 1.75vw, 35px);
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .matches { display: grid; gap: 8px; align-content: start; z-index: 1; position: relative; }
-
-    .match {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 10px;
-      min-height: 70px;
-      border-radius: 14px;
-      border: 1px solid #c9d5e8;
-      background: #fff;
-      padding: 8px 10px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .match::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(95deg, var(--tone, rgba(60,100,200,.16)), transparent 72%);
-      pointer-events: none;
-    }
-
-    .comp {
-      z-index: 1;
-      position: relative;
-      border-radius: 999px;
-      min-width: 88px;
-      text-align: center;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1;
-      padding: 6px 10px;
-    }
-
-    .serie { background: var(--serie); }
-    .ucl { background: var(--ucl); }
-    .coppa { background: var(--coppa); }
-
-    .teams { z-index: 1; position: relative; display: grid; gap: 3px; }
-    .teams b { font-size: 33px; line-height: 1; font-weight: 800; color: #1b2a45; }
-    .teams span { font-size: 23px; line-height: 1; color: var(--muted); font-weight: 700; }
-
-    .state {
-      z-index: 1;
-      position: relative;
-      border-radius: 10px;
-      min-width: 95px;
-      text-align: center;
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1;
-      padding: 7px 10px;
-    }
-
-    .ft { color: #294268; background: #e9effb; }
-    .upcoming { color: #3b5681; background: #edf5ff; }
-
-    .note {
-      min-height: 84px;
-      border: 1px dashed #bdcbdf;
-      border-radius: 18px;
-      background: rgba(255,255,255,.38);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: #61749c;
-      font-size: 34px;
-      font-weight: 700;
-      padding: 12px;
-    }
-
-    @media (max-width: 1380px) {
-      .row { grid-template-columns: 1fr; }
-      .card { min-height: 260px; }
-      .teams b { font-size: 28px; }
-      .teams span { font-size: 20px; }
-      .chip { font-size: 20px; }
-      .note { font-size: 26px; }
+    @media (max-width:1240px){
+      .first-row{grid-template-columns:1fr}
+      .card{min-height:260px}
+      .forecast-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="row">
-      <article class="card weather" aria-label="Weekly Weather">
-        <header class="weather-head">
-          <span class="msr" style="font-size:42px;color:#2e507d">partly_cloudy_day</span>
-          <div style="text-align:left">
-            <div class="weather-temp">11.4°C</div>
-            <div class="weather-state">Partly cloudy</div>
-          </div>
-        </header>
-
-        <div class="days">
-          <div class="day"><b>Tue</b><span>2° / 8°</span></div>
-          <div class="day"><b>Wed</b><span>11° / 5°</span></div>
-          <div class="day"><b>Thu</b><span>6° / -6°</span></div>
-          <div class="day"><b>Fri</b><span>4° / -7°</span></div>
-          <div class="day"><b>Sat</b><span>3° / -1°</span></div>
-          <div class="day"><b>Sun</b><span>2° / -4°</span></div>
-          <div class="day"><b>Mon</b><span>6° / -10°</span></div>
-        </div>
-      </article>
-
-      <article class="card clock" aria-label="Time and Home Status">
-        <div class="time">16:49</div>
-        <div class="date">Wednesday, January 7</div>
-        <div class="chips">
-          <span class="chip">Active 18</span>
-          <span class="chip">Online 146 / 152</span>
-          <span class="chip">Alerts 2</span>
-        </div>
-      </article>
-
-      <article class="card inter" aria-label="Inter Milan Weekly Matches">
+  <main class="page">
+    <section class="first-row">
+      <article class="card inter-card top-accent" aria-label="Inter Milan Weekly Matches">
         <header class="inter-head">
-          <span class="msr" style="font-size:36px;color:#2e446c">sports_soccer</span>
-          <div class="inter-title">
-            <b>Inter Milan</b>
-            <span>مباريات الأسبوع (نتيجة / موعد / بطولة)</span>
+          <span class="msr" style="font-size:36px;color:#2f476e">sports_soccer</span>
+          <div>
+            <h2>Inter Milan</h2>
+            <p>مباريات الأسبوع (نتيجة / موعد / بطولة)</p>
           </div>
         </header>
 
-        <div class="matches">
-          <article class="match" style="--tone:rgba(58,108,255,.16)">
+        <div class="match-list">
+          <div class="match">
             <span class="comp serie">Serie A</span>
             <div class="teams">
               <b>Inter 3 - 0 Cagliari</b>
               <span>Played • Apr 17</span>
             </div>
-            <span class="state ft">FT</span>
-          </article>
+            <span class="status ft">FT</span>
+          </div>
 
-          <article class="match" style="--tone:rgba(106,88,242,.16)">
+          <div class="match">
             <span class="comp ucl">UCL</span>
             <div class="teams">
               <b>Inter vs Bayern</b>
               <span>Wed 21:00 • Quarter Final</span>
             </div>
-            <span class="state upcoming">UPCOMING</span>
-          </article>
+            <span class="status up">UPCOMING</span>
+          </div>
 
-          <article class="match" style="--tone:rgba(17,164,125,.16)">
+          <div class="match">
             <span class="comp coppa">Coppa</span>
             <div class="teams">
               <b>Inter vs Como</b>
               <span>Tue 20:45 • Coppa Italia SF</span>
             </div>
-            <span class="state upcoming">UPCOMING</span>
-          </article>
+            <span class="status up">UPCOMING</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card clock-card" aria-label="Time and Home Status">
+        <div class="clock-time">16:49</div>
+        <div class="clock-date">Wednesday,<br/>January 7</div>
+        <div class="chip-row">
+          <span class="chip">Online 146 / 152</span>
+          <span class="chip">Active 18</span>
+          <span class="chip">Alerts 2</span>
+        </div>
+      </article>
+
+      <article class="card weather-card top-accent" aria-label="Weekly Weather">
+        <header class="weather-head">
+          <span class="msr" style="font-size:44px;color:#2f517e">partly_cloudy_day</span>
+          <div style="text-align:left">
+            <b>11.4°C</b>
+            <span>Partly cloudy</span>
+          </div>
+        </header>
+
+        <div class="forecast-grid">
+          <div class="f-item"><b>Tue</b><span>2° / 8°</span></div>
+          <div class="f-item"><b>Wed</b><span>11° / 5°</span></div>
+          <div class="f-item"><b>Thu</b><span>6° / -6°</span></div>
+          <div class="f-item"><b>Fri</b><span>4° / -7°</span></div>
+          <div class="f-item"><b>Sat</b><span>3° / -1°</span></div>
+          <div class="f-item"><b>Sun</b><span>2° / -4°</span></div>
+          <div class="f-item"><b>Mon</b><span>6° / -10°</span></div>
         </div>
       </article>
     </section>
 
-    <section class="note">هذا بناء جديد من الصفر للصف الأول فقط — نعتمده أولاً قبل أي قسم ثاني.</section>
+    <section class="note">هذا إعادة بناء حقيقية من الصفر للصف الأول — نعتمدها قبل أي جزء ثاني.</section>
   </main>
 </body>
 </html>
