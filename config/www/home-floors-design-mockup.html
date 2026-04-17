@@ -3,400 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALNAJDI Smart Villa • Home Design v3</title>
+  <title>ALNAJDI Smart Villa • First Row Mockup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@500;700;800&family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet" />
   <style>
     :root{
-      --bg:#e7ebf2;
-      --surface:#f6f8fc;
-      --card:#ffffff;
-      --line:#d6deea;
-      --text:#1f2737;
-      --muted:#647693;
-      --shadow:0 10px 30px rgba(33,49,79,.12);
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
-      --ok:#10a37f;
-      --warn:#e08a3a;
-      --dark:#0d1016;
-      --dark-card:#171b24;
-      --dark-line:rgba(255,255,255,.08);
-      --dark-text:#f4f6fb;
-      --dark-muted:#a9b4c7;
+      --bg:#e4e9f2;
+      --surface:#f8fafe;
+      --line:#d3dbe9;
+      --text:#202a3c;
+      --muted:#5f7191;
+      --shadow:0 10px 28px rgba(26,42,74,.12);
+      --r-xl:26px;
+      --r-lg:20px;
+      --r-md:14px;
+
+      --serie-a:#2f6dff;
+      --ucl:#6f58ff;
+      --coppa:#11a47f;
+      --played:#243654;
+      --upcoming:#3c557f;
+      --live:#b82424;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
+      min-height:100vh;
       font-family:"Tajawal","Inter",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 650px at 8% -20%, rgba(255,255,255,.78), transparent 60%),
-        radial-gradient(900px 500px at 100% 0%, rgba(172,196,228,.42), transparent 58%),
+        radial-gradient(900px 520px at 8% -18%, rgba(255,255,255,.78), transparent 62%),
+        radial-gradient(1000px 560px at 100% 0%, rgba(166,191,229,.35), transparent 64%),
         var(--bg);
       padding:18px;
     }
 
-    .msr{
-      font-family:"Material Symbols Rounded";
-      font-variation-settings:'FILL' 1;
-      font-size:22px;
-      line-height:1;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+    .app{max-width:1500px;margin:0 auto;display:grid;gap:14px}
+
+    .top-row{
+      display:grid;
+      grid-template-columns:1.1fr 1fr 1.25fr;
+      gap:12px;
     }
 
-    .app{max-width:1440px;margin:0 auto;display:grid;gap:14px}
-    .panel{
+    .card{
       background:var(--surface);
       border:1px solid var(--line);
-      border-radius:var(--radius-xl);
+      border-radius:var(--r-xl);
       box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.75);
+      padding:16px;
+      min-height:230px;
     }
 
-    .topbar{
-      padding:18px;
+    .weather{
       display:grid;
-      grid-template-columns:1fr auto;
-      gap:14px;
-      align-items:start;
+      grid-template-rows:auto 1fr;
+      gap:10px;
+      background:linear-gradient(155deg,#dce8f8,#b9d2f0);
+      border-color:#adc3e0;
     }
-    .top-left{display:grid;gap:12px}
+    .weather-head{display:flex;justify-content:space-between;align-items:flex-start}
+    .weather-temp{font-size:66px;font-weight:800;line-height:.9}
+    .weather-sub{font-size:34px;color:#35557f;font-weight:700;margin-top:2px}
+    .weather-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end}
+    .day{font-size:17px;text-align:center;color:#2f4d76;font-weight:700;line-height:1.25}
 
-    .time-block b{display:block;font-size:78px;line-height:.88;font-weight:800;letter-spacing:.01em}
-    .time-block span{display:block;font-size:48px;line-height:1.1;color:#1f2737;font-weight:700}
-
-    .status-row{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{
+    .clock{
+      text-align:right;
+      display:grid;
+      grid-template-rows:auto auto 1fr;
+      gap:12px;
+    }
+    .time{font-size:92px;line-height:.82;font-weight:800;letter-spacing:.01em}
+    .date{font-size:52px;line-height:1.02;font-weight:700}
+    .chips{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;align-content:flex-start}
+    .chip{
       border:1px solid var(--line);
-      background:#eef2f8;
       border-radius:999px;
+      background:#eef3fb;
+      color:#2f466c;
       padding:9px 14px;
-      font-size:20px;
+      font-size:24px;
       font-weight:800;
-      color:#334969;
+      line-height:1;
     }
 
-    .weather-card{
-      min-width:520px;
-      background:linear-gradient(155deg,#dce7f6,#b9d2ee);
-      border:1px solid #a9c0df;
-      border-radius:22px;
-      padding:16px 18px;
+    .inter{
       display:grid;
+      grid-template-rows:auto 1fr;
       gap:10px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+      background:#f7f9fe;
     }
-    .weather-top{display:flex;justify-content:space-between;align-items:center}
-    .weather-temp{font-size:58px;font-weight:800;line-height:.9}
-    .weather-sub{font-size:30px;color:#34537d;font-weight:700}
-    .forecast{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:6px}
-    .forecast div{font-size:18px;color:#284668;font-weight:700;text-align:center}
+    .inter-head{display:flex;justify-content:space-between;align-items:flex-start}
+    .inter-title b{display:block;font-size:40px;line-height:.95}
+    .inter-title span{display:block;font-size:24px;color:var(--muted);font-weight:700;margin-top:4px}
 
-    .quick-devices{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:10px;
-    }
-    .mini-device{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:18px;
-      min-height:90px;
-      padding:12px 14px;
+    .match-list{display:grid;gap:8px;align-content:start}
+
+    .match{
+      border:1px solid #cbd6e8;
+      border-radius:14px;
+      background:#fff;
+      padding:8px 10px;
       display:grid;
       grid-template-columns:auto 1fr auto;
       align-items:center;
       gap:10px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
-    }
-    .mini-device .icon{width:42px;height:42px;border-radius:999px;background:#eef2f8;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:#3e5070}
-    .mini-device b{font-size:28px;line-height:1}
-    .mini-device span{display:block;color:var(--muted);font-size:26px;font-weight:600;margin-top:4px}
-    .mini-device small{font-size:24px;color:#334969;font-weight:800}
-
-    .main-grid{display:grid;grid-template-columns:2.2fr 1fr;gap:12px;align-items:start}
-
-    .rooms-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .room-card{
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:16px;
-      min-height:320px;
-      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.6);
-      display:grid;
-      grid-template-rows:auto auto 1fr auto;
-      gap:12px;
       position:relative;
       overflow:hidden;
     }
-    .room-card::after{content:"";position:absolute;inset:auto -40px -80px auto;width:180px;height:180px;background:radial-gradient(circle at center, rgba(255,255,255,.45), transparent 70%);pointer-events:none}
-    .room-icon-wrap{display:flex;justify-content:center}
-    .room-icon{
-      width:132px;height:132px;border-radius:999px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(255,255,255,.35);
-      border:1px solid rgba(255,255,255,.5);
-      color:rgba(30,47,77,.68);
+    .match::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(95deg,var(--tint, rgba(55,99,196,.16)), transparent 70%);
+      pointer-events:none;
     }
-    .room-icon .msr{font-size:76px}
-    .room-title{text-align:center}
-    .room-title b{display:block;font-size:44px;line-height:1}
-    .room-title span{display:block;font-size:30px;color:#526586;font-weight:700;margin-top:8px}
 
-    .floor-strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-    .floor-pill{border-radius:999px;padding:8px 14px;font-size:20px;font-weight:800;border:2px solid}
-    .floor-pill.ok{color:var(--ok);border-color:#9fe2ce;background:#eafaf5}
-    .floor-pill.warn{color:var(--warn);border-color:#f2c79f;background:#fff3e8}
-
-    .icon-row{display:flex;gap:10px;justify-content:center}
-    .bubble{
-      width:54px;height:54px;border-radius:999px;border:2px solid rgba(255,255,255,.65);
-      background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;position:relative;color:#466086;
-    }
-    .bubble.on{background:#e7f9f2;color:#147e64;border-color:#9be1cd}
-    .bubble.warn{background:#fff1e5;color:#ba6927;border-color:#f0c092}
-    .bubble .msr{font-size:26px}
-    .count{position:absolute;top:-7px;left:-7px;min-width:22px;height:22px;border-radius:999px;background:#2b3f61;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid rgba(255,255,255,.75)}
-
-    .pink{background:linear-gradient(160deg,#f7d2cf,#f4bdba)}
-    .yellow{background:linear-gradient(160deg,#f6e8b4,#f2d98e)}
-    .mint{background:linear-gradient(160deg,#c7efde,#ade5ce)}
-    .blue{background:linear-gradient(160deg,#cce6fb,#b5d8f6)}
-
-    .sensor-panel{
-      background:var(--dark);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:24px;
-      padding:10px;
-      display:grid;
-      gap:8px;
-      box-shadow:0 12px 34px rgba(0,0,0,.35);
-    }
-    .sensor-item{
-      background:var(--dark-card);
-      border:1px solid var(--dark-line);
-      border-radius:14px;
-      min-height:84px;
-      display:grid;
-      grid-template-columns:68px 1fr;
+    .comp{
+      position:relative;
+      z-index:1;
+      display:flex;
       align-items:center;
-      overflow:hidden;
-      position:relative;
+      gap:6px;
+      font-size:14px;
+      font-weight:800;
+      color:#fff;
+      border-radius:999px;
+      padding:5px 9px;
+      line-height:1;
     }
-    .sensor-item::before{content:"";position:absolute;inset:0;background:linear-gradient(95deg,var(--glow,rgba(93,141,255,.33)), transparent 62%);pointer-events:none}
-    .sensor-icon{height:100%;display:flex;align-items:center;justify-content:center;border-inline-end:1px solid rgba(255,255,255,.08);color:var(--ic,#8fd0ff);background:radial-gradient(circle at center, rgba(255,255,255,.06), transparent 70%)}
-    .sensor-icon .msr{font-size:34px}
-    .sensor-text{padding-inline:10px;position:relative;z-index:2}
-    .sensor-text b{display:block;color:var(--dark-text);font-size:42px;line-height:1}
-    .sensor-text span{display:block;color:var(--dark-muted);font-size:24px;font-weight:600;margin-top:4px}
+    .comp img{width:16px;height:16px;object-fit:contain;background:#fff;border-radius:50%;padding:2px}
+    .serie{background:var(--serie-a)}
+    .ucl{background:var(--ucl)}
+    .coppa{background:var(--coppa)}
 
-    .bottom-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .ac-card{background:var(--card);border:1px solid var(--line);border-radius:999px;min-height:84px;padding:10px 16px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
-    .ac-left{display:flex;gap:8px;align-items:center}
-    .ac-circle{width:44px;height:44px;border-radius:999px;background:#eef2f8;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-    .ac-card b{font-size:34px;line-height:1}
-    .ac-card span{display:block;color:#5e7090;font-size:26px;font-weight:600}
-    .ac-set{display:flex;gap:8px;align-items:center}
-    .btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:#eef2f8;display:flex;align-items:center;justify-content:center;font-size:28px;color:#2f4366;font-weight:800}
-    .temp{font-size:32px;font-weight:800;color:#283a5b;min-width:80px;text-align:center}
+    .teams{position:relative;z-index:1;display:grid;gap:3px}
+    .teams-top{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:800;color:#1f2d47}
+    .teams-sub{font-size:15px;color:#5f7191;font-weight:700}
 
-    .dock{display:flex;justify-content:center;gap:10px;padding-top:2px}
-    .dock-btn{width:62px;height:62px;border-radius:999px;border:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;color:#2f4366;box-shadow:0 6px 14px rgba(30,52,92,.14)}
-    .dock-btn.active{background:#2b3f61;color:#fff;border-color:#2b3f61}
-    .dock-btn .msr{font-size:30px}
-
-    @media (max-width:1400px){
-      .time-block b{font-size:62px}.time-block span{font-size:38px}
-      .weather-temp{font-size:46px}.weather-sub{font-size:24px}
-      .forecast div{font-size:15px}
-      .mini-device b{font-size:22px}.mini-device span,.mini-device small{font-size:19px}
-      .room-title b{font-size:34px}.room-title span{font-size:22px}
-      .sensor-text b{font-size:34px}.sensor-text span{font-size:19px}
-      .ac-card b{font-size:26px}.ac-card span,.temp{font-size:22px}
+    .logo{
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      object-fit:cover;
+      background:#fff;
+      border:1px solid #ccd6e8;
+      padding:1px;
     }
 
-    @media (max-width:1080px){
-      .topbar{grid-template-columns:1fr}
-      .weather-card{min-width:0}
-      .quick-devices{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .main-grid{grid-template-columns:1fr}
-      .rooms-grid{grid-template-columns:1fr}
-      .bottom-controls{grid-template-columns:1fr}
+    .state{position:relative;z-index:1;font-size:15px;font-weight:800;padding:6px 8px;border-radius:10px;line-height:1;text-align:center;min-width:90px}
+    .played .state{background:#e7eefb;color:var(--played)}
+    .upcoming .state{background:#edf4ff;color:var(--upcoming)}
+    .live .state{background:#ffe8e8;color:var(--live)}
+
+    .guide{
+      border:1px dashed #bcc9df;
+      border-radius:16px;
+      min-height:80px;
+      display:grid;
+      place-items:center;
+      color:#60729b;
+      font-size:22px;
+      font-weight:700;
+      background:rgba(255,255,255,.35);
+    }
+
+    @media (max-width:1300px){
+      .top-row{grid-template-columns:1fr;}
+      .time{font-size:68px}.date{font-size:34px}
+      .weather-temp{font-size:52px}.weather-sub{font-size:26px}
+      .inter-title b{font-size:32px}
     }
   </style>
 </head>
 <body>
   <main class="app">
-    <section class="panel topbar">
-      <div class="top-left">
-        <div class="time-block">
-          <b>16:49</b>
-          <span>Wednesday, January 7</span>
-        </div>
+    <section class="top-row">
+      <!-- Inter Weekly Card (Dynamic rows style) -->
+      <article class="card inter">
+        <header class="inter-head">
+          <div class="inter-title">
+            <b>Inter Milan</b>
+            <span>مباريات الأسبوع (نتيجة / موعد / بطولة)</span>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:34px;color:#2c3f62">sports_soccer</span>
+        </header>
 
-        <div class="status-row">
-          <span class="pill">Alerts 2</span>
-          <span class="pill">Active 18</span>
-          <span class="pill">Online 146 / 152</span>
-        </div>
-      </div>
+        <div class="match-list">
+          <div class="match played" style="--tint:rgba(47,109,255,.2)">
+            <span class="comp serie">
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Serie_A_logo_%282019%29.svg" alt="Serie A" />
+              Serie A
+            </span>
+            <div class="teams">
+              <div class="teams-top">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" alt="Inter" />
+                Inter 3 - 0 Cagliari
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Cagliari_Calcio_logo.svg/120px-Cagliari_Calcio_logo.svg.png" alt="Cagliari" />
+              </div>
+              <div class="teams-sub">Played • Apr 17</div>
+            </div>
+            <div class="state">FT</div>
+          </div>
 
-      <aside class="weather-card">
-        <div class="weather-top">
-          <span class="msr" style="font-size:36px;color:#2f4f78">partly_cloudy_day</span>
+          <div class="match upcoming" style="--tint:rgba(111,88,255,.22)">
+            <span class="comp ucl">
+              <img src="https://upload.wikimedia.org/wikipedia/en/b/bf/UEFA_Champions_League_logo_2.svg" alt="UCL" />
+              UCL
+            </span>
+            <div class="teams">
+              <div class="teams-top">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" alt="Inter" />
+                Inter vs Bayern
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1f/FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg/120px-FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg.png" alt="Bayern" />
+              </div>
+              <div class="teams-sub">Wed 21:00 • Quarter Final</div>
+            </div>
+            <div class="state">UPCOMING</div>
+          </div>
+
+          <div class="match upcoming" style="--tint:rgba(17,164,127,.2)">
+            <span class="comp coppa">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Coppa_Italia_logo.svg/120px-Coppa_Italia_logo.svg.png" alt="Coppa Italia" />
+              Coppa
+            </span>
+            <div class="teams">
+              <div class="teams-top">
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" alt="Inter" />
+                Inter vs Como
+                <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Como_1907_logo.svg/120px-Como_1907_logo.svg.png" alt="Como" />
+              </div>
+              <div class="teams-sub">Tue 20:45 • Coppa Italia SF</div>
+            </div>
+            <div class="state">UPCOMING</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Time & Date Card -->
+      <article class="card clock">
+        <div class="time">16:49</div>
+        <div class="date">Wednesday, January 7</div>
+        <div class="chips">
+          <span class="chip">Online 146 / 152</span>
+          <span class="chip">Active 18</span>
+          <span class="chip">Alerts 2</span>
+        </div>
+      </article>
+
+      <!-- Weather Weekly Card -->
+      <article class="card weather">
+        <header class="weather-head">
+          <span class="material-symbols-rounded" style="font-size:34px;color:#294c77">partly_cloudy_day</span>
           <div style="text-align:left">
             <div class="weather-temp">11.4°C</div>
             <div class="weather-sub">Partly cloudy</div>
           </div>
-        </div>
-        <div class="forecast">
-          <div>Wed<br>11° / 5°</div>
-          <div>Thu<br>6° / -6°</div>
-          <div>Fri<br>4° / -7°</div>
-          <div>Sat<br>3° / -1°</div>
-          <div>Sun<br>-2° / -4°</div>
-          <div>Mon<br>-6° / -10°</div>
-        </div>
-      </aside>
-    </section>
+        </header>
 
-    <section class="quick-devices">
-      <article class="mini-device">
-        <span class="icon"><span class="msr">door_front</span></span>
-        <div><b>Front Door Lock</b><span>Unlocked</span></div>
-        <small>!</small>
-      </article>
-      <article class="mini-device">
-        <span class="icon"><span class="msr">door_open</span></span>
-        <div><b>Block Door Unlock</b><span>Off</span></div>
-        <small>—</small>
-      </article>
-      <article class="mini-device">
-        <span class="icon"><span class="msr">robot_2</span></span>
-        <div><b>S8 MaxV Ultra</b><span>Docked</span></div>
-        <small>OK</small>
-      </article>
-      <article class="mini-device">
-        <span class="icon"><span class="msr">local_laundry_service</span></span>
-        <div><b>Miele WVI860</b><span>Running</span></div>
-        <small>19:03</small>
-      </article>
-    </section>
-
-    <section class="main-grid">
-      <div class="rooms-grid">
-        <article class="room-card pink">
-          <div class="floor-strip"><span class="floor-pill ok">Active 4</span><span class="floor-pill warn">Alert 0</span></div>
-          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">weekend</span></div></div>
-          <div class="room-title"><b>Living Room</b><span>22.8 °C / 48.3 %</span></div>
-          <div class="icon-row">
-            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">3</i></span>
-            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
-            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
-            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
-          </div>
-        </article>
-
-        <article class="room-card yellow">
-          <div class="floor-strip"><span class="floor-pill ok">Active 5</span><span class="floor-pill warn">Alert 0</span></div>
-          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">kitchen</span></div></div>
-          <div class="room-title"><b>Kitchen</b><span>22.8 °C / 48.3 %</span></div>
-          <div class="icon-row">
-            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">4</i></span>
-            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
-            <span class="bubble warn"><span class="msr">water_drop</span><i class="count">1</i></span>
-            <span class="bubble"><span class="msr">local_fire_department</span><i class="count">0</i></span>
-          </div>
-        </article>
-
-        <article class="room-card mint">
-          <div class="floor-strip"><span class="floor-pill ok">Active 3</span><span class="floor-pill warn">Alert 0</span></div>
-          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">bed</span></div></div>
-          <div class="room-title"><b>Bedroom</b><span>20.5 °C / 54 %</span></div>
-          <div class="icon-row">
-            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
-            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">2</i></span>
-            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
-            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
-          </div>
-        </article>
-
-        <article class="room-card blue">
-          <div class="floor-strip"><span class="floor-pill ok">Active 2</span><span class="floor-pill warn">Alert 0</span></div>
-          <div class="room-icon-wrap"><div class="room-icon"><span class="msr">toys</span></div></div>
-          <div class="room-title"><b>Kids Room</b><span>21.0 °C / 52 %</span></div>
-          <div class="icon-row">
-            <span class="bubble on"><span class="msr">lightbulb</span><i class="count">2</i></span>
-            <span class="bubble"><span class="msr">blinds</span><i class="count">0</i></span>
-            <span class="bubble on"><span class="msr">air</span><i class="count">1</i></span>
-            <span class="bubble"><span class="msr">music_note</span><i class="count">0</i></span>
-          </div>
-        </article>
-      </div>
-
-      <aside class="sensor-panel">
-        <article class="sensor-item" style="--glow:rgba(255,73,73,.35);--ic:#ff5d5d">
-          <div class="sensor-icon"><span class="msr">thermostat</span></div>
-          <div class="sensor-text"><b>23.1 °C</b><span>Living room temp (C)</span></div>
-        </article>
-        <article class="sensor-item" style="--glow:rgba(255,160,52,.3);--ic:#ffa944">
-          <div class="sensor-icon"><span class="msr">thermostat</span></div>
-          <div class="sensor-text"><b>72 °F</b><span>Living room temp (F)</span></div>
-        </article>
-        <article class="sensor-item" style="--glow:rgba(89,190,255,.34);--ic:#6cc7ff">
-          <div class="sensor-icon"><span class="msr">humidity_percentage</span></div>
-          <div class="sensor-text"><b>43.1%</b><span>Living room humidity</span></div>
-        </article>
-        <article class="sensor-item" style="--glow:rgba(130,228,146,.3);--ic:#8be896">
-          <div class="sensor-icon"><span class="msr">air</span></div>
-          <div class="sensor-text"><b>14 μg/m³</b><span>Air quality Home</span></div>
-        </article>
-        <article class="sensor-item" style="--glow:rgba(255,189,74,.3);--ic:#ffbf55">
-          <div class="sensor-icon"><span class="msr">airwave</span></div>
-          <div class="sensor-text"><b>51 AQI</b><span>Air quality Amsterdam</span></div>
-        </article>
-      </aside>
-    </section>
-
-    <section class="bottom-controls">
-      <article class="ac-card">
-        <div class="ac-left">
-          <span class="ac-circle"><span class="msr">mode_fan</span></span>
-          <div><b>A/C Living Room</b><span>Heat</span></div>
-        </div>
-        <div class="ac-set">
-          <button class="btn">−</button>
-          <div class="temp">22 °C</div>
-          <button class="btn">+</button>
-        </div>
-      </article>
-
-      <article class="ac-card">
-        <div class="ac-left">
-          <span class="ac-circle"><span class="msr">mode_fan</span></span>
-          <div><b>A/C Bedroom</b><span>Heat</span></div>
-        </div>
-        <div class="ac-set">
-          <button class="btn">−</button>
-          <div class="temp">19 °C</div>
-          <button class="btn">+</button>
+        <div class="weather-days">
+          <div class="day">Mon<br>10° / -6°</div>
+          <div class="day">Sun<br>4° / -2°</div>
+          <div class="day">Sat<br>1° / -3°</div>
+          <div class="day">Fri<br>7° / -4°</div>
+          <div class="day">Thu<br>6° / -6°</div>
+          <div class="day">Wed<br>5° / 11°</div>
+          <div class="day">Tue<br>8° / 2°</div>
         </div>
       </article>
     </section>
 
-    <nav class="dock" aria-label="Navigation">
-      <button class="dock-btn"><span class="msr">cleaning_services</span></button>
-      <button class="dock-btn"><span class="msr">weekend</span></button>
-      <button class="dock-btn active"><span class="msr">bed</span></button>
-      <button class="dock-btn"><span class="msr">settings</span></button>
-      <button class="dock-btn"><span class="msr">chair</span></button>
-    </nav>
+    <section class="guide">هذا نموذج الصف الأول فقط — للمراجعة والاعتماد قبل باقي الأقسام.</section>
   </main>
 </body>
 </html>
