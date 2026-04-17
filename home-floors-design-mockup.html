@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALNAJDI SMART VILLA - Home Floors Design Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #eef1f6;
+      --surface: #ffffff;
+      --text: #1e2430;
+      --muted: #68758f;
+      --line: #dbe1eb;
+      --on: #00a97f;
+      --off: #adb8ca;
+      --alert: #f28b36;
+      --shadow: 0 10px 28px rgba(24, 39, 75, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Tajawal", system-ui, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1000px 600px at 100% -15%, #dfe8ff 0%, transparent 60%), var(--bg);
+    }
+
+    .app {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .clock {
+      display: grid;
+      line-height: 1.1;
+    }
+    .clock b { font-size: clamp(28px, 4vw, 42px); }
+    .clock span { color: var(--muted); font-size: 16px; }
+
+    .weather {
+      background: linear-gradient(135deg, #d8e8ff, #b8d7ff);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      min-width: 230px;
+    }
+    .weather b { font-size: 28px; display: block; }
+    .weather small { color: #37527d; font-weight: 600; }
+
+    .stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #f8faff;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: .08em;
+      margin: 6px 6px 2px;
+    }
+
+    .floors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .floor-card {
+      padding: 16px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(160deg, #fff, #f8fbff);
+      display: grid;
+      gap: 12px;
+      min-height: 230px;
+    }
+
+    .floor-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .floor-name b { font-size: 22px; display: block; }
+    .floor-name span { color: var(--muted); font-weight: 600; }
+
+    .badge {
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid;
+    }
+    .badge.active { color: #0c8f6e; border-color: #a0e4d2; background: #ecfff8; }
+    .badge.alert { color: #9d5218; border-color: #ffd5b2; background: #fff5ea; }
+
+    .floor-meta {
+      display: flex;
+      gap: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .mini-icons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .mini {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 18px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #f6f8fc;
+      color: #5f6f8b;
+    }
+    .mini.on {
+      background: #e9fff8;
+      border-color: #b6ecd9;
+      color: var(--on);
+      box-shadow: inset 0 0 0 1px #d1f4e8;
+    }
+    .mini.off {
+      color: var(--off);
+      background: #f3f5f9;
+    }
+    .mini.alert {
+      background: #fff4eb;
+      border-color: #ffd4b1;
+      color: var(--alert);
+    }
+
+    .mini em {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #2f3e59;
+      color: #fff;
+      font-style: normal;
+      font-size: 10px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+    }
+
+    .floor-details {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .details-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .details-head b { font-size: 22px; }
+    .details-head span { color: var(--muted); font-weight: 600; }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .room {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      background: #fcfdff;
+      display: grid;
+      gap: 10px;
+      min-height: 165px;
+    }
+
+    .room h4 { margin: 0; font-size: 19px; }
+    .room p { margin: 0; color: var(--muted); font-weight: 600; }
+
+    .room .mini-icons { margin-top: 2px; }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      position: sticky;
+      bottom: 10px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #2f3b52;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+    }
+
+    .nav a.active {
+      background: #2f3e59;
+      color: #fff;
+      border-color: #2f3e59;
+    }
+
+    @media (max-width: 1100px) {
+      .topbar { grid-template-columns: 1fr; }
+      .stats { justify-content: start; }
+      .floors-grid { grid-template-columns: 1fr; }
+      .rooms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .rooms-grid { grid-template-columns: 1fr; }
+      .weather { min-width: 0; }
+      .clock span { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="card topbar">
+      <div class="clock">
+        <b>16:49</b>
+        <span>الأربعاء، 7 يناير</span>
+      </div>
+      <div class="weather">
+        <b>11.4°C</b>
+        <small>Partly cloudy</small>
+      </div>
+      <div class="stats">
+        <span class="chip">Online 146 / 152</span>
+        <span class="chip">Active 18</span>
+        <span class="chip">Alerts 2</span>
+      </div>
+    </header>
+
+    <section>
+      <h3 class="section-title">FLOORS OVERVIEW</h3>
+      <div class="floors-grid">
+        <article class="floor-card card">
+          <div class="floor-top">
+            <div class="floor-name">
+              <b>الدور الأرضي</b>
+              <span>GROUND FLOOR</span>
+            </div>
+            <div style="display:grid;gap:6px">
+              <span class="badge active">Active 9</span>
+              <span class="badge alert">Alert 1</span>
+            </div>
+          </div>
+          <div class="floor-meta">
+            <span>الغرف: 5</span>
+            <span>الأجهزة: 38</span>
+          </div>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>5</em></span>
+            <span class="mini on">❄️<em>2</em></span>
+            <span class="mini off">🪟<em>0</em></span>
+            <span class="mini on">🎵<em>1</em></span>
+            <span class="mini alert">🔒<em>1</em></span>
+          </div>
+        </article>
+
+        <article class="floor-card card">
+          <div class="floor-top">
+            <div class="floor-name">
+              <b>الدور الأول</b>
+              <span>FIRST FLOOR</span>
+            </div>
+            <div style="display:grid;gap:6px">
+              <span class="badge active">Active 6</span>
+              <span class="badge alert">Alert 0</span>
+            </div>
+          </div>
+          <div class="floor-meta">
+            <span>الغرف: 6</span>
+            <span>الأجهزة: 42</span>
+          </div>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>3</em></span>
+            <span class="mini on">❄️<em>1</em></span>
+            <span class="mini off">🪟<em>0</em></span>
+            <span class="mini on">🎵<em>2</em></span>
+            <span class="mini off">🧯<em>0</em></span>
+          </div>
+        </article>
+
+        <article class="floor-card card">
+          <div class="floor-top">
+            <div class="floor-name">
+              <b>الدور الثاني</b>
+              <span>SECOND FLOOR</span>
+            </div>
+            <div style="display:grid;gap:6px">
+              <span class="badge active">Active 2</span>
+              <span class="badge alert">Alert 0</span>
+            </div>
+          </div>
+          <div class="floor-meta">
+            <span>الغرف: 3</span>
+            <span>الأجهزة: 17</span>
+          </div>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>1</em></span>
+            <span class="mini off">❄️<em>0</em></span>
+            <span class="mini on">🪟<em>1</em></span>
+            <span class="mini off">🎵<em>0</em></span>
+            <span class="mini off">🔒<em>0</em></span>
+          </div>
+        </article>
+
+        <article class="floor-card card">
+          <div class="floor-top">
+            <div class="floor-name">
+              <b>السطح</b>
+              <span>ROOF</span>
+            </div>
+            <div style="display:grid;gap:6px">
+              <span class="badge active">Active 1</span>
+              <span class="badge alert">Alert 1</span>
+            </div>
+          </div>
+          <div class="floor-meta">
+            <span>المناطق: 2</span>
+            <span>الأجهزة: 11</span>
+          </div>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>1</em></span>
+            <span class="mini alert">💧<em>1</em></span>
+            <span class="mini on">📷<em>2</em></span>
+            <span class="mini off">🪟<em>0</em></span>
+            <span class="mini off">🔒<em>0</em></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card floor-details">
+      <div class="details-head">
+        <div>
+          <b>الدور الأول</b>
+          <span>معاينة شكل الغرف بعد الضغط على الطابق</span>
+        </div>
+        <div class="stats">
+          <span class="chip">Rooms 6</span>
+          <span class="chip">Active 6</span>
+          <span class="chip">Alerts 0</span>
+        </div>
+      </div>
+
+      <div class="rooms-grid">
+        <article class="room">
+          <h4>غرفة النوم الرئيسية</h4>
+          <p>22.1°C / 49% • Devices 9</p>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>2</em></span>
+            <span class="mini on">❄️<em>1</em></span>
+            <span class="mini off">🪟<em>0</em></span>
+            <span class="mini off">🎵<em>0</em></span>
+          </div>
+        </article>
+
+        <article class="room">
+          <h4>المكتب</h4>
+          <p>21.7°C / 51% • Devices 6</p>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>1</em></span>
+            <span class="mini off">❄️<em>0</em></span>
+            <span class="mini on">🎵<em>1</em></span>
+            <span class="mini off">🪟<em>0</em></span>
+          </div>
+        </article>
+
+        <article class="room">
+          <h4>غرفة المعيشة</h4>
+          <p>23.0°C / 47% • Devices 12</p>
+          <div class="mini-icons">
+            <span class="mini on">💡<em>3</em></span>
+            <span class="mini on">❄️<em>1</em></span>
+            <span class="mini on">🎵<em>1</em></span>
+            <span class="mini off">🔒<em>0</em></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <nav class="nav">
+      <a class="active" href="#">Home</a>
+      <a href="#">Security</a>
+      <a href="#">Scenes</a>
+      <a href="#">Energy</a>
+      <a href="#">Settings</a>
+    </nav>
+  </main>
+</body>
+</html>
