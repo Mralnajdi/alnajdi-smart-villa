@@ -1,0 +1,45 @@
+name: Deploy MJ Beverage Menu
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'beverage-menu/**'
+      - '.github/workflows/beverage-menu-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site/beverage-menu
+          cp beverage-menu/index.html _site/beverage-menu/index.html
+          cp beverage-menu/menu-data.js _site/beverage-menu/menu-data.js
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=beverage-menu/">' > _site/index.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
